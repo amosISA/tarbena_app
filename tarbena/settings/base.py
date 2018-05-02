@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 from django.core.signing import Signer
 import os
+from .django_secrets import SECRET_VALUE, SECRET_EMAIL_PASSWORD
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -22,9 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # https://docs.djangoproject.com/en/1.11/topics/signing/
-signer = Signer()
-value_key = signer.sign('8_8*ym^&mq#glmvir95ygq@yxid9sur6dino%r__lc&6deh%z(')
-SECRET_KEY = value_key
+SECRET_KEY = SECRET_VALUE
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -78,12 +77,12 @@ WSGI_APPLICATION = 'tarbena.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -126,7 +125,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "shop/static"),
+    os.path.join(BASE_DIR, "subvenciones/static"),
 ]
 
 MEDIA_URL = '/media/'
@@ -137,7 +136,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'agoraweb700@gmail.com'
-EMAIL_HOST_PASSWORD = 'Agora7000'
+EMAIL_HOST_PASSWORD = SECRET_EMAIL_PASSWORD
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = 'agoraweb700@gmail.com'
 

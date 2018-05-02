@@ -7,7 +7,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tarbena',
         'USER': 'root',
-        'PASSWORD': ''
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': 3306,
+        'OPTIONS': {
+            'sql_mode': 'traditional'
+        },
     }
 }
 

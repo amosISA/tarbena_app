@@ -1,0 +1,27 @@
+What is the doc directory about?
+
+    Files rst(reStructuredText) to write documentation in plaintext format as an alternative to markdown language.
+
+    Files:
+
+    - deployment.rst
+        A point-by-point set of instructions on how to install/update the project into production.
+
+    - installation.rst
+        This is really nice for new people coming into a project or when you get a new laptop and need to set up
+        the project.
+
+    - architecture.rst
+        A guide for understanding what things evolved from as a project ages and grows in scope.
+
+
+
+    How we render our rst files into pretty design?
+
+        We recommend pip installing Sphinx systemwide, as you’ll want to have it handy for every Django project.
+        What follows are links to the formal reStructuredText specification and a couple sample projects
+        which benefit from using it:
+
+        Use Sphinx to Generate Documentation From reStructuredText:
+        http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html
+        http://sphinx-doc.org/

@@ -1,0 +1,2 @@
+sudo mysqldump -u root -p subvenciones > /home/admin/ayudas/subvenciones/database_subvenciones.sql
+And will ask for password.

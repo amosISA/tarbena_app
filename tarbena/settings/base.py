@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
+from django.core.signing import Signer
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -20,7 +21,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8_8*ym^&mq#glmvir95ygq@yxid9sur6dino%r__lc&6deh%z('
+# https://docs.djangoproject.com/en/1.11/topics/signing/
+signer = Signer()
+value_key = signer.sign('8_8*ym^&mq#glmvir95ygq@yxid9sur6dino%r__lc&6deh%z(')
+SECRET_KEY = value_key
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -54,7 +59,7 @@ ROOT_URLCONF = 'tarbena.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,3 +123,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "shop/static"),
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+
+# Configuramos el servidor de correo
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'agoraweb700@gmail.com'
+EMAIL_HOST_PASSWORD = 'Agora7000'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'agoraweb700@gmail.com'
+
+# To receive server errors to my inbox
+ADMINS = (
+    ('Amos', 'agoraweb700@gmail.com'),
+    ('Developer', 'amosisa700@gmail.com'),
+)
+MANAGERS = ADMINS

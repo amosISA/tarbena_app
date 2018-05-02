@@ -19,8 +19,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
-    url(r'^admin/', admin.site.urls),
+    url(r'^panel/docs/', include('django.contrib.admindocs.urls')),
+    url(r'^admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
+    url(r'^panel/', admin.site.urls),
 ]
 
 if settings.DEBUG:

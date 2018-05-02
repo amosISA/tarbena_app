@@ -83,7 +83,10 @@ target/
 *.pot
 *.pyc
 __pycache__/
+mediafiles
+staticfiles
 local_settings.py
+local.py
 tarbena/settings/local.py
 
 .env

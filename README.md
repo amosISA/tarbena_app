@@ -52,3 +52,18 @@ Place the dependencies used in production environment
 pip install -r requirements/local.txt
 pip install -r requirements/production.txt
 ```
+
+# New theme to backend - Django Admin Interface
+https://djangopackages.org/grids/g/admin-styling/
+https://github.com/fabiocaccamo/django-admin-interface
+You can choose your own theme!
+
+# Django honeypot
+https://github.com/dmpayton/django-admin-honeypot
+If someone try to use my admin site It will send me information about him because its a fake url admin site
+
+# Admindocs to my admin django so I can list all my models and see everythings
+https://docs.djangoproject.com/en/1.11/ref/contrib/admin/admindocs/
+```
+pip install docutils
+```

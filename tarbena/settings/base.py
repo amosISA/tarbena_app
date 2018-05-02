@@ -35,13 +35,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli',
+    'admin_interface',
+    'flat_responsive',
+    'colorfield',
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'admin_honeypot',
 ]
 
 MIDDLEWARE = [
@@ -136,14 +140,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'agoraweb700@gmail.com'
+EMAIL_HOST_USER = 'tarbena700@gmail.com'
 EMAIL_HOST_PASSWORD = SECRET_EMAIL_PASSWORD
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = 'agoraweb700@gmail.com'
 
 # To receive server errors to my inbox
 ADMINS = (
-    ('Amos', 'agoraweb700@gmail.com'),
+    ('Amos', 'tarbena700@gmail.com'),
     ('Developer', 'amosisa700@gmail.com'),
 )
 MANAGERS = ADMINS

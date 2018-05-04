@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -52,6 +53,43 @@ class Colectivo(models.Model):
     #     return reverse('myapp:subvencion_by_category',
     #                    args=[self.slug])
 
+class Area(TimeStampedModel):
+    nombre = models.CharField(max_length=250)
+    slug = models.SlugField(max_length=250, unique=True, default=None, blank=True, null=True)
+
+    def __str__(self):
+        return '{}'.format(self.nombre)
+
+    class Meta:
+        ordering = ['nombre',]
+
+    def save(self):
+        self.slug = slugify(self.nombre)
+        super(Area, self).save()
+
+    # def get_absolute_url(self):
+    #     return reverse('myapp:subvencion_by_category',
+    #                    args=[self.slug])
+
+class Ente(TimeStampedModel):
+    nombre = models.CharField(max_length=250)
+    area = models.ForeignKey(Area, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=250, unique=True, default=None, blank=True, null=True)
+
+    def __str__(self):
+        return '{}'.format(self.nombre)
+
+    class Meta:
+        ordering = ['nombre',]
+
+    def save(self):
+        self.slug = slugify(self.nombre)
+        super(Ente, self).save()
+
+    # def get_absolute_url(self):
+    #     return reverse('myapp:subvencion_by_category',
+    #                    args=[self.slug])
+
 class Subvencion(TimeStampedModel):
     user = models.ForeignKey(User, blank=True, null=True)
     inicio = models.DateField(blank=True, null=True)
@@ -74,8 +112,10 @@ class Subvencion(TimeStampedModel):
     gestiona_expediente = models.CharField(max_length=250, blank=True, null=True)
     nombre_carpeta_drive = models.TextField(blank=True, null=True)
 
-    se_relaciona_con = models.ManyToManyField('self', blank=True, null=True)
+    se_relaciona_con = models.ManyToManyField('self', blank=True, default='')
     colectivo = models.ManyToManyField(Colectivo, blank=True)
+
+    ente = models.ForeignKey(Ente)
 
     class Meta:
         ordering = ["fin"]
@@ -92,14 +132,14 @@ class Subvencion(TimeStampedModel):
     #     return reverse('myapp:subvencion_detail',
     #                    args=[self.id, self.slug])
 
-class Comment(models.Model):
+class Comment(TimeStampedModel):
     commented_by = models.ForeignKey(User)
     for_subvencion = models.ForeignKey(Subvencion, related_name='comments')
 
     class Meta:
         ordering = ['created',]
 
-class Like(models.Model):
+class Like(TimeStampedModel):
     liked_by = models.ForeignKey(User)
     subvencion = models.ForeignKey(Subvencion)
 

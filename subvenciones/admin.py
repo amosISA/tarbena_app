@@ -11,7 +11,6 @@ class SubvencionAdmin(admin.ModelAdmin):
     search_fields = ('nombre',)
     empty_value_display = '-' # para los campos vacios se pone eso
     list_display_links = ('nombre',) # que campo aparece como un link para editar el registro
-    #raw_id_fields = ('ente',)
     show_full_result_count = True
 
     def save_model(self, request, obj, form, change):

@@ -133,15 +133,20 @@ class Subvencion(TimeStampedModel):
     #                    args=[self.id, self.slug])
 
 class Comment(TimeStampedModel):
-    commented_by = models.ForeignKey(User)
-    for_subvencion = models.ForeignKey(Subvencion, related_name='comments')
+    user = models.ForeignKey(User)
+    subvencion = models.ForeignKey(Subvencion, related_name='comments')
+    contenido = models.TextField(blank=False, null=False, default='')
+    active = models.BooleanField(default=True)  # field I use to deactivate inappropiate comments
 
     class Meta:
-        ordering = ['created',]
+        ordering = ['-created',]
+
+    def __str__(self):
+        return 'Comentado por {}'.format(self.user)
 
 class Like(TimeStampedModel):
     liked_by = models.ForeignKey(User)
     subvencion = models.ForeignKey(Subvencion)
 
     class Meta:
-        ordering = ['created',]
+        ordering = ['-created',]

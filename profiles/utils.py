@@ -2,7 +2,8 @@
 import os
 
 def delete_file(path):
-    # Deletes file from filesystem.
+    """ Deletes file from filesystem """
+
     try:
         if os.path.isfile(path):
             os.remove(path)

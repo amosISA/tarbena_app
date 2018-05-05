@@ -9,6 +9,7 @@ def upload_location(instance, filename):
     username = instance.user.username
     return "profiles/avatar/%s/%s_%s" % (username, username, filename)
 
+
 class TimeStampedModel(models.Model):
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)

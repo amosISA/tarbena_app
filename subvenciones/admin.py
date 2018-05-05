@@ -9,11 +9,13 @@ class SubvencionAdmin(admin.ModelAdmin):
                     'estado', 'ente', 'user']
     list_filter = ['nombre', 'estado', 'colectivo', 'cuantia_inicial', 'cuantia_final', 'ente']
     search_fields = ('nombre',)
-    empty_value_display = '-' # para los campos vacios se pone eso
-    list_display_links = ('nombre',) # que campo aparece como un link para editar el registro
+    empty_value_display = '-'
+    list_display_links = ('nombre',)
     show_full_result_count = True
 
     def save_model(self, request, obj, form, change):
+        """ Add the user in request to the subsidie when we add new subsidie from the Admin Panel """
+
         obj.user = request.user
         super(SubvencionAdmin, self).save_model(request, obj, form, change)
 admin.site.register(Subvencion, SubvencionAdmin)

@@ -8,19 +8,27 @@ from .utils import delete_file
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_profile_handler(sender, instance, created, **kwargs):
+    """"
+    If you create new user, a new profile will be created for that user
+    Create the profile object, only if it is newly created
+
+    """
+
     if not created:
         return
-    # Create the profile object, only if it is newly created
     profile = models.Profile(user=instance)
     profile.save()
 
-# Delete image after uploading a new one
 @receiver(post_init, sender=models.Profile)
 def backup_image_path(sender, instance, **kwargs):
+    """" Delete image after uploading a new one """
+
     instance._current_imagen_file = instance.avatar
 
 @receiver(post_save, sender=models.Profile)
 def delete_img_post_update(sender, instance, **kwargs):
+    """" Delete image after uploading a new one """
+
     if hasattr(instance, '_current_imagen_file'):
         if instance.avatar:
             if instance._current_imagen_file != instance.avatar.path:
@@ -29,8 +37,9 @@ def delete_img_post_update(sender, instance, **kwargs):
             if instance._current_imagen_file:
                 instance._current_imagen_file.delete()
 
-#Delete image after the profile user is deleted
 @receiver(post_delete, sender=models.Profile)
 def delete_img_post_delete(sender, instance, *args, **kwargs):
+    """ Delete image after the profile user is deleted """
+
     if instance.avatar:
         delete_file(instance.avatar.path)

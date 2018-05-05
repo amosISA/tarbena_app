@@ -8,4 +8,4 @@ def delete_file(path):
         if os.path.isfile(path):
             os.remove(path)
     except FileNotFoundError:
-        print("Unable to remove file: %s" % path)
+        pass

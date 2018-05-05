@@ -8,6 +8,11 @@ User = settings.AUTH_USER_MODEL
 
 # Create your models here.
 class TimeStampedModel(models.Model):
+    """
+    An abstract base class model that provides selfupdating
+    ``created`` and ``modified`` fields.
+    """
+
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 

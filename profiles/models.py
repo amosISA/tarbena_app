@@ -11,6 +11,11 @@ def upload_location(instance, filename):
 
 
 class TimeStampedModel(models.Model):
+    """
+    An abstract base class model that provides selfupdating
+    ``created`` and ``modified`` fields.
+    """
+
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
@@ -20,10 +25,10 @@ class TimeStampedModel(models.Model):
 class Profile(TimeStampedModel):
     user = models.OneToOneField(User, primary_key=True)
     avatar = models.ImageField(upload_to=upload_location,
-                               null=True,
                                blank=True,
                                height_field="height_field",
-                               width_field="width_field")
+                               width_field="width_field",
+                               default="")
     height_field = models.IntegerField(default=0, blank=True, null=True)
     width_field = models.IntegerField(default=0, blank=True, null=True)
     telefono = models.CharField(max_length=250, blank=True, null=True)

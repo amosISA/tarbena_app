@@ -18,10 +18,20 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
+from . import views
+
+
 urlpatterns = [
+    # Admin
     url(r'^panel/docs/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     url(r'^panel/', admin.site.urls),
+
+    # Entry point to main app: Index
+    url(r'^$', views.index),
+
+    # Login
+    url(r'^accounts/login/', views.custom_login, {'template_name': 'login.html'}, name='login'),
 ]
 
 if settings.DEBUG:

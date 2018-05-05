@@ -86,8 +86,7 @@ __pycache__/
 mediafiles
 staticfiles
 local_settings.py
-local.py
-tarbena/settings/local.py
+config/settings/local.py
 
 .env
 db.sqlite3

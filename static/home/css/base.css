@@ -24,9 +24,9 @@ body {
     body .login .login * {
       box-sizing: border-box;
       font-family: "proxima-nova", helvetica; }
-    body .login .login .vertical-form.sign-in, body .login .login .vertical-form.register {
+    body .login .vertical-form.sign-in, body .login .vertical-form.register {
       padding-bottom: 20px; }
-    body .login .login .vertical-form {
+    body .login .vertical-form {
       margin: 0 auto;
       width: 470px;
       padding: 40px;
@@ -35,7 +35,7 @@ body {
       /* Input user name and password */
       /* Button Log In */
       /* Forgot Password */ }
-      body .login .login .vertical-form #user_name, body .login .login .vertical-form #user_password {
+      body .login .vertical-form #user_name, body .login .vertical-form #user_password {
         background: #fcfcfc;
         border: 2px solid #e7e7e7;
         margin: 20px auto;
@@ -48,7 +48,7 @@ body {
         text-align: left;
         height: auto;
         -webkit-appearance: none; }
-      body .login .login .vertical-form .login_form_submit_button {
+      body .login .vertical-form .login_form_submit_button {
         color: white;
         background: #15CD72;
         border: 0;
@@ -64,10 +64,10 @@ body {
         width: 100%;
         display: block;
         border-radius: 3px; }
-      body .login .login .vertical-form p a {
+      body .login .vertical-form p a {
         color: #0069ff;
         text-decoration: none; }
-    body .login .login .vertical-form legend {
+    body .login .vertical-form legend {
       text-align: center;
       font-weight: 300;
       color: #444;

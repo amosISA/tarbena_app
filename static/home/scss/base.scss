@@ -31,10 +31,10 @@ body {
     }
 
     /* Login form */
-    .login .vertical-form.sign-in, .login .vertical-form.register {
+    .vertical-form.sign-in, .vertical-form.register {
       padding-bottom: 20px;
     }
-    .login .vertical-form {
+    .vertical-form {
       margin: 0 auto;
       width: 470px;
       padding: 40px;
@@ -83,7 +83,7 @@ body {
       }
     }
 
-    .login .vertical-form legend {
+    .vertical-form legend {
       text-align: center;
       font-weight: 300;
       color: #444;

@@ -1,0 +1,115 @@
+/* Variables */
+
+
+/* Body */
+body {
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+  font-style: normal;
+  font-variant: normal;
+  color: #666;
+  font-weight: 400;
+  line-height: 1.5;
+  display: block;
+
+  /* Login */
+  .login {
+    background: #0069ff;
+    font-family: "proxima-nova";
+    padding: 0;
+    margin: 0;
+
+    .logo {
+      display: block;
+      height: 75px;
+      padding-top: 40px;
+      margin: 0 auto 30px;
+    }
+
+    .login * {
+      box-sizing: border-box;
+      font-family: "proxima-nova", helvetica;
+    }
+
+    /* Login form */
+    .login .vertical-form.sign-in, .login .vertical-form.register {
+      padding-bottom: 20px;
+    }
+    .login .vertical-form {
+      margin: 0 auto;
+      width: 470px;
+      padding: 40px;
+      border-radius: 3px;
+      background: white;
+
+      /* Input user name and password */
+      #user_name, #user_password {
+        background: #fcfcfc;
+        border: 2px solid #e7e7e7;
+        margin: 20px auto;
+        padding: 15px;
+        width: 100%;
+        display: block;
+        border-radius: 3px;
+        font-size: 18px;
+        transition: opacity 0.4s;
+        text-align: left;
+        height: auto;
+        -webkit-appearance: none;
+      }
+
+      /* Button Log In */
+      .login_form_submit_button {
+        color: white;
+        background: #15CD72;
+        border: 0;
+        font-weight: 600;
+        font-size: 17px;
+        text-align: center;
+        cursor: pointer;
+        margin-bottom: 0;
+        height: auto;
+        -webkit-appearance: none;
+        transition: opacity 0.4s;
+        padding: 15px;
+        width: 100%;
+        display: block;
+        border-radius: 3px;
+      }
+
+      /* Forgot Password */
+      p a {
+        color: #0069ff;
+        text-decoration: none;
+      }
+    }
+
+    .login .vertical-form legend {
+      text-align: center;
+      font-weight: 300;
+      color: #444;
+      margin: 0 auto 45px;
+      font-size: 35px;
+      line-height: 38px;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    /* Login Footer */
+    .footer {
+      text-align: center;
+      color: white;
+      margin: 20px auto;
+
+      p { margin-bottom: 40px; }
+      a {
+        font-weight: 600;
+        border: 0;
+        padding: 0;
+
+        &:hover {
+          color: #E7F1F9;
+        }
+      }
+    }
+  }
+}

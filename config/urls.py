@@ -17,8 +17,11 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.views import LoginView, logout, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
+from django.contrib.auth import views as auth_views
 
 from . import views
+from profiles.views import activate_user_view
 
 
 urlpatterns = [
@@ -27,11 +30,27 @@ urlpatterns = [
     url(r'^admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     url(r'^panel/', admin.site.urls),
 
-    # Entry point to main app: Index
-    url(r'^$', views.index),
+    #url(r'^profile/', include('profiles.urls', namespace='profiles')),
 
-    # Login
-    url(r'^accounts/login/', views.custom_login, {'template_name': 'login.html'}, name='login'),
+    # Entry point to main app: Index
+    url(r'^$', views.index, name='index'),
+
+    # Login, Register, Activation email, reset, confirm Password
+    url(r'^login/$', LoginView.as_view(redirect_authenticated_user=True), name='login'),
+    url(r'^logout/', logout, {'next_page': '/login/'}, name='logout'),
+    url(r'^register/$', views.RegisterView.as_view(), name="register"),
+    url(r'^activate/(?P<code>[a-z0-9].*)/$', activate_user_view, name='activate'),
+    #url('^change-password/$', auth_views.password_change, {'post_change_redirect' : '/'}, name='password_change'),
+    url(r'^reset/password_reset', password_reset, {"template_name": "registration/password_reset_form.html",
+        "email_template_name": "registration/password_reset_email.html"}, name="password_reset"),
+    url(r'^password_reset_done', password_reset_done, {"template_name":"registration/password_reset_done.html"},
+        name="password_reset_done"),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', password_reset_confirm,
+        {'template_name': 'registration/password_reset_confirm.html'},
+        name='password_reset_confirm'
+        ),
+    url(r'^reset/done', password_reset_complete, {'template_name': 'registration/password_reset_complete.html'},
+        name='password_reset_complete'),
 ]
 
 if settings.DEBUG:

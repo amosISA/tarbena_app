@@ -4,6 +4,8 @@ DEBUG = False
 
 ALLOWED_HOSTS += ['*', ]
 
+SITE_ID = 2
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

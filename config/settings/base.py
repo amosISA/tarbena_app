@@ -32,7 +32,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'admin_honeypot',
     'subvenciones',
     'profiles',
@@ -62,6 +62,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
+
+LOGIN_REDIRECT_URL = reverse_lazy('index')
 
 TEMPLATES = [
     {
@@ -141,10 +143,6 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
-
-# Where it redirects me when I login or logout
-LOGIN_REDIRECT_URL = reverse_lazy('index')
-LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 # Email server
 EMAIL_USE_TLS = True

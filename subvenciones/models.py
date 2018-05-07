@@ -30,15 +30,15 @@ class Estado(TimeStampedModel):
         ordering = ["nombre"]
 
     def save(self):
-        self.slug = slugify(self.etapa)
+        self.slug = slugify(self.nombre)
         super(Estado, self).save()
 
-    # def get_absolute_url(self):
-    #     return reverse('myapp:subvencion_by_category',
-    #                    args=[self.slug])
+    def get_absolute_url(self):
+        return reverse('subvenciones:subvencion_by_category',
+                       args=[self.slug])
 
-    # def count_subsidies(self):
-    #     return Subvencion.objects.filter(estado=self.etapa)
+    def count_subsidies(self):
+        return Subvencion.objects.filter(estado=self.etapa)
 
 class Colectivo(models.Model):
     nombre = models.CharField(max_length=250)
@@ -54,9 +54,9 @@ class Colectivo(models.Model):
         self.slug = slugify(self.nombre)
         super(Colectivo, self).save()
 
-    # def get_absolute_url(self):
-    #     return reverse('myapp:subvencion_by_category',
-    #                    args=[self.slug])
+    def get_absolute_url(self):
+        return reverse('subvenciones:subvencion_by_category',
+                       args=[self.slug])
 
 class Area(TimeStampedModel):
     nombre = models.CharField(max_length=250)
@@ -72,9 +72,9 @@ class Area(TimeStampedModel):
         self.slug = slugify(self.nombre)
         super(Area, self).save()
 
-    # def get_absolute_url(self):
-    #     return reverse('myapp:subvencion_by_category',
-    #                    args=[self.slug])
+    def get_absolute_url(self):
+        return reverse('subvenciones:subvencion_by_category',
+                       args=[self.slug])
 
 class Ente(TimeStampedModel):
     nombre = models.CharField(max_length=250)
@@ -91,9 +91,9 @@ class Ente(TimeStampedModel):
         self.slug = slugify(self.nombre)
         super(Ente, self).save()
 
-    # def get_absolute_url(self):
-    #     return reverse('myapp:subvencion_by_category',
-    #                    args=[self.slug])
+    def get_absolute_url(self):
+        return reverse('subvenciones:subvencion_by_category',
+                       args=[self.slug])
 
 class Subvencion(TimeStampedModel):
     user = models.ForeignKey(User, blank=True, null=True)

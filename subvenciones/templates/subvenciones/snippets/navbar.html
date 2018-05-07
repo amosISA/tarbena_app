@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-sm navbar-custom fixed-top">
+    <div class="row">
+        <div class="col brand-styled-nav">
+            <a data-toggle="collapse" href="#dep-notif-collapse" class="navbar-brand">Gestión de Subvenciones</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCustom">
+                <i class="fa fa-bars fa-lg py-1 text-white"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbarCustom">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+                <a class="nav-link" href="#"> <i class="fas fa-home"></i> Inicio</a>
+            </li>
+            <li class="nav-item {% if request.path == '/new/' %}active{% endif %}">
+                <a class="nav-link" href="#"> <i class="far fa-file"></i> Crear subvención</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-bookmark"></i> Ver favoritos
+                </a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav" style="margin-right:30px;">
+            {% if request.user.is_authenticated %}
+                <li class="nav-item" style="margin-right:20px;margin-top: 8px;">
+                    <span id="button-actual-subsidie-navigation"><i class="fas fa-exchange-alt"></i></span>
+                </li>
+                <li class="nav-item" style="margin-right:20px;">
+                    <input type="text" id="search-on-navigation">
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> <i class="far fa-user"></i> {{ request.user.username|title }}</a>
+                </li>
+            {% else %}
+                <li class="nav-link" class="nav-item">Bienvenido nuevo usuario. Por favor inicie sesión</li>
+            {% endif %}
+
+            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"> <i class="fas fa-sign-out-alt"></i> Salir</a></li>
+        </ul>
+    </div>
+</nav>

@@ -18,7 +18,25 @@
             <!-- Favicon -->
             <link rel="icon" href="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" type="image/x-icon"/>
 
+            <!-- Font Awesome -->
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
+            <!-- Base CSS -->
             <link rel="stylesheet" href="{% static 'subvenciones/css/base.css' %}">
+
+            <!-- Datatables -->
+            <link rel="stylesheet" type="text/css" href="{% static 'home/datatables/datatables.min.css' %}"/>
+            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.dataTables.css' %}">
+            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.bootstrap4.css' %}">
+            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.foundation.css' %}">
+            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.jqueryui.css' %}">
+            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.semanticui.css' %}">
+            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/common.css' %}">
+            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/mixins.css' %}">
+            <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+
+            <!-- Colores JC -->
+            <link rel="stylesheet" href="http://popsique.net/subs/colores.css">
         {% endblock %}
 
         <title>
@@ -30,16 +48,45 @@
         {% block navbar %}
         {% endblock %}
 
-        <div class="container-fluid subvenciones_container">
-            {% block content %}
-            {% endblock %}
+        <div class="container-fluid subv_webapp_container">
+            <div class="starter-template">
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script
+          src="https://code.jquery.com/jquery-3.3.1.js"
+          integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+          crossorigin="anonymous"></script>
+        <script src="http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+        <!-- Datatables -->
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="{% static 'home/datatables/datatables.min.js' %}"></script>
+
+        <script>
+            /* Add csrftoken in every AJAX request */
+            var csrftoken = $.cookie('csrftoken');
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+        </script>
+
+        {% block addscript %}
+        {% endblock %}
 
         <script>
             $(document).ready(function() {

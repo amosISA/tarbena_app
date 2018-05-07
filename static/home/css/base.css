@@ -4,23 +4,23 @@ body {
   font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
   font-style: normal;
   font-variant: normal;
-  color: #666;
+  color: #000;
+  background: #0069ff;
   font-weight: 400;
   line-height: 1.5;
   display: block;
   /* Login */ }
   body .login {
-    background: #0069ff;
     font-family: "proxima-nova";
     padding: 0;
     margin: 0;
     /* Login form */
     /* Login Footer */ }
-    body .login .logo {
+    body .login .tar_logo {
       display: block;
-      height: 75px;
-      padding-top: 40px;
-      margin: 0 auto 30px; }
+      height: 150px;
+      padding-top: 20px;
+      margin: 0 auto 20px; }
     body .login .login * {
       box-sizing: border-box;
       font-family: "proxima-nova", helvetica; }
@@ -85,7 +85,8 @@ body {
       body .login .footer a {
         font-weight: 600;
         border: 0;
-        padding: 0; }
+        padding: 0;
+        color: #fff; }
         body .login .footer a:hover {
           color: #E7F1F9; }
 

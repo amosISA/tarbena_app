@@ -59,6 +59,17 @@ body {
     .vertical-form.sign-in, .vertical-form.register {
       padding-bottom: 20px;
     }
+
+    .vertical-form.register p {
+      padding-top: 8px;
+      font-size: 17px;
+      line-height: 1.5;
+      text-align: center;
+      margin: 0;
+      margin-top: 10px;
+      color: #666;
+    }
+
     .vertical-form {
       margin: 0 auto;
       width: 470px;
@@ -67,7 +78,8 @@ body {
       background: white;
 
       /* Input user name and password */
-      #user_name, #user_password {
+      #user_name, #user_password, #id_username, #id_email, #id_first_name, #id_last_name,
+      #id_password1, #id_password2 {
         background: #fcfcfc;
         border: 2px solid #e7e7e7;
         margin: 20px auto;
@@ -83,7 +95,7 @@ body {
       }
 
       /* Button Log In */
-      .login_form_submit_button {
+      .login_form_submit_button, .register_form_submit_button {
         color: white;
         background: #61bd4f;
         border: 0;

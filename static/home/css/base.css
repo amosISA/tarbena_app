@@ -46,6 +46,14 @@ body {
       font-family: "proxima-nova", helvetica; }
     body .login .vertical-form.sign-in, body .login .vertical-form.register {
       padding-bottom: 20px; }
+    body .login .vertical-form.register p {
+      padding-top: 8px;
+      font-size: 17px;
+      line-height: 1.5;
+      text-align: center;
+      margin: 0;
+      margin-top: 10px;
+      color: #666; }
     body .login .vertical-form {
       margin: 0 auto;
       width: 470px;
@@ -55,7 +63,8 @@ body {
       /* Input user name and password */
       /* Button Log In */
       /* Forgot Password */ }
-      body .login .vertical-form #user_name, body .login .vertical-form #user_password {
+      body .login .vertical-form #user_name, body .login .vertical-form #user_password, body .login .vertical-form #id_username, body .login .vertical-form #id_email, body .login .vertical-form #id_first_name, body .login .vertical-form #id_last_name,
+      body .login .vertical-form #id_password1, body .login .vertical-form #id_password2 {
         background: #fcfcfc;
         border: 2px solid #e7e7e7;
         margin: 20px auto;
@@ -68,7 +77,7 @@ body {
         text-align: left;
         height: auto;
         -webkit-appearance: none; }
-      body .login .vertical-form .login_form_submit_button {
+      body .login .vertical-form .login_form_submit_button, body .login .vertical-form .register_form_submit_button {
         color: white;
         background: #61bd4f;
         border: 0;
@@ -84,7 +93,7 @@ body {
         width: 100%;
         display: block;
         border-radius: 3px; }
-        body .login .vertical-form .login_form_submit_button:hover {
+        body .login .vertical-form .login_form_submit_button:hover, body .login .vertical-form .register_form_submit_button:hover {
           background-color: #0CB863;
           transition: background 0.1s; }
       body .login .vertical-form p a {

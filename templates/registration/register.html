@@ -1,7 +1,6 @@
-
-
 {% extends "home/base.html" %}
 {% load staticfiles %}
+{% load tags %}
 
 {% block title %}
     Tárbena
@@ -12,73 +11,50 @@
 
 {% block content %}
     <div class="login">
+        {% if form.errors %}
+            <ul class="notice erros">
+                {% for field in form %}
+                    {% if field.errors %}
+                        - {{ field.errors|striptags }}<br />
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+
         <img class="tar_logo" height="75" width="208" src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="Tarbena logo">
 
         <form name="tar_register_form" class="vertical-form register" method="post" accept-charset="UTF-8">
             {% csrf_token %}
 
-            {% if form.errors %}
-                <div class="ag_form_login_message_error">
-                    {% for field in form %}
-                        {% if field.errors %}
-                            - {{ field.errors|striptags }}<br />
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            {% endif %}
+            <legend>
+                Crear cuenta
+            </legend>
 
-            <div class="ag_form_block_input">
-                {{ form.username.label_tag }}
-                <div class="ag_form_inner_wrapper">
-                    {{ form.username }}
-                </div>
-            </div>
+            {{ form.username|htmlattributes:"placeholder: Usuario" }}
+            {{ form.email|htmlattributes:"placeholder: Email" }}
+            {{ form.first_name|htmlattributes:"placeholder: Nombre" }}
+            {{ form.last_name|htmlattributes:"placeholder: Isaila" }}
+            {{ form.password1|htmlattributes:"placeholder: Contraseña" }}
+            {{ form.password2 }}
+            <input class="register_form_submit_button" type="submit" value="Registrar">
 
-            <div class="ag_form_block_input">
-                {{ form.email.label_tag }}
-                <div class="ag_form_inner_wrapper">
-                    {{ form.email }}
-                </div>
-            </div>
-
-            <div class="ag_form_block_input">
-                {{ form.first_name.label_tag }}
-                <div class="ag_form_inner_wrapper">
-                    {{ form.first_name }}
-                </div>
-            </div>
-
-            <div class="ag_form_block_input">
-                {{ form.last_name.label_tag }}
-                <div class="ag_form_inner_wrapper">
-                    {{ form.last_name }}
-                </div>
-            </div>
-
-            <div class="ag_form_block_input">
-                {{ form.password1.label_tag }}
-                <div class="ag_form_inner_wrapper">
-                    {{ form.password1 }}
-                </div>
-            </div>
-
-            <div class="ag_form_block_input">
-                {{ form.password2.label_tag }}
-                <div class="ag_form_inner_wrapper">
-                    {{ form.password2 }}
-                </div>
-            </div>
-
-            <div class="ag_form_block_input">
-                <div class="ag_form_inner_wrapper">
-                    <button class="ag_register_form_submit_button" type="submit">Registrar</button>
-                </div>
-            </div>
-
-            <div class="ag_auth_page_login_account_hint">
-                ¿Dispone de una cuenta?
-                <a href="{% url 'login' %}" class="ag_auth_page_login_button">Log in</a>
-            </div>
+            <!-- Terms -->
+            <p class="terms">
+                Registrándote aceptas los <a href="#">Términos del Servicio</a> y la <a href="#">Política de Privacidad</a>.
+            </p>
         </form>
+
+        <div class="footer">
+            <p>
+                ¿Ya dispone de una cuenta?
+                <a href="{% url 'login' %}" class="auth_page_signin">Log in</a>
+            </p>
+        </div>
     </div>
+{% endblock %}
+
+{% block domready %}
+    $('form').find("#id_password2").each(function(ev) {
+        $(this).attr("placeholder", "Confirmar contraseña");
+    });
 {% endblock %}

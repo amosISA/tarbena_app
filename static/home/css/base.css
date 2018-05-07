@@ -5,22 +5,42 @@ body {
   font-style: normal;
   font-variant: normal;
   color: #000;
-  background: #0069ff;
   font-weight: 400;
   line-height: 1.5;
   display: block;
   /* Login */ }
+  body .home_container {
+    height: 100%;
+    margin: 0;
+    padding: 0; }
   body .login {
     font-family: "proxima-nova";
     padding: 0;
     margin: 0;
+    height: 100%;
+    background: #0069ff;
+    /* Errors */
     /* Login form */
     /* Login Footer */ }
+    body .login ul.notice {
+      background-color: #EDE04D;
+      color: #212200;
+      margin: 0;
+      border: 0;
+      width: 100%;
+      text-align: center;
+      list-style-position: inside;
+      list-style: none;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 10px; }
+    body .login ul.notice li {
+      padding: 5px 0; }
     body .login .tar_logo {
       display: block;
       height: 150px;
       padding-top: 20px;
-      margin: 0 auto 20px; }
+      margin: 0 auto 28px; }
     body .login .login * {
       box-sizing: border-box;
       font-family: "proxima-nova", helvetica; }
@@ -50,7 +70,7 @@ body {
         -webkit-appearance: none; }
       body .login .vertical-form .login_form_submit_button {
         color: white;
-        background: #15CD72;
+        background: #61bd4f;
         border: 0;
         font-weight: 600;
         font-size: 17px;
@@ -64,6 +84,9 @@ body {
         width: 100%;
         display: block;
         border-radius: 3px; }
+        body .login .vertical-form .login_form_submit_button:hover {
+          background-color: #0CB863;
+          transition: background 0.1s; }
       body .login .vertical-form p a {
         color: #0069ff;
         text-decoration: none; }

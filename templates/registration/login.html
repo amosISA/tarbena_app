@@ -10,28 +10,28 @@
 
 {% block content %}
     <div class="login">
+        {% if form.errors %}
+            <ul class="notice erros">
+                Compruebe que su nombre y contraseña sean correctas o, puede que su
+                cuenta no esté activada (compruebe su email).
+            </ul>
+        {% endif %}
+
+        {% if next %}
+            <ul class="notice erros">
+                {% if user.is_authenticated %}
+                    Your account doesn't have access to this page. To proceed,
+                    please login with an account that has access.
+                {% else %}
+                    Para ver esta página debe registrarse.
+                {% endif %}
+            </ul>
+        {% endif %}
+
         <img class="tar_logo" height="75" width="208" src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="Tarbena logo">
 
         <form name="tar_login_form" class="vertical-form sign-in" method="post" action="{% url 'login' %}" accept-charset="UTF-8">
             {% csrf_token %}
-
-            {% if form.errors %}
-                <div class="tar_form_login_message_error">
-                    Compruebe que su nombre y contraseña sean correctas o, puede que su
-                    cuenta no esté activada (compruebe su email).
-                </div>
-            {% endif %}
-
-            {% if next %}
-                <div class="ag_form_login_message_error">
-                    {% if user.is_authenticated %}
-                        Your account doesn't have access to this page. To proceed,
-                        please login with an account that has access.
-                    {% else %}
-                        Para ver esta página debe registrarse.
-                    {% endif %}
-                </div>
-            {% endif %}
 
             <legend>
                 Log In

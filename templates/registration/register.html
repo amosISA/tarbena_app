@@ -1,6 +1,20 @@
 
-    <div class="ag_auth_page_register">
-        <form name="ag_register_form" class="ag_form_auth_register" method="post">
+
+{% extends "home/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Tárbena
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+    <div class="login">
+        <img class="tar_logo" height="75" width="208" src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="Tarbena logo">
+
+        <form name="tar_register_form" class="vertical-form register" method="post" accept-charset="UTF-8">
             {% csrf_token %}
 
             {% if form.errors %}
@@ -65,6 +79,6 @@
                 ¿Dispone de una cuenta?
                 <a href="{% url 'login' %}" class="ag_auth_page_login_button">Log in</a>
             </div>
-
         </form>
     </div>
+{% endblock %}

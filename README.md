@@ -23,6 +23,7 @@ python .\manage.py loaddata subsidies.json
 ```
 export MYSQL_PASSWORD=1234
 'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+Or I can add it to my file and import it like the secret key and the email password.
 ```
 
 # Save my SECREY_KEY in a secure file in the production server

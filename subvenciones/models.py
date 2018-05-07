@@ -122,6 +122,8 @@ class Subvencion(TimeStampedModel):
 
     ente = models.ForeignKey(Ente)
 
+    likes = models.ManyToManyField(User, blank=True, related_name='subvencion_likes')
+
     class Meta:
         ordering = ["fin"]
         verbose_name = 'Subvencion'
@@ -147,7 +149,7 @@ class Comment(TimeStampedModel):
         ordering = ['-created',]
 
     def __str__(self):
-        return 'Comentado por {}'.format(self.user)
+        return 'Comentado por {}, {}'.format(self.user, self.subvencion)
 
 class Like(TimeStampedModel):
     liked_by = models.ForeignKey(User)

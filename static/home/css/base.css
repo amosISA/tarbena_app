@@ -8,7 +8,8 @@ body {
   font-weight: 400;
   line-height: 1.5;
   display: block;
-  /* Login */ }
+  /* Login */
+  /* Form responsive */ }
   body .home_container {
     height: 100%;
     margin: 0;
@@ -44,8 +45,10 @@ body {
     body .login .login * {
       box-sizing: border-box;
       font-family: "proxima-nova", helvetica; }
-    body .login .vertical-form.sign-in, body .login .vertical-form.register {
+    body .login .vertical-form.sign-in, body .login .vertical-form.register, body .login .vertical-form.reset {
       padding-bottom: 20px; }
+    body .login .vertical-form.reset {
+      margin-bottom: 205px; }
     body .login .vertical-form.register p {
       padding-top: 8px;
       font-size: 17px;
@@ -64,7 +67,7 @@ body {
       /* Button Log In */
       /* Forgot Password */ }
       body .login .vertical-form #user_name, body .login .vertical-form #user_password, body .login .vertical-form #id_username, body .login .vertical-form #id_email, body .login .vertical-form #id_first_name, body .login .vertical-form #id_last_name,
-      body .login .vertical-form #id_password1, body .login .vertical-form #id_password2 {
+      body .login .vertical-form #id_password1, body .login .vertical-form #id_password2, body .login .vertical-form #id_new_password1, body .login .vertical-form #id_new_password2 {
         background: #fcfcfc;
         border: 2px solid #e7e7e7;
         margin: 20px auto;
@@ -77,7 +80,7 @@ body {
         text-align: left;
         height: auto;
         -webkit-appearance: none; }
-      body .login .vertical-form .login_form_submit_button, body .login .vertical-form .register_form_submit_button {
+      body .login .vertical-form .login_form_submit_button, body .login .vertical-form .register_form_submit_button, body .login .vertical-form .reset_password_form_submit_button {
         color: white;
         background: #61bd4f;
         border: 0;
@@ -93,7 +96,7 @@ body {
         width: 100%;
         display: block;
         border-radius: 3px; }
-        body .login .vertical-form .login_form_submit_button:hover, body .login .vertical-form .register_form_submit_button:hover {
+        body .login .vertical-form .login_form_submit_button:hover, body .login .vertical-form .register_form_submit_button:hover, body .login .vertical-form .reset_password_form_submit_button:hover {
           background-color: #0CB863;
           transition: background 0.1s; }
       body .login .vertical-form p a {
@@ -121,5 +124,13 @@ body {
         color: #fff; }
         body .login .footer a:hover {
           color: #E7F1F9; }
+  @media screen and (max-width: 550px) {
+    body .login .logo {
+      padding-top: 35px;
+      padding-bottom: 5px; }
+    body .login .vertical-form {
+      width: 100%;
+      border-radius: 0;
+      padding: 40px 20px; } }
 
 /*# sourceMappingURL=base.css.map */

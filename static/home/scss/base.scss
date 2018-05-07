@@ -56,9 +56,11 @@ body {
     }
 
     /* Login form */
-    .vertical-form.sign-in, .vertical-form.register {
+    .vertical-form.sign-in, .vertical-form.register, .vertical-form.reset {
       padding-bottom: 20px;
     }
+
+    .vertical-form.reset { margin-bottom: 205px; }
 
     .vertical-form.register p {
       padding-top: 8px;
@@ -79,7 +81,7 @@ body {
 
       /* Input user name and password */
       #user_name, #user_password, #id_username, #id_email, #id_first_name, #id_last_name,
-      #id_password1, #id_password2 {
+      #id_password1, #id_password2, #id_new_password1, #id_new_password2 {
         background: #fcfcfc;
         border: 2px solid #e7e7e7;
         margin: 20px auto;
@@ -95,7 +97,7 @@ body {
       }
 
       /* Button Log In */
-      .login_form_submit_button, .register_form_submit_button {
+      .login_form_submit_button, .register_form_submit_button, .reset_password_form_submit_button {
         color: white;
         background: #61bd4f;
         border: 0;
@@ -153,6 +155,19 @@ body {
           color: #E7F1F9;
         }
       }
+    }
+  }
+
+  /* Form responsive */
+  @media screen and (max-width: 550px) {
+    .login .logo {
+      padding-top: 35px;
+      padding-bottom: 5px;
+    }
+    .login .vertical-form {
+      width: 100%;
+      border-radius: 0;
+      padding: 40px 20px;
     }
   }
 }

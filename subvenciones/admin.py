@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from .models import Subvencion, Estado, Colectivo, Ente, Area
+from .models import Subvencion, Estado, Colectivo, Ente, Area, Comment
 
 # Register your models here.
 class SubvencionAdmin(admin.ModelAdmin):
@@ -35,4 +35,11 @@ admin.site.register(Ente, EnteAdmin)
 class AreaAdmin(admin.ModelAdmin):
     exclude = ('slug',)
 admin.site.register(Area, AreaAdmin)
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'subvencion', 'contenido', 'active')
+    list_filter = ('active', 'created', 'updated')
+    search_fields = ('subvencion', 'contenido')
+admin.site.register(Comment, CommentAdmin)
+
 

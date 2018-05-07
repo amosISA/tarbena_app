@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^panel/', admin.site.urls),
 
     #url(r'^profile/', include('profiles.urls', namespace='profiles')),
+    url(r'^subvenciones/', include('subvenciones.urls', namespace='subvenciones')),
 
     # Entry point to main app: Index
     url(r'^$', views.index, name='index'),

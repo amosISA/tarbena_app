@@ -1,1 +1,17 @@
-<h1>HELLO</h1>
+{% extends "home/base.html" %}
+{% load staticfiles %}
+{% load tags %}
+
+{% block title %}
+    Tárbena
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+    <ul>
+        <li><a href="{% url 'subvenciones:index' %}">Subvenciones</a></li>
+        <li><a href="#">Parcelas</a></li>
+    </ul>
+{% endblock %}

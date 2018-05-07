@@ -87,6 +87,7 @@ mediafiles
 staticfiles
 local_settings.py
 config/settings/local.py
+config/settings/django_secrets.py
 
 .env
 db.sqlite3

@@ -88,11 +88,7 @@
         {% block addscript %}
         {% endblock %}
 
-        <script>
-            $(document).ready(function() {
-                {% block domready %}
-                {% endblock %}
-            });
-        </script>
+        {% block js %}
+        {% endblock %}
     </body>
 </html>

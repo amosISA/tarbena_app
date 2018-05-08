@@ -10,11 +10,11 @@
 
     <div class="navbar-collapse collapse" id="navbarCustom">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+            <li class="nav-item {% if request.path == '/subvenciones/' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'subvenciones:index' %}"> <i class="fas fa-home"></i> Inicio</a>
             </li>
-            <li class="nav-item {% if request.path == '/new/' %}active{% endif %}">
-                <a class="nav-link" href="#"> <i class="far fa-file"></i> Crear subvención</a>
+            <li class="nav-item {% if request.path == '/subvenciones/new/' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'subvenciones:create' %}"> <i class="far fa-file"></i> Crear subvención</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">

@@ -1,0 +1,162 @@
+{% extends "subvenciones/base.html" %}
+
+{% block title %} Crear{% endblock %}
+
+{% block navbar %}
+    {% include 'subvenciones/snippets/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    {% load staticfiles %}
+    {% load tags %}
+    <div class="row forms_act_crea">
+        <div class="ag_create_post_wrapper col-lg-12">
+            <h1 class="h1">Añadir Subvención</h1>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form id="some-form" class="form-horizontal" method="post" enctype="multipart/form-data" action="">{% csrf_token %}
+
+                {% if form.errors %}
+                    <div class="ag_form_login_message_error">
+                        {% for field,error in form.errors.items %}
+                            {{ field|capfirst }} - {{ error|striptags }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-lg-3 doted-right">
+                        <div class="row">
+                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
+                                <!-- Inicio -->
+                                {{ form.inicio.label_tag }}
+                                {{ form.inicio|htmlattributes:"class:form-control" }}
+                            </div>
+                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
+                                <!-- Fin -->
+                                {{ form.fin.label_tag }}
+                                {{ form.fin|htmlattributes:"class:form-control" }}
+                            </div>
+                        </div>
+
+                        <!-- Responsable -->
+                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                            {{ form.responsable.label_tag }}
+                            {{ form.responsable|htmlattributes:"class:form-control" }}
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
+                                <!-- Gestiona Enlace -->
+                                {{ form.drive.label_tag }}
+                                {{ form.drive|htmlattributes:"class:form-control" }}
+                            </div>
+                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
+                                <!-- Gestiona Expediente -->
+                                {{ form.gestiona_expediente.label_tag }}
+                                {{ form.gestiona_expediente|htmlattributes:"placeholder: Expediente, class:form-control" }}
+                            </div>
+                        </div>
+
+                        <!-- Nombre carpeta drive -->
+                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                            {{ form.nombre_carpeta_drive.label_tag }}
+                            {{ form.nombre_carpeta_drive|htmlattributes:"class:form-control" }}
+                        </div>
+
+                        <!-- Aquí va el ente con el Area -->
+
+                        <!-- Colectivo -->
+                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                            {{ form.colectivo.label_tag }}
+                            {{ form.colectivo|htmlattributes:"class:form-control" }}
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                            {{ form.estado.label_tag }}
+                            {{ form.estado|htmlattributes:"class:form-control" }}
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
+                                <!-- Cuantia inicio -->
+                                {{ form.cuantia_inicial.label_tag }}
+                                {{ form.cuantia_inicial|htmlattributes:"class:form-control" }}
+                            </div>
+                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
+                                <!-- Cuantia final -->
+                                {{ form.cuantia_final.label_tag }}
+                                {{ form.cuantia_final|htmlattributes:"class:form-control" }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 doted-right">
+                        <!-- Nombre -->
+                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                            {{ form.nombre.label_tag }}
+                            {{ form.nombre|htmlattributes:"class:form-control" }}
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-4 title-create_post" style="text-align:justify;font-weight:bold;">
+                                <!-- Procedimiento -->
+                                {{ form.procedimiento.label_tag }}
+                                {{ form.procedimiento|htmlattributes:"placeholder: Procedimiento, class:form-control" }}
+                            </div>
+                            <div class="form-group col-md-4 title-create_post" style="text-align:justify;font-weight:bold;">
+                                <!-- Bases -->
+                                {{ form.bases.label_tag }}
+                                {{ form.bases|htmlattributes:"placeholder: Bases, class:form-control" }}
+                            </div>
+                            <div class="form-group col-md-4 title-create_post" style="text-align:justify;font-weight:bold;">
+                                <!-- Solicitud -->
+                                {{ form.solicitud.label_tag }}
+                                {{ form.solicitud|htmlattributes:"placeholder: Solicitud, class:form-control" }}
+                            </div>
+                        </div>
+
+                        <!-- Descripcion -->
+                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                            {{ form.descripcion.label_tag }}
+                            {{ form.descripcion|htmlattributes:"placeholder: Descripcion, class:form-control" }}
+                        </div>
+
+                        <!-- Comentarios -->
+                    </div>
+
+                    <div class="col-lg-3">
+                        <!-- Se relacion con -->
+                        <div class="form-group title-create_post se_relaciona_con_ajax_div" style="text-align:justify;font-weight:bold;">
+                            {{ form.se_relaciona_con.label_tag }}
+                            {{ form.se_relaciona_con|htmlattributes:"placeholder: Expediente, class:form-control" }}
+                        </div>
+                    </div>
+                </div>
+
+                <!--onclick="this.disabled=true,this.form.submit();"-->
+                <input class="button_submit_create_form" type="submit" value="Crear Subvención" />
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block addscript %}
+    <script src="{% static 'subvenciones/js/create_subvenciones.js' %}"></script>
+    <!-- For the admin site -->
+    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+    <script src="{% static 'admin/js/core.js' %}"></script>
+    <script src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>
+{% endblock %}

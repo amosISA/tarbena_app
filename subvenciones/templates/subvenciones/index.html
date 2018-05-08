@@ -3,7 +3,7 @@
 {% load tags %}
 
 {% block title %}
-    Subvenciones
+    {% if estado %}{{ estado.nombre }}{% elif area %}{{ area.nombre }}{% elif user %}{{ user.username }}{% else %}Subvenciones{% endif %}
 {% endblock %}
 
 {% block navbar %}

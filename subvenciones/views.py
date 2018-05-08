@@ -1,18 +1,23 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
+from .forms import SubvencionForm
 from .models import Subvencion, Estado, Colectivo, Area
 
 @login_required()
 def index_subvenciones(request, estado_slug=None):
     """ List subvenciones """
 
-    estado = None
+    estado, area, user = None, None, None
     estados = Estado.objects.all().annotate(number_stats=Count('subvencion'))
 
     # If is superuser: list all subsidies, if not, only the related to the respective user
@@ -42,8 +47,22 @@ def index_subvenciones(request, estado_slug=None):
     return render(request,
                   'subvenciones/index.html',
                   {'estado': estado,
+                   'area': area,
+                   'user': user,
                    'estados': estados,
                    'subvenciones': subvenciones,
                    'days_until_estado': days_until_estado,
                    'total_subvenciones': total_subvenciones,
                    'colectivos': colectivos})
+
+# --------------- Create New Subsidie --------------- #
+class SubvencionCreateView(LoginRequiredMixin, CreateView):
+    form_class = SubvencionForm
+    template_name = 'subvenciones/create.html'
+    success_url = reverse_lazy('subvenciones:index')
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.user = self.request.user
+        messages.success(self.request, 'Subvención añadida correctamente')
+        return super(SubvencionCreateView, self).form_valid(form)

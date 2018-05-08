@@ -3,10 +3,12 @@ import datetime
 
 register = template.Library()
 
-# So that I can use this filter to add attributes to my elements in templates such as:
-# {{ form.email|htmlattributes:"class : something, id: openid_identifier" }}
-# So my input email now have a class=something and id=openid_identifier
 def htmlattributes(value, arg):
+    """
+    So that I can use this filter to add attributes to my elements in templates such as:
+    {{ form.email|htmlattributes:"class : something, id: openid_identifier" }}
+    So my input email now have a class=something and id=openid_identifier
+    """
     attrs = value.field.widget.attrs
 
     data = arg.replace(' ', '')
@@ -54,6 +56,10 @@ def days_until(value):
 register.filter('daysuntil', days_until)
 
 def split_value(value):
+    """
+    If username is: Juan Pablo:
+    this returns: JP
+    """
     str_word = str(value)
     words = str_word.split()
     letters = [word[0] for word in words]

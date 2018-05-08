@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import os
+import datetime
 from django.conf import settings
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
@@ -10,8 +12,7 @@ User = settings.AUTH_USER_MODEL
 
 # Create your models here.
 def upload_location(instance, filename):
-    username = instance.user.username
-    return "profiles/avatar/%s/%s_%s" % (username, username, filename)
+    return os.path.join('profiles/avatar/', datetime.datetime.now().date().strftime("%Y/%m/%d"), filename)
 
 
 class TimeStampedModel(models.Model):

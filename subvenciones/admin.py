@@ -2,6 +2,7 @@
 from django.contrib import admin
 
 from .models import Subvencion, Estado, Colectivo, Ente, Area, Comment
+from .sites import my_admin_site
 
 # Register your models here.
 class SubvencionAdmin(admin.ModelAdmin):
@@ -18,6 +19,7 @@ class SubvencionAdmin(admin.ModelAdmin):
 
         obj.user = request.user
         super(SubvencionAdmin, self).save_model(request, obj, form, change)
+my_admin_site.register(Subvencion, SubvencionAdmin)
 admin.site.register(Subvencion, SubvencionAdmin)
 
 class EstadoAdmin(admin.ModelAdmin):

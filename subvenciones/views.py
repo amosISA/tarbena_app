@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 
-from .models import Subvencion, Estado, Colectivo
+from .models import Subvencion, Estado, Colectivo, Area
 
 @login_required()
 def index_subvenciones(request, estado_slug=None):
@@ -27,6 +27,9 @@ def index_subvenciones(request, estado_slug=None):
         if Estado.objects.filter(slug=estado_slug).exists():
             estado = get_object_or_404(Estado, slug=estado_slug)
             subvenciones = subvenciones.filter(estado=estado)
+        elif Area.objects.filter(slug=estado_slug).exists():
+            area = get_object_or_404(Area, slug=estado_slug)
+            subvenciones = subvenciones.filter(ente__area=area)
         else:
             subvenciones = Subvencion.objects.all()
 

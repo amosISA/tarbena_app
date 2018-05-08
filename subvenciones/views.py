@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 
@@ -30,6 +31,9 @@ def index_subvenciones(request, estado_slug=None):
         elif Area.objects.filter(slug=estado_slug).exists():
             area = get_object_or_404(Area, slug=estado_slug)
             subvenciones = subvenciones.filter(ente__area=area)
+        elif User.objects.filter(username=estado_slug).exists():
+            user = get_object_or_404(User, username=estado_slug)
+            subvenciones = subvenciones.filter(responsable__username=user)
         else:
             subvenciones = Subvencion.objects.all()
 

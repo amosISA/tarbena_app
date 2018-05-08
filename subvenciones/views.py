@@ -55,6 +55,12 @@ def index_subvenciones(request, estado_slug=None):
                    'total_subvenciones': total_subvenciones,
                    'colectivos': colectivos})
 
+# Load a list of areas for a given Ente
+def load_areas(request):
+    ente_id = request.GET.get('ente')
+    areas = Area.objects.filter(ente_id=ente_id).order_by('nombre')
+    return render(request, 'subvenciones/areas_dropdown_list_options.html', {'areas': areas})
+
 # --------------- Create New Subsidie --------------- #
 class SubvencionCreateView(LoginRequiredMixin, CreateView):
     form_class = SubvencionForm

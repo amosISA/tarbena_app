@@ -58,27 +58,8 @@ class Colectivo(models.Model):
         return reverse('subvenciones:subvencion_by_category',
                        args=[self.slug])
 
-class Area(TimeStampedModel):
-    nombre = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250, unique=True, default=None, blank=True, null=True)
-
-    def __str__(self):
-        return '{}'.format(self.nombre)
-
-    class Meta:
-        ordering = ['nombre',]
-
-    def save(self):
-        self.slug = slugify(self.nombre)
-        super(Area, self).save()
-
-    def get_absolute_url(self):
-        return reverse('subvenciones:subvencion_by_category',
-                       args=[self.slug])
-
 class Ente(TimeStampedModel):
     nombre = models.CharField(max_length=250)
-    area = models.ForeignKey(Area, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=250, unique=True, default=None, blank=True, null=True)
 
     def __str__(self):
@@ -90,6 +71,25 @@ class Ente(TimeStampedModel):
     def save(self):
         self.slug = slugify(self.nombre)
         super(Ente, self).save()
+
+    def get_absolute_url(self):
+        return reverse('subvenciones:subvencion_by_category',
+                       args=[self.slug])
+
+class Area(TimeStampedModel):
+    nombre = models.CharField(max_length=250)
+    ente = models.ForeignKey(Ente, on_delete=models.CASCADE, null=True)
+    slug = models.SlugField(max_length=250, unique=True, default=None, blank=True, null=True)
+
+    def __str__(self):
+        return '{}'.format(self.nombre)
+
+    class Meta:
+        ordering = ['nombre',]
+
+    def save(self):
+        self.slug = slugify(self.nombre)
+        super(Area, self).save()
 
     def get_absolute_url(self):
         return reverse('subvenciones:subvencion_by_category',
@@ -121,7 +121,8 @@ class Subvencion(TimeStampedModel):
     se_relaciona_con = models.ManyToManyField('self', blank=True, default='')
     colectivo = models.ManyToManyField(Colectivo, blank=True)
 
-    ente = models.ForeignKey(Ente)
+    ente = models.ForeignKey(Ente, null=True)
+    area = models.ForeignKey(Area, null=True)
 
     likes = models.ManyToManyField(User, blank=True, related_name='subvencion_likes')
 

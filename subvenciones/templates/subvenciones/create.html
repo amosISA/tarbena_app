@@ -25,7 +25,7 @@
                 {% endfor %}
             {% endif %}
 
-            <form id="some-form" class="form-horizontal" method="post" enctype="multipart/form-data" action="">{% csrf_token %}
+            <form id="some-form" class="form-horizontal" data-area-url="{% url 'subvenciones:ajax_load_areas' %}" method="post" enctype="multipart/form-data" action="">{% csrf_token %}
 
                 {% if form.errors %}
                     <div class="ag_form_login_message_error">
@@ -75,7 +75,17 @@
                             {{ form.nombre_carpeta_drive|htmlattributes:"class:form-control" }}
                         </div>
 
-                        <!-- Aquí va el ente con el Area -->
+                        <!-- Ente -->
+                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                            {{ form.ente.label_tag }}
+                            {{ form.ente|htmlattributes:"class:form-control" }}
+                        </div>
+
+                        <!-- Area -->
+                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                            {{ form.area.label_tag }}
+                            {{ form.area|htmlattributes:"class:form-control" }}
+                        </div>
 
                         <!-- Colectivo -->
                         <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
@@ -155,6 +165,7 @@
 
 {% block addscript %}
     <script src="{% static 'subvenciones/js/create_subvenciones.js' %}"></script>
+    <script src="{% static 'subvenciones/js/load_areas.js' %}"></script>
     <!-- For the admin site -->
     <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
     <script src="{% static 'admin/js/core.js' %}"></script>

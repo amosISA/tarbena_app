@@ -10,7 +10,7 @@ from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .forms import SubvencionForm
+from .forms import SubvencionForm, CommentFormSet
 from .models import Subvencion, Estado, Colectivo, Area
 
 @login_required()
@@ -67,8 +67,36 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
     template_name = 'subvenciones/create.html'
     success_url = reverse_lazy('subvenciones:index')
 
-    def form_valid(self, form):
-        instance = form.save(commit=False)
-        instance.user = self.request.user
+    def get(self, request, *args, **kwargs):
+        """Primero ponemos nuestro object como nulo, se debe tener en
+        cuenta que object se usa en la clase CreateView para crear el objeto"""
+        self.object = None
+        # Instanciamos el formulario de la Subvención que declaramos en la variable form_class
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        # Instanciamos el formset
+        comment_formset = CommentFormSet()
+        # Renderizamos el formulario de la subvención y el formset
+        return self.render_to_response(self.get_context_data(form=form,
+                                                             comment_form_set=comment_formset))
+
+    def post(self,request, *args, **kwargs):
+        # Obtenemos nuevamente la instancia del formulario de Subvención
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        # Obtenemos el formset pero ya con lo que se le pasa en el POST
+        comment_form_set = CommentFormSet(request.POST)
+        """Llamamos a los métodos para validar el formulario de Subvención y el formset, si son válidos ambos se llama al método
+        form_valid o en caso contrario se llama al método form_invalid"""
+        if form.is_valid() and comment_form_set.is_valid():
+            return self.form_valid(form, comment_form_set)
+        else:
+            return self.form_invalid(form, comment_form_set)
+
+    def form_valid(self, form, comment_form_set):
+        self.object = form.save()
+        comment_form_set.instance = self.object
+        comment_form_set.save()
+        self.object.user = self.request.user
         messages.success(self.request, 'Subvención añadida correctamente')
         return super(SubvencionCreateView, self).form_valid(form)

@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
 
+from martor.models import MartorField
 User = settings.AUTH_USER_MODEL
 
 # Create your models here.
@@ -144,7 +145,7 @@ class Subvencion(TimeStampedModel):
 class Comment(TimeStampedModel):
     user = models.ForeignKey(User)
     subvencion = models.ForeignKey(Subvencion, related_name='comments')
-    contenido = models.TextField(blank=False, null=False, default='')
+    contenido = MartorField()
     active = models.BooleanField(default=True)  # field I use to deactivate inappropiate comments
 
     class Meta:

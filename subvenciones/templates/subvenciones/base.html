@@ -37,6 +37,12 @@
 
             <!-- Colores JC -->
             <link rel="stylesheet" href="http://popsique.net/subs/colores.css">
+
+            <!-- Martor - Markdown editor for comments -->
+            <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+            <link href="{% static 'plugins/css/semantic.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+            <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+            <link href="{% static 'martor/css/martor.min.css' %}" type="text/css" media="all" rel="stylesheet" />
         {% endblock %}
 
         <title>
@@ -54,6 +60,22 @@
                 {% endblock %}
             </div>
         </div>
+
+        <!-- Martor - Markdown editor for comments -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script
+          src="https://code.jquery.com/jquery-3.3.1.js"
+          integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+          crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{% static 'plugins/js/ace.js' %}"></script>
+        <script type="text/javascript" src="{% static 'plugins/js/semantic.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'plugins/js/mode-markdown.js' %}"></script>
+        <script type="text/javascript" src="{% static 'plugins/js/ext-language_tools.js' %}"></script>
+        <script type="text/javascript" src="{% static 'plugins/js/theme-github.js' %}"></script>
+        <script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'plugins/js/resizable.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'plugins/js/emojis.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'martor/js/martor.min.js' %}"></script>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

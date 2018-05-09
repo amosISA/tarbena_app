@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
+from django.forms.models import inlineformset_factory
 
-from .models import Subvencion, Estado, Area, Ente
+from martor.fields import MartorFormField
+from .models import Subvencion, Estado, Area, Ente, Comment
 from .sites import my_admin_site
 
 class EstadoForm(forms.ModelForm):
@@ -69,3 +71,11 @@ class SubvencionForm(forms.ModelForm):
                 pass  # invalid input from the client; ignore and fallback to empty Area queryset
         elif self.instance.pk:
             self.fields['area'].queryset = self.instance.ente.area_set.order_by('nombre')
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = '__all__'
+        exclude = ('user', 'subvencion', 'active',)
+
+CommentFormSet = inlineformset_factory(Subvencion, Comment, form=CommentForm, extra=1)

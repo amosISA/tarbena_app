@@ -145,6 +145,10 @@
                         </div>
 
                         <!-- Comentarios -->
+                        {{ comment_formset.management_form }}
+                        {% for comment_form in comment_form_set %}
+                            {{ comment_form.contenido }}
+                        {% endfor %}
                     </div>
 
                     <div class="col-lg-3">

@@ -33,9 +33,15 @@ class SubvencionForm(forms.ModelForm):
                 my_admin_site,
                 can_add_related=True
             ),
-            'responsable': RelatedFieldWidgetWrapper(
-                Subvencion._meta.get_field('responsable').formfield().widget,
-                Subvencion._meta.get_field('responsable').rel,
+            'ente': RelatedFieldWidgetWrapper(
+                Subvencion._meta.get_field('ente').formfield().widget,
+                Subvencion._meta.get_field('ente').rel,
+                my_admin_site,
+                can_add_related=True
+            ),
+            'area': RelatedFieldWidgetWrapper(
+                Subvencion._meta.get_field('area').formfield().widget,
+                Subvencion._meta.get_field('area').rel,
                 my_admin_site,
                 can_add_related=True
             ),

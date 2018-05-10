@@ -75,7 +75,10 @@ class SubvencionForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = '__all__'
-        exclude = ('user', 'subvencion', 'active',)
+        fields = ['contenido', 'user']
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(CommentForm, self).__init__(*args, **kwargs)
 
 CommentFormSet = inlineformset_factory(Subvencion, Comment, form=CommentForm, extra=1)

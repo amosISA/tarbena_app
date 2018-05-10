@@ -145,8 +145,13 @@
                         </div>
 
                         <!-- Comentarios -->
-                        {{ comment_formset.management_form }}
-                        {% for comment_form in comment_form_set %}
+                        {{ comments_formset.management_form }}
+                        {% for comment_form in comments_formset %}
+                            {% if comment_form.user.errors %}
+                                {% for error in comment_form.user.errors %}
+                                    | {{ error|escape }}
+                                {% endfor %}
+                            {% endif %}
                             {{ comment_form.contenido }}
                         {% endfor %}
                     </div>

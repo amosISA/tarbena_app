@@ -73,23 +73,23 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
         """Primero ponemos nuestro object como nulo, se debe tener en
         cuenta que object se usa en la clase CreateView para crear el objeto"""
         self.object = None
-        # Instanciamos el formulario de la Compra que declaramos en la variable form_class
+        # Instanciamos el formulario de la Subvención que declaramos en la variable form_class
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        # Instanciamos el formset
-        comments_formset = CommentFormSet(request.user)
-        # Renderizamos el formulario de la compra y el formset
+        # Instanciamos el formset con un valor inicial
+        comments_formset = CommentFormSet(initial=[{'user':request.user}])
+        # Renderizamos el formulario de la Subvención y el formset
         return self.render_to_response(self.get_context_data(form=form,
                                                              comments_formset=comments_formset))
 
     def post(self, request, *args, **kwargs):
-        # Obtenemos nuevamente la instancia del formulario de Compras
+        # Obtenemos nuevamente la instancia del formulario de Subvención
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         # Obtenemos el formset pero ya con lo que se le pasa en el POST
-        comments_formset = CommentFormSet(request.user, request.POST)
-        """Llamamos a los métodos para validar el formulario de Compra y el formset, si son válidos ambos se llama al método
+        comments_formset = CommentFormSet(request.POST)
+        """Llamamos a los métodos para validar el formulario de Subvención y el formset, si son válidos ambos se llama al método
         form_valid o en caso contrario se llama al método form_invalid"""
         if form.is_valid() and comments_formset.is_valid():
             return self.form_valid(form, comments_formset)
@@ -97,17 +97,20 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
             return self.form_invalid(form, comments_formset)
 
     def form_valid(self, form, comments_formset):
-        # Aquí ya guardamos el object de acuerdo a los valores del formulario de Compra
+        # Aquí ya guardamos el object de acuerdo a los valores del formulario de Subvención
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
         self.object = form.save()
-        # Utilizamos el atributo instance del formset para asignarle el valor del objeto Compra creado y que nos indica el modelo Foráneo
+        # Utilizamos el atributo instance del formset para asignarle el valor del objeto Subvención creado y que nos indica el modelo Foráneo
+        # Es decir, al model Comment se le relaciona la subvención
         comments_formset.instance = self.object
         # Finalmente guardamos el formset para que tome los valores que tiene
         comments_formset.save()
-        # Redireccionamos a la ventana del listado de compras
+        # Redireccionamos a la ventana del listado de subvenciones
         return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form, comments_formset):
-        # Si es inválido el form de Compra o el formset renderizamos los errores
+        # Si es inválido el form de Subvención o el formset renderizamos los errores
         messages.error(self.request, 'Error en la creación de la subvención')
         return self.render_to_response(self.get_context_data(form=form,
                                                              comments_formset=comments_formset))

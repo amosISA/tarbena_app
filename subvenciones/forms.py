@@ -3,7 +3,6 @@ from django import forms
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 from django.forms.models import inlineformset_factory
 
-from martor.fields import MartorFormField
 from .models import Subvencion, Estado, Area, Ente, Comment
 from .sites import my_admin_site
 
@@ -75,10 +74,6 @@ class SubvencionForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['contenido', 'user']
+        fields = ['user', 'contenido']
 
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
-        super(CommentForm, self).__init__(*args, **kwargs)
-
-CommentFormSet = inlineformset_factory(Subvencion, Comment, form=CommentForm, extra=1)
+CommentFormSet = inlineformset_factory(Subvencion, Comment, form=CommentForm, extra=1, can_delete=False)

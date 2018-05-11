@@ -50,6 +50,10 @@ $j(document).ready(function(){
         if (form.serialize() != original)
             return 'Are you sure you want to leave?'
     };
+
+
+    // Hide comments user
+    $('#id_comments-0-user').hide();
 });
 
 function businessDays(days) {

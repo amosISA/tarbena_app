@@ -24,4 +24,22 @@ What is the doc directory about?
 
         Use Sphinx to Generate Documentation From reStructuredText:
         http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html
+        https://docs.readthedocs.io/en/latest/getting_started.html
         http://sphinx-doc.org/
+
+        Sphinx is a tool that makes it easy to create beautiful documentation.
+
+        Installing:
+            pip install sphinx sphinx-autobuild
+
+            Create a directory inside your project to hold your docs:
+            cd /path/to/project
+            mkdir docs
+
+            cd docs
+            sphinx-quickstart
+                This command create the sphinx tree inside of our docs directory
+
+            And when we modify our rst just run inside docs the following command to have the pretty
+            design inside of our build directory:
+                make html (in windows: .\make.bat html)

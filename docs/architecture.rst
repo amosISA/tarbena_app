@@ -81,3 +81,11 @@ Multiple requirements files
 - **local.txt**: place the dependencies used in local environment such as debug toolbar
 - **production.txt**: place the dependencies used in production environment
 - **ci.txt** (continuous integration): the needs of a continuous integration such as django-jenkins or coverage
+
+Admin Documentation
+-------------------
+`https://docs.djangoproject.com/en/1.11/ref/contrib/admin/admindocs/ <https://docs.djangoproject.com/en/1.11/ref/contrib/admin/admindocs/>`_
+::
+
+    pip install docutils
+

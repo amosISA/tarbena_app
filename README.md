@@ -1,3 +1,3 @@
 # Tárbena App
 
-![Screenshot](readme_img.png.png)
+![Screenshot](readme_img.png)

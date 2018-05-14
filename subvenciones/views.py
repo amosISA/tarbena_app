@@ -125,3 +125,25 @@ def subvencion_detail(request, id):
     return render(request,
                   'subvenciones/detail.html',
                   {'subvencion': subvencion})
+
+# --------------- Delete Subsidie --------------- #
+class SubvencionDeleteView(LoginRequiredMixin, DeleteView):
+    model = Subvencion
+    success_url = reverse_lazy('subvenciones:index')
+
+    def get_object(self, queryset=None):
+        obj = super(SubvencionDeleteView, self).get_object()
+        return obj
+
+    def post(self, request, *args, **kwargs):
+        if self.request.POST.get("confirm_delete"):
+            # when confirmation page has been displayed and confirm button pressed
+            self.get_object().delete()
+            messages.success(self.request, 'Subvención eliminada correctamente!')
+            return HttpResponseRedirect(self.success_url)
+        elif self.request.POST.get("cancel"):
+            # when confirmation page has been displayed and cancel button pressed
+            return HttpResponseRedirect(reverse('subvenciones:index'))
+        else:
+            # when data is coming from the form which lists all items
+            return self.get(self, *args, **kwargs)

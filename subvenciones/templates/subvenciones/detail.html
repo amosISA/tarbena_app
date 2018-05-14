@@ -1,5 +1,6 @@
 {% extends "subvenciones/base.html" %}
 {% load staticfiles %}
+{% load martortags %}
 
 {% block title %}
     Subs: {{ subvencion.nombre }}
@@ -54,7 +55,7 @@
                             <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
                                 <!-- Gestiona Expediente -->
                                 <label for="id_gestiona_expediente">Gestiona expediente:</label>
-                                <input type="text" value="{{ subvencion.gestiona_expediente }}" id="id_gestiona_expediente" class="form-control" readonly>
+                                <input type="text" value="{% if subvencion.gestiona_expediente %}{{ subvencion.gestiona_expediente }}{% endif %}" id="id_gestiona_expediente" class="form-control" readonly>
                             </div>
                         </div>
 
@@ -100,12 +101,12 @@
                             <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
                                 <!-- Cuantia inicio -->
                                 <label for="id_cuantia_inicial">Cuantía inicio:</label>
-                                <textarea id="id_cuantia_inicial" rows="1" cols="20" class="form-control" readonly>{{ subvencion.cuantia_inicial }}</textarea>
+                                <textarea id="id_cuantia_inicial" rows="1" cols="20" class="form-control" readonly>{% if subvencion.cuantia_inicial %}{{ subvencion.cuantia_inicial }}{% endif %}</textarea>
                             </div>
                             <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
                                 <!-- Cuantia final -->
                                 <label for="id_cuantia_final">Cuantía final:</label>
-                                <textarea id="id_cuantia_final" rows="1" cols="20" class="form-control" readonly>{{ subvencion.cuantia_final }}</textarea>
+                                <textarea id="id_cuantia_final" rows="1" cols="20" class="form-control" readonly>{% if subvencion.cuantia_final %}{{ subvencion.cuantia_final }}{% endif %}</textarea>
                             </div>
                         </div>
 
@@ -113,7 +114,7 @@
                             <div>Subvención creada por <b><i>{{ subvencion.user|title }}</i></b> el <span>{{ subvencion.created }}</span></div>
                             <div>Última fecha de modificación: <span>{{ subvencion.updated }}</span></div>
                             <div class="subv-edit-action"><a href="#">Editar subvención</a></div>
-                            <div class="subv-delete-action"><a href="#">Eliminar subvención</a></div>
+                            <div class="subv-delete-action"><a href="{% url 'subvenciones:delete_subvencion' pk=subvencion.pk %}">Eliminar subvención</a></div>
                         </div>
                     </div>
                     <div class="col-lg-6 doted-right">
@@ -147,11 +148,15 @@
                             <textarea id="id_descripcion" disabled rows="12" cols="20" class="form-control">{{ subvencion.descripcion|safe }}</textarea>
                         </div>
 
-                        <!-- Comentarios
+                        <!-- Comentarios -->
                         <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
                             <label for="id_comentarios">Comentarios:</label>
-                            <textarea id="id_comentarios" disabled rows="12" cols="20" class="form-control">{{ subvencion.comentarios|safe }}</textarea>
-                        </div>-->
+                            <div id="id_comentarios" disabled rows="12" cols="20" class="form-control">
+                                {% for comment in subvencion.comments.all %}
+                                    <strong>{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</strong>: {{ comment.contenido|safe_markdown }}
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-lg-3">

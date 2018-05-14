@@ -1,0 +1,36 @@
+{% extends "subvenciones/base.html" %}
+
+{% block title %}
+    Subs: {{ subvencion.nombre }}
+{% endblock %}
+
+{% block navbar %}
+    {% include 'subvenciones/snippets/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="subv_delete_wrapper">
+        <form class="subv_delete_form" action="" method="post">{% csrf_token %}
+
+            {% if form.errors %}
+                <div class="delete_subv_form_message_error">
+                    {% for field in form %}
+                        {% if field.errors %}
+                            - {{ field.errors|striptags }}<br />
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <p>Estas seguro que quieres borrar la subvención: "{{ object.nombre }}"?</p>
+            <div class="delete_subv_form_block_input">
+                <div class="delete_subv_form_inner_wrapper">
+                    <input class="delete_subv_form_submit_button" name="confirm_delete" type="submit" value="Confirm" />
+                    <input class="delete_subv_form_cancel_button" name="cancel" type="submit" value="Cancel" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

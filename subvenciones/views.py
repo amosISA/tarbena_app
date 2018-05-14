@@ -115,3 +115,13 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
         messages.error(self.request, 'Error en la creación de la subvención')
         return self.render_to_response(self.get_context_data(form=form,
                                                              comments_formset=comments_formset))
+
+@login_required()
+# --------------- Subsidie Details --------------- #
+def subvencion_detail(request, id):
+    subvencion = get_object_or_404(Subvencion,
+                                   id=id)
+
+    return render(request,
+                  'subvenciones/detail.html',
+                  {'subvencion': subvencion})

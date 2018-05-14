@@ -138,9 +138,9 @@ class Subvencion(TimeStampedModel):
         else:
             return '{} {}'.format(self.nombre, self.fin.strftime("%Y"))
 
-    # def get_absolute_url(self):
-    #     return reverse('myapp:subvencion_detail',
-    #                    args=[self.id, self.slug])
+    def get_absolute_url(self):
+        return reverse('subvenciones:subvencion_detail',
+                       args=[self.id])
 
 class Comment(TimeStampedModel):
     user = models.ForeignKey(User, blank=True, null=True)

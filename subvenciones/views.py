@@ -37,7 +37,7 @@ def index_subvenciones(request, estado_slug=None):
             subvenciones = subvenciones.filter(estado=estado)
         elif Area.objects.filter(slug=estado_slug).exists():
             area = get_object_or_404(Area, slug=estado_slug)
-            subvenciones = subvenciones.filter(ente__area=area)
+            subvenciones = subvenciones.filter(area__nombre=area)
         elif User.objects.filter(username=estado_slug).exists():
             user = get_object_or_404(User, username=estado_slug)
             subvenciones = subvenciones.filter(responsable__username=user)
@@ -113,6 +113,42 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
     def form_invalid(self, form, comments_formset):
         # Si es inválido el form de Subvención o el formset renderizamos los errores
         messages.error(self.request, 'Error en la creación de la subvención')
+        return self.render_to_response(self.get_context_data(form=form,
+                                                             comments_formset=comments_formset))
+
+# --------------- Edit Subsidie --------------- #
+class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
+    model = Subvencion
+    form_class = SubvencionForm
+    template_name = 'subvenciones/edit.html'
+    success_url = reverse_lazy('subvenciones:index')
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        comments_formset = CommentFormSet(initial=[{'user':request.user}])
+
+        return self.render_to_response(self.get_context_data(form=form,
+                                                             comments_formset=comments_formset))
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        comments_formset = CommentFormSet(request.POST)
+
+        if form.is_valid() and comments_formset.is_valid():
+            return self.form_valid(form, comments_formset)
+        else:
+            return self.form_invalid(form, comments_formset)
+
+    def form_valid(self, form, comments_formset):
+        messages.success(self.request, 'Subvención actualizada correctamente!')
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form, comments_formset):
+        messages.error(self.request, 'Error en la actualización de la subvención')
         return self.render_to_response(self.get_context_data(form=form,
                                                              comments_formset=comments_formset))
 

@@ -43,7 +43,7 @@
                     <tbody>
                         {% for subvencion in subvenciones %}
                             <tr>
-                                <td class="td1 {% if subvencion.generalitat == None and subvencion.gobierno == None %}diputacion{% elif subvencion.diputacion == None and subvencion.gobierno == None %}conselleria{% elif subvencion.diputacion == None and subvencion.diputacion == None %}gobierno{% endif %}">
+                                <td class="td1 {{ subvencion.ente }}">
                                     <div class="bloque01">
                                         <div class="fechaInicio">{{ subvencion.inicio|date:"d/m/Y" }}</div>
                                         <div class="colectivo">
@@ -58,8 +58,8 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="departamento depart{{ subvencion.ente.area.id }}">
-                                        <a class="ente_area_link" href="{{ subvencion.ente.area.get_absolute_url }}">{{ subvencion.ente.area }}</a>
+                                    <div class="departamento depart{{ subvencion.area.id }}">
+                                        <a class="ente_area_link" href="{{ subvencion.area.get_absolute_url }}">{{ subvencion.area }}</a>
                                     </div>
                                     <div class="repositorios">
                                         <div class="drive"><i class="fab fa-google-drive"></i>
@@ -80,7 +80,7 @@
                                     <br />
                                     {{ subvencion.descripcion|safe }}
                                 </td>
-                                <td class="td3 estadocss" style="{% if subvencion.fin|daysuntil in days_until_estado %}background-color:#ff0000;color:#fff;{% elif subvencion.fin|daysuntil == 'passed days' %}background-color:{{ subvencion.estado.font_color }};{% else %}background-color:#fff;{% endif %}">
+                                <td class="td3" style="{% if subvencion.fin|daysuntil in days_until_estado %}background-color:#ff0000;color:#fff;{% elif subvencion.fin|daysuntil == 'passed days' %}background-color:{{ subvencion.estado.font_color }};{% else %}background-color:#fff;{% endif %}">
                                     <div class="fechaInicio date-end">{{ subvencion.fin|date:"d/m/Y" }}</div>
                                     <div class="estadoBloque estado">{{ subvencion.estado }}</div>
                                     <div class="responsables">
@@ -96,8 +96,8 @@
                                 <td class="td4">
                                     <!-- Comentarios -->
                                     {% for comment in subvencion.comments.all %}
-                                        {{ comment.user.username }} | {{ comment.contenido|safe_markdown }}
-                                        {{ comment.created|date:"d/m/Y" }}
+                                        <span class="comment_user_date">{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</span>:
+                                        {{ comment.contenido|safe_markdown }}
                                     {% endfor %}
                                 </td>
                             </tr>

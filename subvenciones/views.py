@@ -144,6 +144,9 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
             return self.form_invalid(form, comments_formset)
 
     def form_valid(self, form, comments_formset):
+        self.object = form.save()
+        comments_formset.instance = self.object
+        comments_formset.save()
         messages.success(self.request, 'Subvención actualizada correctamente!')
         return HttpResponseRedirect(self.get_success_url())
 

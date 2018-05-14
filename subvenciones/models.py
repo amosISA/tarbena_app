@@ -145,7 +145,7 @@ class Subvencion(TimeStampedModel):
 class Comment(TimeStampedModel):
     user = models.ForeignKey(User, blank=True, null=True)
     subvencion = models.ForeignKey(Subvencion, related_name='comments')
-    contenido = MartorField()
+    contenido = MartorField(blank=True)
     active = models.BooleanField(default=True)  # field I use to deactivate inappropiate comments
 
     class Meta:

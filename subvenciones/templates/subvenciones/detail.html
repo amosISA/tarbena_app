@@ -128,17 +128,23 @@
                             <div class="form-group col-md-4 title-create_post" style="text-align:justify;font-weight:bold;">
                                 <!-- Procedimiento -->
                                 <label for="id_procedimiento">Procedimiento:</label>
-                                <textarea id="id_procedimiento" rows="1" cols="20" class="form-control" readonly {% if subvencion.procedimiento %}tabindex="0" data-toggle="popover" data-trigger="hover" data-html="true" title="Procedimiento" data-content="<a href='{{ subvencion.procedimiento }}' target='_blank'>{{ subvencion.procedimiento }}</a>"{% endif %}>{{ subvencion.procedimiento }}</textarea>
+                                <div id="id_procedimiento" class="form-control" style="overflow:hidden;">
+                                    <a href="{{ subvencion.procedimiento }}" target="_blank">{{ subvencion.procedimiento }}</a>
+                                </div>
                             </div>
                             <div class="form-group col-md-4 title-create_post" style="text-align:justify;font-weight:bold;">
                                 <!-- Bases -->
                                 <label for="id_bases">Bases:</label>
-                                <textarea id="id_bases" rows="1" cols="20" class="form-control" readonly {% if subvencion.bases %}tabindex="0" data-toggle="popover" data-trigger="hover" data-html="true" title="Bases" data-content="<a href='{{ subvencion.bases }}' target='_blank'>{{ subvencion.bases }}</a>"{% endif %}>{{ subvencion.bases }}</textarea>
+                                <div id="id_bases" class="form-control" style="overflow:hidden;">
+                                    <a href="{{ subvencion.bases }}" target="_blank">{{ subvencion.bases }}</a>
+                                </div>
                             </div>
                             <div class="form-group col-md-4 title-create_post" style="text-align:justify;font-weight:bold;">
                                 <!-- Solicitud -->
                                 <label for="id_solicitud">Solicitud:</label>
-                                <textarea id="id_solicitud" rows="1" cols="20" class="form-control" readonly {% if subvencion.solicitud %}tabindex="0" data-toggle="popover" data-trigger="hover" data-html="true" title="Solicitud" data-content="<a href='{{ subvencion.solicitud }}' target='_blank'>{{ subvencion.solicitud }}</a>"{% endif %}>{{ subvencion.solicitud }}</textarea>
+                                <div id="id_solicitud" class="form-control" style="overflow:hidden;">
+                                    <a href="{{ subvencion.solicitud }}" target="_blank">{{ subvencion.solicitud }}</a>
+                                </div>
                             </div>
                         </div>
 
@@ -170,7 +176,7 @@
                                         {{ subv.nombre }}
                                     </label>
                                     <div style="text-align:right;">
-                                        <a href="{{ subv.get_absolute_url }}" target="_blank"><img src="{% static 'myapp/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>
+                                        <a href="{{ subv.get_absolute_url }}" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>
                                     </div>
                                 </li>
                                 {% endfor %}

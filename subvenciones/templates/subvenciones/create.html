@@ -25,18 +25,30 @@
                 {% endfor %}
             {% endif %}
 
-            {% if formset.errors %}
-                {% for dict in formset.errors %}
-                    {% for error in dict.values %}
-                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                            <strong>{{ error }}</strong>
+            {{ comments_formset.management_form }}
+            {% for comment_form in comments_formset %}
+                {% if comment_form.user.errors %}
+                    {% for error in comment_form.user.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Campo usuario de comentarios: {{ error|escape }}</strong>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                     {% endfor %}
-                {% endfor %}
-            {% endif %}
+                {% endif %}
+
+                {% if comment_form.contenido.errors %}
+                    {% for error in comment_form.contenido.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Comentarios: {{ error|escape }}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
 
             <form id="some-form" class="form-horizontal" data-area-url="{% url 'subvenciones:ajax_load_areas' %}" method="post" enctype="multipart/form-data" action="">{% csrf_token %}
 
@@ -160,11 +172,6 @@
                         <!-- Comentarios -->
                         {{ comments_formset.management_form }}
                         {% for comment_form in comments_formset %}
-                            {% if comment_form.user.errors %}
-                                {% for error in comment_form.user.errors %}
-                                    | {{ error|escape }}
-                                {% endfor %}
-                            {% endif %}
                             {{ comment_form.user }}
                             {{ comment_form.contenido }}
                         {% endfor %}

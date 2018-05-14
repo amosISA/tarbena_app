@@ -1,6 +1,7 @@
 {% extends "subvenciones/base.html" %}
 {% load staticfiles %}
 {% load tags %}
+{% load martortags %}
 
 {% block title %}
     {% if estado %}{{ estado.nombre }}{% elif area %}{{ area.nombre }}{% elif user %}{{ user.username }}{% else %}Subvenciones{% endif %}
@@ -77,7 +78,7 @@
                                         </a>
                                     </b>
                                     <br />
-                                    {{ subvencion.descripcion }}
+                                    {{ subvencion.descripcion|safe }}
                                 </td>
                                 <td class="td3 estadocss" style="{% if subvencion.fin|daysuntil in days_until_estado %}background-color:#ff0000;color:#fff;{% elif subvencion.fin|daysuntil == 'passed days' %}background-color:{{ subvencion.estado.font_color }};{% else %}background-color:#fff;{% endif %}">
                                     <div class="fechaInicio date-end">{{ subvencion.fin|date:"d/m/Y" }}</div>
@@ -89,11 +90,15 @@
                                             </span>
                                         {% endfor %}
                                     </div>
-                                    <div class="cuantia"><i class="fas fa-dollar-sign"></i> {{ subvencion.cuantia_inicial|safe }}</div>
-                                    <div class="cuantia"><i class="fas fa-euro-sign"></i> {{ subvencion.cuantia_final|safe }}</div>
+                                    <div class="cuantia"><i class="fas fa-dollar-sign"></i> {% if subvencion.cuantia_inicial %}{{ subvencion.cuantia_inicial|safe }}{% endif %}</div>
+                                    <div class="cuantia"><i class="fas fa-euro-sign"></i> {% if subvencion.cuantia_final %}{{ subvencion.cuantia_final|safe }}{% endif %}</div>
                                 </td>
                                 <td class="td4">
-
+                                    <!-- Comentarios -->
+                                    {% for comment in subvencion.comments.all %}
+                                        {{ comment.user.username }} | {{ comment.contenido|safe_markdown }}
+                                        {{ comment.created|date:"d/m/Y" }}
+                                    {% endfor %}
                                 </td>
                             </tr>
                         {% endfor %}

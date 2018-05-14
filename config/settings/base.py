@@ -213,3 +213,10 @@ MARTOR_MARKDOWN_BASE_MENTION_URL = 'https://python.web.id/author/' # default (ch
 
 # Check this setting is not set else csrf will not be sent over ajax calls
 CSRF_COOKIE_HTTPONLY = False
+
+
+# Message tags
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}

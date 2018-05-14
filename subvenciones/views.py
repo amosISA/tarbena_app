@@ -106,7 +106,8 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
         comments_formset.instance = self.object
         # Finalmente guardamos el formset para que tome los valores que tiene
         comments_formset.save()
-        # Redireccionamos a la ventana del listado de subvenciones
+        # Redireccionamos a la ventana del listado de subvenciones con el mensaje de éxito
+        messages.success(self.request, 'Subvención añadida correctamente!')
         return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form, comments_formset):

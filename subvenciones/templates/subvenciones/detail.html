@@ -153,7 +153,7 @@
                             <label for="id_comentarios">Comentarios:</label>
                             <div id="id_comentarios" disabled rows="12" cols="20" class="form-control">
                                 {% for comment in subvencion.comments.all %}
-                                    <strong>{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</strong>: {{ comment.contenido|safe_markdown }}
+                                    <span class="comment_user_date">{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</span>: {{ comment.contenido|safe_markdown }}
                                 {% endfor %}
                             </div>
                         </div>

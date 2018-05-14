@@ -44,4 +44,8 @@ body .subv_delete_wrapper {
           body .subv_delete_wrapper .subv_delete_form .delete_subv_form_block_input .delete_subv_form_inner_wrapper .delete_subv_form_submit_button:hover, body .subv_delete_wrapper .subv_delete_form .delete_subv_form_block_input .delete_subv_form_inner_wrapper .delete_subv_form_cancel_button:hover {
             background-color: #17979b; }
 
+/* Comments span user date */
+.comment_user_date {
+  text-decoration: underline; }
+
 /*# sourceMappingURL=subvenciones.css.map */

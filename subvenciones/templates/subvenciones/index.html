@@ -68,7 +68,9 @@
                                                 <a href="{{ subvencion.drive }}" target="_blank">{% if subvencion.nombre_carpeta_drive %}{{ subvencion.nombre_carpeta_drive }}{% else %}Drive{% endif %}</a>
                                             {% endif %}
                                         </div>
-                                        <div class="gestiona"><i class="fas fa-university"></i> {% if not subvencion.gestiona_expediente %}{% else %}{{ subvencion.gestiona_expediente }}{% endif %}</div>
+                                        <div class="gestiona" style="overflow: hidden;">
+                                            <i class="fas fa-university"></i> {% if not subvencion.gestiona_expediente %}{% else %}<a href="{{ subvencion.gestiona_expediente }}" target="_blank">{{ subvencion.gestiona_expediente }}</a>{% endif %}
+                                        </div>
                                     </div>
                                 </td>
                                 <td class="td2">

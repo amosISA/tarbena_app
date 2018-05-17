@@ -16,6 +16,7 @@ Apps
 - **Parcelas**: parcels management with Google Maps
 - **Django Honeypot**: admin security
 - **Django Admin Interface**: theme for Django Admin Panel
+- **smart-selects**: area-ente selects functionality
 
 Authentication
 ^^^^^^^^^^^^^^
@@ -87,6 +88,46 @@ Django Admin Interface
 | `https://djangopackages.org/grids/g/admin-styling/ <https://djangopackages.org/grids/g/admin-styling/>`_
 | `https://github.com/fabiocaccamo/django-admin-interface <https://github.com/fabiocaccamo/django-admin-interface>`_
 | You can choose your own theme!
+
+smart-select
+^^^^^^^^^^^^
+| `https://github.com/digi604/django-smart-selects <https://github.com/digi604/django-smart-selects>`_
+| I use this app for chaining selects (ente-area)
+
+**Installation**::
+
+    pip install django-smart-selects
+    url(r'^chaining/', include('smart_selects.urls')), # into root url's, after admin
+
+**models.py**::
+
+    from smart_selects.db_fields import ChainedForeignKey
+    area = ChainedForeignKey(
+        Area,
+        chained_field="ente",
+        chained_model_field="ente",
+        show_all=False,
+        auto_choose=True,
+        sort=True,
+        default=''
+    )
+
+| App error
+
+In Lib/site-packages/smart_selects/static/smart_selects/admin/js/chainedfk.js has a problem, all his methods should be defined
+as object so I copy the new js from here:
+`new chainedfk.js <https://github.com/RafaDias/django-smart-selects/blob/61f182f4e56fa7f7eb1ca2fbf0fb922bb25c8a0e/smart_selects/static/smart-selects/admin/js/chainedfk.js>`_
+
+| And I copy it to my root static project so when I git pull to my production server I have it solved:
+| static/smart-selects/admin/js/chainedfk.js
+
+And finally into my create.html and edit.html template I import them like this::
+
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedm2m.js' %}"></script>
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
+
+My old functionality is from here: `old functionality <https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html>`_
 
 Project commands
 ----------------

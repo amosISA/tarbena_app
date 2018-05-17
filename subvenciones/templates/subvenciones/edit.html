@@ -51,7 +51,7 @@
                 {% endif %}
             {% endfor %}
 
-            <form id="some-form" class="form-horizontal" data-area-url="{% url 'subvenciones:ajax_load_areas' %}" method="post" enctype="multipart/form-data" action="">{% csrf_token %}
+            <form id="some-form" class="form-horizontal" method="post" enctype="multipart/form-data" action="">{% csrf_token %}
 
                 {% if form.errors %}
                     <div class="ag_form_login_message_error">
@@ -205,7 +205,9 @@
 
 {% block addscript %}
     <script src="{% static 'subvenciones/js/create_subvenciones.js' %}"></script>
-    <script src="{% static 'subvenciones/js/load_areas.js' %}"></script>
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedm2m.js' %}"></script>
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
     <!-- For the admin site -->
     <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
     <script src="{% static 'admin/js/core.js' %}"></script>

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'subvenciones',
     'profiles',
     'martor',
+    'smart_selects',
 ]
 
 MIDDLEWARE = [

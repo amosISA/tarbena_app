@@ -52,27 +52,6 @@ class SubvencionForm(forms.ModelForm):
         }
         exclude = ('user',)
 
-    def __init__(self, *args, **kwargs):
-        """
-        Overriding the default init method
-        and setting the queryset of the area field
-        to an empty list of choices
-        """
-
-        super().__init__(*args, **kwargs)
-        self.fields['area'].queryset = Area.objects.none()
-
-        if 'ente' in self.data:
-            """ Create subvencion """
-            try:
-                ente_id = int(self.data.get('ente'))
-                self.fields['area'].queryset = Area.objects.filter(ente_id=ente_id).order_by('nombre')
-            except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty Area queryset
-        elif self.instance.pk:
-            """ Edit subvencion """
-            self.fields['area'].queryset = self.instance.ente.area_set.order_by('nombre')
-
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment

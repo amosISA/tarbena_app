@@ -5,6 +5,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 
 from martor.models import MartorField
+from smart_selects.db_fields import ChainedForeignKey
 User = settings.AUTH_USER_MODEL
 
 # Create your models here.
@@ -123,7 +124,15 @@ class Subvencion(TimeStampedModel):
     colectivo = models.ManyToManyField(Colectivo, blank=True)
 
     ente = models.ForeignKey(Ente, null=True)
-    area = models.ForeignKey(Area, null=True)
+    area = ChainedForeignKey(
+        Area,
+        chained_field="ente",
+        chained_model_field="ente",
+        show_all=False,
+        auto_choose=True,
+        sort=True,
+        default=''
+    )
 
     likes = models.ManyToManyField(User, blank=True, related_name='subvencion_likes')
 

@@ -55,6 +55,9 @@ urlpatterns = [
 
     # Markdown editor for user mentions and notifications
     url(r'^martor/', include('martor.urls')),
+
+    # Smart select
+    url(r'^chaining/', include('smart_selects.urls')),
 ]
 
 if settings.DEBUG:

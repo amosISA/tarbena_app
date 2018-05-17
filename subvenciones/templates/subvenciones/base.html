@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
+    {% load staticfiles %}
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
         <meta name="description" content="Tarbena web with Django and Python">
         <meta name="author" content="Isaila Amos Lucian">
         <meta name="generator" content="Django, PyCharm" />
@@ -12,39 +12,18 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <!-- Favicon -->
+        <link rel="icon" href="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" type="image/x-icon"/>
+        <link rel="stylesheet" href="{% static 'subvenciones/css/bootstrap.min.css' %}">
+        <!-- Base CSS -->
+        <link rel="stylesheet" href="{% static 'subvenciones/css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'subvenciones/css/subvenciones.css' %}">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+        <!-- Colores JC -->
+        <link rel="stylesheet" href="http://popsique.net/subs/colores.css">
 
-        {% load staticfiles %}
         {% block stylesheets %}
-            <!-- Favicon -->
-            <link rel="icon" href="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" type="image/x-icon"/>
-
-            <link rel="stylesheet" href="{% static 'subvenciones/css/bootstrap.min.css' %}">
-
-            <!-- Base CSS -->
-            <link rel="stylesheet" href="{% static 'subvenciones/css/base.css' %}">
-            <link rel="stylesheet" href="{% static 'subvenciones/css/subvenciones.css' %}">
-
-            <!-- Font Awesome -->
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-
-            <!-- jQuery UI -->
-            <link
-             href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-             rel="stylesheet" type="text/css" />
-            <link rel="stylesheet" href="{% static 'subvenciones/css/jquery-ui.multidatespicker.css' %}">
-
-            <!-- Datatables -->
-            <link rel="stylesheet" type="text/css" href="{% static 'home/datatables/datatables.min.css' %}"/>
-            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.dataTables.css' %}">
-            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.bootstrap4.css' %}">
-            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.foundation.css' %}">
-            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.jqueryui.css' %}">
-            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.semanticui.css' %}">
-            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/common.css' %}">
-            <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/mixins.css' %}">
-
-            <!-- Colores JC -->
-            <link rel="stylesheet" href="http://popsique.net/subs/colores.css">
         {% endblock %}
 
         <title>
@@ -63,21 +42,6 @@
             </div>
         </div>
 
-        <!-- Martor - Markdown editor for comments -->
-        <script
-          src="https://code.jquery.com/jquery-3.3.1.js"
-          integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-          crossorigin="anonymous"></script>
-        <script type="text/javascript" src="{% static 'plugins/js/ace.js' %}"></script>
-        <script type="text/javascript" src="{% static 'plugins/js/semantic.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'plugins/js/mode-markdown.js' %}"></script>
-        <script type="text/javascript" src="{% static 'plugins/js/ext-language_tools.js' %}"></script>
-        <script type="text/javascript" src="{% static 'plugins/js/theme-github.js' %}"></script>
-        <script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'plugins/js/resizable.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'plugins/js/emojis.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'martor/js/martor.min.js' %}"></script>
-
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script
           src="https://code.jquery.com/jquery-3.3.1.js"
@@ -87,16 +51,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-
-        <!-- CDN for sorting the head on the table -->
-        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
-
-        <!-- jQuery UI -->
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="{% static 'subvenciones/js/jquery-ui.multidatespicker.js' %}"></script>
-
-        <script type="text/javascript" src="{% static 'home/datatables/datatables.min.js' %}"></script>
 
         <script>
             /* Add csrftoken in every AJAX request */

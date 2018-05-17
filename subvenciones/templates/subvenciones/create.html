@@ -3,7 +3,6 @@
 {% load tags %}
 
 {% block stylesheets %}
-    {{ block.super }}
     <!-- Martor - Markdown editor for comments -->
     <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
     <link href="{% static 'plugins/css/semantic.min.css' %}" type="text/css" media="all" rel="stylesheet" />
@@ -203,6 +202,21 @@
 {% endblock %}
 
 {% block addscript %}
+    <!-- Martor - Markdown editor for comments -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/ace.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/semantic.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/mode-markdown.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/ext-language_tools.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/theme-github.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/resizable.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/emojis.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'martor/js/martor.min.js' %}"></script>
+
     <script src="{% static 'subvenciones/js/create_subvenciones.js' %}"></script>
     <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
     <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedm2m.js' %}"></script>

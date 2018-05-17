@@ -1,4 +1,15 @@
 {% extends "subvenciones/base.html" %}
+{% load staticfiles %}
+{% load tags %}
+
+{% block stylesheets %}
+    {{ block.super }}
+    <!-- Martor - Markdown editor for comments -->
+    <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+    <link href="{% static 'plugins/css/semantic.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+    <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+    <link href="{% static 'martor/css/martor.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+{% endblock %}
 
 {% block title %} Crear{% endblock %}
 
@@ -8,8 +19,6 @@
 
 {% block content %}
 
-    {% load staticfiles %}
-    {% load tags %}
     <div class="row forms_act_crea">
         <div class="ag_create_post_wrapper col-lg-12">
             <h1 class="h1">Añadir Subvención</h1>

@@ -20,12 +20,18 @@
 
             <link rel="stylesheet" href="{% static 'subvenciones/css/bootstrap.min.css' %}">
 
-            <!-- Font Awesome -->
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-
             <!-- Base CSS -->
             <link rel="stylesheet" href="{% static 'subvenciones/css/base.css' %}">
             <link rel="stylesheet" href="{% static 'subvenciones/css/subvenciones.css' %}">
+
+            <!-- Font Awesome -->
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
+            <!-- jQuery UI -->
+            <link
+             href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+             rel="stylesheet" type="text/css" />
+            <link rel="stylesheet" href="{% static 'subvenciones/css/jquery-ui.multidatespicker.css' %}">
 
             <!-- Datatables -->
             <link rel="stylesheet" type="text/css" href="{% static 'home/datatables/datatables.min.css' %}"/>
@@ -36,16 +42,9 @@
             <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.semanticui.css' %}">
             <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/common.css' %}">
             <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/mixins.css' %}">
-            <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
 
             <!-- Colores JC -->
             <link rel="stylesheet" href="http://popsique.net/subs/colores.css">
-
-            <!-- Martor - Markdown editor for comments -->
-            <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
-            <link href="{% static 'plugins/css/semantic.min.css' %}" type="text/css" media="all" rel="stylesheet" />
-            <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet" />
-            <link href="{% static 'martor/css/martor.min.css' %}" type="text/css" media="all" rel="stylesheet" />
         {% endblock %}
 
         <title>
@@ -65,7 +64,6 @@
         </div>
 
         <!-- Martor - Markdown editor for comments -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script
           src="https://code.jquery.com/jquery-3.3.1.js"
           integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -80,18 +78,24 @@
         <script type="text/javascript" src="{% static 'plugins/js/emojis.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'martor/js/martor.min.js' %}"></script>
 
-        <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script
           src="https://code.jquery.com/jquery-3.3.1.js"
           integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
           crossorigin="anonymous"></script>
         <script src="http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 
-        <!-- Datatables -->
+        <!-- CDN for sorting the head on the table -->
         <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+
+        <!-- jQuery UI -->
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="{% static 'subvenciones/js/jquery-ui.multidatespicker.js' %}"></script>
+
         <script type="text/javascript" src="{% static 'home/datatables/datatables.min.js' %}"></script>
 
         <script>

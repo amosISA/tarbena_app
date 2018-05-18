@@ -1,0 +1,441 @@
+[
+{
+  "model": "subvenciones.estado",
+  "pk": 1,
+  "fields": {
+    "created": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-05-07T20:47:32.920Z",
+    "nombre": "Aprobada",
+    "slug": "aprobada"
+  }
+},
+{
+  "model": "subvenciones.estado",
+  "pk": 2,
+  "fields": {
+    "created": "2018-05-09T13:34:24.763Z",
+    "updated": "2018-05-09T13:34:24.763Z",
+    "nombre": "Defini\u00e9ndose",
+    "slug": "definiendose"
+  }
+},
+{
+  "model": "subvenciones.estado",
+  "pk": 3,
+  "fields": {
+    "created": "2018-05-14T13:33:44.516Z",
+    "updated": "2018-05-14T13:33:44.516Z",
+    "nombre": "Lista",
+    "slug": "lista"
+  }
+},
+{
+  "model": "subvenciones.estado",
+  "pk": 4,
+  "fields": {
+    "created": "2018-05-14T13:44:41.749Z",
+    "updated": "2018-05-14T13:44:41.749Z",
+    "nombre": "Finalizada",
+    "slug": "finalizada"
+  }
+},
+{
+  "model": "subvenciones.colectivo",
+  "pk": 1,
+  "fields": {
+    "nombre": "Ayuntamiento",
+    "slug": "ayuntamiento"
+  }
+},
+{
+  "model": "subvenciones.colectivo",
+  "pk": 2,
+  "fields": {
+    "nombre": "Ayuntamientos y mancomunidades",
+    "slug": "ayuntamientos-y-mancomunidades"
+  }
+},
+{
+  "model": "subvenciones.ente",
+  "pk": 4,
+  "fields": {
+    "created": "2018-05-08T22:32:47.044Z",
+    "updated": "2018-05-08T22:32:47.044Z",
+    "nombre": "Diputaci\u00f3n de Alicante",
+    "slug": "diputacion-de-alicante"
+  }
+},
+{
+  "model": "subvenciones.ente",
+  "pk": 5,
+  "fields": {
+    "created": "2018-05-08T22:32:50.861Z",
+    "updated": "2018-05-08T22:32:50.861Z",
+    "nombre": "Cultura Conseller\u00eda",
+    "slug": "cultura-conselleria"
+  }
+},
+{
+  "model": "subvenciones.ente",
+  "pk": 6,
+  "fields": {
+    "created": "2018-05-14T13:51:09.611Z",
+    "updated": "2018-05-14T13:51:09.611Z",
+    "nombre": "Prubeea",
+    "slug": "prubeea"
+  }
+},
+{
+  "model": "subvenciones.ente",
+  "pk": 7,
+  "fields": {
+    "created": "2018-05-14T14:24:12.244Z",
+    "updated": "2018-05-14T14:24:12.244Z",
+    "nombre": "dfg",
+    "slug": "dfg"
+  }
+},
+{
+  "model": "subvenciones.ente",
+  "pk": 8,
+  "fields": {
+    "created": "2018-05-14T18:59:05.903Z",
+    "updated": "2018-05-14T18:59:05.903Z",
+    "nombre": "sdf",
+    "slug": "sdf"
+  }
+},
+{
+  "model": "subvenciones.ente",
+  "pk": 9,
+  "fields": {
+    "created": "2018-05-15T19:58:41.802Z",
+    "updated": "2018-05-15T19:58:41.802Z",
+    "nombre": "funciona bien",
+    "slug": "funciona-bien"
+  }
+},
+{
+  "model": "subvenciones.ente",
+  "pk": 10,
+  "fields": {
+    "created": "2018-05-15T20:03:29.858Z",
+    "updated": "2018-05-15T20:03:29.858Z",
+    "nombre": "funciona de lujoooo",
+    "slug": "funciona-de-lujoooo"
+  }
+},
+{
+  "model": "subvenciones.ente",
+  "pk": 11,
+  "fields": {
+    "created": "2018-05-15T20:25:59.908Z",
+    "updated": "2018-05-15T20:25:59.908Z",
+    "nombre": "fee",
+    "slug": "fee"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 5,
+  "fields": {
+    "created": "2018-05-08T22:33:14.823Z",
+    "updated": "2018-05-08T22:33:14.823Z",
+    "nombre": "Conselleria de Agricultura, Medio Ambiente, Cambio Clim\u00e1tico y Desarrollo Rural",
+    "ente": 5,
+    "slug": "conselleria-de-agricultura-medio-ambiente-cambio-climatico-y-desarrollo-rural"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 6,
+  "fields": {
+    "created": "2018-05-08T22:33:20.508Z",
+    "updated": "2018-05-08T22:33:20.508Z",
+    "nombre": "Conselleria de Transparencia, Responsabilidad Social, Participaci\u00f3n y Cooperaci\u00f3n",
+    "ente": 5,
+    "slug": "conselleria-de-transparencia-responsabilidad-social-participacion-y-cooperacion"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 7,
+  "fields": {
+    "created": "2018-05-08T22:33:28.088Z",
+    "updated": "2018-05-08T22:33:28.088Z",
+    "nombre": "Campana de Musica als Pobles",
+    "ente": 5,
+    "slug": "campana-de-musica-als-pobles"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 8,
+  "fields": {
+    "created": "2018-05-08T22:33:33.610Z",
+    "updated": "2018-05-08T22:33:33.610Z",
+    "nombre": "Medio Ambiente",
+    "ente": 4,
+    "slug": "medio-ambiente"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 9,
+  "fields": {
+    "created": "2018-05-08T22:33:39.854Z",
+    "updated": "2018-05-08T22:33:39.854Z",
+    "nombre": "Cultura",
+    "ente": 4,
+    "slug": "cultura"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 10,
+  "fields": {
+    "created": "2018-05-14T09:52:04.145Z",
+    "updated": "2018-05-14T09:52:04.145Z",
+    "nombre": "Nuevo dipu",
+    "ente": 4,
+    "slug": "nuevo-dipu"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 11,
+  "fields": {
+    "created": "2018-05-14T13:54:47.439Z",
+    "updated": "2018-05-14T13:54:47.439Z",
+    "nombre": "sdf",
+    "ente": 5,
+    "slug": "sdf"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 12,
+  "fields": {
+    "created": "2018-05-14T14:19:44.643Z",
+    "updated": "2018-05-14T14:19:44.643Z",
+    "nombre": "dfgdfg",
+    "ente": 5,
+    "slug": "dfgdfg"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 13,
+  "fields": {
+    "created": "2018-05-14T14:23:32.523Z",
+    "updated": "2018-05-14T14:23:32.523Z",
+    "nombre": "asda sd3423 4234",
+    "ente": 5,
+    "slug": "asda-sd3423-4234"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 14,
+  "fields": {
+    "created": "2018-05-14T14:29:15.961Z",
+    "updated": "2018-05-14T14:29:15.961Z",
+    "nombre": "sdfsdfsdfsd",
+    "ente": 5,
+    "slug": "sdfsdfsdfsd"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 15,
+  "fields": {
+    "created": "2018-05-15T20:03:12.104Z",
+    "updated": "2018-05-15T20:03:12.104Z",
+    "nombre": "no funciona",
+    "ente": 5,
+    "slug": "no-funciona"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 16,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "asd",
+    "ente": 5,
+    "slug": "asd"
+  }
+},
+{
+  "model": "subvenciones.subvencion",
+  "pk": 36,
+  "fields": {
+    "created": "2018-05-14T11:41:34.306Z",
+    "updated": "2018-05-15T19:54:10.949Z",
+    "user": 1,
+    "inicio": "2018-05-14",
+    "fin": "2018-05-14",
+    "nombre": "Fomento de la lengua y cultura popular valenciana",
+    "procedimiento": "https://drive.google.com/open?id=1Ikp-oJkMl4AjZqFWPVf6yi7alcUpjZgU",
+    "bases": "https://drive.google.com/open?id=14aRHxdySpvPDQQp7ZnnQrnKvO7aPpWON",
+    "solicitud": "",
+    "cuantia_inicial": "34",
+    "cuantia_final": "3434",
+    "descripcion": "didndignidgidngidngidgndig movil mvil",
+    "estado": 1,
+    "drive": "https://github.com/amosISA/ayudas/blob/master/myapp/templates/myapp/index.html",
+    "gestiona_expediente": "https://github.com/amosISA/ayudas/blob/master/myapp/templates/myapp/index.html",
+    "nombre_carpeta_drive": "mojones",
+    "ente": 4,
+    "area": 9,
+    "responsable": [
+      1,
+      8
+    ],
+    "se_relaciona_con": [],
+    "colectivo": [
+      1,
+      2
+    ],
+    "likes": []
+  }
+},
+{
+  "model": "subvenciones.subvencion",
+  "pk": 37,
+  "fields": {
+    "created": "2018-05-17T17:56:34.873Z",
+    "updated": "2018-05-17T17:57:05.408Z",
+    "user": 1,
+    "inicio": "2018-05-18",
+    "fin": "2018-06-29",
+    "nombre": "Subvenci\u00f3n del medio ambiente",
+    "procedimiento": "",
+    "bases": "",
+    "solicitud": "",
+    "cuantia_inicial": null,
+    "cuantia_final": null,
+    "descripcion": "",
+    "estado": 2,
+    "drive": "",
+    "gestiona_expediente": null,
+    "nombre_carpeta_drive": "",
+    "ente": 5,
+    "area": 12,
+    "responsable": [
+      1,
+      8
+    ],
+    "se_relaciona_con": [],
+    "colectivo": [
+      1,
+      2
+    ],
+    "likes": []
+  }
+},
+{
+  "model": "subvenciones.subvencion",
+  "pk": 38,
+  "fields": {
+    "created": "2018-05-17T17:57:43.868Z",
+    "updated": "2018-05-17T17:57:43.868Z",
+    "user": 1,
+    "inicio": null,
+    "fin": null,
+    "nombre": "asdasdasdasd asdasd asd",
+    "procedimiento": "",
+    "bases": "",
+    "solicitud": "",
+    "cuantia_inicial": null,
+    "cuantia_final": null,
+    "descripcion": "",
+    "estado": 1,
+    "drive": "",
+    "gestiona_expediente": null,
+    "nombre_carpeta_drive": "",
+    "ente": 4,
+    "area": 9,
+    "responsable": [
+      1,
+      8
+    ],
+    "se_relaciona_con": [],
+    "colectivo": [],
+    "likes": []
+  }
+},
+{
+  "model": "subvenciones.comment",
+  "pk": 27,
+  "fields": {
+    "created": "2018-05-14T11:41:34.564Z",
+    "updated": "2018-05-14T11:41:34.564Z",
+    "user": 1,
+    "subvencion": 36,
+    "contenido": "ahora se q es JC",
+    "active": true
+  }
+},
+{
+  "model": "subvenciones.comment",
+  "pk": 28,
+  "fields": {
+    "created": "2018-05-14T11:42:08.501Z",
+    "updated": "2018-05-14T11:42:08.501Z",
+    "user": 1,
+    "subvencion": 36,
+    "contenido": "",
+    "active": true
+  }
+},
+{
+  "model": "subvenciones.comment",
+  "pk": 29,
+  "fields": {
+    "created": "2018-05-14T11:42:52.651Z",
+    "updated": "2018-05-14T11:42:52.651Z",
+    "user": 1,
+    "subvencion": 36,
+    "contenido": "nada de nada",
+    "active": true
+  }
+},
+{
+  "model": "subvenciones.comment",
+  "pk": 30,
+  "fields": {
+    "created": "2018-05-15T19:54:11.089Z",
+    "updated": "2018-05-15T19:54:11.089Z",
+    "user": 1,
+    "subvencion": 36,
+    "contenido": "otro comentario",
+    "active": true
+  }
+},
+{
+  "model": "subvenciones.comment",
+  "pk": 31,
+  "fields": {
+    "created": "2018-05-17T17:56:35.114Z",
+    "updated": "2018-05-17T17:56:35.114Z",
+    "user": 1,
+    "subvencion": 37,
+    "contenido": "@[soma] para probvar medio ambiente **dfg**",
+    "active": true
+  }
+},
+{
+  "model": "subvenciones.comment",
+  "pk": 32,
+  "fields": {
+    "created": "2018-05-17T17:57:05.531Z",
+    "updated": "2018-05-17T17:57:05.531Z",
+    "user": 1,
+    "subvencion": 37,
+    "contenido": "",
+    "active": true
+  }
+}
+]

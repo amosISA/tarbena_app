@@ -1,0 +1,343 @@
+[
+{
+  "model": "subvenciones.area",
+  "pk": 1,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Cultura",
+    "ente": 1,
+    "slug": "cultura"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 2,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Agua. Ciclo h\u00eddrico",
+    "ente": 1,
+    "slug": "agua-ciclo-hidrico"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 3,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Infraestructuras. Cooperaci\u00f3n",
+    "ente": 1,
+    "slug": "infraestructuras-cooperacion"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 4,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Bienestar social",
+    "ente": 1,
+    "slug": "bienestar-social"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 5,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Deportes",
+    "ente": 1,
+    "slug": "deportes"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 6,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Medio Ambiente",
+    "ente": 1,
+    "slug": "medio-ambiente"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 7,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Igualdad y Juventud",
+    "ente": 1,
+    "slug": "igualdad-y-juventud"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 8,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Ciudadanos extranjeros",
+    "ente": 1,
+    "slug": "ciudadanos-extranjeros"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 9,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Patronato de Turismo",
+    "ente": 1,
+    "slug": "patronato-de-turismo"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 10,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Instituto Juan Gil-Albert",
+    "ente": 1,
+    "slug": "instituto-juan-gil-albert"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 11,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Promoci\u00f3n y desarrollo local",
+    "ente": 1,
+    "slug": "promocion-y-desarrollo-local"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 12,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Servicio Asistencia a Municipios",
+    "ente": 1,
+    "slug": "servicio-asistencia-a-municipios"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 13,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Residuos S\u00f3lidos Urbanos",
+    "ente": 1,
+    "slug": "residuos-solidos-urbanos"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 14,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Fomento y desarrollo",
+    "ente": 1,
+    "slug": "fomento-y-desarrollo"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 15,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Conselleria de Agricultura, Medio Ambiente, Cambio Clim\u00e1tico y Desarrollo Rural",
+    "ente": 2,
+    "slug": "conselleria-de-agricultura-medio-ambiente-cambio-climatico-y-desarrollo-rural"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 16,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Conselleria de Transparencia, Responsabilidad Social, Participaci\u00f3n y Cooperaci\u00f3n",
+    "ente": 2,
+    "slug": "conselleria-de-transparencia-responsabilidad-social-participacion-y-cooperacion"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 17,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Direcci\u00f3n General de Administraci\u00f3n Local, de la Presidencia de la Generalitat",
+    "ente": 2,
+    "slug": "direccion-general-de-administracion-local-de-la-presidencia-de-la-generalitat"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 18,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Conselleria de Econom\u00eda Sostenible, Sectores Productivos, Comercio y Trabajo",
+    "ente": 2,
+    "slug": "conselleria-de-economia-sostenible-sectores-productivos-comercio-y-trabajo"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 19,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Direcci\u00f3n Territorial de Igualdad y Pol\u00edticas Inclusivas",
+    "ente": 2,
+    "slug": "direccion-territorial-de-igualdad-y-politicas-inclusivas"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 20,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Conselleria de Hacienda y Modelo Econ\u00f3mico",
+    "ente": 2,
+    "slug": "conselleria-de-hacienda-y-modelo-economico"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 21,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Institut Valenci\u00e0 de la Joventut",
+    "ente": 2,
+    "slug": "institut-valencia-de-la-joventut"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 22,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Consejo de C\u00e1maras de Comercio, Industria, Servicios y Navegaci\u00f3n",
+    "ente": 2,
+    "slug": "consejo-de-camaras-de-comercio-industria-servicios-y-navegacion"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 23,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "SERVEF",
+    "ente": 2,
+    "slug": "servef"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 24,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Conselleria de Justicia, Administraci\u00f3n P\u00fablica, Reformas Democr\u00e1ticas y Libertades P\u00fablicas",
+    "ente": 2,
+    "slug": "conselleria-de-justicia-administracion-publica-reformas-democraticas-y-libertades-publicas"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 25,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Educaci\u00f3n, Investigaci\u00f3n, Cultura y Deporte",
+    "ente": 2,
+    "slug": "educacion-investigacion-cultura-y-deporte"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 26,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Agencia valenciana de seguridad y respuesta a las emergencia",
+    "ente": 2,
+    "slug": "agencia-valenciana-de-seguridad-y-respuesta-a-las-emergencia"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 27,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Conselleria de Sanidad Universal y Salud P\u00fablica",
+    "ente": 2,
+    "slug": "conselleria-de-sanidad-universal-y-salud-publica"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 28,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Ag\u00e8ncia Valenciana del Turisme",
+    "ente": 2,
+    "slug": "agencia-valenciana-del-turisme"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 29,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "IVAJ",
+    "ente": 2,
+    "slug": "ivaj"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 31,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "Conselleria de Vivienda, Obras P\u00fablicas y Vertebraci\u00f3n del Territorio",
+    "ente": 2,
+    "slug": "conselleria-de-vivienda-obras-publicas-y-vertebracion-del-territorio"
+  }
+},
+{
+  "model": "subvenciones.area",
+  "pk": 32,
+  "fields": {
+    "created": "2018-05-15T20:24:37.800Z",
+    "updated": "2018-05-15T20:24:37.800Z",
+    "nombre": "IVACE - Instituto Valenciano de Competitividad Empresarial",
+    "ente": 2,
+    "slug": "ivace-instituto-valenciano-de-competitividad-empresarial"
+  }
+}
+]

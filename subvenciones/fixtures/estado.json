@@ -1,0 +1,102 @@
+[
+{
+  "model": "subvenciones.estado",
+  "pk": 1,
+  "fields": {
+    "created": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-05-07T20:47:32.920Z",
+    "nombre": "Cerrada a espera de resoluci\u00f3n",
+    "slug": "cerrada-a-espera-de-resolucion"
+  }
+},
+{
+  "model": "subvenciones.estado",
+  "pk": 2,
+  "fields": {
+    "created": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-05-07T20:47:32.920Z",
+    "nombre": "No aplicable",
+    "slug": "no-aplicable"
+  }
+},
+{
+  "model": "subvenciones.estado",
+  "pk": 3,
+  "fields": {
+    "created": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-05-07T20:47:32.920Z",
+    "nombre": "Solicitada con detalles por definir",
+    "slug": "solicitada-con-detalles-por-definir"
+  }
+},
+{
+  "model": "subvenciones.estado",
+  "pk": 4,
+  "fields": {
+    "created": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-05-07T20:47:32.920Z",
+    "nombre": "Defini\u00e9ndose",
+    "slug": "definiendose"
+  }
+},
+{
+  "model": "subvenciones.estado",
+  "pk": 5,
+  "fields": {
+    "created": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-05-07T20:47:32.920Z",
+    "nombre": "Aprobada",
+    "slug": "aprobada"
+  }
+},
+{
+  "model": "subvenciones.estado",
+  "pk": 6,
+  "fields": {
+    "created": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-05-07T20:47:32.920Z",
+    "nombre": "Desestimada",
+    "slug": "desestimada"
+  }
+},
+{
+  "model": "subvenciones.estado",
+  "pk": 7,
+  "fields": {
+    "created": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-05-07T20:47:32.920Z",
+    "nombre": "Ejecutada y terminada",
+    "slug": "ejecutada-y-terminada"
+  }
+},
+{
+  "model": "subvenciones.estado",
+  "pk": 8,
+  "fields": {
+    "created": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-05-07T20:47:32.920Z",
+    "nombre": "Limbo",
+    "slug": "limbo"
+  }
+},
+{
+  "model": "subvenciones.estado",
+  "pk": 9,
+  "fields": {
+    "created": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-05-07T20:47:32.920Z",
+    "nombre": "Sin atender",
+    "slug": "sin-atender"
+  }
+},
+{
+  "model": "subvenciones.estado",
+  "pk": 10,
+  "fields": {
+    "created": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-05-07T20:47:32.920Z",
+    "nombre": "postergado",
+    "slug": "postergado"
+  }
+}
+]

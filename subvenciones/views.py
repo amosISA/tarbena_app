@@ -63,6 +63,12 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
     template_name = 'subvenciones/create.html'
     success_url = reverse_lazy('subvenciones:index')
 
+    def get_initial(self):
+        super(SubvencionCreateView, self).get_initial()
+        user = self.request.user
+        self.initial = {"estado": 4, "user": user.id, "colectivo": 1}
+        return self.initial
+
     def get(self, request, *args, **kwargs):
         """Primero ponemos nuestro object como nulo, se debe tener en
         cuenta que object se usa en la clase CreateView para crear el objeto"""

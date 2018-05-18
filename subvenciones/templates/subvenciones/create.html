@@ -5,7 +5,7 @@
 {% block stylesheets %}
     <!-- Martor - Markdown editor for comments -->
     <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
-    <link href="{% static 'plugins/css/semantic.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+    <!--<link href="{% static 'plugins/css/semantic.min.css' %}" type="text/css" media="all" rel="stylesheet" />-->
     <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet" />
     <link href="{% static 'martor/css/martor.min.css' %}" type="text/css" media="all" rel="stylesheet" />
 {% endblock %}
@@ -186,10 +186,15 @@
                     </div>
 
                     <div class="col-lg-3">
+                        <!-- Ajax filter -->
+                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                            <label>Subvenciones relacionadas:</label><br>
+                            <a class="ajax_relation_anchor" data-toggle="modal" data-target="#ajaxRelationFilterModal" href="{% url 'subvenciones:ajax_loop_areas' %}">Filtrar</a>
+                        </div>
                         <!-- Se relacion con -->
                         <div class="form-group title-create_post se_relaciona_con_ajax_div" style="text-align:justify;font-weight:bold;">
                             {{ form.se_relaciona_con.label_tag }}
-                            {{ form.se_relaciona_con|htmlattributes:"placeholder: Expediente, class:form-control" }}
+                            {{ form.se_relaciona_con|htmlattributes:"class:form-control" }}
                         </div>
                     </div>
                 </div>
@@ -197,6 +202,25 @@
                 <!--onclick="this.disabled=true,this.form.submit();"-->
                 <input class="button_submit_create_form" type="submit" value="Crear Subvención" />
             </form>
+
+            <!-- Modal -->
+            <div class="modal fade" id="ajaxRelationFilterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Filtrar por areas</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button id="modal_ajax_button_filter_subsidies" type="button" class="btn btn-default" data-dismiss="modal">Filtrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -208,7 +232,7 @@
       integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
       crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static 'plugins/js/ace.js' %}"></script>
-    <script type="text/javascript" src="{% static 'plugins/js/semantic.min.js' %}"></script>
+    <!--<script type="text/javascript" src="{% static 'plugins/js/semantic.min.js' %}"></script>-->
     <script type="text/javascript" src="{% static 'plugins/js/mode-markdown.js' %}"></script>
     <script type="text/javascript" src="{% static 'plugins/js/ext-language_tools.js' %}"></script>
     <script type="text/javascript" src="{% static 'plugins/js/theme-github.js' %}"></script>
@@ -218,6 +242,84 @@
     <script type="text/javascript" src="{% static 'martor/js/martor.min.js' %}"></script>
 
     <script src="{% static 'subvenciones/js/create_subvenciones.js' %}"></script>
+    <script>
+        // Frist, empty the ul
+        $('ul#id_se_relaciona_con').text('');
+        // WHEN ADD SUBSIDIE
+        $(document).ready(function() {
+            // AJAX FOR SELECT DEPARTMENT AND FILL SE RELACIONA CON
+            $('.se_relaciona_con_ajax_div').css('display', 'none');
+            // When you click the first filter button and modal appear
+            $('.ajax_relation_anchor').on('click', function(e){
+                // Made the popup appear with the insert template
+                e.preventDefault();
+                $('#ajaxRelationFilterModal').modal('show').find('.modal-body').load($(this).attr('href'));
+            });
+            // When you click on each checkbox on the modal and displays the subsidies in the
+            // same modal when you check them
+            $('body').on('click', '.modal-ajax-entes input:checkbox', function(){
+                var checkbox = $(this);
+                var dip_list = [];
+                var gene_list = [];
+                var gob_list = [];
+
+                $("input[name='diputacion_ajax']:checked").each( function () {
+                    dip_list.push(parseInt($(this).val()));
+                });
+                $("input[name='generalitat_ajax']:checked").each( function () {
+                   gene_list.push(parseInt($(this).val()));
+                });
+                $("input[name='gobierno_ajax']:checked").each( function () {
+                   gob_list.push(parseInt($(this).val()));
+                });
+                $.ajax({
+                    method: 'GET',
+                    url: "{% url 'subvenciones:ajax_se_relaciona_con' %}",
+                    data: {
+                        'diputacion_ajax': dip_list,
+                        'generalitat_ajax': gene_list,
+                        'gobierno_ajax': gob_list
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var checkboxes_list = $('ul#content_ajax_list input:checkbox');
+                        // if the checkboxes in the list are not checked they are deleted when a new checkbox is selected
+                        checkboxes_list.each(function() {
+                            var checkbox_list = $(this);
+                            if(checkbox_list.is(':checked')){}else{checkbox_list.parent().parent().remove();}
+                        });
+                        $.each(data, function(key, value){
+                            $('ul#content_ajax_list').append("<li><label><input type='checkbox' name='se_relaciona_con' value='"+value.pk+"' class='' id='id_se_relaciona_con_"+key+"'>"+value.fields['nombre']+"</label></li>");
+                        });
+                        // Aquí cuando seleccionas una subvención para que no vuelva a aparecer duplicada la q
+                        // has seleccionado, la eliminamos si ya se encuentra dentro del objecto
+                        // primero la metemos y luego miramos otra vez si está, y si así es, la eliminamos
+                        var inputs_checkbox = {};
+                        $('ul#content_ajax_list input:checkbox').each(function() {
+                            var checkbox = $(this).val();
+                            if(inputs_checkbox[checkbox]) {
+                                $(this).parent().parent().remove();
+                            } else {
+                                inputs_checkbox[checkbox] = true;
+                            }
+                        });
+                    }
+                });
+            });
+            // When you click on filter button from the modal popup
+            $('#modal_ajax_button_filter_subsidies').click(function() {
+                $('.se_relaciona_con_ajax_div').css('display', 'block');
+                var ul_li = $('#id_se_relaciona_con');
+                ul_li.text('');
+                $('ul#content_ajax_list input:checkbox').each(function() {
+                    if($(this).is(':checked')){
+                        ul_li.append('<li>'+$(this).parent().parent().html()+'</li>');
+                    }
+                });
+                $('#id_se_relaciona_con input:checkbox').prop('checked', true);
+            });
+        });
+    </script>
     <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
     <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedm2m.js' %}"></script>
     <script type="text/javascript" src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>

@@ -1,0 +1,61 @@
+<div class="row">
+    {% if diputacion %}
+        <div class="col-4-md" style="margin-left:10px;margin-right:10px;">
+            <!-- Filter Diputacion de Alicante -->
+            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                <label>Diputación de Alicante:</label>
+                <ul class="form-control modal-ajax-entes" style="list-style-type: none">
+                    {% for dip in diputacion %}
+                        <li>
+                            <label for="{{ dip.nombre }}_{{ dip.pk }}">
+                                <input name="diputacion_ajax" id="{{ dip.nombre }}_{{ dip.pk }}" type="checkbox" value="{{ dip.pk }}">{{ dip.nombre }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if generalitat %}
+        <div class="col-4-md" style="margin-left:10px;margin-right:10px;">
+            <!-- Filter Generalitat -->
+            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                <label>Generalitat Valenciana:</label>
+                <ul class="form-control modal-ajax-entes" style="list-style-type: none">
+                    {% for gene in generalitat %}
+                        <li>
+                            <label for="{{ gene.nombre }}_{{ gene.pk }}">
+                                <input name="generalitat_ajax" id="{{ gene.nombre }}_{{ gene.pk }}" type="checkbox" value="{{ gene.pk }}">{{ gene.nombre }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if gobierno %}
+        <div class="col-4-md" style="margin-left:10px;margin-right:10px;">
+            <!-- Filter Gobierno -->
+            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                <label>Gobierno de España:</label>
+                <ul class="form-control modal-ajax-entes" style="list-style-type: none">
+                    {% for gob in gobierno %}
+                        <li>
+                            <label for="{{ gob.nombre }}_{{ gob.pk }}">
+                                <input name="gobierno_ajax" id="{{ gob.nombre }}_{{ gob.pk }}" type="checkbox" value="{{ gob.pk }}">{{ gob.nombre }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<div class="row">
+    <div class="col-12-md content-ajax-body form-group">
+        <ul id="content_ajax_list"></ul>
+    </div>
+</div>

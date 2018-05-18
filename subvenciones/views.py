@@ -1,20 +1,22 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.core import serializers
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import transaction
-from django.db.models import Count
-from django.http import HttpResponseRedirect
+from django.db.models import Count, Q
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .forms import SubvencionForm, CommentFormSet
 from .models import Subvencion, Estado, Colectivo, Area
 
+# --------------- Index: List Subvenciones --------------- #
 @login_required()
 def index_subvenciones(request, estado_slug=None):
     """ List subvenciones """
@@ -56,6 +58,31 @@ def index_subvenciones(request, estado_slug=None):
                    'days_until_estado': days_until_estado,
                    'total_subvenciones': total_subvenciones,
                    'colectivos': colectivos})
+
+# --------------- Get Areas related to each ente with AJAX --------------- #
+def ajax_se_relaciona_con(request):
+    diputacion = request.GET.getlist('diputacion_ajax[]', '0')
+    generalitat = request.GET.getlist('generalitat_ajax[]', '0')
+    gobierno = request.GET.getlist('gobierno_ajax[]', '0')
+
+    query = Subvencion.objects.all().filter(Q(area__id__in=diputacion) |
+                                      Q(area__id__in=generalitat) |
+                                      Q(area__id__in=gobierno))
+    data = serializers.serialize('json', query)
+    return HttpResponse(data, content_type="application/json")
+
+def subsidies_for_ajax_loop(request):
+    subvenciones = Subvencion.objects.all()
+    diputacion = Area.objects.filter(ente_id=1)
+    generalitat = Area.objects.filter(ente_id=2)
+    gobierno = Area.objects.filter(ente_id=3)
+
+    return render(request,
+                  'subvenciones/ajax_se_relaciona_con_modal.html',
+                  {'subvenciones':subvenciones,
+                   'diputacion':diputacion,
+                   'generalitat':generalitat,
+                   'gobierno':gobierno})
 
 # --------------- Create New Subsidie --------------- #
 class SubvencionCreateView(LoginRequiredMixin, CreateView):

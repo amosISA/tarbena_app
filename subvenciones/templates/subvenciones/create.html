@@ -288,9 +288,19 @@
                             var checkbox_list = $(this);
                             if(checkbox_list.is(':checked')){}else{checkbox_list.parent().parent().remove();}
                         });
+
                         $.each(data, function(key, value){
+                            var ente = value.fields['ente'];
+                            if(ente == 1) {
+                                console.log("soy diiip");
+                            } else if (ente == 2) {
+                                console.log("soy gene");
+                            } else if (ente == 3) {
+                                console.log("soy gob");
+                            }
                             $('ul#content_ajax_list').append("<li><label><input type='checkbox' name='se_relaciona_con' value='"+value.pk+"' class='' id='id_se_relaciona_con_"+key+"'>"+value.fields['nombre']+"</label></li>");
                         });
+
                         // Aquí cuando seleccionas una subvención para que no vuelva a aparecer duplicada la q
                         // has seleccionado, la eliminamos si ya se encuentra dentro del objecto
                         // primero la metemos y luego miramos otra vez si está, y si así es, la eliminamos

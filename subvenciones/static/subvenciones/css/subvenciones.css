@@ -48,4 +48,11 @@ body .subv_delete_wrapper {
 .comment_user_date {
   text-decoration: underline; }
 
+/* Fixed checkbox with inline text */
+input[type=checkbox], input[type=radio] {
+  box-sizing: border-box !important;
+  padding: 0px 0px 0 0 !important;
+  position: absolute !important;
+  margin: 3.8px 0 0 -15px !important; }
+
 /*# sourceMappingURL=subvenciones.css.map */

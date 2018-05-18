@@ -1,10 +1,10 @@
 <div class="row">
     {% if diputacion %}
-        <div class="col-4-md" style="margin-left:10px;margin-right:10px;">
+        <div class="col-md">
             <!-- Filter Diputacion de Alicante -->
             <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
                 <label>Diputación de Alicante:</label>
-                <ul class="form-control modal-ajax-entes" style="list-style-type: none">
+                <ul class="form-control modal-ajax-entes filtro" style="list-style-type: none">
                     {% for dip in diputacion %}
                         <li>
                             <label for="{{ dip.nombre }}_{{ dip.pk }}">
@@ -18,11 +18,11 @@
     {% endif %}
 
     {% if generalitat %}
-        <div class="col-4-md" style="margin-left:10px;margin-right:10px;">
+        <div class="col-md">
             <!-- Filter Generalitat -->
             <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
                 <label>Generalitat Valenciana:</label>
-                <ul class="form-control modal-ajax-entes" style="list-style-type: none">
+                <ul class="form-control modal-ajax-entes filtro" style="list-style-type: none">
                     {% for gene in generalitat %}
                         <li>
                             <label for="{{ gene.nombre }}_{{ gene.pk }}">
@@ -36,11 +36,11 @@
     {% endif %}
 
     {% if gobierno %}
-        <div class="col-4-md" style="margin-left:10px;margin-right:10px;">
+        <div class="col-md">
             <!-- Filter Gobierno -->
             <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
                 <label>Gobierno de España:</label>
-                <ul class="form-control modal-ajax-entes" style="list-style-type: none">
+                <ul class="form-control modal-ajax-entes filtro" style="list-style-type: none">
                     {% for gob in gobierno %}
                         <li>
                             <label for="{{ gob.nombre }}_{{ gob.pk }}">

@@ -791,10 +791,10 @@ ul#id_se_relaciona_con {
     background-color: #fff3d6;
 }
 
-#id_se_relaciona_con li label, #id_responsable li label, #id_colectivo li label {
+#id_se_relaciona_con li label, #id_responsable li label, #id_colectivo li label, .filtro li label {
     display: block;
-    padding-left:10px;
-    padding-bottom:5px;
+    padding-left:20px;
+    padding-bottom:2px;
 }
 
 #id_se_relaciona_con li label:hover, #id_responsable li label:hover, #id_colectivo li label:hover, #content_ajax_list li label:hover {

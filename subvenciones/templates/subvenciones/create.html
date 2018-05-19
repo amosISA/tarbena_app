@@ -262,6 +262,13 @@
                 var dip_list = [];
                 var gene_list = [];
                 var gob_list = [];
+                var dip_div = $('.content_ajax_list #dip-filtered-sub');
+                var gene_div = $('.content_ajax_list #gene-filtered-sub');
+                var gob_div = $('.content_ajax_list #gob-filtered-sub');
+                var checkboxes_list_dip = $('ul#dip-filtered-sub input:checkbox');
+                var checkboxes_list_gene = $('ul#gene-filtered-sub input:checkbox');
+                var checkboxes_list_gob = $('ul#gob-filtered-sub input:checkbox');
+
 
                 $("input[name='diputacion_ajax']:checked").each( function () {
                     dip_list.push(parseInt($(this).val()));
@@ -272,6 +279,7 @@
                 $("input[name='gobierno_ajax']:checked").each( function () {
                    gob_list.push(parseInt($(this).val()));
                 });
+
                 $.ajax({
                     method: 'GET',
                     url: "{% url 'subvenciones:ajax_se_relaciona_con' %}",
@@ -282,13 +290,6 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-                        var dip_div = $('.content_ajax_list #dip-filtered-sub');
-                        var gene_div = $('.content_ajax_list #gene-filtered-sub');
-                        var gob_div = $('.content_ajax_list #gob-filtered-sub');
-
-                        var checkboxes_list_dip = $('ul#dip-filtered-sub input:checkbox');
-                        var checkboxes_list_gene = $('ul#gene-filtered-sub input:checkbox');
-                        var checkboxes_list_gob = $('ul#gob-filtered-sub input:checkbox');
                         // if the checkboxes in the list are not checked they are deleted when a new checkbox is selected
                         checkboxes_list_dip.each(function() {
                             var checkbox_list = $(this);

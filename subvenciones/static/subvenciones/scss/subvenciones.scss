@@ -71,3 +71,10 @@ input[type=checkbox], input[type=radio] {
     position: absolute!important;
     margin: 3.8px 0 0 -15px!important;
 }
+
+/* Increase modal related subvenciones width */
+@media (min-width: 992px) {
+  .modal-lg {
+    max-width: 1500px!important;
+  }
+}

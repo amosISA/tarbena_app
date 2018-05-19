@@ -938,24 +938,6 @@ ul#id_se_relaciona_con {
     height: 294px;
 }
 
-/* MODAL FILTER FULL WIDTH */
-.modal-dialog {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  margin-left: 60px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-.modal-content {
-  height: auto;
-  width: 1200px;
-  min-height: 100%;
-  border-radius: 0;
-}
-
 /*** BACK TO TOP ***/
 a#back-to-top {
     position: fixed;

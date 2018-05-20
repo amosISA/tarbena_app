@@ -187,10 +187,16 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
 def subvencion_detail(request, id):
     subvencion = get_object_or_404(Subvencion,
                                    id=id)
+    diputacion = Subvencion.objects.filter(se_relaciona_con=subvencion, ente__id=1)
+    generalitat = Subvencion.objects.filter(se_relaciona_con=subvencion, ente__id=2)
+    gobierno = Subvencion.objects.filter(se_relaciona_con=subvencion, ente__id=3)
 
     return render(request,
                   'subvenciones/detail.html',
-                  {'subvencion': subvencion})
+                  {'subvencion': subvencion,
+                   'diputacion': diputacion,
+                   'generalitat': generalitat,
+                   'gobierno': gobierno})
 
 # --------------- Delete Subsidie --------------- #
 class SubvencionDeleteView(LoginRequiredMixin, DeleteView):

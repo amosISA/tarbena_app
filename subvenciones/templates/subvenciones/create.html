@@ -243,11 +243,11 @@
 
     <script src="{% static 'subvenciones/js/create_subvenciones.js' %}"></script>
     <script>
-        // Frist, empty the ul
+        // Frist, empty the ul and hide it
         $('ul#id_se_relaciona_con').text('');
-        // WHEN ADD SUBSIDIE
+
+        // RELATED SUBVENCIONES WITH AJAX
         $(document).ready(function() {
-            // AJAX FOR SELECT DEPARTMENT AND FILL SE RELACIONA CON
             $('.se_relaciona_con_ajax_div').css('display', 'none');
             // When you click the first filter button and modal appear
             $('.ajax_relation_anchor').on('click', function(e){
@@ -350,26 +350,32 @@
                 $('.se_relaciona_con_ajax_div').css('display', 'block');
                 var ul_li = $('#id_se_relaciona_con');
                 ul_li.text('');
-                ul_li.append('--- Diputación de Alicante ---');
-                $('ul#dip-filtered-sub input:checkbox').each(function() {
-                    if($(this).is(':checked')){
-                        ul_li.append('<li>'+$(this).parent().parent().html()+'</li>');
-                    }
-                });
+                if($('ul#dip-filtered-sub input:checkbox').length > 0) {
+                    ul_li.append('--- Diputación de Alicante ---');
+                    $('ul#dip-filtered-sub input:checkbox').each(function () {
+                        if ($(this).is(':checked')) {
+                            ul_li.append('<li>' + $(this).parent().parent().html() + '</li>');
+                        }
+                    });
+                }
 
-                ul_li.append('<br>'+'--- Generalitat Valenciana ---');
-                $('ul#gene-filtered-sub input:checkbox').each(function() {
-                    if($(this).is(':checked')){
-                        ul_li.append('<li>'+$(this).parent().parent().html()+'</li>');
-                    }
-                });
+                if($('ul#gene-filtered-sub input:checkbox').length > 0) {
+                    ul_li.append('--- Generalitat Valenciana ---');
+                    $('ul#gene-filtered-sub input:checkbox').each(function () {
+                        if ($(this).is(':checked')) {
+                            ul_li.append('<li>' + $(this).parent().parent().html() + '</li>');
+                        }
+                    });
+                }
 
-                ul_li.append('<br>'+'--- Gobierno de España ---');
-                $('ul#gob-filtered-sub input:checkbox').each(function() {
-                    if($(this).is(':checked')){
-                        ul_li.append('<li>'+$(this).parent().parent().html()+'</li>');
-                    }
-                });
+                if($('ul#gob-filtered-sub input:checkbox').length > 0) {
+                    ul_li.append('--- Gobierno de España ---');
+                    $('ul#gob-filtered-sub input:checkbox').each(function () {
+                        if ($(this).is(':checked')) {
+                            ul_li.append('<li>' + $(this).parent().parent().html() + '</li>');
+                        }
+                    });
+                }
                 $('#id_se_relaciona_con input:checkbox').prop('checked', true);
             });
         });

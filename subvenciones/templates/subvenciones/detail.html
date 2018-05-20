@@ -170,16 +170,47 @@
                         <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
                             <label>Se relaciona con:</label>
                             <ul id="id_se_relaciona_con" class="form-control">
-                                {% for subv in subvencion.se_relaciona_con.all %}
-                                <li>
-                                    <label for="id_se_relaciona_con_{{ subv.id }}"><input checked onclick="return false;" type="checkbox" name="se_relaciona_con" value="{{ subv.id }}" id="id_se_relaciona_con_{{ subv.id }}">
-                                        {{ subv.nombre }}
-                                    </label>
-                                    <div style="text-align:right;">
-                                        <a href="{{ subv.get_absolute_url }}" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>
-                                    </div>
-                                </li>
-                                {% endfor %}
+                                {% if diputacion %}
+                                    --- Diputación de Alicante ---
+                                    {% for subv in diputacion %}
+                                        <li>
+                                            <label for="id_se_relaciona_con_{{ subv.id }}"><input checked onclick="return false;" type="checkbox" name="se_relaciona_con" value="{{ subv.id }}" id="id_se_relaciona_con_{{ subv.id }}">
+                                                {{ subv.nombre }}
+                                            </label>
+                                            <div style="text-align:right;">
+                                                <a href="{{ subv.get_absolute_url }}" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+
+                                {% if generalitat %}
+                                    --- Generalitat Valenciana ---
+                                    {% for subv in generalitat %}
+                                        <li>
+                                            <label for="id_se_relaciona_con_{{ subv.id }}"><input checked onclick="return false;" type="checkbox" name="se_relaciona_con" value="{{ subv.id }}" id="id_se_relaciona_con_{{ subv.id }}">
+                                                {{ subv.nombre }}
+                                            </label>
+                                            <div style="text-align:right;">
+                                                <a href="{{ subv.get_absolute_url }}" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+
+                                {% if gobierno %}
+                                    --- Gobierno de España ---
+                                    {% for subv in gobierno %}
+                                        <li>
+                                            <label for="id_se_relaciona_con_{{ subv.id }}"><input checked onclick="return false;" type="checkbox" name="se_relaciona_con" value="{{ subv.id }}" id="id_se_relaciona_con_{{ subv.id }}">
+                                                {{ subv.nombre }}
+                                            </label>
+                                            <div style="text-align:right;">
+                                                <a href="{{ subv.get_absolute_url }}" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
                             </ul>
                         </div>
                     </div>

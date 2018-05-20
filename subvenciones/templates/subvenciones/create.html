@@ -262,13 +262,6 @@
                 var dip_list = [];
                 var gene_list = [];
                 var gob_list = [];
-                var dip_div = $('.content_ajax_list #dip-filtered-sub');
-                var gene_div = $('.content_ajax_list #gene-filtered-sub');
-                var gob_div = $('.content_ajax_list #gob-filtered-sub');
-                var checkboxes_list_dip = $('ul#dip-filtered-sub input:checkbox');
-                var checkboxes_list_gene = $('ul#gene-filtered-sub input:checkbox');
-                var checkboxes_list_gob = $('ul#gob-filtered-sub input:checkbox');
-
 
                 $("input[name='diputacion_ajax']:checked").each( function () {
                     dip_list.push(parseInt($(this).val()));
@@ -290,16 +283,20 @@
                     },
                     dataType: 'json',
                     success: function (data) {
+                        var dip_div = $('.content_ajax_list #dip-filtered-sub');
+                        var gene_div = $('.content_ajax_list #gene-filtered-sub');
+                        var gob_div = $('.content_ajax_list #gob-filtered-sub');
+
                         // if the checkboxes in the list are not checked they are deleted when a new checkbox is selected
-                        checkboxes_list_dip.each(function() {
+                        $('ul#dip-filtered-sub input:checkbox').each(function() {
                             var checkbox_list = $(this);
                             if(checkbox_list.is(':checked')){}else{checkbox_list.parent().parent().remove();}
                         });
-                        checkboxes_list_gene.each(function() {
+                        $('ul#gene-filtered-sub input:checkbox').each(function() {
                             var checkbox_list = $(this);
                             if(checkbox_list.is(':checked')){}else{checkbox_list.parent().parent().remove();}
                         });
-                        checkboxes_list_gob.each(function() {
+                        $('ul#gob-filtered-sub input:checkbox').each(function() {
                             var checkbox_list = $(this);
                             if(checkbox_list.is(':checked')){}else{checkbox_list.parent().parent().remove();}
                         });
@@ -314,22 +311,21 @@
                             } else if (ente == 3) { // Gobierno España
                                 gob_div.append('<li><label><input type="checkbox" name="se_relaciona_con" value="'+value.pk+'" id="id_se_relaciona_con_'+key+'">'+value.fields["nombre"]+'</label></li>');
                             }
-                            //$('ul#content_ajax_list').append("<li><label><input type='checkbox' name='se_relaciona_con' value='"+value.pk+"' class='' id='id_se_relaciona_con_"+key+"'>"+value.fields['nombre']+"</label></li>");
                         });
 
                         // Aquí cuando seleccionas una subvención para que no vuelva a aparecer duplicada la q
                         // has seleccionado, la eliminamos si ya se encuentra dentro del objecto
                         // primero la metemos y luego miramos otra vez si está, y si así es, la eliminamos
                         var inputs_checkbox_dip = {}, inputs_checkbox_gene = {}, inputs_checkbox_gob = {};
-                        checkboxes_list_dip.each(function() {
-                            var checkbox = $(this).val();
-                            if(inputs_checkbox_dip[checkbox]) {
+                        $('ul#dip-filtered-sub input:checkbox').each(function() {
+                            var checkbox = $(this);
+                            if(inputs_checkbox_dip[checkbox.attr('id')]) {
                                 $(this).parent().parent().remove();
                             } else {
-                                inputs_checkbox_dip[checkbox] = true;
+                                inputs_checkbox_dip[checkbox.attr('id')] = true;
                             }
                         });
-                        checkboxes_list_gene.each(function() {
+                        $('ul#gene-filtered-sub input:checkbox').each(function() {
                             var checkbox = $(this).val();
                             if(inputs_checkbox_gene[checkbox]) {
                                 $(this).parent().parent().remove();
@@ -337,7 +333,7 @@
                                 inputs_checkbox_gene[checkbox] = true;
                             }
                         });
-                        checkboxes_list_gob.each(function() {
+                        $('ul#gob-filtered-sub input:checkbox').each(function() {
                             var checkbox = $(this).val();
                             if(inputs_checkbox_gob[checkbox]) {
                                 $(this).parent().parent().remove();
@@ -348,6 +344,7 @@
                     }
                 });
             });
+
             // When you click on filter button from the modal popup
             $('#modal_ajax_button_filter_subsidies').click(function() {
                 $('.se_relaciona_con_ajax_div').css('display', 'block');

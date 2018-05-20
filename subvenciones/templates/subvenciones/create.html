@@ -350,7 +350,22 @@
                 $('.se_relaciona_con_ajax_div').css('display', 'block');
                 var ul_li = $('#id_se_relaciona_con');
                 ul_li.text('');
-                $('ul#content_ajax_list input:checkbox').each(function() {
+                ul_li.append('--- Diputación de Alicante ---');
+                $('ul#dip-filtered-sub input:checkbox').each(function() {
+                    if($(this).is(':checked')){
+                        ul_li.append('<li>'+$(this).parent().parent().html()+'</li>');
+                    }
+                });
+
+                ul_li.append('<br>'+'--- Generalitat Valenciana ---');
+                $('ul#gene-filtered-sub input:checkbox').each(function() {
+                    if($(this).is(':checked')){
+                        ul_li.append('<li>'+$(this).parent().parent().html()+'</li>');
+                    }
+                });
+
+                ul_li.append('<br>'+'--- Gobierno de España ---');
+                $('ul#gob-filtered-sub input:checkbox').each(function() {
                     if($(this).is(':checked')){
                         ul_li.append('<li>'+$(this).parent().parent().html()+'</li>');
                     }

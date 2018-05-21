@@ -9,8 +9,9 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import transaction
 from django.db.models import Count, Q
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
+from django.views.decorators.http import require_POST
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .forms import SubvencionForm, CommentFormSet
@@ -83,6 +84,30 @@ def subsidies_for_ajax_loop(request):
                    'diputacion':diputacion,
                    'generalitat':generalitat,
                    'gobierno':gobierno})
+
+# --------------- Likes --------------- #
+@login_required
+@require_POST
+def likes(request):
+    subsidie_id = request.POST.get('id')
+    action = request.POST.get('action')
+
+    if subsidie_id and action:
+        try:
+            subsidie = Subvencion.objects.get(id=subsidie_id)
+            if action == 'like':
+                subsidie.likes.add(request.user)
+            else:
+                subsidie.likes.remove(request.user)
+            return JsonResponse({'status':'ok'})
+        except:
+            pass
+        return JsonResponse({'status':'ko'})
+
+# --------------- Favourites --------------- #
+@login_required()
+def favourites(request, estado_slug=None):
+    pass
 
 # --------------- Create New Subsidie --------------- #
 class SubvencionCreateView(LoginRequiredMixin, CreateView):

@@ -392,3 +392,29 @@
     <script src="{% static 'admin/js/core.js' %}"></script>
     <script src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>
 {% endblock %}
+
+{% block js %}
+    <script>
+        // AJAX FOR LIKES
+        $('a.like-button-details').click(function(e) {
+            e.preventDefault();
+            $.post('{% url "subvenciones:like" %}',
+                {
+                    id: $(this).data('id'),
+                    action: $(this).data('action')
+                },
+                function(data) {
+                    if(data['status'] == 'ok')
+                    {
+                        var button_likes = $('a.like-button-details');
+                        var previous_action = button_likes.data('action');
+                        //toggle data-action
+                        button_likes.data('action', previous_action == 'like' ? 'unlike' : 'like');
+                        //toggle link text
+                        $('.likes_heart').addClass(previous_action == 'like' ? $('.likes_heart').addClass("fas") : $('.likes_heart').removeClass('fas'));
+                    }
+                }
+            );
+        });
+    </script>
+{% endblock %}

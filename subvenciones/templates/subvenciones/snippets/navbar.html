@@ -17,9 +17,33 @@
                 <a class="nav-link" href="{% url 'subvenciones:create' %}"> <i class="far fa-file"></i> Crear subvención</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-bookmark"></i> Ver favoritos
-                </a>
+                <!-- Index, Cuando creas y cuando pinchas en favoritos aparecerá el contador de cuántas favortias tengo -->
+                <!-- También Estado, Area, Responsable -->
+                {% url 'subvenciones:subvencion_by_category' estado.slug as estado %}
+                {% url 'subvenciones:subvencion_by_category' area.slug as area %}
+                {% url 'subvenciones:subvencion_by_category' responsable__username.username as responsable %}
+
+                {% url 'subvenciones:subvencion_detail' subvencion.id as detail %}
+                {% url 'subvenciones:edit_subvencion' subvencion.id as editsubv %}
+                {% url 'subvenciones:delete_subvencion' subvencion.id as delsubv %}
+                {% if request.path == '/subvenciones/' or request.path == '/subvenciones/new/' or request.path == '/subvenciones/favourites/' or request.path == estado or request.path == area or request.get_full_path == responsable %}
+                    <a id="indexFavouritesButton" class="nav-link" href="{% url 'subvenciones:favourites' %}">
+                        <span id="badge-count-likes" class="badge">{{ userlikes.count }}</span>
+                        <i class="far fa-bookmark"></i> Ver favoritos
+                    </a>
+                <!-- En detalles, al editar, borrar la subvención, aparecerá como favorita o no -->
+                {% elif request.path == detail or request.path == editsubv or request.path == delsubv %}
+                    {% with total_likes=subvencion.likes.count likes=subvencion.likes.all %}
+                        <a class="nav-link like-button-details" href="#" data-id="{{ subvencion.id }}" data-action="{% if request.user in likes %}un{% endif %}like">
+                            <i class="likes_heart {% if request.user in likes %}fas{% else %}far{% endif %} fa-bookmark"></i> Ver favoritos
+                        </a>
+                    {% endwith %}
+                {% else %}
+                    <a id="indexFavouritesButton" class="nav-link" href="{% url 'subvenciones:favourites' %}">
+                        <span id="badge-count-likes" class="badge">{{ userlikes.count }}</span>
+                        <i class="far fa-bookmark"></i> Ver favoritos
+                    </a>
+                {% endif %}
             </li>
         </ul>
 

@@ -57,28 +57,14 @@ $j(document).ready(function(){
 });
 
 function businessDays(days) {
-    /*var data = {
-        "ano_nuevo": "01/01/2018",
-        "reyes": "06/01/2018",
-        "pascua": "2018/03/30",
-        "dia_del_trabajo": "01/05/2018",
-        "asuncion_virgen": "2018/08/15",
-        "hispanidad": "12/08/2018",
-        "santos": "01/11/2018",
-        "constitucion": "06/12/2018",
-        "inmaculada": "08/12/2018",
-        "navidad": "2018/12/25"
-    };
-    var items = [];
-    $j.each( data, function( key, val ) {
-        items.push(new Date(val));
-    });
-    var national_days = [];
-    $j.each(items, function(key, value) {
-        national_days.push(value.toString().split(" ", 4).join(" "));
-    });
-    console.log(national_days);*/
     var dataAvui = new Date($j('#id_inicio').val());
+
+    var holidays = [
+        "01/01/2018", "06/01/2018", "30/03/2018", "01/05/2018", "15/08/2018", "12/08/2018", "01/11/2018", "06/12/2018",
+        "08/12/2018", "25/12/2018", "01/01/2019", "06/01/2019", "19/04/2019", "01/05/2019", "15/08/2019", "12/10/2019",
+        "01/11/2019", "06/12/2019", "25/12/2019"
+    ]
+
     for (var i=1;i<=days;i++)
     {
         var dataTemp = dataAvui;
@@ -89,22 +75,19 @@ function businessDays(days) {
             dataTemp.setDate(dataTemp.getDate() + 2);
         }else if(dataTemp.getDay() == 0){
             dataTemp.setDate(dataTemp.getDate() + 1);
-        }else if(dataFormated == '01/01/2018' || dataFormated == '06/01/2018' || dataFormated == '30/03/2018'
-                || dataFormated == '01/05/2018' || dataFormated == '15/08/2018' || dataFormated == '12/08/2018'
-                || dataFormated == '01/11/2018' || dataFormated == '06/12/2018' || dataFormated == '08/12/2018'
-                || dataFormated == '25/12/2018' || dataFormated == '01/01/2019' || dataFormated == '06/01/2019'
-                || dataFormated == '19/04/2019' || dataFormated == '01/05/2019' || dataFormated == '15/08/2019'
-                || dataFormated == '12/10/2019' || dataFormated == '01/11/2019' || dataFormated == '06/12/2019'
-                || dataFormated == '25/12/2019') {
-            dataTemp.setDate(dataTemp.getDate() + 1);
-        }/*else if($j.inArray(dataTemp.toString().split(" ", 4).join(" "), national_days) != -1 && dataTemp.getDay() != 0 && dataTemp.getDay() != 6) {
-            console.log("fecha_calend " + dataTemp.toString().split(" ", 4).join(" ") + " fecha_nacional " + national_days[i]);
-        }*/
-        //console.log(dataFormated);
+        }
+
+        for (var j = 0; j < holidays.length; j++) {
+            if (holidays[j] == dataFormated ) {
+                dataTemp.setDate(dataTemp.getDate() + 1);
+            }
+        }
+
         dataAvui = dataTemp;
         $j("#id_fin").val(dataAvui.toInputFormat());
     }
 }
+
 Date.prototype.toInputFormat = function() {
    var yyyy = this.getFullYear().toString();
    var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based

@@ -33,19 +33,24 @@ def index_subvenciones(request, estado_slug=None):
 
     total_subvenciones = Subvencion.objects.count()
     colectivos = Colectivo.objects.all()
+    userlikes = Subvencion.objects.filter(likes__in=[request.user])
 
-    if estado_slug:
-        if Estado.objects.filter(slug=estado_slug).exists():
-            estado = get_object_or_404(Estado, slug=estado_slug)
-            subvenciones = subvenciones.filter(estado=estado)
-        elif Area.objects.filter(slug=estado_slug).exists():
-            area = get_object_or_404(Area, slug=estado_slug)
-            subvenciones = subvenciones.filter(area__nombre=area)
-        elif User.objects.filter(username=estado_slug).exists():
-            user = get_object_or_404(User, username=estado_slug)
-            subvenciones = subvenciones.filter(responsable__username=user)
-        else:
-            subvenciones = Subvencion.objects.all()
+    # Handle user favourites
+    if request.path == '/subvenciones/favourites/':
+        subvenciones = Subvencion.objects.filter(likes__in=[request.user])
+    else:
+        if estado_slug:
+            if Estado.objects.filter(slug=estado_slug).exists():
+                estado = get_object_or_404(Estado, slug=estado_slug)
+                subvenciones = subvenciones.filter(estado=estado)
+            elif Area.objects.filter(slug=estado_slug).exists():
+                area = get_object_or_404(Area, slug=estado_slug)
+                subvenciones = subvenciones.filter(area__nombre=area)
+            elif User.objects.filter(username=estado_slug).exists():
+                user = get_object_or_404(User, username=estado_slug)
+                subvenciones = subvenciones.filter(responsable__username=user)
+            else:
+                subvenciones = Subvencion.objects.all()
 
     days_until_estado = ['7d', '6d', '5d', '4d', '3d', '2d', '1d', 'expires today', 'expired']
 
@@ -58,7 +63,8 @@ def index_subvenciones(request, estado_slug=None):
                    'subvenciones': subvenciones,
                    'days_until_estado': days_until_estado,
                    'total_subvenciones': total_subvenciones,
-                   'colectivos': colectivos})
+                   'colectivos': colectivos,
+                   'userlikes': userlikes})
 
 # --------------- Get Areas related to each ente with AJAX --------------- #
 def ajax_se_relaciona_con(request):
@@ -103,11 +109,6 @@ def likes(request):
         except:
             pass
         return JsonResponse({'status':'ko'})
-
-# --------------- Favourites --------------- #
-@login_required()
-def favourites(request, estado_slug=None):
-    pass
 
 # --------------- Create New Subsidie --------------- #
 class SubvencionCreateView(LoginRequiredMixin, CreateView):

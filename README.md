@@ -1,3 +1,4 @@
 # Tárbena App
-
-![Screenshot](readme_img.png)
+<p align="center">
+  <img src="readme_img.png">
+</p>

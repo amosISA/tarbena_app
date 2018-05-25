@@ -1,5 +1,5 @@
-Starting Project on Windows
-==================================
+Starting Project
+================
 
 Requirements
 ------------
@@ -7,7 +7,7 @@ Requirements
 2. Python 3.6.5
 3. mysqlclient
 
-Get ready
+Get ready (Windows)
 ---------
 - Download `python <https://www.python.org/downloads/>`_
 - Install pip. For windows we get it `here <https://bootstrap.pypa.io/get-pip.py>`_

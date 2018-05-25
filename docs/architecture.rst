@@ -1,8 +1,8 @@
-May 2018: Starting Tárbena project 
-==================================
+Architecture
+============
 
-Preparing project configuration
--------------------------------
+Configuration
+-------------
 1. Gitignore: local settings 
 2. Creating settings module with files for different environments: base, local and production 
 3. Creating project documentation with reStructuredText(.rst) files and Sphinx

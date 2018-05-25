@@ -16,6 +16,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .forms import SubvencionForm, CommentFormSet
 from .models import Subvencion, Estado, Colectivo, Area
+from notify.signals import notify
 
 # --------------- Index: List Subvenciones --------------- #
 @login_required()
@@ -160,6 +161,12 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
         # Finalmente guardamos el formset para que tome los valores que tiene
         comments_formset.save()
         # Redireccionamos a la ventana del listado de subvenciones con el mensaje de éxito
+
+        # Notify
+        notify.send(self.request.user, recipient=self.request.user, actor=self.request.user,
+                    verb='subvención, %s' % (form.cleaned_data.get('nombre')), obj=self.object,
+                    nf_type='create_subvencion')
+
         messages.success(self.request, 'Subvención añadida correctamente!')
         return HttpResponseRedirect(self.get_success_url())
 

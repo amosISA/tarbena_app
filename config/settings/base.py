@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'profiles',
     'martor',
     'smart_selects',
+    'notify',
 ]
 
 MIDDLEWARE = [

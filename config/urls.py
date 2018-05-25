@@ -58,6 +58,9 @@ urlpatterns = [
 
     # Smart select
     url(r'^chaining/', include('smart_selects.urls')),
+
+    # Notify activity system
+    url(r'^notifications/', include('notify.urls', 'notifications')),
 ]
 
 if settings.DEBUG:
@@ -68,4 +71,3 @@ if settings.DEBUG:
 
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

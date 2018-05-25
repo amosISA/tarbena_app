@@ -14,6 +14,13 @@ class SubvencionAdmin(admin.ModelAdmin):
     list_display_links = ('nombre',)
     show_full_result_count = True
 
+    # https://medium.com/@hakibenita/things-you-must-know-about-django-admin-as-your-app-gets-bigger-6be0b0ee9614
+    list_select_related = (
+        'estado',
+        'ente',
+        'user',
+    )
+
     def save_model(self, request, obj, form, change):
         """ Add the user in request to the subsidie when we add new subsidie from the Admin Panel """
 

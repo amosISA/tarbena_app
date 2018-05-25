@@ -17,6 +17,7 @@ Apps
 - **Django Honeypot**: admin security
 - **Django Admin Interface**: theme for Django Admin Panel
 - **smart-selects**: area-ente selects functionality
+- **django-notify-x**: django notification system activity
 
 Authentication
 ^^^^^^^^^^^^^^
@@ -128,6 +129,36 @@ And finally into my create.html and edit.html template I import them like this::
     <script type="text/javascript" src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
 
 My old functionality is from here: `old functionality <https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html>`_
+
+django-notify-x
+^^^^^^^^^^^^^^^
+`https://github.com/v1k45/django-notify-x <https://github.com/v1k45/django-notify-x>`_
+::
+
+    pip install django-notify-x
+    INSTALLED_APPS = ('notify',)
+    url(r'^notifications/', include('notify.urls', 'notifications')),
+    python manage.py migrate notify
+    python manage.py collectstatic
+
+**Important**: The notify application has in his models the verb to 50 limit character, just change it to TextField instead of CharField. And then do::
+
+    # Lib/site-packages/notify/models.py
+    verb = models.TextField(verbose_name=_('Verb of the action'))
+    python manage.py makemigrations
+    python manage.py migrate
+
+**Views**::
+
+    from notify.signals import notify
+    notify.send(self.request.user, recipient=self.request.user, actor=self.object,
+                    verb='subvención, %s' % (form.cleaned_data.get('nombre')), obj=self.object,
+                    nf_type='create_subvencion')
+
+    Actor: The object which performed the activity.
+    Verb: The activity.
+    Object: The object on which activity was performed.
+    Target: The object where activity was performed.
 
 Project commands
 ----------------

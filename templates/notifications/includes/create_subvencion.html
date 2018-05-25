@@ -1,0 +1,29 @@
+{% load i18n %}
+<li class="notification-box-list bg-white {{ notification.read|yesno:'read,unread' }}" data-nf-id="{{ notification.id }}" id="nf-{{ notification.id }}">
+    <div class="row">
+        {% block notification %}
+                <div class="col-lg-3 col-sm-3 col-3 text-center">
+                    <img src="/demo/man-profile.jpg" class="w-50 rounded-circle">
+                </div>
+                <div class="col-lg-7 col-sm-7 col-7">
+                    {% blocktrans with actor_url=notification.actor_url actor=notification.actor verb=notification.verb%}
+                    <strong class="text-info">{{ actor }}</strong>
+                    <div>
+                        {{ verb }}
+                    </div>
+                    {% endblocktrans %}
+                    <small class="text-warning">{% blocktrans with created=notification.created|timesince %}Hace {{created}}.{% endblocktrans %}</small>
+                </div>
+                <div class="col-lg-2 col-sm-2 col-2">
+                    <button data-id="{{ notification.id }}" class="mark-notification"
+                    data-mark-action="{{ notification.read|yesno:'unread,read' }}"
+                    data-toggle-text="Mark as {{ notification.read|yesno:_('read,unread') }}">
+
+                    Mark as {{ notification.read|yesno:'unread,read' }}
+
+                    </button>
+                    <button class="delete-notification" data-id="{{ notification.id }}">X</button>
+                </div>
+        {% endblock notification %}
+    </div>
+</li>

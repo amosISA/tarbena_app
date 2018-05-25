@@ -12,12 +12,9 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   configuration
-   apps
-   project commands
-   multiple requirements files
-   admin documentation
-
+   installation
+   architecture
+   deployment
 
 Indices and tables
 ==================

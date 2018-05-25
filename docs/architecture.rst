@@ -141,7 +141,10 @@ django-notify-x
     python manage.py migrate notify
     python manage.py collectstatic
 
-**Important**: The notify application has in his models the verb to 50 limit character, just change it to TextField instead of CharField. And then do::
+.. warning::
+     ``notify`` application has in his models the verb to 50 limit character, just change it to TextField instead of CharField.
+
+About the warning you can do::
 
     # Lib/site-packages/notify/models.py
     verb = models.TextField(verbose_name=_('Verb of the action'))

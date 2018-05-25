@@ -6,7 +6,7 @@ About the app
 
 | Each Town Hall in small towns needs to be introduced to new technologies. So for my people (Tárbena/Alicante) I have decided to make an application that suits their needs.
 
-| The sole purpose of ``django-notify-x`` is to add a *facebook-like* notification system functionality and give you the ability to control | everything.
+| The sole purpose of ``tarbena_app`` is to add a *graphical user interface* system functionality and give you the ability to control | everything.
 
 **The key features of Tarbena apps are**:
 

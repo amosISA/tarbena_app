@@ -19,9 +19,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'tarbena'
-copyright = '2018, tarbena'
-author = 'tarbena'
+project = 'tarbena_app'
+copyright = '2018, Amos Lucian Isaila'
+author = 'Amos Lucian Isaila'
 
 # The short X.Y version
 version = ''

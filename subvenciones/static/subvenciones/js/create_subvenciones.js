@@ -51,7 +51,6 @@ $j(document).ready(function(){
             return 'Are you sure you want to leave?'
     };
 
-
     // Hide comments user
     $('#id_comments-0-user').hide();
 });
@@ -78,7 +77,9 @@ function businessDays(days) {
         }
 
         for (var j = 0; j < holidays.length; j++) {
-            if (holidays[j] == dataFormated ) {
+            if (holidays[j] == dataFormated) {
+                console.log("holidays: "+holidays[j]);
+                console.log("data: "+dataFormated);
                 dataTemp.setDate(dataTemp.getDate() + 1);
             }
         }

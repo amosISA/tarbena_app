@@ -43,3 +43,8 @@ What is the doc directory about?
             And when we modify our rst just run inside docs the following command to have the pretty
             design inside of our build directory:
                 make html (in windows: .\make.bat html)
+
+        Add my docs to readthedocs.io:
+            - Create account there
+            - Pin project from github and webhook him
+            - And we ready to go!

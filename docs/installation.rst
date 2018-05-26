@@ -24,7 +24,7 @@ Requirements
 Get ready (Windows)
 ---------
 - Download `python <https://www.python.org/downloads/>`_
-- Install pip. For windows we get it `here <https://bootstrap.pypa.io/get-pip.py>`_
+- Install ``pip``. For windows we get it `here <https://bootstrap.pypa.io/get-pip.py>`_
 - Create an environment variable for pip::
 
     setx PATH "%PATH%;C:\Python27\Scripts"
@@ -39,8 +39,8 @@ Get ready (Windows)
     Scripts/activate => windows
     source bin/activate => linux
 
-- Install Django with pip
-- Install MySQL::
+- Install ``Django`` with pip
+- Install ``MySQL``::
 
     For Python 2.7:
     Download it here: http://www.codegood.com/download/10/

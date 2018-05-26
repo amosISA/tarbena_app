@@ -53,7 +53,7 @@ Create Subvencion
 | Here for the formset field (contenido) I used markdown editor (added his configuration into settings):
 | `Django markdown editor <https://github.com/agusmakmun/django-markdown-editor>`_
 
-In my custom template the editor didnt't work as expected so in my base.html I had to add the following urls::
+In my custom template the editor didn't work as expected so in my base.html I had to add the following urls::
 
     <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
     <link href="{% static 'plugins/css/semantic.min.css' %}" type="text/css" media="all" rel="stylesheet" />
@@ -113,20 +113,19 @@ smart-select
         default=''
     )
 
-| App error
+.. warning::
+    In Lib/site-packages/smart_selects/static/smart_selects/admin/js/chainedfk.js has a problem, all his methods should be defined
+    as object so I copy the new js from here:
+    `new chainedfk.js <https://github.com/RafaDias/django-smart-selects/blob/61f182f4e56fa7f7eb1ca2fbf0fb922bb25c8a0e/smart_selects/static/smart-selects/admin/js/chainedfk.js>`_
 
-In Lib/site-packages/smart_selects/static/smart_selects/admin/js/chainedfk.js has a problem, all his methods should be defined
-as object so I copy the new js from here:
-`new chainedfk.js <https://github.com/RafaDias/django-smart-selects/blob/61f182f4e56fa7f7eb1ca2fbf0fb922bb25c8a0e/smart_selects/static/smart-selects/admin/js/chainedfk.js>`_
+    | And I copy it to my root static project so when I git pull to my production server I have it solved:
+    | static/smart-selects/admin/js/chainedfk.js
 
-| And I copy it to my root static project so when I git pull to my production server I have it solved:
-| static/smart-selects/admin/js/chainedfk.js
+    And finally into my create.html and edit.html template I import them like this::
 
-And finally into my create.html and edit.html template I import them like this::
-
-    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
-    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedm2m.js' %}"></script>
-    <script type="text/javascript" src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
+        <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
+        <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedm2m.js' %}"></script>
+        <script type="text/javascript" src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
 
 My old functionality is from here: `old functionality <https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html>`_
 
@@ -165,11 +164,11 @@ About the warning you can do::
 
 Project commands
 ----------------
-To start the Python interactive interpreter with Django, using your settings/local.py settings file::
+To start the Python interactive interpreter with Django, using your ``settings/local.py`` settings file::
 
     python manage.py shell --settings=tarbena.settings.local
 
-To run the local development server with your settings/local.py settings file::
+To run the local development server with your ``settings/local.py`` settings file::
 
     python manage.py runserver --settings=tarbena.settings.local
 
@@ -190,7 +189,7 @@ Export my production database password and then get it or save it in a secure fo
 
 
 
-Save my SECREY_KEY in a secure file in the production server::
+Save my ``SECREY_KEY`` in a secure file in the production server::
 
     >>> from django.core.signing import Signer
     >>> signer = Signer()

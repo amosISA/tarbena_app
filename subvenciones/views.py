@@ -164,7 +164,7 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
 
         # Notify
         notify.send(self.request.user, recipient=self.request.user, actor=self.request.user,
-                    verb='subvención, %s' % (form.cleaned_data.get('nombre')), obj=self.object,
+                    verb='subvención', obj=self.object, target=self.object,
                     nf_type='create_subvencion')
 
         messages.success(self.request, 'Subvención añadida correctamente!')

@@ -163,7 +163,8 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
         # Redireccionamos a la ventana del listado de subvenciones con el mensaje de éxito
 
         # Notify
-        notify.send(self.request.user, recipient=self.request.user, actor=self.request.user,
+        users = User.objects.all()
+        notify.send(self.request.user, recipient_list=list(users), actor=self.request.user,
                     verb='subvención', obj=self.object, target=self.object,
                     nf_type='create_subvencion')
 
@@ -207,6 +208,13 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
         self.object = form.save()
         comments_formset.instance = self.object
         comments_formset.save()
+
+        # Notify
+        users = User.objects.all()
+        notify.send(self.request.user, recipient_list=list(users), actor=self.request.user,
+                    verb='subvención', obj=self.object, target=self.object,
+                    nf_type='edit_subvencion')
+
         messages.success(self.request, 'Subvención actualizada correctamente!')
         return HttpResponseRedirect(self.get_success_url())
 
@@ -242,6 +250,11 @@ class SubvencionDeleteView(LoginRequiredMixin, DeleteView):
 
     def post(self, request, *args, **kwargs):
         if self.request.POST.get("confirm_delete"):
+            # Notify
+            users = User.objects.all()
+            notify.send(self.request.user, recipient_list=list(users), actor=self.request.user,
+                        verb='subvención, %s' % (self.get_object()), nf_type='delete_subvencion')
+
             # when confirmation page has been displayed and confirm button pressed
             self.get_object().delete()
             messages.success(self.request, 'Subvención eliminada correctamente!')

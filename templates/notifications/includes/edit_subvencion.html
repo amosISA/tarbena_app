@@ -3,11 +3,11 @@
     {% block notification %}
         {% if notification.target %}
             {% blocktrans with actor_url=notification.actor_url actor=notification.actor verb=notification.verb target=notification.target target_url=notification.target_url%}
-                Crear: {{ verb }}, <a target="_blank" href="{{ target_url }}">{{ target }}</a>, <i><b>{{ actor }}.</b></i>
+                Editar: {{ verb }}, <a target="_blank" href="{{ target_url }}">{{ target }}</a>, <i><b>{{ actor }}.</b></i>
             {% endblocktrans %}
         {% else %}
             {% blocktrans with actor_url=notification.actor_url actor=notification.actor verb=notification.verb%}
-            Crear: {{ verb }}, <i><b>{{ actor }}.</b></i>
+            Editar: {{ verb }}, <i><b>{{ actor }}.</b></i>
             {% endblocktrans %}
         {% endif %}
         <span class="timesince"><small class="timestamp">{% blocktrans with created=notification.created|timesince %}Hace {{created}}.{% endblocktrans %}</small></span>

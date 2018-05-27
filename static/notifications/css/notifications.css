@@ -11,6 +11,7 @@
 .dropdown-menu .notification-box-list {
     height: 294px;
     padding: 5px;
+    overflow: auto;
 }
 .dropdown-menu .notif-button-close {
     padding: 0;

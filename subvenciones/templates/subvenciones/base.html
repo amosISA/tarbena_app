@@ -68,6 +68,11 @@
                     }
                 }
             });
+
+            /* Avoid notification menu to close on click inside him */
+            $('.dropdown-menu').on("click.bs.dropdown", function (e) {
+                e.stopPropagation(); e.preventDefault();
+            });
         </script>
 
         {% block addscript %}

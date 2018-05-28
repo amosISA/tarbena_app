@@ -34,7 +34,7 @@ $(document).ready(function() {
                     {extend: 'print', orientation: 'landscape', pageSize: 'LEGAL'}
                 ]
             }
-        ]
+        ],
     });
     $('#search-on-navigation').keyup(function(){
           oTable.search($(this).val()).draw();

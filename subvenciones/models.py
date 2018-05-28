@@ -40,7 +40,7 @@ class Estado(TimeStampedModel):
                        args=[self.slug])
 
     def count_subsidies(self):
-        return Subvencion.objects.filter(estado=self.etapa)
+        return Subvencion.objects.filter(estado=self.id).count()
 
 class Colectivo(models.Model):
     nombre = models.CharField(max_length=250)

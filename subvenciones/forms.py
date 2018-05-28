@@ -58,3 +58,16 @@ class CommentForm(forms.ModelForm):
         fields = ['user', 'contenido']
 
 CommentFormSet = inlineformset_factory(Subvencion, Comment, form=CommentForm, extra=1, can_delete=False)
+
+class IndexSelectsForm(forms.ModelForm):
+    """
+    Form that I use in index to filter with chained select (ente, area)
+    """
+    class Meta:
+        model = Subvencion
+        fields = ['ente', 'area']
+        exclude = ('user','inicio','fin','estado','se_relaciona_con',
+                   'responsable','colectivo', 'nombre', 'procedimiento',
+                   'bases', 'solicitud', 'cuantia_inicial', 'cuantia_final',
+                   'descripcion', 'drive', 'gestiona_expediente',
+                   'nombre_carpeta_drive', 'likes')

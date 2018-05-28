@@ -14,8 +14,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .forms import SubvencionForm, CommentFormSet
-from .models import Subvencion, Estado, Colectivo, Area
+from .forms import SubvencionForm, CommentFormSet, IndexSelectsForm
+from .models import Subvencion, Estado, Colectivo, Area, Ente
 from notify.signals import notify
 
 # --------------- Index: List Subvenciones --------------- #
@@ -23,8 +23,12 @@ from notify.signals import notify
 def index_subvenciones(request, estado_slug=None):
     """ List subvenciones """
 
+    form = IndexSelectsForm(request.POST or None)
+
     estado, area, user = None, None, None
     estados = Estado.objects.all().annotate(number_stats=Count('subvencion'))
+    entes = Ente.objects.all()
+    areas = Area.objects.all()
 
     # If is superuser: list all subsidies, if not, only the related to the respective user
     if request.user.is_superuser:
@@ -61,6 +65,9 @@ def index_subvenciones(request, estado_slug=None):
                    'area': area,
                    'user': user,
                    'estados': estados,
+                   'entes': entes,
+                   'areas': areas,
+                   'form': form,
                    'subvenciones': subvenciones,
                    'days_until_estado': days_until_estado,
                    'total_subvenciones': total_subvenciones,

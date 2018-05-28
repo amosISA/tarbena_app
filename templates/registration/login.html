@@ -9,50 +9,68 @@
 {% endblock %}
 
 {% block content %}
-    <div class="login">
-        {% if form.errors %}
-            <ul class="notice erros">
-                Compruebe que su nombre y contraseña sean correctas o, puede que su
-                cuenta no esté activada (compruebe su email).
-            </ul>
-        {% endif %}
+    <div>
+        <div class="login">
+            {% if form.errors %}
+                <ul class="notice erros">
+                    Compruebe que su nombre y contraseña sean correctas o, puede que su
+                    cuenta no esté activada (compruebe su email).
+                </ul>
+            {% endif %}
 
-        {% if next %}
-            <ul class="notice erros">
-                {% if user.is_authenticated %}
-                    Your account doesn't have access to this page. To proceed,
-                    please login with an account that has access.
-                {% else %}
-                    Para ver esta página debe registrarse.
-                {% endif %}
-            </ul>
-        {% endif %}
+            {% if next %}
+                <ul class="notice erros">
+                    {% if user.is_authenticated %}
+                        Your account doesn't have access to this page. To proceed,
+                        please login with an account that has access.
+                    {% else %}
+                        Para ver esta página debe registrarse.
+                    {% endif %}
+                </ul>
+            {% endif %}
 
-        <img class="tar_logo" height="75" width="208" src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="Tarbena logo">
+            <div class="login_content">
+                <a href="#" class="login_content_header">
+                    <img class="login_content_logo" src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="Tarbena logo">
+                </a>
 
-        <form name="tar_login_form" class="vertical-form sign-in" method="post" action="{% url 'login' %}" accept-charset="UTF-8">
-            {% csrf_token %}
+                <div class="login_content_div_form">
+                    <form class="login_content_form" method="post" action="{% url 'login' %}" accept-charset="UTF-8">
+                        {% csrf_token %}
 
-            <legend>
-                Log In
-            </legend>
+                        <div class="form_block_input form_block_input_error">
+                            <div class="form-block-inner-wrapper" style="width:100%;">
+                                <input id="user_name" type="text" name="username" required placeholder="Nombre" autofocus label="false">
+                            </div>
+                        </div>
+                        <div class="form_block_input form_block_input_error">
+                            <div class="form-block-inner-wrapper" style="width:100%;">
+                                <input id="user_password" type="password" name="password" required placeholder="Contraseña" autocomplete="off" label="false">
+                            </div>
+                        </div>
 
-            <input id="user_name" class="input_username_login" type="text" name="username" placeholder="Nombre" autofocus label="false">
-            <input id="user_password" class="input_password_login" type="password" name="password" placeholder="Contraseña" autocomplete="off" label="false">
-            <input class="login_form_submit_button" type="submit" value="Log in">
-            <input type="hidden" name="next" value="{{ next }}" />
+                        <!-- Forgot Password -->
+                        <div class="login_content_form_options">
+                            <a href="{% url 'password_reset' %}">Olvidé mi contraseña</a>
+                        </div>
 
-            <!-- Forgot Password -->
-            <p>
-                <a href="{% url 'password_reset' %}">Olvidé mi contraseña</a>
-            </p>
-        </form>
+                        <button class="login_btn" type="submit">Log in</button>
+                        <input type="hidden" name="next" value="{{ next }}" />
 
-        <div class="footer">
-            <p>
-                ¿No dispone de una cuenta?
-                <a href="{% url 'register' %}" class="auth_page_signup">Crea una cuenta</a>
-            </p>
+                        <div class="login_content_form_tos" data-reactid="55">
+                            Al proceder, acepto las
+                            <a href="/terms" target="_blank" data-reactid="57">Condiciones de Uso </a>y la
+                            <a href="/privacy" target="_blank" data-reactid="59">Política de Privacidad</a>
+                            de Tárbena
+                        </div>
+
+                        <div class="login_content_form_signup_hint">
+                            ¿No dispone de una cuenta?
+                            <a href="{% url 'register' %}" class="login_content_signup_btn">Crea una cuenta</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

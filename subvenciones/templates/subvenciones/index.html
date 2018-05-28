@@ -42,27 +42,6 @@
             {% endif %}
 
             {% if subvenciones %}
-                <!-- Filter options -->
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col">
-                            <select name="estado" class="form-control" id="filter_table_estado">
-                                <option value="">Estado</option>
-                                {% for estado in estados %}
-                                    <option value="{{ estado.id }}">{{ estado.nombre }} ({{ estado.count_subsidies }})</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col">
-                            {{ form.ente|htmlattributes:"class:form-control" }}
-                        </div>
-                        <div class="col">
-                            {{ form.area|htmlattributes:"class:form-control" }}
-                        </div>
-                    </div>
-                </div>
-                <!-- End Filter options -->
-
                 <table id="subv_table_ordering" class="table" width="100%">
                     <thead class="thead-subv-table">
                         <tr class="table-active">

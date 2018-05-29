@@ -1,1 +1,82 @@
-<h1>privacy</h1>
+{% extends "home/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Política de privacidad
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+<div>
+    <div>
+        <div>
+            <span style="font-size:0;"></span>
+            <div class="custom-home-navbar custom-home-navbar--fixed">
+                <div class="custom-home-navbar__left">
+                    <a href="#" class="custom-home-navbar__logo">
+                        <img class="custom-home-navbar__logo__img" src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="Tarbena logo">
+                    </a>
+                    <div class="custom-home-navbar__menus">
+                        <ul class="custom-home-navbar__left__ul">
+                            <li class="custom-home-navbar__li menu">
+                                <a href="{% url 'login' %}" class="custom-home-navbar__li__anchor">Entra</a>
+                            </li>
+                            <li class="custom-home-navbar__li menu">
+                                <a href="{% url 'register' %}" class="custom-home-navbar__li__anchor">Regístrate</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="custom-home-navbar__right">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="rights-tarbena main">
+                <div class="rights-tarbena content">
+                    <div class="rights-tarbena">
+                        <div class="rights-tarbena md">
+                            <h1>Tarbena's web Privacy Policy</h1>
+                            <p>This Privacy Policy was last modified on May 29, 2018.</p>
+                            <p>This page informs you of our policies regarding the collection, use, and disclosure of personal information we receive from users of the Site.</p>
+                            <p>We use your personal information only for providing services and improving the Site. By using the Site, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, accessible at <a href="{% url 'terms' %}">terms</a>.</p>
+                            <h2>1. Information We Collect and Receive</h2>
+                            <h3>1.1 Information You Give Us</h3>
+                            <p>This is information you actively give us while taking certain actions on our Site, such as creating an account, filling out your profile.</p>
+                            <p>While using our Site, we may ask you to provide us with certain pieces of personally identifiable information that can be used to contact or identify you. Personally identifiable information ("personal information" or “personal data”) may include, but is not limited to, your name, email address, profile photo, and payment information.</p>
+                            <p>Through use of the Site, you may also provide us with data that is not personally identifiable (“non-identifying data”). This includes additional profile information, such as: your expertise, timezone, and language.</p>
+                            <h3>1.2 Information We Automatically Collect from Your Use of the Platform</h3>
+                            <p>In addition to information provided by you, we also collect information when you use the Platform, including usage information and log data.</p>
+                            <p><strong>Usage Information</strong><br>
+                            When you use the Site, we collect information about your interactions with the Platform, such as session history, pages viewed, subsidies liked.</p>
+                            <p><strong>Log Data and Device Information</strong><br>
+                            Like many site operators, we collect information that your browser sends whenever you visit our Site ("Log Data"). This Log Data may include information such as your computer's Internet Protocol ("IP") address, browser type, browser version, the pages of our Site that you visit, the time and date of your visit, the time spent on those pages, and other statistics.</p>
+                            <p><strong>Cookies</strong><br>
+                            Cookies are files with small amounts of data, which may include an anonymous unique identifier. Cookies are sent to your browser from a website and stored on your computer's hard drive. Like many sites, we use "cookies" to collect information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Site.</p>
+                            <h2>2. Use of Personal Information</h2>
+                            <h3>2.1 How We Use Personal Information</h3>
+                            <ul>
+                            <li><strong>To send emails and other communications.</strong> We may use your email, name, and other information to send you notification emails and important Site and Account reminders.</li>
+                            <li><strong>To investigate and help prevent security issues and abuse.</strong></li>
+                            <li><strong>To maintain and display your public profile.</strong>
+                            <li><strong>For marketing and promotional purposes.</strong> We may display targeted marketing and promotional messaging to promote our Services or Site. This includes, but is not limited to, emails, in-app notifications, web and browser notifications, and displays.</li>
+                            </ul>
+                            <h3>2.2 Disclosure of Personal Information to Third-Party Services</h3>
+                            <p>We may disclose your personal information to third-party services who act as our service providers or advertising partners. For example, we may provide your email address to Sendgrid, our email and newsletter service provider, in order to send you notifications and other emails.</p>
+                            <h2>3. Updating and Deleting Your Information</h2>
+                            <p>If you wish to update your account or profile information, you can do so from your Account Settings and Profile page (accessed from the dropdown menu at the top right of your dashboard.)</p>
+                            <p>When you delete your account from Account Settings, we remove all personal data we have on record, including your name, email, photo, social profiles, IP. This means all account deletions are permanent. We may retain some personal data for a period of time, as required by law.</p>
+                            <h2>4. Changes To This Privacy Policy</h2>
+                            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on the Site. You are advised to review this Privacy Policy periodically for any changes.</p>
+                            <h2>5. Contact Us</h2>
+                            <p>If you have any questions about this Privacy Policy, please <a href="mailto:amosisa700@gmail.com">contact us</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

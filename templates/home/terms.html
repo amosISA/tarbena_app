@@ -1,0 +1,80 @@
+{% extends "home/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Condiciones de uso
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+<div>
+    <div>
+        <div>
+            <span style="font-size:0;"></span>
+            <div class="custom-home-navbar custom-home-navbar--fixed">
+                <div class="custom-home-navbar__left">
+                    <a href="#" class="custom-home-navbar__logo">
+                        <img class="custom-home-navbar__logo__img" src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="Tarbena logo">
+                    </a>
+                    <div class="custom-home-navbar__menus">
+                        <ul class="custom-home-navbar__left__ul">
+                            <li class="custom-home-navbar__li menu">
+                                <a href="{% url 'login' %}" class="custom-home-navbar__li__anchor">Entra</a>
+                            </li>
+                            <li class="custom-home-navbar__li menu">
+                                <a href="{% url 'register' %}" class="custom-home-navbar__li__anchor">Regístrate</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="custom-home-navbar__right">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="rights-tarbena main">
+                <div class="rights-tarbena content">
+                    <h3 class="rights-tarbena">
+                        <span class="rights-tarbena title">Tárbena Terms of Service ("Agreement")</span>
+                        <span class="rights-tarbena privacy-ref">
+                            /
+                            <a href="{% url 'privacy' %}" class="rights-tarbena">Privacy Policy</a>
+                        </span>
+                    </h3>
+                    <p class="rights-tarbena">
+                        <em class="rights-tarbena">This Agreement was last modified on May 29, 2018.</em>
+                    </p>
+                    <div class="rights-tarbena">
+                        <div class="rights-tarbena md">
+                            <p>Please read these Terms of Service ("<strong>Agreement</strong>", "<strong>Terms of Service</strong>") carefully before using Tarbena's web. This Agreement sets forth the legally binding terms and conditions for your use of the Site at Tarbena's web.</p>
+                            <p>The Site is a platform where are hosted many apps that help people in my town (Tárbena/Alicante, Spain) to solve their daily needs. Our role is to facilitate the availability of the Site and the services provided by Tarbena's web.</p>
+                            <p>By accessing or using the Site in any manner, including, but not limited to, visiting or browsing the Site or contributing content or other materials to the Site, you agree to be bound by these Terms of Service. Capitalized terms are defined in this Agreement.</p>
+                            <p><strong>1. Code of Conduct</strong></p>
+                            <p>In using our Site and Services, you agree to follow our Code of Conduct. Violations of our Code of Conduct may result in the immediate&nbsp;<strong>removal of your access to this site and/or restrictions on your access to our services</strong>.</p>
+                            <p>In general, maintaining civility in communication is encouraged. If you encounter someone who is negatively affecting your platform experience by either spamming you or insulting you, please report the user immediately.</p>
+                            <p>We reserve the right to hide and/or remove any content on our site that may be illegal, unlawful, or unethical.</p>
+                            <p><strong>2. Termination</strong></p>
+                            <p>We may terminate your access to the Site, without cause or notice, which may result in the forfeiture and destruction of all information associated with you. All provisions of this Agreement that by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity, and limitations of liability.</p>
+                            <p><strong>3. Limitation of Liability</strong></p>
+                            <p>By using our Services, you agree that Tarbena's web will not be liable for any indirect, incidental, special or consequential damages, loss of revenue, loss of data or emotional distress resulting from your use of the Site or services. We do not promise that the content/tutorials on our site are error-free.</p>
+                            <p><strong>4. Links To Other Sites</strong></p>
+                            <p>Our Site may contain links to third-party sites that are not owned or controlled by Tarbena's web.</p>
+                            <p>Trademarks of third-party sites, such as names and logos, may be used on our site to identify the sites. We do not claim any ownership of those names, slogans, or logos.</p>
+                            <p>Tarbena's web has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party sites or services. We strongly advise you to read the terms and conditions and privacy policy of any third-party site that you visit.</p>
+                            <p><strong>5. Governing Law</strong></p>
+                            <p>This Agreement (and any further rules, policies, or guidelines incorporated by reference) shall be governed and construed in accordance with the laws of Spain, without giving effect to any principles of conflicts of law.</p>
+                            <p><strong>6. Changes To This Agreement</strong></p>
+                            <p>We reserve the right, at our sole discretion, to modify or replace these Terms of Service by posting the updated terms on the Site. Your continued use of the Site after any such changes constitutes your acceptance of the new Terms of Service.<br>
+                            Please review this Agreement periodically for changes. If you do not agree to any of this Agreement or any changes to this Agreement, do not use, access or continue to access the Site or discontinue any use of the Site immediately.</p>
+                            <p><strong>Contact Us</strong></p>
+                            <p>If you have any questions about this Agreement, please <a href="mailto:amosisa700@gmail.com">contact us</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -21,8 +21,8 @@
             {% if next %}
                 <ul class="notice erros">
                     {% if user.is_authenticated %}
-                        Your account doesn't have access to this page. To proceed,
-                        please login with an account that has access.
+                        Su cuenta no tiene acceso a esta página. Para proceder,
+                        haga login con una cuenta que si dispone de tal permiso.
                     {% else %}
                         Para ver esta página debe registrarse.
                     {% endif %}
@@ -38,12 +38,12 @@
                     <form class="login_content_form" method="post" action="{% url 'login' %}" accept-charset="UTF-8">
                         {% csrf_token %}
 
-                        <div class="form_block_input form_block_input_error">
+                        <div class="form_block_input">
                             <div class="form-block-inner-wrapper" style="width:100%;">
                                 <input id="user_name" type="text" name="username" required placeholder="Nombre" autofocus label="false">
                             </div>
                         </div>
-                        <div class="form_block_input form_block_input_error">
+                        <div class="form_block_input">
                             <div class="form-block-inner-wrapper" style="width:100%;">
                                 <input id="user_password" type="password" name="password" required placeholder="Contraseña" autocomplete="off" label="false">
                             </div>
@@ -59,8 +59,8 @@
 
                         <div class="login_content_form_tos" data-reactid="55">
                             Al proceder, acepto las
-                            <a href="/terms" target="_blank" data-reactid="57">Condiciones de Uso </a>y la
-                            <a href="/privacy" target="_blank" data-reactid="59">Política de Privacidad</a>
+                            <a href="{% url 'terms' %}" target="_blank" data-reactid="57">Condiciones de Uso </a>y la
+                            <a href="{% url 'privacy' %}" target="_blank" data-reactid="59">Política de Privacidad</a>
                             de Tárbena
                         </div>
 

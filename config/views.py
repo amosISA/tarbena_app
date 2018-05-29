@@ -25,3 +25,10 @@ class RegisterView(CreateView):
         if self.request.user.is_authenticated():
             return HttpResponseRedirect(reverse('index'))
         return super(RegisterView, self).dispatch(*args, **kwargs)
+
+# --------------- Terms and Privacy --------------- #
+def terms_privacy(request, name):
+    template_name = 'home/%s.html' % name
+    return render(request,
+                  template_name,
+                  {})

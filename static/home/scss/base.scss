@@ -101,15 +101,6 @@ a {
       border: solid 1px #e6e6e6;
       font-size: 16px;
     }
-
-    //.form_block_input_error {
-    //  border: solid 1px #ff7142;
-    //  background-color: #fff5f2;
-    //
-    //  &:focus {
-    //    border: solid 1px #ff7142;
-    //  }
-    //}
   }
 
   input[type="text"]:required, input[type="password"]:required { box-shadow: none; }
@@ -151,6 +142,8 @@ a {
     border: none;
     text-shadow: none;
     letter-spacing: 0;
+
+    &:hover { background: #00b088; }
   }
 
   button {
@@ -176,9 +169,76 @@ a {
       margin-left: 5px;
     }
   }
+
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: inherit;
+    color: inherit;
+  }
+
+  h3, .h3 {
+    font: { size: 24px; }
+  }
+
+  h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  p { margin: 0 0 10px; }
+  strong { font-weight: 600; }
+  blockquote { border-left: 5px solid #eee; }
+
+  ul {
+    list-style: none;
+    margin: 0;
+  }
+
+  /* Navbar custom */
+  .custom-home-navbar--fixed {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 500;
+  }
+  .custom-home-navbar {
+    min-height: 60px;
+    display: flex;
+    justify-content: space-between;
+    -webkit-font-smoothing: antialiased;
+    background-image: linear-gradient(285deg,#006080,#006181 47%,#003648);
+    box-shadow: 0 1px 3px 0 rgba(51,51,51,0.2), 0 1px 3px 0 rgba(51,51,51,0.2);
+  }
+  .custom-home-navbar__left {
+    display: flex;
+    align-items: center;
+  }
+  .custom-home-navbar__right {
+    display: flex;
+    align-items: center;
+  }
+  .custom-home-navbar__logo {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+  }
+  .custom-home-navbar__logo__img {
+    height: 20px;
+  }
+  .custom-home-navbar__menus {
+    align-items: center;
+    padding: 0;
+    margin-left: 14px;
+    height: 100%;
+  }
+  .custom-home-navbar__right > div {
+    height: 100%;
+  }
 }
 
-/* Errors */
+/* Login Errors */
 ul.notice {
   background-color: #EDE04D;
   color: #212200;
@@ -194,4 +254,95 @@ ul.notice {
 }
 ul.notice li {
   padding: 5px 0;
+}
+
+/* Terms and privacy */
+.main.rights-tarbena {
+  display: block;
+  height: 100%;
+  background-color: #e9eaec;
+  padding-top: 50px;
+}
+
+.content.rights-tarbena {
+  margin: 35px auto 80px auto;
+  width: 90%;
+  max-width: 1070px;
+  line-height: 24px;
+  font-family: 'Open Sans';
+  font-size: 14px;
+  color: #5f6366;
+  border-radius: 2px;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 0px #ddd;
+  background: #fff;
+  padding: 20px;
+}
+
+.title.rights-tarbena {
+  font-weight: 600;
+  color: #073648;
+}
+.privacy-ref.rights-tarbena {
+  font-size: 14px;
+}
+.md.rights-tarbena blockquote {
+  border-style: none;
+  font-size: 14px;
+  padding: 0 0 0 40px;
+  margin-bottom: 10px;
+}
+.md.rights-tarbena ul {
+  margin-bottom: 10px;
+}
+.md.rights-tarbena >ul {
+  padding-left: 65px;
+}
+.md.rights-tarbena li {
+  list-style-type: disc;
+}
+.md.rights-tarbena li p {
+    margin-bottom: 0px;
+}
+
+/* Custom Navbar */
+ul.custom-home-navbar__left__ul {
+  list-style: none;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+ul.custom-home-navbar__left__ul a { text-decoration: none; }
+ul.custom-home-navbar__left__ul li {
+  list-style: none;
+  margin: 0;
+}
+.menu.custom-home-navbar__li {
+  position: relative;
+  height: 100%;
+  font-size: 14px;
+}
+.menu.custom-home-navbar__li>a.custom-home-navbar__li__anchor {
+  height: 100%;
+  display: flex;
+  padding: 23px 16px 22px;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  color: #ffffff;
+  font-weight: normal;
+}
+.menu.custom-home-navbar__li>a.custom-home-navbar__li__anchor span { margin-left: 4px; }
+span.custom-home-navbar__li__anchor__span {
+  display: inline-flex;
+}
+span.custom-home-navbar__li__anchor__span i {
+  width: 14px;
+  height: 14px;
+  -webkit-box-pack: center;
+  justify-content: center;
+  align-items: center;
 }

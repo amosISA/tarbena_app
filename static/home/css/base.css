@@ -78,6 +78,8 @@ a {
     font-size: 16px; }
   .home_container input[type="text"]:required, .home_container input[type="password"]:required {
     box-shadow: none; }
+  .home_container input[type="text"]:focus, .home_container input[type="password"]:focus {
+    border: solid 1px #00b5e2; }
   .home_container input[type="text"], .home_container input[type="password"] {
     height: auto;
     line-height: initial;

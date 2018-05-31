@@ -104,6 +104,7 @@ a {
   }
 
   input[type="text"]:required, input[type="password"]:required { box-shadow: none; }
+  input[type="text"]:focus, input[type="password"]:focus { border: solid 1px #00b5e2; }
   input[type="text"], input[type="password"] {
     height: auto;
     line-height: initial;

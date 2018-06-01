@@ -4,9 +4,10 @@
 {% load martortags %}
 
 {% block stylesheets %}
+    <style>input[type=checkbox] { margin: 2px 0 0 -15px !important; }</style>
     <!-- Martor - Markdown editor for comments -->
     <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
-    <!--<link href="{% static 'plugins/css/semantic.min.css' %}" type="text/css" media="all" rel="stylesheet" />-->
+    <link href="{% static 'plugins/css/semantic.min.css' %}" type="text/css" media="all" rel="stylesheet" />
     <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet" />
     <link href="{% static 'martor/css/martor.min.css' %}" type="text/css" media="all" rel="stylesheet" />
 {% endblock %}
@@ -190,7 +191,11 @@
                             <div id="id_comentarios" disabled rows="12" cols="20" class="form-control">
                                 {% if subvencion.comments.all %}
                                     {% for comment in subvencion.comments.all %}
-                                        <span class="comment_user_date">{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</span>: {{ comment.contenido|safe_markdown }}
+                                        {% if comment.contenido %}
+                                            <span class="comment_user_date">{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</span>: {{ comment.contenido|safe_markdown }}
+                                        {% else %}
+                                            No hay comentarios para esta subvención.
+                                        {% endif %}
                                     {% endfor %}
                                 {% else %}
                                     No hay comentarios para esta subvención.
@@ -246,7 +251,7 @@
       integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
       crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static 'plugins/js/ace.js' %}"></script>
-    <!--<script type="text/javascript" src="{% static 'plugins/js/semantic.min.js' %}"></script>-->
+    <script type="text/javascript" src="{% static 'plugins/js/semantic.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'plugins/js/mode-markdown.js' %}"></script>
     <script type="text/javascript" src="{% static 'plugins/js/ext-language_tools.js' %}"></script>
     <script type="text/javascript" src="{% static 'plugins/js/theme-github.js' %}"></script>

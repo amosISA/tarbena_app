@@ -1009,3 +1009,9 @@ table.mceLayout, textarea.tinyMCE {
   margin-left:5px;
   margin-top:2px;
 }
+
+/* Comentarios field overflow */
+#id_comentarios {
+  height: 200px;
+  overflow: auto;
+}

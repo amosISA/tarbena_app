@@ -159,7 +159,11 @@
                             <label for="id_comentarios">Comentarios:</label>
                             <div id="id_comentarios" disabled rows="12" cols="20" class="form-control">
                                 {% for comment in subvencion.comments.all %}
-                                    <span class="comment_user_date">{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</span>: {{ comment.contenido|safe_markdown }}
+                                    {% if comment.contenido %}
+                                        <span class="comment_user_date">{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</span>: {{ comment.contenido|safe_markdown }}
+                                    {% else %}
+                                            No hay comentarios para esta subvención.
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                         </div>

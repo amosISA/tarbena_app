@@ -50,7 +50,7 @@ class SubvencionForm(forms.ModelForm):
             'responsable': forms.CheckboxSelectMultiple(),
             'colectivo': forms.CheckboxSelectMultiple(),
         }
-        exclude = ('user',)
+        exclude = ('user', 'likes',)
 
 class CommentForm(forms.ModelForm):
     class Meta:

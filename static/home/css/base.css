@@ -46,7 +46,7 @@ a {
   .home_container .auth-page_logotype {
     width: 120px;
     display: block;
-    margin: auto auto 30px; }
+    margin: auto auto 20px; }
   .home_container .login {
     min-height: 100vh;
     background-image: linear-gradient(to top, #000e40, #245160 50%, #2a7b97);

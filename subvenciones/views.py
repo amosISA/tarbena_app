@@ -15,7 +15,7 @@ from django.views.decorators.http import require_POST
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .forms import SubvencionForm, CommentFormSet, IndexSelectsForm
-from .models import Subvencion, Estado, Colectivo, Area, Ente
+from .models import Subvencion, Estado, Colectivo, Area, Ente, Comment
 from notify.signals import notify
 
 # --------------- Index: List Subvenciones --------------- #
@@ -169,6 +169,11 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
         comments_formset.save()
         # Redireccionamos a la ventana del listado de subvenciones con el mensaje de éxito
 
+        # If comments are saved without content, they are deleted
+        for comment in Comment.objects.all():
+            if not comment.contenido:
+                comment.delete()
+
         # Notify
         users = User.objects.all()
         notify.send(self.request.user, recipient_list=list(users), actor=self.request.user,
@@ -215,6 +220,11 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
         self.object = form.save()
         comments_formset.instance = self.object
         comments_formset.save()
+
+        # If comments are saved without content, they are deleted
+        for comment in Comment.objects.all():
+            if not comment.contenido:
+                comment.delete()
 
         # Notify
         users = User.objects.all()

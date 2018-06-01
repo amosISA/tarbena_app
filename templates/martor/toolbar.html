@@ -1,0 +1,22 @@
+{% load i18n %}
+<div class="ui right floated item martor-toolbar">
+  <div class="ui basic tiny icon buttons no-border">
+    <div class="ui icon button no-border markdown-selector markdown-bold" title="{% trans 'Bold' %} (Ctrl+B)">
+      <i class="bold icon"></i>
+    </div>
+    <div class="ui icon button no-border markdown-selector markdown-italic" title="{% trans 'Italic' %} (Ctrl+I)">
+      <i class="italic icon"></i>
+    </div>
+
+    <div class="ui icon button no-border markdown-selector markdown-link" title="{% trans 'URL/Link' %} (Ctrl+L)">
+      <i class="linkify icon"></i>
+    </div>
+    <div class="ui icon button no-border markdown-selector markdown-direct-mention" title="{% trans 'Direct Mention a User' %} (Ctrl+M)">
+      <i class="at icon"></i>
+    </div>
+
+    <div class="ui icon button no-border markdown-selector markdown-help" title="{% trans 'Markdown Guide (Help)' %}">
+      <i class="help circle icon"></i>
+    </div>
+  </div>
+</div>

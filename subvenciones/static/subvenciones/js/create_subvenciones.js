@@ -33,13 +33,7 @@ $j(document).ready(function(){
             $j('.id_date_fin_anchors_bussines_day').remove();
         }
     });
-
-
-    // Make estado and ayuntamiento selected by default
-    // $j('#id_estado option[value="4"]').attr("selected",true);
-    // $j('#id_colectivo_1').prop('checked', true);
-
-
+    
     // Unsaved changes leaving page
     var form = $j('#some-form'),
     original = form.serialize();

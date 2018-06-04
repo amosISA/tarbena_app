@@ -211,7 +211,7 @@ MARTOR_SEARCH_USERS_URL = '/martor/search-user/' # default
 
 # Markdown Extensions
 MARTOR_MARKDOWN_BASE_EMOJI_URL = 'https://assets-cdn.github.com/images/icons/emoji/' # default
-MARTOR_MARKDOWN_BASE_MENTION_URL = 'https://python.web.id/author/' # default (change this)
+MARTOR_MARKDOWN_BASE_MENTION_URL = '#' # default (change this)
 
 # Check this setting is not set else csrf will not be sent over ajax calls
 CSRF_COOKIE_HTTPONLY = False

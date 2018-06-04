@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from bs4 import BeautifulSoup
 from django.core import serializers
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -13,10 +14,12 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.utils.module_loading import import_string
+from notify.signals import notify
 
 from .forms import SubvencionForm, CommentFormSet, IndexSelectsForm
 from .models import Subvencion, Estado, Colectivo, Area, Ente, Comment
-from notify.signals import notify
+from src.config.settings.base import MARTOR_MARKDOWNIFY_FUNCTION
 
 # --------------- Index: List Subvenciones --------------- #
 @login_required()
@@ -158,16 +161,18 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
             return self.form_invalid(form, comments_formset)
 
     def form_valid(self, form, comments_formset):
-        # Aquí ya guardamos el object de acuerdo a los valores del formulario de Subvención
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object = form.save()
-        # Utilizamos el atributo instance del formset para asignarle el valor del objeto Subvención creado y que nos indica el modelo Foráneo
-        # Es decir, al model Comment se le relaciona la subvención
         comments_formset.instance = self.object
-        # Finalmente guardamos el formset para que tome los valores que tiene
+
+        comments_formset.save(commit=False)
+        for f in comments_formset:
+            contenido = f.cleaned_data.get("contenido")
+            if contenido:
+                # Notify comment
+                markdown_find_mentions(self.request.POST['comments-0-contenido'], self.request.user, self.object)
         comments_formset.save()
-        # Redireccionamos a la ventana del listado de subvenciones con el mensaje de éxito
 
         # If comments are saved without content, they are deleted
         for comment in Comment.objects.all():
@@ -219,6 +224,13 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form, comments_formset):
         self.object = form.save()
         comments_formset.instance = self.object
+
+        comments_formset.save(commit=False)
+        for f in comments_formset:
+            contenido = f.cleaned_data.get("contenido")
+            if contenido:
+                # Notify comment
+                markdown_find_mentions(self.request.POST['comments-0-contenido'], self.request.user, self.object)
         comments_formset.save()
 
         # If comments are saved without content, they are deleted
@@ -226,7 +238,7 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
             if not comment.contenido:
                 comment.delete()
 
-        # Notify
+        # Notify update subvencion
         users = User.objects.all()
         notify.send(self.request.user, recipient_list=list(users), actor=self.request.user,
                     verb='subvención', obj=self.object, target=self.object,
@@ -239,6 +251,33 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
         messages.error(self.request, 'Error en la actualización de la subvención')
         return self.render_to_response(self.get_context_data(form=form,
                                                              comments_formset=comments_formset))
+
+def markdown_find_mentions(markdown_text, user, object):
+    """
+    To find the users that mentioned
+    on markdown content using `BeautifulShoup`.
+
+    input  : `markdown_text` or markdown content.
+    return : `list` of usernames.
+    """
+    markdownify = import_string(MARTOR_MARKDOWNIFY_FUNCTION)
+    mark = markdownify(markdown_text)
+    soup = BeautifulSoup(mark, 'html.parser')
+    markdown_users = list(set(
+        username.text[1::] for username in
+        soup.findAll('a', {'class': 'direct-mention-link'})
+    ))
+
+    all_users = User.objects.all()
+    notify_list_users = []
+    for a in all_users:
+        if a.username in markdown_users:
+            for o in User.objects.all().filter(username=a):
+                notify_list_users.append(o)
+
+    return notify.send(user, recipient_list=list(notify_list_users), actor=user,
+                verb='comentarios', obj=object, target=object,
+                nf_type='mention')
 
 @login_required()
 # --------------- Subsidie Details --------------- #

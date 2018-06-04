@@ -1,0 +1,19 @@
+{% load i18n %}
+<div data-nf-id="{{ notification.id }}" id="nf-{{ notification.id }}" class="notification alert alert-info {{ notification.read|yesno:'read,unread' }}">
+    {% block notification %}
+        {% if notification.target %}
+            {% blocktrans with actor_url=notification.actor_url actor=notification.actor verb=notification.verb target=notification.target target_url=notification.target_url%}
+                Comentarios: has sido mencionado en la subvención: <a target="_blank" href="{{ target_url }}">{{ target }}</a>, por <i><b>{{ actor }}.</b></i>
+            {% endblocktrans %}
+        {% else %}
+            {% blocktrans with actor_url=notification.actor_url actor=notification.actor verb=notification.verb%}
+            Comentarios: has sido mencionado por <i><b>{{ actor }}.</b></i>
+            {% endblocktrans %}
+        {% endif %}
+        <span class="timesince"><small class="timestamp">{% blocktrans with created=notification.created|timesince %}Hace {{created}}.{% endblocktrans %}</small></span>
+    {% endblock notification %}
+
+    <button type="button" class="close delete-notification" data-dismiss="alert" aria-label="Close" data-id="{{ notification.id }}">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

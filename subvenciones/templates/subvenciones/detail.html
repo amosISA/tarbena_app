@@ -65,6 +65,12 @@
                             <input type="text" value="{{ subvencion.nombre_carpeta_drive }}" id="id_nombre_carpeta_drive" class="form-control" readonly>
                         </div>
 
+                        <!-- Impreso -->
+                        <div class="form-check title-create_post wrapper-impreso" style="text-align:justify;font-weight:bold;">
+                            <input type="checkbox" {% if subvencion.impreso %}checked{% endif %} onclick="return false;" id="id_impreso" class="form-check-input" readonly>
+                            <label for="id_impreso">Impreso</label>
+                        </div>
+
                         <!-- Ente -->
                         <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
                             <label for="id_ente">Ente:</label>

@@ -120,6 +120,9 @@ class Subvencion(TimeStampedModel):
     gestiona_expediente = models.CharField(max_length=250, blank=True, null=True)
     nombre_carpeta_drive = models.TextField(blank=True, null=True)
 
+    # Impreso o no
+    impreso = models.BooleanField(default=False)
+
     se_relaciona_con = models.ManyToManyField('self', blank=True, default='')
     colectivo = models.ManyToManyField(Colectivo, blank=True)
 

@@ -7,14 +7,16 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import transaction
 from django.db.models import Count, Q
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
+from django.template import loader
+from django.utils.module_loading import import_string
 from django.views.decorators.http import require_POST
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.utils.module_loading import import_string
 from notify.signals import notify
 
 from .forms import SubvencionForm, CommentFormSet, IndexSelectsForm
@@ -170,8 +172,17 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
         for f in comments_formset:
             contenido = f.cleaned_data.get("contenido")
             if contenido:
-                # Notify comment
-                markdown_find_mentions(self.request.POST['comments-0-contenido'], self.request.user, self.object)
+                # Notify and email comment
+                location = reverse("subvenciones:subvencion_detail", kwargs={'id': self.object.pk})
+                url = self.request.build_absolute_uri(location)
+                markdown_find_mentions(self.request.POST['comments-0-contenido'],
+                                       self.request.user,
+                                       self.request.user.username,
+                                       self.object.nombre,
+                                       self.request.user.email,
+                                       self.object,
+                                       url)
+
         comments_formset.save()
 
         # If comments are saved without content, they are deleted
@@ -229,8 +240,17 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
         for f in comments_formset:
             contenido = f.cleaned_data.get("contenido")
             if contenido:
-                # Notify comment
-                markdown_find_mentions(self.request.POST['comments-0-contenido'], self.request.user, self.object)
+                # Notify and email comment
+                location = reverse("subvenciones:subvencion_detail", kwargs={'id':self.object.pk})
+                url = self.request.build_absolute_uri(location)
+                markdown_find_mentions(self.request.POST['comments-0-contenido'],
+                                       self.request.user,
+                                       self.request.user.username,
+                                       self.object.nombre,
+                                       self.request.user.email,
+                                       self.object,
+                                       url)
+
         comments_formset.save()
 
         # If comments are saved without content, they are deleted
@@ -252,10 +272,12 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
         return self.render_to_response(self.get_context_data(form=form,
                                                              comments_formset=comments_formset))
 
-def markdown_find_mentions(markdown_text, user, object):
+def markdown_find_mentions(markdown_text, user, user_username, name_subv, mail, object, url):
     """
     To find the users that mentioned
     on markdown content using `BeautifulShoup`.
+
+    Also send email to users that have been mentioned.
 
     input  : `markdown_text` or markdown content.
     return : `list` of usernames.
@@ -270,10 +292,31 @@ def markdown_find_mentions(markdown_text, user, object):
 
     all_users = User.objects.all()
     notify_list_users = []
+    email_list_users = []
     for a in all_users:
         if a.username in markdown_users:
             for o in User.objects.all().filter(username=a):
                 notify_list_users.append(o)
+
+                if o.email:
+                    email_list_users.append(o.email)
+
+    html_message = loader.render_to_string(
+        'subvenciones/subv_email_create.html',
+        {
+            'name_actor': user_username,
+            'name_subv': name_subv,
+            'object': object,
+            'url': url
+        }
+    )
+
+    send_mail('Gestión de subvenciones',
+              '',
+              mail,
+              email_list_users,  # recievers
+              html_message=html_message
+    )
 
     return notify.send(user, recipient_list=list(notify_list_users), actor=user,
                 verb='comentarios', obj=object, target=object,

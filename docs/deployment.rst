@@ -19,9 +19,3 @@ Override verb character limit to TextField::
     verb = models.TextField(verbose_name=_('Verb of the action'))
     python manage.py makemigrations
     python manage.py migrate
-
-Martor (markdown) app
----------------------
-Override mention href::
-
-     # Lib/site-packages/martor/extensions/mention.py

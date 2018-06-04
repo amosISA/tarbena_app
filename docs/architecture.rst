@@ -76,6 +76,50 @@ In my custom template the editor didn't work as expected so in my base.html I ha
 
 | Datatables functionality to list subvenciones into the index.html
 
+Notify user comment
+"""""""""""""""""""
+For notifying the comments where user names appear I used this function:
+
+.. code-block:: python
+
+    def markdown_find_mentions(markdown_text, user, object):
+        """
+        To find the users that mentioned
+        on markdown content using `BeautifulShoup`.
+
+        input  : `markdown_text` or markdown content.
+        return : `list` of usernames.
+        """
+        markdownify = import_string(MARTOR_MARKDOWNIFY_FUNCTION)
+        mark = markdownify(markdown_text)
+        soup = BeautifulSoup(mark, 'html.parser')
+        markdown_users = list(set(
+            username.text[1::] for username in
+            soup.findAll('a', {'class': 'direct-mention-link'})
+        ))
+
+        all_users = User.objects.all()
+        notify_list_users = []
+        for a in all_users:
+            if a.username in markdown_users:
+                for o in User.objects.all().filter(username=a):
+                    notify_list_users.append(o)
+
+        return notify.send(user, recipient_list=list(notify_list_users), actor=user,
+                    verb='comentarios', obj=object, target=object,
+                    nf_type='mention')
+
+And then in the Created and UpdatedView in the formset:
+
+.. code-block:: python
+
+    comments_formset.save(commit=False)
+        for f in comments_formset:
+            contenido = f.cleaned_data.get("contenido")
+            if contenido:
+                # Notify comment
+                markdown_find_mentions(self.request.POST['comments-0-contenido'], self.request.user, self.object)
+        comments_formset.save()
 
 Parcelas
 ^^^^^^^^

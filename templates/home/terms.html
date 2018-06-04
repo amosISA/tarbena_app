@@ -11,28 +11,9 @@
 {% block content %}
 <div>
     <div>
-        <div>
-            <span style="font-size:0;"></span>
-            <div class="custom-home-navbar custom-home-navbar--fixed">
-                <div class="custom-home-navbar__left">
-                    <a href="#" class="custom-home-navbar__logo">
-                        <img class="custom-home-navbar__logo__img" src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="Tarbena logo">
-                    </a>
-                    <div class="custom-home-navbar__menus">
-                        <ul class="custom-home-navbar__left__ul">
-                            <li class="custom-home-navbar__li menu">
-                                <a href="{% url 'login' %}" class="custom-home-navbar__li__anchor">Entra</a>
-                            </li>
-                            <li class="custom-home-navbar__li menu">
-                                <a href="{% url 'register' %}" class="custom-home-navbar__li__anchor">Regístrate</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="custom-home-navbar__right">
-                </div>
-            </div>
-        </div>
+
+        {% include 'home/snippets/navbar.html' %}
+
         <div>
             <div class="rights-tarbena main">
                 <div class="rights-tarbena content">
@@ -75,6 +56,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 {% endblock %}

@@ -40,16 +40,16 @@ a {
   .home_container img:not(:root) {
     overflow: hidden; }
   .home_container .login_content_logo {
-    width: 40px;
+    width: 60px;
     display: block;
     margin: auto auto 7px; }
   .home_container .auth-page_logotype {
-    width: 120px;
+    width: 200px;
     display: block;
     margin: auto auto 20px; }
   .home_container .login {
     min-height: 100vh;
-    background-image: linear-gradient(to top, #000e40, #245160 50%, #2a7b97);
+    background-image: linear-gradient(to top, #003040, #003648 50%, #065773);
     -webkit-font-smoothing: antialiased;
     font-size: 14px;
     padding-bottom: 24px; }
@@ -180,8 +180,11 @@ a {
     align-items: center;
     margin-left: 20px; }
   .home_container .custom-home-navbar__logo__img {
-    height: 20px; }
+    height: 40px; }
   .home_container .custom-home-navbar__menus {
+    flex: 1;
+    display: flex;
+    -webkit-box-pack: justify;
     align-items: center;
     padding: 0;
     margin-left: 14px;

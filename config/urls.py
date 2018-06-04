@@ -62,9 +62,10 @@ urlpatterns = [
     # Notify activity system
     url(r'^notifications/', include('notify.urls', 'notifications')),
 
-    # Terms and Privacy
-    url(r'^terms/$', views.terms_privacy, {'name':'terms'}, name='terms'),
-    url(r'^privacy/$', views.terms_privacy, {'name':'privacy'}, name='privacy'),
+    # Terms, Privacy and Cookies
+    url(r'^terms/$', views.terms_privacy_cookies, {'name':'terms'}, name='terms'),
+    url(r'^privacy/$', views.terms_privacy_cookies, {'name':'privacy'}, name='privacy'),
+    url(r'^cookies/$', views.terms_privacy_cookies, {'name':'cookies'}, name='cookies'),
 ]
 
 if settings.DEBUG:

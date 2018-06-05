@@ -2,59 +2,99 @@
 {% load staticfiles %}
 {% load tags %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'home/css/register.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+{% endblock %}
+
 {% block title %}
-    Tárbena
+    Regístrate
 {% endblock %}
 
 {% block navbar %}
 {% endblock %}
 
 {% block content %}
-    <div class="login">
-        {% if form.errors %}
-            <ul class="notice erros">
-                {% for field in form %}
-                    {% if field.errors %}
-                        - {{ field.errors|striptags }}<br />
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        {% endif %}
+    <div>
+        <div class="register">
+            <div class="register_content">
+                <div class="register__signup">
+                    <form class="form-block" method="post" accept-charset="UTF-8">
+                        {% csrf_token %}
 
-        <img class="tar_logo" height="75" width="208" src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="Tarbena logo">
-        
-        <form name="tar_register_form" class="vertical-form register" method="post" accept-charset="UTF-8">
-            {% csrf_token %}
+                        <div class="form-block__header">
+                            <img class="register_logo_icon" src="{% static 'home/img/favicon/register/logoTarbenaSubvencionesicon.png' %}" alt="Tarbena logo">
+                            <img class="register_logotype" src="{% static 'home/img/favicon/register/ajuntament.png' %}" alt="Ajuntament logo">
+                        </div>
 
-            <legend>
-                Crear cuenta
-            </legend>
+                        {% if form.errors %}
+                            <div class="register_error-message">
+                                {% for field in form %}
+                                    {% if field.errors %}
+                                        - {{ field.errors|striptags }}<br />
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
 
-            {{ form.username|htmlattributes:"placeholder: Usuario" }}
-            {{ form.email|htmlattributes:"placeholder: Email" }}
-            {{ form.first_name|htmlattributes:"placeholder: Nombre" }}
-            {{ form.last_name|htmlattributes:"placeholder: Isaila" }}
-            {{ form.password1|htmlattributes:"placeholder: Contraseña" }}
-            {{ form.password2 }}
-            <input class="register_form_submit_button" type="submit" value="Registrar">
+                        <div class="form-block__input">
+                            {{ form.username.label_tag }}
+                            <div class="form-block__inner-wrapper">
+                                {{ form.username }}
+                            </div>
+                        </div>
 
-            <!-- Terms -->
-            <p class="terms">
-                Registrándote aceptas los <a href="#">Términos del Servicio</a> y la <a href="#">Política de Privacidad</a>.
-            </p>
-        </form>
+                        <div class="form-block__input">
+                            {{ form.email.label_tag }}
+                            <div class="form-block__inner-wrapper">
+                                {{ form.email }}
+                            </div>
+                        </div>
 
-        <div class="footer">
-            <p>
-                ¿Ya dispone de una cuenta?
-                <a href="{% url 'login' %}" class="auth_page_signin">Log in</a>
-            </p>
+                        <div class="form-block__input">
+                            {{ form.first_name.label_tag }}
+                            <div class="form-block__inner-wrapper">
+                                {{ form.first_name }}
+                            </div>
+                        </div>
+
+                        <div class="form-block__input">
+                            {{ form.last_name.label_tag }}
+                            <div class="form-block__inner-wrapper">
+                                {{ form.last_name }}
+                            </div>
+                        </div>
+
+                        <div class="form-block__input">
+                            {{ form.password1.label_tag }}
+                            <div class="form-block__inner-wrapper">
+                                {{ form.password1 }}
+                            </div>
+                        </div>
+
+                        <div class="form-block__input">
+                            {{ form.password2.label_tag }}
+                            <div class="form-block__inner-wrapper">
+                                {{ form.password2 }}
+                            </div>
+                        </div>
+
+                        <small class="register_small__footer">
+                            Registrándome, acepto las <a href="{% url 'terms' %}" target="_blank">Condiciones de Uso</a> y la <a href="{% url 'privacy' %}" target="_blank">Política de Privacidad</a>
+                        </small>
+
+                        <div class="register_action_submit">
+                            <button class="register_submit_button" type="submit">Registrar</button>
+                        </div>
+
+                        <div class="register_footer">
+                            ¿Dispone de una cuenta?
+                            <a href="{% url 'login' %}">Log in</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-{% endblock %}
-
-{% block domready %}
-    $('form').find("#id_password2").each(function(ev) {
-        $(this).attr("placeholder", "Confirmar contraseña");
-    });
 {% endblock %}

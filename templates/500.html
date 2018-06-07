@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+    {% load staticfiles %}
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <meta name="description" content="Tarbena web 500 error">
+        <meta name="author" content="Isaila Amos Lucian">
+        <meta name="generator" content="Django, PyCharm" />
+        <meta name="keywords" content="html, css, sass, python, jQuery, ajax, javascript" />
+
+        <!-- Favicon -->
+        <link rel="icon" href="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" type="image/x-icon"/>
+        <link href='https://fonts.googleapis.com/css?family=Helvetica' rel='stylesheet'>
+        <link rel="stylesheet" href="{% static 'home/css/404_500.css' %}">
+
+        <title>
+            {% block title %}500{% endblock %}
+        </title>
+    </head>
+    <body>
+        <div class="space">
+            <p style="font-size: 80px;">500</p>
+            <p>Página no disponible.</p>
+            <p>Lo sentimos, pero la página pedida no está disponible.</p>
+            <p>Los desarrolladores han sido notificados.</p>
+        </div>
+        <div class="credit">
+            <a href="#">Amos Lucian Isaila</a>
+        </div>
+        <footer>
+            <div class="support">
+                <p>Por favor <a href="mailto:amosisa700@gmail.com">contacta con nosotros</a> o vuelve a <a href="{% url 'index' %}">la aplicación</a>.</p>
+            </div>
+            <div>Copyright © <script>document.write(new Date().getFullYear())</script> Ajuntament de Tárbena. All rights reserved.</div>
+        </footer>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="{% static 'home/js/dots_background.js' %}"></script>
+</html>

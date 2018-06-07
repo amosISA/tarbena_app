@@ -8,7 +8,7 @@
             </a>
             <div class="custom-home-navbar__menus">
                 <ul class="custom-home-navbar__left__ul">
-                    {% if request.user.is_authenticated %}
+
                         <li class="custom-home-navbar__li menu">
                             <a href="{% url 'subvenciones:index' %}" class="custom-home-navbar__li__anchor">Subvenciones</a>
                         </li>
@@ -18,15 +18,22 @@
                         <li class="custom-home-navbar__li menu">
                             <a href="#" class="custom-home-navbar__li__anchor">Llaves</a>
                         </li>
-                    {% else %}
-                        <li class="custom-home-navbar__li menu">
-                            <a href="{% url 'login' %}" class="custom-home-navbar__li__anchor">Entra</a>
-                        </li>
-                        <li class="custom-home-navbar__li menu">
-                            <a href="{% url 'register' %}" class="custom-home-navbar__li__anchor">Regístrate</a>
-                        </li>
-                    {% endif %}
+
                 </ul>
+            </div>
+        </div>
+
+        <div class="custom-home-navbar__right">
+            <div>
+                <div class="custom-home-navbar__menus_toogle">
+                    <a href="#" class="setting-dropdown-icon">
+                        <span></span>
+                    </a>
+                </div>
+                <div class="custom-home-navbar__menus__links">
+                    <a href="{% url 'register' %}" class="custom-home-navbar__menus__link">REGÍSTRATE</a>
+                    <a href="{% url 'login' %}" class="custom-home-navbar__menus__link">ENTRA</a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,97 @@
+/*** Body ***/
+/************/
+body {
+  font-size: 0.8rem; }
+  body #map_canvas {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 200; }
+  body .actions_parcels {
+    position: absolute;
+    z-index: 300;
+    left: 30px;
+    top: 50px;
+    /*** GEOLOCATIONS ***/
+    /********************/ }
+    body .actions_parcels .accordion_for_card {
+      display: inline-block;
+      color: #fff !important;
+      background-color: #42abe5 !important;
+      font-size: 14px !important;
+      border: none;
+      padding: 8px 16px;
+      vertical-align: middle;
+      overflow: hidden;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      white-space: nowrap;
+      border-radius: 50%; }
+    body .actions_parcels #preloader {
+      display: block;
+      width: 50px;
+      height: 35px;
+      cursor: pointer; }
+    body .actions_parcels #card {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      vertical-align: middle;
+      line-height: 10px; }
+    body .actions_parcels .collapse {
+      visibility: hidden; }
+    body .actions_parcels .collapse.show {
+      visibility: visible;
+      display: block; }
+    body .actions_parcels .collapsing {
+      position: relative;
+      height: 0;
+      overflow: hidden;
+      -webkit-transition-property: height, visibility;
+      transition-property: height, visibility;
+      -webkit-transition-duration: 0.35s;
+      transition-duration: 0.35s;
+      -webkit-transition-timing-function: ease;
+      transition-timing-function: ease; }
+    body .actions_parcels .collapsing.width {
+      -webkit-transition-property: width, visibility;
+      transition-property: width, visibility;
+      width: 0;
+      height: auto; }
+    body .actions_parcels .form-check-parcel {
+      text-align: center;
+      font-size: 0.8rem;
+      margin-top: 10px;
+      margin-bottom: 10px; }
+      body .actions_parcels .form-check-parcel input {
+        width: 50px; }
+      body .actions_parcels .form-check-parcel button {
+        display: inline-block; }
+    body .actions_parcels .add_new_data {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      text-align: center; }
+      body .actions_parcels .add_new_data a {
+        color: #000;
+        text-decoration: none;
+        cursor: context-menu; }
+    body .actions_parcels .card {
+      font-size: 0.8rem !important;
+      display: none;
+      overflow: hidden; }
+      body .actions_parcels .card ul {
+        margin: 0;
+        padding: 0; }
+        body .actions_parcels .card ul li {
+          list-style-type: none;
+          text-align: left; }
+      body .actions_parcels .card .card-header {
+        height: 480px;
+        overflow: auto; }
+        body .actions_parcels .card .card-header li {
+          list-style-type: none; }
+
+/*# sourceMappingURL=base.css.map */

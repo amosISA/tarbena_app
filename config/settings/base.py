@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'admin_honeypot',
     'subvenciones',
+    'parcelas',
     'profiles',
     'martor',
     'smart_selects',

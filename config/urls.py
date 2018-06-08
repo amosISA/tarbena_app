@@ -32,6 +32,7 @@ urlpatterns = [
 
     #url(r'^profile/', include('profiles.urls', namespace='profiles')),
     url(r'^subvenciones/', include('subvenciones.urls', namespace='subvenciones')),
+    url(r'^parcelas/', include('parcelas.urls', namespace='parcelas')),
 
     # Entry point to main app: Index
     url(r'^$', views.index, name='index'),

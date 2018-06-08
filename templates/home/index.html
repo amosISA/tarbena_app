@@ -2,6 +2,11 @@
 {% load staticfiles %}
 {% load tags %}
 
+{% block stylesheets %}
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'home/css/index.css' %}">
+{% endblock %}
+
 {% block title %}
     Tárbena
 {% endblock %}
@@ -10,8 +15,39 @@
 {% endblock %}
 
 {% block content %}
-    <ul>
-        <li><a href="{% url 'subvenciones:index' %}">Subvenciones</a></li>
-        <li><a href="{% url 'parcelas:index' %}">Parcelas</a></li>
-    </ul>
+    <div class="entrypoint__content">
+        <h2>Aplicaciones</h2>
+
+        <div class="entrypoin_aplications_wrapper__seen entrypoin_aplications__wrapper">
+            <div class="aplications_details__cards">
+                <a href="{% url 'subvenciones:index' %}">
+                    <div class="application_cards__detail">
+                        <img src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="card">
+                        <div class="application_detail__title">Subvenciones</div>
+                        <div class="application_detail__body">
+                            Gestiona las subvenciones correspondiente a cada departamento.
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'parcelas:index' %}">
+                    <div class="application_cards__detail">
+                        <img src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="card">
+                        <div class="application_detail__title">Parcelas</div>
+                        <div class="application_detail__body">
+                            Busca las parcelas correspondiente al polígono respectivo. Descargue el KML correspondiente.
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="application_cards__detail">
+                        <img src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="card">
+                        <div class="application_detail__title">Llaves</div>
+                        <div class="application_detail__body">
+                            Sepa en cualquier momento quien ha utilizado las llaves, quien las tiene ...
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

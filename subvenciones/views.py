@@ -28,7 +28,7 @@ from src.config.settings.base import MARTOR_MARKDOWNIFY_FUNCTION
 def index_subvenciones(request, estado_slug=None):
     """ List subvenciones """
 
-    form = IndexSelectsForm(request.POST or None)
+    # form = IndexSelectsForm(request.POST or None)
 
     estado, area, user = None, None, None
     estados = Estado.objects.all().annotate(number_stats=Count('subvencion'))
@@ -72,7 +72,6 @@ def index_subvenciones(request, estado_slug=None):
                    'estados': estados,
                    'entes': entes,
                    'areas': areas,
-                   'form': form,
                    'subvenciones': subvenciones,
                    'days_until_estado': days_until_estado,
                    'total_subvenciones': total_subvenciones,

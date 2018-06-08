@@ -1,0 +1,130 @@
+/*** Body ***/
+/************/
+body {
+  font: {
+    size: 0.8rem;
+  }
+
+  #map_canvas {
+    height: 100%;
+    width: 100%;
+    top : 0; left : 0; position : absolute; z-index : 200;
+  }
+
+  .actions_parcels {
+    position : absolute; z-index : 300; left: 30px; top: 50px;
+
+    // Button for panel collapse
+    .accordion_for_card {
+      display: inline-block;
+      color: #fff!important;
+      background-color: #42abe5!important;
+      font-size: 14px!important;
+      border: none;
+      padding: 8px 16px;
+      vertical-align: middle;
+      overflow: hidden;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      white-space: nowrap;
+      border-radius: 50%;
+    }
+
+    /*** GEOLOCATIONS ***/
+    #preloader{
+      display: block;
+      width: 50px;
+      height: 35px;
+      cursor: pointer;
+    }
+    /********************/
+
+    #card {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      vertical-align: middle;
+      line-height: 10px;
+    }
+
+    .collapse {
+      visibility: hidden;
+    }
+    .collapse.show {
+      visibility: visible;
+      display: block;
+    }
+    .collapsing {
+      position: relative;
+      height: 0;
+      overflow: hidden;
+      -webkit-transition-property: height, visibility;
+      transition-property: height, visibility;
+      -webkit-transition-duration: 0.35s;
+      transition-duration: 0.35s;
+      -webkit-transition-timing-function: ease;
+      transition-timing-function: ease;
+    }
+    .collapsing.width {
+      -webkit-transition-property: width, visibility;
+      transition-property: width, visibility;
+      width: 0;
+      height: auto;
+    }
+
+    // Div for checking parcel with his number and number of poligon
+    .form-check-parcel {
+      text-align: center;
+      font: { size: 0.8rem; }
+      margin: {
+        top: 10px;
+        bottom: 10px;
+      }
+
+      input { width: 50px; }
+      button { display: inline-block; }
+    }
+
+    // Div for add new data to table: projects, sectors and parcels
+    .add_new_data {
+      margin: {
+        top: 10px;
+        bottom: 10px;
+      }
+      text-align: center;
+      a {
+        color: #000;
+        text-decoration: none;
+        cursor: context-menu;
+      }
+    }
+
+    // Accordion
+
+
+    .card {
+      font-size: 0.8rem!important;
+      display: none;
+      overflow: hidden;
+
+      ul {
+        margin: 0;
+        padding: 0;
+        li {
+          list-style-type: none;
+          text-align: left;
+        }
+      }
+
+      .card-header {
+        height: 480px;
+        overflow: auto;
+
+        li {
+          list-style-type: none;
+        }
+      }
+    }
+  }
+}

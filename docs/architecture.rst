@@ -123,6 +123,15 @@ And then in the Created and UpdatedView in the formset:
 
 Parcelas
 ^^^^^^^^
+Things you can do with this app:
+
+- Find parcels by polygon in my municipality
+- Add projects to your town hall (clean forests, roads ...)
+- Geolocation
+
+.. note::
+
+    You can download KML related to that parcel
 
 Django Honeypot
 ^^^^^^^^^^^^^^^
@@ -449,5 +458,3 @@ The one exception to the rule here is that, *when a release branch currently exi
     | This work-flow guide I brought it from:
     | `https://nvie.com/posts/a-successful-git-branching-model/ <https://nvie.com/posts/a-successful-git-branching-model/>`_
     | `http://aprendegit.com/que-es-git-flow/ <http://aprendegit.com/que-es-git-flow/>`_
-
-

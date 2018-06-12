@@ -18,6 +18,7 @@ Apps
 - **Django Admin Interface**: theme for Django Admin Panel
 - **smart-selects**: area-ente selects functionality
 - **django-notify-x**: django notification system activity
+- **django-markdown-editor**
 
 Authentication
 ^^^^^^^^^^^^^^
@@ -214,6 +215,36 @@ About the warning you can do::
     Verb: The activity.
     Object: The object on which activity was performed.
     Target: The object where activity was performed.
+
+django-markdown-editor (martor)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+App used to create comments related to each subvencion.
+Besides, it allows you to add mentions to users with a custom query and then send them an email.
+
+When you use in template::
+
+    comment.contenido|safe_markdown
+
+This has in `Lib/site-packages/martor/extensions/mentions.py` this code:
+
+.. code-block:: python
+
+        def handleMatch(self, m):
+        username = self.unescape(m.group(2))
+
+        """Makesure `username` is registered and actived."""
+        if MARTOR_ENABLE_CONFIGS['mention'] == 'true':
+            if username in [u.username for u in User.objects.exclude(is_active=False)]:
+                url = '{0}{1}/'.format(MARTOR_MARKDOWN_BASE_MENTION_URL, username)
+                el = markdown.util.etree.Element('a')
+                el.set('href', url)
+                el.set('class', 'direct-mention-link')
+                el.text = markdown.util.AtomicString('@' + username)
+                return el
+
+If you leave it like that you will have as many duplicated queries as mentions you have in that template. So to solve this, you just have to comment this line::
+
+    if username in [u.username for u in User.objects.exclude(is_active=False)]:
 
 Project commands
 ----------------

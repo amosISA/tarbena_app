@@ -72,7 +72,7 @@
                         </li>
 
                         <div class="notification-box-list">
-                            {% render_notifications using request.user.notifications.active for box %}
+                            {% user_notifications %}
                         </div>
 
                         <li class="footer bg-dark text-center">

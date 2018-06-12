@@ -110,10 +110,8 @@
                                 <td class="td4">
                                     <!-- Comentarios -->
                                     {% for comment in subvencion.comments.all %}
-                                        {% if comment.contenido %}
-                                            <span class="comment_user_date">{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</span>:
-                                            {{ comment.contenido|safe_markdown }}
-                                        {% endif %}
+                                        <span class="comment_user_date">{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</span>:
+                                        {{ comment.contenido|safe_markdown }}
                                     {% endfor %}
                                 </td>
                             </tr>

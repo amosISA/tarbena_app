@@ -28,18 +28,21 @@ from src.config.settings.base import MARTOR_MARKDOWNIFY_FUNCTION
 def index_subvenciones(request, estado_slug=None):
     """ List subvenciones """
 
-    # form = IndexSelectsForm(request.POST or None)
-
     estado, area, user = None, None, None
-    estados = Estado.objects.all().annotate(number_stats=Count('subvencion'))
-    entes = Ente.objects.all()
-    areas = Area.objects.all()
 
     # If is superuser: list all subsidies, if not, only the related to the respective user
     if request.user.is_superuser:
-        subvenciones = Subvencion.objects.extra(select={"day_mod": "date(fin)"}).order_by('day_mod')
+        subvenciones = Subvencion.objects.prefetch_related(
+            'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
+        ).select_related(
+            'user', 'estado', 'ente', 'area'
+        ).extra(select={"day_mod": "date(fin)"}).order_by('day_mod')
     else:
-        subvenciones = Subvencion.objects.all().filter(user=request.user)
+        subvenciones = Subvencion.objects.prefetch_related(
+            'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
+        ).select_related(
+            'user', 'estado', 'ente', 'area'
+        ).filter(responsable=request.user)
 
     total_subvenciones = Subvencion.objects.count()
     colectivos = Colectivo.objects.all()
@@ -47,7 +50,11 @@ def index_subvenciones(request, estado_slug=None):
 
     # Handle user favourites
     if request.path == '/subvenciones/favourites/':
-        subvenciones = Subvencion.objects.filter(likes__in=[request.user])
+        subvenciones = Subvencion.objects.prefetch_related(
+            'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
+        ).select_related(
+            'user', 'estado', 'ente', 'area'
+        ).filter(likes__in=[request.user])
     else:
         if estado_slug:
             if Estado.objects.filter(slug=estado_slug).exists():
@@ -60,7 +67,7 @@ def index_subvenciones(request, estado_slug=None):
                 user = get_object_or_404(User, username=estado_slug)
                 subvenciones = subvenciones.filter(responsable__username=user)
             else:
-                subvenciones = Subvencion.objects.all()
+                subvenciones = Subvencion.objects.prefetch_related('likes', 'colectivo', 'responsable').all()
 
     days_until_estado = ['7d', '6d', '5d', '4d', '3d', '2d', '1d', 'expires today', 'expired']
 
@@ -69,9 +76,6 @@ def index_subvenciones(request, estado_slug=None):
                   {'estado': estado,
                    'area': area,
                    'user': user,
-                   'estados': estados,
-                   'entes': entes,
-                   'areas': areas,
                    'subvenciones': subvenciones,
                    'days_until_estado': days_until_estado,
                    'total_subvenciones': total_subvenciones,
@@ -324,7 +328,11 @@ def markdown_find_mentions(markdown_text, user, user_username, name_subv, mail, 
 @login_required()
 # --------------- Subsidie Details --------------- #
 def subvencion_detail(request, id):
-    subvencion = get_object_or_404(Subvencion,
+    subvencion = get_object_or_404(Subvencion.objects.prefetch_related(
+                                                        'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
+                                                    ).select_related(
+                                                        'user', 'estado', 'ente', 'area'
+                                                    ),
                                    id=id)
     diputacion = Subvencion.objects.filter(se_relaciona_con=subvencion, ente__id=1)
     generalitat = Subvencion.objects.filter(se_relaciona_con=subvencion, ente__id=2)

@@ -1,0 +1,134 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+.home_container {
+  .user-profile {
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    background: #fff;
+  }
+
+  .user-profile__info-block {
+    position: relative;
+    z-index: 3;
+
+    .info-block__avatar {
+      position: relative;
+      display: inline-block;
+
+      .form-block__filepicker {
+        position: relative;
+        border-radius: 50%;
+        overflow: hidden;
+        display: inline-block;
+      }
+
+      .form-block__filepicker-preview {
+        width: 140px;
+        height: 140px;
+
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .form-block__filepicker-input--minimize, .form-block__filepicker-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.4);
+        color: #fff;
+        border: none;
+        padding: 0;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+      .form-block__filepicker-input--minimize:before, .form-block__filepicker-input:before {
+        font-family: FontAwesome;
+        content: "\f030";
+        display: inline-block;
+        margin-right: 5px;
+      }
+    }
+
+    .info-block__name-group {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 7px;
+
+      .info-block__name_user__text {
+        display: inline-block;
+        position: relative;
+        min-width: 340px;
+        border-bottom: solid 1px transparent;
+        padding: 20px 40px 8px;
+        font-size: 28px;
+        font-weight: bold;
+        line-height: 1.07;
+        color: #fff;
+      }
+    }
+  }
+
+  .user-profile__info-block__background-group {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+
+  .user-profile__info-block__background {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    filter: blur(10px);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+  }
+
+  .user-profile__info-block__mask {
+    width: 100%;
+    height: 100%;
+    background: #005774;
+    opacity: .9;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .user-profile__info-block__content {
+    padding: 120px 0 80px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: auto;
+  }
+
+  .user-profile__sticky-tab-bar {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.fa-times:before {
+  content: "\f00d";
+}

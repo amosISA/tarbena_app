@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     url(r'^panel/', admin.site.urls),
 
-    #url(r'^profile/', include('profiles.urls', namespace='profiles')),
+    url(r'^profile/', include('profiles.urls', namespace='profiles')),
     url(r'^subvenciones/', include('subvenciones.urls', namespace='subvenciones')),
     url(r'^parcelas/', include('parcelas.urls', namespace='parcelas')),
 

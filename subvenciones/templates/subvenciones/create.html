@@ -104,16 +104,21 @@
                             </div>
                         </div>
 
-                        <!-- Nombre carpeta drive -->
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            {{ form.nombre_carpeta_drive.label_tag }}
-                            {{ form.nombre_carpeta_drive|htmlattributes:"class:form-control" }}
-                        </div>
-
-                        <!-- Impreso -->
-                        <div class="form-check title-create_post wrapper-impreso" style="text-align:justify;font-weight:bold;">
-                            {{ form.impreso|htmlattributes:"class:form-check-input" }}
-                            {{ form.impreso.label_tag }}
+                        <div class="row">
+                            <div class="form-group col-md-7 title-create_post" style="text-align:justify;font-weight:bold;">
+                                <!-- Nombre carpeta drive -->
+                                <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                                    {{ form.nombre_carpeta_drive.label_tag }}
+                                    {{ form.nombre_carpeta_drive|htmlattributes:"class:form-control" }}
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5 title-create_post" style="text-align:justify;font-weight:bold;">
+                                <!-- Impreso -->
+                                <div class="form-check title-create_post wrapper-impreso" style="text-align:justify;font-weight:bold;">
+                                    {{ form.impreso|htmlattributes:"class:form-check-input" }}
+                                    {{ form.impreso.label_tag }}
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Ente -->

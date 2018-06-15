@@ -47,6 +47,16 @@ $j(document).ready(function(){
 
     // Hide comments user
     $('#id_comments-0-user').hide();
+
+    // Print or not print awesome icon
+    $("label[for='id_impreso']").append($('<i class="fas fa-ban" id="nested-checkbox-print"></i>')).addClass('nested-icon-check').text().slice(0, -1);
+    $("label[for='id_impreso']").click(function() {
+        if($(this).hasClass('nested-icon-check')){
+            $(this).removeClass('nested-icon-check').find($('#nested-checkbox-print').remove());
+        } else {
+            $(this).append($('<i class="fas fa-ban" id="nested-checkbox-print"></i>')).addClass('nested-icon-check');
+        }
+    });
 });
 
 function businessDays(days) {

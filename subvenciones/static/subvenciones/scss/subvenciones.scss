@@ -91,11 +91,15 @@ input[type=checkbox], input[type=radio] {
 
 #id_impreso + label { margin-top: 20px; }
 #id_impreso + label:before { content: "\f02f"; position: relative; } /* unchecked icon */
-#id_impreso + label:before { letter-spacing: 10px; font-size: 20px; } /* space between checkbox and label */
+#id_impreso + label:before { letter-spacing: 10px; font-size: 20px; color: #ddd; } /* space between checkbox and label */
 
 #nested-checkbox-print {
   position: absolute;
   top: 13px;
   left: 9.5px;
   font-size: 300%;
+}
+
+.nested-icon-check + label:before {
+  color: #000;
 }

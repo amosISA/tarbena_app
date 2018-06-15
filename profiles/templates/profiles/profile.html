@@ -1,0 +1,74 @@
+{% extends "home/base.html" %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'profiles/css/profiles.css' %}">
+{% endblock %}
+
+{% block title %}
+    {{ user.username }}
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+<div>
+    <div>
+
+        {% include 'home/snippets/navbar.html' %}
+
+        <div class="user-profile">
+            <!-- Image and Upload avatar -->
+            <div class="user-profile__info-block">
+                <div class="user-profile__info-block__background-group">
+                    <div class="user-profile__info-block__background" style="background-image: url('{% if user.profile.avatar  %}{{ user.profile.avatar.url }}{% else %}{% static 'home/img/avatar/default.png' %}{% endif %}');"></div>
+                    <div class="user-profile__info-block__mask"></div>
+                </div>
+                <div class="user-profile__info-block__content">
+                    <div class="info-block__avatar">
+                        <div class="form-block__filepicker">
+                            <div class="form-block__filepicker-preview">
+                                {% if user.profile.avatar %}
+                                    <img src="{{ user.profile.avatar.url }}" alt="User Image" />
+                                {% else %}
+                                    <img src="{% static 'home/img/avatar/default.png' %}" alt="User Image" />
+                                {% endif %}
+
+                                <div class="form-block__filepicker-reset">
+                                    <i class="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="form-block__filepicker-input--minimize">
+                                UPLOAD
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-block__name-group">
+                        <div class="info-block__name_user__text">
+                            <span>{{ user.get_full_name|title }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Navbar -->
+            <div>
+                <div style="padding-bottom:0px;"></div>
+                <div class="user-profile__sticky-tab-bar" style="transform: translateZ(0px);">
+                    <div>
+                        <div class="user_profile__tab-bar">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-profile__content-background">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -80,7 +80,8 @@ input[type=checkbox], input[type=radio] {
 /* unchecked icon */
 #id_impreso + label:before {
   letter-spacing: 10px;
-  font-size: 20px; }
+  font-size: 20px;
+  color: #ddd; }
 
 /* space between checkbox and label */
 #nested-checkbox-print {
@@ -88,5 +89,8 @@ input[type=checkbox], input[type=radio] {
   top: 13px;
   left: 9.5px;
   font-size: 300%; }
+
+.nested-icon-check + label:before {
+  color: #000; }
 
 /*# sourceMappingURL=subvenciones.css.map */

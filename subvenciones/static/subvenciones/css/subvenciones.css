@@ -1,3 +1,4 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 /* Delete subvencion wrapper */
 body .subv_delete_wrapper {
   width: 95%;
@@ -59,5 +60,33 @@ input[type=checkbox], input[type=radio] {
 @media (min-width: 992px) {
   .modal-lg {
     max-width: 1500px !important; } }
+/* Custom checkbox create/edit print */
+/*** custom checkboxes ***/
+#id_impreso {
+  display: none; }
+
+/* to hide the checkbox itself */
+#id_impreso + label:before {
+  font-family: FontAwesome;
+  display: inline-block; }
+
+#id_impreso + label {
+  margin-top: 20px; }
+
+#id_impreso + label:before {
+  content: "\f02f";
+  position: relative; }
+
+/* unchecked icon */
+#id_impreso + label:before {
+  letter-spacing: 10px;
+  font-size: 20px; }
+
+/* space between checkbox and label */
+#nested-checkbox-print {
+  position: absolute;
+  top: 13px;
+  left: 9.5px;
+  font-size: 300%; }
 
 /*# sourceMappingURL=subvenciones.css.map */

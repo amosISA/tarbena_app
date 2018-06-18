@@ -14,6 +14,11 @@
       border-radius: 50%;
       overflow: hidden;
       display: inline-block; }
+      .home_container .user-profile__info-block .info-block__avatar .form-block__filepicker a {
+        color: #fff; }
+        .home_container .user-profile__info-block .info-block__avatar .form-block__filepicker a:hover {
+          color: #fff;
+          text-decoration: none; }
     .home_container .user-profile__info-block .info-block__avatar .form-block__filepicker-preview {
       width: 140px;
       height: 140px; }
@@ -93,9 +98,25 @@
   z-index: 1;
   max-width: 860px;
   margin: auto; }
-.home_container .user-profile__sticky-tab-bar {
-  position: relative;
-  z-index: 2; }
+.home_container .user_profile_avatar__form .user_profile_avatar__div_submit {
+  align-items: center; }
+.home_container .user_profile_avatar__form .btn_update_user_avatar {
+  color: #fff;
+  background: #009fc6;
+  border-radius: 3px;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  font-size: 1em;
+  line-height: 1;
+  border: none;
+  text-transform: capitalize;
+  text-shadow: none;
+  letter-spacing: 0;
+  padding: 10px 20px;
+  display: inline-flex; }
+  .home_container .user_profile_avatar__form .btn_update_user_avatar:hover {
+    background-color: #0088c6; }
 
 .fa-times:before {
   content: "\f00d"; }

@@ -19,6 +19,11 @@
         border-radius: 50%;
         overflow: hidden;
         display: inline-block;
+
+        a {
+          color: #fff;
+          &:hover { color:#fff; text-decoration: none; }
+        }
       }
 
       .form-block__filepicker-preview {
@@ -123,9 +128,30 @@
     margin: auto;
   }
 
-  .user-profile__sticky-tab-bar {
-    position: relative;
-    z-index: 2;
+  .user_profile_avatar__form {
+    .user_profile_avatar__div_submit {
+      align-items: center;
+    }
+    .btn_update_user_avatar {
+      color: #fff;
+      background: #009fc6;
+      border-radius: 3px;
+      text-align: center;
+      outline: none;
+      cursor: pointer;
+      font-size: 1em;
+      line-height: 1;
+      border: none;
+      text-transform: capitalize;
+      text-shadow: none;
+      letter-spacing: 0;
+      padding: 10px 20px;
+      display: inline-flex;
+
+      &:hover {
+        background-color: #0088c6;
+      }
+    }
   }
 }
 

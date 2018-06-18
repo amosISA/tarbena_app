@@ -83,7 +83,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"> <i class="far fa-user"></i> {{ request.user.username|title }}</a>
+                    <a class="nav-link" href="{% url 'profiles:user_profile' username=request.user %}"> <i class="far fa-user"></i> {{ request.user.username|title }}</a>
                 </li>
             {% else %}
                 <li class="nav-link" class="nav-item">Bienvenido nuevo usuario. Por favor inicie sesión</li>

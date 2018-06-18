@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404
-from django.shortcuts import redirect, get_object_or_404
+from django.core.urlresolvers import reverse
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import redirect, get_object_or_404, render
 from django.views.generic import DetailView
 
 from .models import Profile
+from .forms import ProfileForm
 
 User = get_user_model()
 
@@ -37,3 +40,22 @@ class ProfileDetailView(LoginRequiredMixin ,DetailView):
         if username is None:
             raise Http404
         return get_object_or_404(User, username__iexact=username, is_active=True)
+
+# --------------- Edit User avatar --------------- #
+@login_required()
+def upload_avatar(request):
+    instance = Profile.objects.get(user=request.user)
+    form = ProfileForm(request.POST or None, request.FILES or None, instance=instance)
+
+    if request.method == "POST":
+        if form.is_valid():
+            image_avatar = request.FILES.get('avatar', False)
+            instance.avatar = image_avatar
+            instance.save()
+            return HttpResponseRedirect(reverse('profiles:user_profile', kwargs={'username': request.user}))
+
+    context = {
+        "instance": instance,
+        "form": form
+    }
+    return render(request, 'profiles/upload_avatar.html', context)

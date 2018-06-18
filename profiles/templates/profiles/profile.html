@@ -3,6 +3,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{% static 'profiles/css/profiles.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 {% endblock %}
 
 {% block title %}
@@ -39,26 +40,16 @@
                                     <i class="fa fa-times"></i>
                                 </div>
                             </div>
-                            <div class="form-block__filepicker-input--minimize">
-                                UPLOAD
-                            </div>
+                            <a id="triggerEvents" href="{% url 'profiles:upload_avatar' %}" data-toggle="modal" data-target="#open-modal">
+                                <div class="form-block__filepicker-input--minimize">
+                                    UPLOAD
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div class="info-block__name-group">
                         <div class="info-block__name_user__text">
                             <span>{{ user.get_full_name|title }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- User Navbar -->
-            <div>
-                <div style="padding-bottom:0px;"></div>
-                <div class="user-profile__sticky-tab-bar" style="transform: translateZ(0px);">
-                    <div>
-                        <div class="user_profile__tab-bar">
-
                         </div>
                     </div>
                 </div>
@@ -71,4 +62,39 @@
 
     </div>
 </div>
+
+<div id="open-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Actualiza tu avatar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block addscript %}
+    <script
+          src="https://code.jquery.com/jquery-3.3.1.js"
+          integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+          crossorigin="anonymous"></script>
+    <script src="http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block domready %}
+    $('#triggerEvents').on('click', function(e){
+        // Made the popup appear with the insert template
+        e.preventDefault();
+        $('#open-modal').modal('show').find('.modal-body').load($(this).attr('href'));
+    });
 {% endblock %}

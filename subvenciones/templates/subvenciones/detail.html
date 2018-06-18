@@ -2,6 +2,10 @@
 {% load staticfiles %}
 {% load martortags %}
 
+{% block stylesheets %}
+    <style>#id_impreso + label { margin-left: -4px!important; }</style>
+{% endblock %}
+
 {% block title %}
     Subs: {{ subvencion.nombre }}
 {% endblock %}
@@ -59,16 +63,18 @@
                             </div>
                         </div>
 
-                        <!-- Nombre carpeta drive -->
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            <label for="id_nombre_carpeta_drive">Nombre carpeta drive:</label>
-                            <input type="text" value="{{ subvencion.nombre_carpeta_drive }}" id="id_nombre_carpeta_drive" class="form-control" readonly>
-                        </div>
+                        <div class="row">
+                            <!-- Nombre carpeta drive -->
+                            <div class="form-group col-md-10 title-create_post" style="text-align:justify;font-weight:bold;">
+                                <label for="id_nombre_carpeta_drive">Nombre carpeta drive:</label>
+                                <input type="text" value="{{ subvencion.nombre_carpeta_drive }}" id="id_nombre_carpeta_drive" class="form-control" readonly>
+                            </div>
 
-                        <!-- Impreso -->
-                        <div class="form-check title-create_post wrapper-impreso" style="text-align:justify;font-weight:bold;">
-                            <input type="checkbox" {% if subvencion.impreso %}checked{% endif %} onclick="return false;" id="id_impreso" class="form-check-input" readonly>
-                            <label for="id_impreso">Impreso</label>
+                            <!-- Impreso -->
+                            <div class="form-group col-md-2 title-create_post wrapper-impreso" style="text-align:justify;font-weight:bold;">
+                                <input type="checkbox" {% if subvencion.impreso %}checked{% endif %} onclick="return false;" id="id_impreso" class="form-check-input" readonly>
+                                <label for="id_impreso" class="{% if subvencion.impreso %}nested-icon-check{% endif %}">Impreso</label>
+                            </div>
                         </div>
 
                         <!-- Ente -->

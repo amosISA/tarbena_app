@@ -3,4 +3,7 @@ $(document).ready(function() {
     $("select#id_responsable").attr('size', '10');
     var select_resp = document.getElementById('id_responsable');
     select_resp.size = select_resp.length;
+
+    // Print or not print awesome icon
+    $("label[for='id_impreso']").text('');
 });

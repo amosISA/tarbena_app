@@ -49,6 +49,7 @@ $j(document).ready(function(){
     $('#id_comments-0-user').hide();
 
     // Print or not print awesome icon
+    $("label[for='id_impreso']").text('');
     $("label[for='id_impreso']").click(function() {
         $(this).toggleClass('nested-icon-check');
     });

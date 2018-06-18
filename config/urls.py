@@ -39,7 +39,7 @@ urlpatterns = [
 
     # Login, Register, Activation email, reset, confirm Password
     url(r'^accounts/login/$', LoginView.as_view(redirect_authenticated_user=True), name='login'),
-    url(r'^logout/', logout, {'next_page': '/login/'}, name='logout'),
+    url(r'^logout/', logout, {'next_page': '/accounts/login/'}, name='logout'),
     url(r'^register/$', views.RegisterView.as_view(), name="register"),
     url(r'^activate/(?P<code>[a-z0-9].*)/$', activate_user_view, name='activate'),
     #url('^change-password/$', auth_views.password_change, {'post_change_redirect' : '/'}, name='password_change'),

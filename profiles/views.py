@@ -41,6 +41,16 @@ class ProfileDetailView(LoginRequiredMixin ,DetailView):
             raise Http404
         return get_object_or_404(User, username__iexact=username, is_active=True)
 
+    def get(self, request, *args, **kwargs):
+        """ If user want to access different profile, he will be redirected to his profile """
+
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        if self.request.user.username != self.kwargs.get('username'):
+            return(HttpResponseRedirect(reverse('profiles:user_profile', kwargs={'username': self.request.user})))
+        else:
+            return self.render_to_response(context)
+
 # --------------- Edit User avatar --------------- #
 @login_required()
 def upload_avatar(request):

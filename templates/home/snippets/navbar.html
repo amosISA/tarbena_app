@@ -25,6 +25,31 @@
 
         <div class="custom-home-navbar__right">
             <div>
+                {% if request.user.is_authenticated %}
+                    <div class="custom-home-navbar__user_avatar">
+                        <div>
+                            <div class="custom-home-navbar__avatar">
+                                <div class="custom__navbar__avatar avatar__img">
+                                    {% if user.profile.avatar %}
+                                        <img src="{{ user.profile.avatar.url }}" alt="User Image" class="custom_navbar_avatar__img" />
+                                    {% else %}
+                                        <img src="{% static 'home/img/avatar/default.png' %}" alt="User Image" class="custom_navbar_avatar__img" />
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="custom_navbar__avatar__dropdown">
+                                <a href="{% url 'profiles:user_profile' username=user.username %}" class="custom_navbar__avatar_box__link">
+                                    Mi perfil
+                                    <i class="fa fa-user"></i>
+                                </a>
+                                <a href="{% url 'logout' %}" class="custom_navbar__avatar_box__link">
+                                    Salir
+                                    <i class="fa fa-sign-out"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
                 <div class="custom-home-navbar__menus_toogle">
                     <a href="#" class="setting-dropdown-icon">
                         <span></span>

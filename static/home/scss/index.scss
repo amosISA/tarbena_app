@@ -41,6 +41,11 @@
       text-decoration: none;
     }
   }
+  @media (max-width: 810px) {
+    .aplications_details__cards {
+      display: block;
+    }
+  }
 
   .application_cards__detail {
     width: 250px;
@@ -60,6 +65,16 @@
       flex: none;
       width: 60px;
       height: 60px;
+    }
+  }
+  @media (max-width: 810px) {
+    .application_cards__detail {
+      width: 95%;
+      height: auto;
+      max-width: 450px;
+      max-height: 450px;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 

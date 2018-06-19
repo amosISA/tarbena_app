@@ -4,19 +4,13 @@
     <div class="custom-home-navbar custom-home-navbar--fixed">
         <div class="custom-home-navbar__left">
             <a href="{% url 'index' %}" class="custom-home-navbar__logo">
-                <img class="custom-home-navbar__logo__img" src="{% static 'home/img/favicon/login/logoTarbenaSubvencionesicon.png' %}" alt="Tarbena logo">
+                <div class="header-menu__logo" style="background-image: url({% static 'home/img/favicon/entrypoint/logo_entrypoint.png' %})"></div>
             </a>
             <div class="custom-home-navbar__menus">
                 <ul class="custom-home-navbar__left__ul">
                     {% if request.user.is_authenticated %}
                         <li class="custom-home-navbar__li menu">
-                            <a href="{% url 'subvenciones:index' %}" class="custom-home-navbar__li__anchor">Subvenciones</a>
-                        </li>
-                        <li class="custom-home-navbar__li menu">
-                            <a href="{% url 'parcelas:index' %}" class="custom-home-navbar__li__anchor">Parcelas</a>
-                        </li>
-                        <li class="custom-home-navbar__li menu">
-                            <a href="#" class="custom-home-navbar__li__anchor">Llaves</a>
+                            <a href="#" class="custom-home-navbar__li__anchor"></a>
                         </li>
                     {% endif %}
                 </ul>

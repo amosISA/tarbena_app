@@ -7,11 +7,17 @@ $(document).ready(function() {
         }
     });
 
-    // Toggle dropdown right side
+    // Toggle dropdown right side when user is not logged in
     $('.custom-home-navbar__menus_toogle').click(function () {
         $('.custom-home-navbar__menus_toogle > a').toggleClass("setting-dropdown-icon--active");
         $('.custom-home-navbar__menus__links').toggleClass('custom-home-navbar__menus__links--active').toggle();
         handle1();
+    });
+
+    // Toggle dropdown right side when user is logged in
+    $('.custom-home-navbar__avatar').on('click', function() {
+        var dropdown = $('.custom_navbar__avatar__dropdown');
+        dropdown.hasClass('custom_navbar__avatar__dropdown--hide') ? dropdown.removeClass('custom_navbar__avatar__dropdown--hide') : dropdown.addClass('custom_navbar__avatar__dropdown--hide');
     });
 });
 

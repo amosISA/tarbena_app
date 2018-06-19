@@ -29,6 +29,9 @@
   position: relative; }
   .home_container .aplications_details__cards a {
     text-decoration: none; }
+@media (max-width: 810px) {
+  .home_container .aplications_details__cards {
+    display: block; } }
 .home_container .application_cards__detail {
   width: 250px;
   height: 250px;
@@ -46,6 +49,14 @@
     flex: none;
     width: 60px;
     height: 60px; }
+@media (max-width: 810px) {
+  .home_container .application_cards__detail {
+    width: 95%;
+    height: auto;
+    max-width: 450px;
+    max-height: 450px;
+    margin-left: auto;
+    margin-right: auto; } }
 .home_container img {
   max-width: 100%;
   vertical-align: middle;

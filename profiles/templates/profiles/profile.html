@@ -56,7 +56,101 @@
             </div>
 
             <div class="user-profile__content-background">
+                <div class="user-profile__content">
 
+                    <!-- User Configuration -->
+                    <div class="user-profile__profile__data">
+                        <div class="user_profile__section-header">
+                            <div class="section-header__title">CONFIGURACIÓN</div>
+                            <div class="section-header__right">
+                                <div class="user-profile__edit-btn">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    EDITAR
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user_profile__section-panel">
+                            <div>
+                                <div class="user_profile__profile__data-content">
+                                    <ul class="user_profile__list-data">
+                                        <!-- Email -->
+                                        <li class="user_profile__list-item">
+                                            <div class="user_profile__list-flex">
+                                                <div class="user_profile__list-h3">Email</div>
+                                                <div class="user_profile__list-input">
+                                                    <input type="email" class="user_profile__list-input__email" disabled value="{{ user.email }}">
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Username -->
+                                        <li class="user_profile__list-item">
+                                            <div class="user_profile__list-flex">
+                                                <div class="user_profile__list-h3">Nombre de usuario</div>
+                                                <div class="user_profile__list-input">
+                                                    <span>{{ user.username }}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- First name -->
+                                        <li class="user_profile__list-item">
+                                            <div class="user_profile__list-flex">
+                                                <div class="user_profile__list-h3">Nombre</div>
+                                                <div class="user_profile__list-input">
+                                                    <span>{{ user.first_name }}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Last name -->
+                                        <li class="user_profile__list-item">
+                                            <div class="user_profile__list-flex">
+                                                <div class="user_profile__list-h3">Apellidos</div>
+                                                <div class="user_profile__list-input">
+                                                    <span>{{ user.last_name }}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Change Password -->
+                    <div class="user-profile__profile__password">
+                        <div class="user_profile__section-header">
+                            <div class="section-header__title">CONTRASEÑA</div>
+                        </div>
+                        <div class="user_profile__section-panel user-profile__section-panel__empty-case">
+                            <div class="user-profile__edit-btn">
+                                <i class="fas fa-plus-circle"></i>
+                                CAMBIAR CONTRASEÑA
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delete Account -->
+                    <div class="user-profile__profile__delete">
+                        <div class="user_profile__section-header">
+                            <div class="section-header__title">BORRAR CUENTA</div>
+                        </div>
+                        <div class="user_profile__section-panel">
+                            <div>
+                                <div class="user_profile__profile__data-content">
+                                    <span>Borre su cuenta de manera permanente junto con toda la información asociada a ella.
+                                        Si ha tenido algun problema con la misma y necesita ayuda, <a href="mailto:amosisa700@gmail.com">contacte</a> con nosotros
+                                        para que le podamos ayudar.</span>
+                                </div>
+                                <div class="user-profile__data-btn-delete">
+                                    <div class="settings__account-delete-btn">Borrar Cuenta</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
 

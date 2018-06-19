@@ -117,6 +117,124 @@
   display: inline-flex; }
   .home_container .user_profile_avatar__form .btn_update_user_avatar:hover {
     background-color: #0088c6; }
+.home_container .user-profile__content-background {
+  background: #f3f3f3;
+  min-height: calc(100vh - 52px); }
+.home_container .user-profile__content {
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  padding-bottom: 50px;
+  min-width: 620px; }
+@media (max-width: 640px) {
+  .home_container .user-profile__content {
+    width: 95%;
+    min-width: 200px; } }
+.home_container .user_profile__section-header {
+  display: flex;
+  padding: 30px 0 0 0;
+  align-items: center;
+  width: 100%; }
+.home_container .section-header__title {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.33;
+  letter-spacing: .9px;
+  color: #333;
+  padding-bottom: 20px; }
+.home_container .section-header__right {
+  flex: 1;
+  text-align: right; }
+.home_container .user-profile__edit-btn:first-child {
+  margin-left: 0; }
+.home_container .user-profile__edit-btn {
+  color: #00b5e2;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: bold;
+  padding-bottom: 20px;
+  display: inline-block; }
+  .home_container .user-profile__edit-btn:hover {
+    text-decoration: none; }
+  .home_container .user-profile__edit-btn i {
+    font-size: 14px;
+    margin-right: 8px; }
+.home_container .user_profile__section-panel {
+  border-radius: 2px;
+  background-color: #fff;
+  border: solid 1px #e5eaea;
+  position: relative; }
+.home_container .user_profile__profile__data-content {
+  padding: 20px 30px 20px 30px;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.6; }
+  .home_container .user_profile__profile__data-content .user_profile__list-data .user_profile__list-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    list-style: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 40px 0 35px;
+    display: flex !important;
+    -webkit-box-align: center !important;
+    align-items: center !important; }
+    .home_container .user_profile__profile__data-content .user_profile__list-data .user_profile__list-item .user_profile__list-flex {
+      -webkit-box-flex: 1;
+      flex: 1 1 auto; }
+      .home_container .user_profile__profile__data-content .user_profile__list-data .user_profile__list-item .user_profile__list-flex .user_profile__list-h3 {
+        font-weight: 600 !important;
+        font-size: 21px !important;
+        line-height: 24px !important;
+        transform: translateY(-1.88px);
+        letter-spacing: -0.29px !important;
+        color: rgba(0, 0, 0, 0.84) !important;
+        fill: rgba(0, 0, 0, 0.84) !important; }
+      .home_container .user_profile__profile__data-content .user_profile__list-data .user_profile__list-item .user_profile__list-flex .user_profile__list-input {
+        font-weight: 400 !important;
+        font-style: normal !important;
+        letter-spacing: 0 !important;
+        font-size: 16px !important;
+        line-height: 20px !important;
+        transform: translateY(1.52px);
+        color: rgba(0, 0, 0, 0.76) !important;
+        fill: rgba(0, 0, 0, 0.76) !important;
+        max-width: 400px !important; }
+        .home_container .user_profile__profile__data-content .user_profile__list-data .user_profile__list-item .user_profile__list-flex .user_profile__list-input .user_profile__list-input__email {
+          cursor: default;
+          display: block;
+          font-size: 17px;
+          border: none;
+          letter-spacing: 0;
+          font-weight: 400;
+          font-style: normal;
+          color: rgba(0, 0, 0, 0.84) !important;
+          fill: rgba(0, 0, 0, 0.84) !important; }
+.home_container .user-profile__section-panel__empty-case {
+  padding: 22px 30px;
+  display: flex; }
+.home_container .user-profile__section-panel__empty-case.user_profile__section-panel {
+  padding-bottom: 0 !important; }
+.home_container .user-profile__data-btn-delete {
+  padding: 20px 30px 20px 30px;
+  display: flex;
+  align-items: center; }
+  .home_container .user-profile__data-btn-delete .settings__account-delete-btn {
+    padding: 10px 20px;
+    margin-right: 15px;
+    display: inline-flex;
+    background: transparent;
+    color: #ff7142;
+    border: 1px solid #ff7142;
+    border-radius: 3px;
+    font-weight: 600;
+    text-shadow: none;
+    box-shadow: none;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    font-size: 1em;
+    line-height: 1;
+    text-transform: capitalize;
+    letter-spacing: 0; }
 
 .fa-times:before {
   content: "\f00d"; }

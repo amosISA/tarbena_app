@@ -169,6 +169,8 @@
   color: #555;
   font-size: 15px;
   line-height: 1.6; }
+  .home_container .user_profile__profile__data-content .user_profile__list-data {
+    padding: 15px; }
   .home_container .user_profile__profile__data-content .user_profile__list-data .user_profile__list-item {
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     list-style: none;
@@ -208,6 +210,9 @@
           font-style: normal;
           color: rgba(0, 0, 0, 0.84) !important;
           fill: rgba(0, 0, 0, 0.84) !important; }
+    @media (max-width: 767px) {
+      .home_container .user_profile__profile__data-content .user_profile__list-data .user_profile__list-item .user_profile__list-flex {
+        padding-bottom: 15px !important; } }
 .home_container .user-profile__section-panel__empty-case {
   padding: 22px 30px;
   display: flex; }
@@ -235,6 +240,23 @@
     line-height: 1;
     text-transform: capitalize;
     letter-spacing: 0; }
+.home_container .user_profile__messages {
+  position: relative;
+  z-index: 2; }
+.home_container .user_profile_messages__tab-bar {
+  display: flex;
+  background: #f9f9f9;
+  border-top: solid 1px rgba(0, 0, 0, 0.1);
+  border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  height: 52px;
+  position: relative; }
+  .home_container .user_profile_messages__tab-bar .user_profile_messages__tab-center {
+    display: flex;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    align-items: center; }
 
 .fa-times:before {
   content: "\f00d"; }

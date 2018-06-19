@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth import get_user_model
+from django.contrib import messages
+from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponseRedirect
@@ -88,3 +90,21 @@ def upload_avatar(request):
         "form": form
     }
     return render(request, 'profiles/upload_avatar.html', context)
+
+# --------------- User Change Password --------------- #
+@login_required()
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Su contraseña se ha actualizado correctamente!')
+            return HttpResponseRedirect(reverse('profiles:user_profile', kwargs={'username': request.user}))
+        else:
+            messages.error(request, 'Ha ocurrido un error al cambiar la contraseña.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/password_change.html', {
+        'form': form
+    })

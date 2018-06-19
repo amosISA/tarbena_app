@@ -18,10 +18,9 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, logout, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
-from django.contrib.auth import views as auth_views
 
 from . import views
-from profiles.views import activate_user_view
+from profiles.views import activate_user_view, change_password
 
 
 urlpatterns = [
@@ -42,7 +41,7 @@ urlpatterns = [
     url(r'^logout/', logout, {'next_page': '/accounts/login/'}, name='logout'),
     url(r'^register/$', views.RegisterView.as_view(), name="register"),
     url(r'^activate/(?P<code>[a-z0-9].*)/$', activate_user_view, name='activate'),
-    #url('^change-password/$', auth_views.password_change, {'post_change_redirect' : '/'}, name='password_change'),
+    url('^password/$', change_password, name='change_password'),
     url(r'^reset/password_reset', password_reset, {"template_name": "registration/password_reset_form.html",
         "email_template_name": "registration/password_reset_email.html"}, name="password_reset"),
     url(r'^password_reset_done', password_reset_done, {"template_name":"registration/password_reset_done.html"},

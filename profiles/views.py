@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404, render
 from django.views.generic import DetailView
+from django.views.generic.edit import UpdateView
 
 from .models import Profile
 from .forms import ProfileForm
@@ -30,7 +31,7 @@ def activate_user_view(request, code=None, *args, **kwargs):
     return redirect("login")
 
 # --------------- User Profile Detail View --------------- #
-class ProfileDetailView(LoginRequiredMixin ,DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     queryset = User.objects.filter(is_active=True)
     template_name = 'profiles/profile.html'
 
@@ -50,6 +51,24 @@ class ProfileDetailView(LoginRequiredMixin ,DetailView):
             return(HttpResponseRedirect(reverse('profiles:user_profile', kwargs={'username': self.request.user})))
         else:
             return self.render_to_response(context)
+
+# --------------- Update User Information --------------- #
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    template_name = 'profiles/update_profile.html'
+    fields = ['username', 'email', 'first_name', 'last_name']
+
+    def get_success_url(self):
+        return reverse('profiles:user_profile', kwargs={'username': self.request.user})
+
+    def get_object(self, queryset=None):
+        """
+        This method will load the object
+        that will be used to load the form
+        that will be edited
+        """
+
+        return self.request.user
 
 # --------------- Edit User avatar --------------- #
 @login_required()

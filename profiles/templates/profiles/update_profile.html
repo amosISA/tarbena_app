@@ -1,0 +1,56 @@
+
+    <div class="ag_auth_page_register">
+        <form name="ag_register_form" class="ag_form_auth_register" method="post">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="ag_form_login_message_error">
+                    {% for field in form %}
+                        {% if field.errors %}
+                            - {{ field.errors|striptags }}<br />
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="ag_form_block_input">
+                {{ form.username.label_tag }}
+                <div class="ag_form_inner_wrapper">
+                    {{ form.username }}
+                </div>
+            </div>
+
+            <div class="ag_form_block_input">
+                {{ form.email.label_tag }}
+                <div class="ag_form_inner_wrapper">
+                    {{ form.email }}
+                </div>
+            </div>
+
+            <div class="ag_form_block_input">
+                {{ form.first_name.label_tag }}
+                <div class="ag_form_inner_wrapper">
+                    {{ form.first_name }}
+                </div>
+            </div>
+
+            <div class="ag_form_block_input">
+                {{ form.last_name.label_tag }}
+                <div class="ag_form_inner_wrapper">
+                    {{ form.last_name }}
+                </div>
+            </div>
+
+            <div class="ag_form_block_input">
+                <div class="ag_form_inner_wrapper">
+                    <button class="ag_register_form_submit_button" type="submit">Guardar</button>
+                </div>
+            </div>
+
+            <div class="ag_auth_page_login_account_hint">
+                ¿Cambiar contraseña?
+                <a href="#" class="ag_auth_page_login_button">Change</a>
+            </div>
+
+        </form>
+    </div>

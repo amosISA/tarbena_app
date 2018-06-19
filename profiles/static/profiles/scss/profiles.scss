@@ -219,6 +219,8 @@
     font-size: 15px;
     line-height: 1.6;
 
+    .user_profile__list-data { padding: 15px; }
+
     .user_profile__list-data .user_profile__list-item {
       border-bottom: 1px solid rgba(0,0,0,.05);
       list-style: none;
@@ -265,6 +267,11 @@
           }
         }
       }
+      @media (max-width: 767px) {
+        .user_profile__list-flex {
+          padding-bottom: 15px !important;
+        }
+      }
     }
   }
 
@@ -299,6 +306,33 @@
       line-height: 1;
       text-transform: capitalize;
       letter-spacing: 0;
+    }
+  }
+
+  .user_profile__messages {
+    position: relative;
+    z-index: 2;
+  }
+
+  .user_profile_messages__tab-bar {
+    display: flex;
+    background: #f9f9f9;
+    border-top: solid 1px rgba(0,0,0,0.1);
+    border-bottom: solid 1px rgba(0,0,0,0.1);
+    box-shadow: 0 0 5px rgba(0,0,0,0.15);
+    height: 52px;
+    position: relative;
+
+    .user_profile_messages__tab-center {
+      display: flex;
+      width: 90%;
+      max-width: 800px;
+      margin: 0 auto;
+      align-items: center;
+
+      .tab_bars__tab {
+
+      }
     }
   }
 }

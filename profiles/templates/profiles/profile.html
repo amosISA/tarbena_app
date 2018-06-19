@@ -58,6 +58,19 @@
             <div class="user-profile__content-background">
                 <div class="user-profile__content">
 
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div style="padding-top: 50px;">
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    <strong>{{ message }}</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
                     <!-- User Configuration -->
                     <div class="user-profile__profile__data">
                         <div class="user_profile__section-header">
@@ -124,10 +137,12 @@
                             <div class="section-header__title">CONTRASEÑA</div>
                         </div>
                         <div class="user_profile__section-panel user-profile__section-panel__empty-case">
-                            <div class="user-profile__edit-btn">
-                                <i class="fas fa-plus-circle"></i>
-                                CAMBIAR CONTRASEÑA
-                            </div>
+                            <a id="user-profile__anchor-change--password" data-toggle="modal" data-target="#open-modal-password" href="{% url 'change_password' %}">
+                                <div class="user-profile__edit-btn">
+                                    <i class="fas fa-plus-circle"></i>
+                                    CAMBIAR CONTRASEÑA
+                                </div>
+                            </a>
                         </div>
                     </div>
 
@@ -157,11 +172,29 @@
     </div>
 </div>
 
+<!-- Modal: Update User Avatar -->
 <div id="open-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Actualiza tu avatar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Update User Password -->
+<div id="open-modal-password" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelPassword" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabelPassword">Actualiza tu contraseña</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -186,9 +219,16 @@
 {% endblock %}
 
 {% block domready %}
+    /* Modal Avatar */
     $('#triggerEvents').on('click', function(e){
         // Made the popup appear with the insert template
         e.preventDefault();
         $('#open-modal').modal('show').find('.modal-body').load($(this).attr('href'));
+    });
+
+    /* Modal Password */
+    $('#user-profile__anchor-change--password').on('click', function(e){
+        e.preventDefault();
+        $('#open-modal-password').modal('show').find('.modal-body').load($(this).attr('href'));
     });
 {% endblock %}

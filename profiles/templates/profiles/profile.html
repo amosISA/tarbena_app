@@ -137,7 +137,7 @@
                             <div class="section-header__title">CONTRASEÑA</div>
                         </div>
                         <div class="user_profile__section-panel user-profile__section-panel__empty-case">
-                            <a id="user-profile__anchor-change--password" data-toggle="modal" data-target="#open-modal-password" href="{% url 'change_password' %}">
+                            <a id="user-profile__anchor-change--password" href="{% url 'change_password' %}">
                                 <div class="user-profile__edit-btn">
                                     <i class="fas fa-plus-circle"></i>
                                     CAMBIAR CONTRASEÑA
@@ -188,23 +188,6 @@
         </div>
     </div>
 </div>
-
-<!-- Modal: Update User Password -->
-<div id="open-modal-password" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelPassword" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabelPassword">Actualiza tu contraseña</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}
 
 {% block addscript %}
@@ -224,11 +207,5 @@
         // Made the popup appear with the insert template
         e.preventDefault();
         $('#open-modal').modal('show').find('.modal-body').load($(this).attr('href'));
-    });
-
-    /* Modal Password */
-    $('#user-profile__anchor-change--password').on('click', function(e){
-        e.preventDefault();
-        $('#open-modal-password').modal('show').find('.modal-body').load($(this).attr('href'));
     });
 {% endblock %}

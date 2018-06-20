@@ -94,8 +94,8 @@ def upload_avatar(request):
 # --------------- User Change Password --------------- #
 @login_required()
 def change_password(request):
+    form = PasswordChangeForm(request.user, request.POST)
     if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)

@@ -1,6 +1,9 @@
-============
+==========
+Deployment
+==========
+
 Secret files
-============
+------------
 | When deploying don't save the secret files into the project. Save them into a safe place and ignore them with gitignore. Things such as: database password, ``SECRET_KEY``, email password, etc.
 
 When I use::
@@ -29,7 +32,7 @@ When you use in template::
 
     comment.contenido|safe_markdown
 
-This has in `Lib/site-packages/martor/extensions/mentions.py` this code:
+This has in ``Lib/site-packages/martor/extensions/mentions.py`` this code:
 
 .. code-block:: python
 
@@ -49,3 +52,20 @@ This has in `Lib/site-packages/martor/extensions/mentions.py` this code:
 If you leave it like that you will have as many duplicated queries as mentions you have in that template. So to solve this, you just have to comment this line::
 
     if username in [u.username for u in User.objects.exclude(is_active=False)]:
+
+PDF (WeasyPrint)
+----------------
+I used this package to generate pdfs from detailed subsidies.
+
+For installing::
+
+    pip install WeasyPrint
+
+.. warning::
+    **Problems in Windows**:
+
+    ``OSError: dlopen() failed to load a library: cairo / cairo-2``
+
+    To solve this I've got to install this: `https://tschoonj.github.io/blog/2014/02/08/gtk2-64-bit-windows-runtime-environment-installer/ <https://tschoonj.github.io/blog/2014/02/08/gtk2-64-bit-windows-runtime-environment-installer/>`_
+
+    

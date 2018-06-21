@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from bs4 import BeautifulSoup
+from django.conf import settings
 from django.core import serializers
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -14,6 +15,7 @@ from django.db.models import Count, Q
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.template import loader
+from django.template.loader import render_to_string
 from django.utils.module_loading import import_string
 from django.views.decorators.http import require_POST
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -22,6 +24,8 @@ from notify.signals import notify
 from .forms import SubvencionForm, CommentFormSet, IndexSelectsForm
 from .models import Subvencion, Estado, Colectivo, Area, Ente, Comment
 from src.config.settings.base import MARTOR_MARKDOWNIFY_FUNCTION
+
+import weasyprint
 
 # --------------- Index: List Subvenciones --------------- #
 @login_required()
@@ -321,9 +325,12 @@ def markdown_find_mentions(markdown_text, user, user_username, name_subv, mail, 
               html_message=html_message
     )
 
-    return notify.send(user, recipient_list=list(notify_list_users), actor=user,
-                verb='comentarios', obj=object, target=object,
-                nf_type='mention')
+    if markdown_users:
+        return notify.send(user, recipient_list=list(notify_list_users), actor=user,
+                    verb='comentarios', obj=object, target=object,
+                    nf_type='mention')
+    else:
+        return
 
 @login_required()
 # --------------- Subsidie Details --------------- #
@@ -371,3 +378,17 @@ class SubvencionDeleteView(LoginRequiredMixin, DeleteView):
         else:
             # when data is coming from the form which lists all items
             return self.get(self, *args, **kwargs)
+
+# --------------- PDF Detail Subsidie --------------- #
+@login_required()
+def admin_subvencion_pdf(request, subvencion_id):
+    subvencion = get_object_or_404(Subvencion, id=subvencion_id)
+    html = render_to_string('subvenciones/pdf_detail.html',
+                            {'subvencion': subvencion})
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename=subvencion_{}.pdf'.format(subvencion.id)
+    weasyprint.HTML(string=html).write_pdf(response,
+                                           stylesheets=[weasyprint.CSS(
+                                               settings.STATIC_ROOT + '/subvenciones/css/pdf.css'
+                                           )])
+    return response

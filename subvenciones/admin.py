@@ -1,13 +1,21 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.core.urlresolvers import reverse
 
 from .models import Subvencion, Estado, Colectivo, Ente, Area, Comment
 from .sites import my_admin_site
 
-# Register your models here.
+# Subvencion PDF
+def subvencion_pdf(obj):
+    return '<a href="{}">PDF</a>'.format(
+        reverse('subvenciones:admin_subvencion_pdf', args=[obj.id])
+    )
+subvencion_pdf.allow_tags = True
+subvencion_pdf.short_description = 'PDF'
+
 class SubvencionAdmin(admin.ModelAdmin):
     list_display = ['inicio', 'nombre', 'fin', 'cuantia_inicial', 'cuantia_final',
-                    'estado', 'ente', 'user']
+                    'estado', 'ente', 'user', subvencion_pdf]
     list_filter = ['nombre', 'estado', 'colectivo', 'cuantia_inicial', 'cuantia_final', 'ente']
     search_fields = ('nombre',)
     empty_value_display = '-'

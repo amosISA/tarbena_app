@@ -1,38 +1,19 @@
-{% extends "subvenciones/base.html" %}
 {% load staticfiles %}
 {% load martortags %}
-
-{% block stylesheets %}
-    <style>#id_impreso + label { margin-left: -4px!important; }</style>
-{% endblock %}
-
-{% block title %}
-    Subs: {{ subvencion.nombre }}
-{% endblock %}
-
-{% block navbar %}
-    {% include 'subvenciones/snippets/navbar.html' %}
-{% endblock %}
-
-{% block content %}
 {% load tags %}
     <div class="row forms_act_crea">
         <div class="ag_create_post_wrapper col-lg-12">
-            <h1 class="h1">Detalles Subvención</h1>
+            <h1 class="h1">{{ subvencion.nombre }}</h1>
 
             <form class="form-horizontal">
                 <div class="row">
                     <div class="col-lg-3 doted-right">
                         <div class="row">
                             <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
-                                <!-- Inicio -->
-                                <label for="id_inicio">Inicio:</label>
-                                <input type="text" id="id_inicio" value="{{ subvencion.inicio|date:'d/m/Y' }}" class="form-control" readonly>
+                                {{ subvencion.inicio|date:'d/m/Y' }}
                             </div>
                             <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
-                                <!-- Fin -->
-                                <label for="id_fin">Fin:</label>
-                                <input type="text" id="id_fin" value="{{ subvencion.fin|date:'d/m/Y' }}" class="form-control" readonly>
+                                {{ subvencion.fin|date:'d/m/Y' }}
                             </div>
                         </div>
 
@@ -127,7 +108,6 @@
                             <div>Última fecha de modificación: <span>{{ subvencion.updated }}</span></div>
                             <div class="subv-edit-action"><a href="{% url 'subvenciones:edit_subvencion' pk=subvencion.pk %}">Editar subvención</a></div>
                             <div class="subv-delete-action"><a href="{% url 'subvenciones:delete_subvencion' pk=subvencion.pk %}">Eliminar subvención</a></div>
-                            <div><a target="_blank" href="{% url 'subvenciones:admin_subvencion_pdf' subvencion_id=subvencion.id %}">PDF</a></div>
                         </div>
                     </div>
                     <div class="col-lg-6 doted-right">
@@ -235,34 +215,3 @@
             </form>
         </div>
     </div>
-{% endblock %}
-
-{% block addscript %}
-    <script src="{% static 'subvenciones/js/detail.js' %}"></script>
-{% endblock %}
-
-{% block js %}
-    <script>
-        // AJAX FOR LIKES
-        $('a.like-button-details').click(function(e) {
-            e.preventDefault();
-            $.post('{% url "subvenciones:like" %}',
-                {
-                    id: $(this).data('id'),
-                    action: $(this).data('action')
-                },
-                function(data) {
-                    if(data['status'] == 'ok')
-                    {
-                        var button_likes = $('a.like-button-details');
-                        var previous_action = button_likes.data('action');
-                        //toggle data-action
-                        button_likes.data('action', previous_action == 'like' ? 'unlike' : 'like');
-                        //toggle link text
-                        $('.likes_heart').addClass(previous_action == 'like' ? $('.likes_heart').addClass("fas") : $('.likes_heart').removeClass('fas'));
-                    }
-                }
-            );
-        });
-    </script>
-{% endblock %}

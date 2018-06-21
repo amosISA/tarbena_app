@@ -15,4 +15,9 @@ urlpatterns = [
     # Two urls pointing to same view but different parameters
     url(r'^(?P<estado_slug>[-\w ]+)/$', views.index_subvenciones, name='subvencion_by_category'),
     url(r'^favourites/$', views.index_subvenciones, name='favourites'),
+
+    # Subvencion detail PDF
+    url(r'^admin/subvencion/(?P<subvencion_id>\d+)/pdf/$',
+        views.admin_subvencion_pdf,
+        name='admin_subvencion_pdf'),
 ]

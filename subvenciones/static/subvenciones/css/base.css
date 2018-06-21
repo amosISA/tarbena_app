@@ -778,6 +778,7 @@ ul#id_se_relaciona_con {
   text-align: left;
   background-color: papayawhip;
 }
+#id_se_relaciona_con li { position: relative; }
 
 #id_se_relaciona_con li, #id_responsable li, #id_colectivo li, #content_ajax_list {
     list-style-type: none;

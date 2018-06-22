@@ -21,7 +21,7 @@ from django.views.decorators.http import require_POST
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from notify.signals import notify
 
-from .forms import SubvencionForm, CommentFormSet, IndexSelectsForm
+from .forms import SubvencionForm, CommentFormSet, SubvencionFilter
 from .models import Subvencion, Estado, Colectivo, Area, Ente, Comment
 from src.config.settings.base import MARTOR_MARKDOWNIFY_FUNCTION
 
@@ -33,6 +33,13 @@ def index_subvenciones(request, estado_slug=None):
     """ List subvenciones """
 
     estado, area, user = None, None, None
+
+    # Sidebar filtering
+    f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
+            'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
+        ).select_related(
+            'user', 'estado', 'ente', 'area'
+        ).all())
 
     # If is superuser: list all subsidies, if not, only the related to the respective user
     if request.user.is_superuser:
@@ -60,18 +67,7 @@ def index_subvenciones(request, estado_slug=None):
             'user', 'estado', 'ente', 'area'
         ).filter(likes__in=[request.user])
     else:
-        if estado_slug:
-            if Estado.objects.filter(slug=estado_slug).exists():
-                estado = get_object_or_404(Estado, slug=estado_slug)
-                subvenciones = subvenciones.filter(estado=estado)
-            elif Area.objects.filter(slug=estado_slug).exists():
-                area = get_object_or_404(Area, slug=estado_slug)
-                subvenciones = subvenciones.filter(area__nombre=area)
-            elif User.objects.filter(username=estado_slug).exists():
-                user = get_object_or_404(User, username=estado_slug)
-                subvenciones = subvenciones.filter(responsable__username=user)
-            else:
-                subvenciones = Subvencion.objects.prefetch_related('likes', 'colectivo', 'responsable').all()
+        subvenciones = Subvencion.objects.prefetch_related('likes', 'colectivo', 'responsable').all()
 
     days_until_estado = ['7d', '6d', '5d', '4d', '3d', '2d', '1d', 'expires today', 'expired']
 
@@ -81,6 +77,7 @@ def index_subvenciones(request, estado_slug=None):
                    'area': area,
                    'user': user,
                    'subvenciones': subvenciones,
+                   'filter' : f,
                    'days_until_estado': days_until_estado,
                    'total_subvenciones': total_subvenciones,
                    'colectivos': colectivos,

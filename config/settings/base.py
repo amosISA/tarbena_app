@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'martor',
     'smart_selects',
     'notify',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

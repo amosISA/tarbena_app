@@ -36,9 +36,9 @@ $(function() {
             "5/27/2013", "7/4/2013", "9/2/2013", "11/28/2013",
             "11/29/2013", "12/24/2013", "12/25/2013"];
 
-    var id_date_inicio = $('#id_inicio');
+    var id_date_inicio = $('#id_fecha_publicacion');
     var id_date_fin = $('#id_fin');
-    var content_div_fin = '<div class="id_date_fin_anchors_bussines_day"><a href="#" onClick="businessDays(15);">+ 15 días hábiles</a><a href="#" onClick="businessDays(20);">+ 20 días hábiles</a><a href="#" onClick="businessDays(30);">+ 30 días hábiles</a></div>';
+    var content_div_fin = '<div class="id_date_fin_anchors_bussines_day"><a href="#" onClick="businessDays(10);">+ 10 días hábiles</a><a href="#" onClick="businessDays(15);">+ 15 días hábiles</a><a href="#" onClick="businessDays(20);">+ 20 días hábiles</a><a href="#" onClick="businessDays(30);">+ 30 días hábiles</a></div>';
     id_date_inicio.change(function() {
         if (id_date_inicio.val()) {
             if (!$('.id_date_fin_anchors_bussines_day').length) {

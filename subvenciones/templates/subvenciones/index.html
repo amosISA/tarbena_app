@@ -69,7 +69,7 @@
                 <table id="subv_table_ordering" class="table" width="100%">
                     <thead class="thead-subv-table">
                         <tr class="table-active">
-                            <th>Inicio</th>
+                            <th>Fecha publicación</th>
                             <th>Nombre y descripción</th>
                             <th>Vencimiento</th>
                             <th>Comentarios</th>
@@ -81,7 +81,7 @@
                             <tr>
                                 <td class="td1 {{ f.ente }}">
                                     <div class="bloque01">
-                                        <div class="fechaInicio">{{ f.inicio|date:"d/m/Y" }}</div>
+                                        <div class="fechaInicio">{{ f.fecha_publicacion|date:"d/m/Y" }}</div>
                                         <div class="colectivo">
                                             <ul>
                                                 {% for colectivo in colectivos %}

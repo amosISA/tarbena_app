@@ -33,7 +33,7 @@ class SubvencionForm(forms.ModelForm):
         model = Subvencion
         fields = '__all__'
         widgets = {
-            'inicio': forms.DateInput(format='%Y-%m-%d', attrs={'type':'date'}),
+            'fecha_publicacion': forms.DateInput(format='%Y-%m-%d', attrs={'type':'date'}),
             'fin': forms.DateInput(format='%Y-%m-%d', attrs={'type':'date'}),
             'estado': RelatedFieldWidgetWrapper(
                 Subvencion._meta.get_field('estado').formfield().widget,

@@ -20,9 +20,9 @@ $j(document).ready(function(){
 
 
     /* Date bussiness days 30, 25, 10 */
-    var id_date_inicio = $j('#id_inicio');
+    var id_date_inicio = $j('#id_fecha_publicacion');
     var id_date_fin = $j('#id_fin');
-    var content_div_fin = '<div class="id_date_fin_anchors_bussines_day"><a href="#" onClick="businessDays(15);">+ 15 días hábiles</a><a href="#" onClick="businessDays(20);">+ 20 días hábiles</a><a href="#" onClick="businessDays(30);">+ 30 días hábiles</a></div>';
+    var content_div_fin = '<div class="id_date_fin_anchors_bussines_day"><a href="#" onClick="businessDays(10);">+ 10 días hábiles</a><a href="#" onClick="businessDays(15);">+ 15 días hábiles</a><a href="#" onClick="businessDays(20);">+ 20 días hábiles</a><a href="#" onClick="businessDays(30);">+ 30 días hábiles</a></div>';
     id_date_inicio.change(function() {
         if (id_date_inicio.val()) {
             if (!$j('.id_date_fin_anchors_bussines_day').length) {
@@ -56,7 +56,7 @@ $j(document).ready(function(){
 });
 
 function businessDays(days) {
-    var dataAvui = new Date($j('#id_inicio').val());
+    var dataAvui = new Date($j('#id_fecha_publicacion').val());
 
     var holidays = [
         "01/01/2018", "06/01/2018", "30/03/2018", "01/05/2018", "15/08/2018", "12/08/2018", "01/11/2018", "06/12/2018",

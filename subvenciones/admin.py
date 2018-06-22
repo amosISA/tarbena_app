@@ -14,7 +14,7 @@ subvencion_pdf.allow_tags = True
 subvencion_pdf.short_description = 'PDF'
 
 class SubvencionAdmin(admin.ModelAdmin):
-    list_display = ['inicio', 'nombre', 'fin', 'cuantia_inicial', 'cuantia_final',
+    list_display = ['fecha_publicacion', 'nombre', 'fin', 'cuantia_inicial', 'cuantia_final',
                     'estado', 'ente', 'user', subvencion_pdf]
     list_filter = ['nombre', 'estado', 'colectivo', 'cuantia_inicial', 'cuantia_final', 'ente']
     search_fields = ('nombre',)

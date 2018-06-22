@@ -25,23 +25,36 @@
 
 {% block content %}
 
+    <!-- Side Navigation Menu for Filtering -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <form action="" method="get" style="padding:5px;">
+            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                {{ filter.form.estado.label_tag }}
+                {{ filter.form.estado|htmlattributes:"class:form-control" }}
+            </div>
+            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                {{ filter.form.ente.label_tag }}
+                {{ filter.form.ente|htmlattributes:"class:form-control" }}
+            </div>
+            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                {{ filter.form.area.label_tag }}
+                {{ filter.form.area|htmlattributes:"class:form-control" }}
+            </div>
+            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                {{ filter.form.responsable.label_tag }}
+                {{ filter.form.responsable|htmlattributes:"class:form-control" }}
+            </div>
+            <input type="submit" value="Filtrar" />
+        </form>
+    </div>
+
     <!-- BACK TO TOP -->
     <a href="#" id="back-to-top" title="Back to top">&uarr;</a>
 
     <div class="row align-items-center subv-table-row">
-        <div class="col-12 nopadding">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                        <strong>{{ message }}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endfor %}
-            {% endif %}
-
-            {% if subvenciones %}
+        {% if filter %}
+            <div class="col-12 nopadding">
                 <table id="subv_table_ordering" class="table" width="100%">
                     <thead class="thead-subv-table">
                         <tr class="table-active">
@@ -53,15 +66,15 @@
                     </thead>
 
                     <tbody>
-                        {% for subvencion in subvenciones %}
+                        {% for f in filter.qs %}
                             <tr>
-                                <td class="td1 {{ subvencion.ente }}">
+                                <td class="td1 {{ f.ente }}">
                                     <div class="bloque01">
-                                        <div class="fechaInicio">{{ subvencion.inicio|date:"d/m/Y" }}</div>
+                                        <div class="fechaInicio">{{ f.inicio|date:"d/m/Y" }}</div>
                                         <div class="colectivo">
                                             <ul>
                                                 {% for colectivo in colectivos %}
-                                                    {% if colectivo in subvencion.colectivo.all %}
+                                                    {% if colectivo in f.colectivo.all %}
                                                             <li>{{ colectivo }}</li>
                                                     {% else %}
                                                         <li class="apagado">{{ colectivo }}</li>
@@ -70,46 +83,46 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="departamento depart{{ subvencion.area.id }}">
-                                        <a class="ente_area_link" href="{{ subvencion.area.get_absolute_url }}">{{ subvencion.area }}</a>
+                                    <div class="departamento depart{{ f.area.id }}">
+                                        {{ f.area }}
                                     </div>
                                     <div class="repositorios">
                                         <div class="drive"><i class="fab fa-google-drive"></i>
-                                            {% if not subvencion.drive %}
+                                            {% if not f.drive %}
                                             {% else %}
-                                                <a href="{{ subvencion.drive }}" target="_blank">{% if subvencion.nombre_carpeta_drive %}{{ subvencion.nombre_carpeta_drive }}{% else %}Drive{% endif %}</a>
+                                                <a href="{{ f.drive }}" target="_blank">{% if f.nombre_carpeta_drive %}{{ f.nombre_carpeta_drive }}{% else %}Drive{% endif %}</a>
                                             {% endif %}
                                         </div>
                                         <div class="gestiona" style="overflow: hidden;">
-                                            <i class="fas fa-university"></i> {% if not subvencion.gestiona_expediente %}{% else %}<a href="{{ subvencion.gestiona_expediente }}" target="_blank">{{ subvencion.gestiona_expediente }}</a>{% endif %}
+                                            <i class="fas fa-university"></i> {% if not f.gestiona_expediente %}{% else %}<a href="{{ f.gestiona_expediente }}" target="_blank">{{ f.gestiona_expediente }}</a>{% endif %}
                                         </div>
                                     </div>
                                 </td>
                                 <td class="td2">
                                     <b>
-                                        <a href="{{ subvencion.get_absolute_url }}" target="_blank">
-                                            {{ subvencion.nombre|safe }}
+                                        <a href="{{ f.get_absolute_url }}" target="_blank">
+                                            {{ f.nombre|safe }}
                                         </a>
                                     </b>
                                     <br />
-                                    {{ subvencion.descripcion|safe }}
+                                    {{ f.descripcion|safe }}
                                 </td>
                                 <td class="td3" style="{% if subvencion.fin|daysuntil in days_until_estado %}background-color:#ff0000;color:#fff;{% elif subvencion.fin|daysuntil == 'passed days' %}background-color:{{ subvencion.estado.font_color }};{% else %}background-color:#fff;{% endif %}">
-                                    <div class="fechaInicio date-end">{{ subvencion.fin|date:"d/m/Y" }}</div>
-                                    <div class="estadoBloque estado">{{ subvencion.estado }}</div>
+                                    <div class="fechaInicio date-end">{{ f.fin|date:"d/m/Y" }}</div>
+                                    <div class="estadoBloque estado">{{ f.estado }}</div>
                                     <div class="responsables">
-                                        {% for responsable in subvencion.responsable.all %}
+                                        {% for responsable in f.responsable.all %}
                                             <span class="badge badge-pill badge-inverse" tabindex="0" data-toggle="popover" data-trigger="hover" data-content="{{ responsable.username }}">
-                                                <a style="color:inherit;" href="{% url 'subvenciones:subvencion_by_category' estado_slug=responsable.username %}">{{ responsable|split_value }}</a>
+                                                {{ responsable|split_value }}
                                             </span>
                                         {% endfor %}
                                     </div>
-                                    <div class="cuantia"><i class="fas fa-dollar-sign"></i> {% if subvencion.cuantia_inicial %}{{ subvencion.cuantia_inicial|safe }}{% endif %}</div>
-                                    <div class="cuantia"><i class="fas fa-euro-sign"></i> {% if subvencion.cuantia_final %}{{ subvencion.cuantia_final|safe }}{% endif %}</div>
+                                    <div class="cuantia"><i class="fas fa-dollar-sign"></i> {% if f.cuantia_inicial %}{{ f.cuantia_inicial|safe }}{% endif %}</div>
+                                    <div class="cuantia"><i class="fas fa-euro-sign"></i> {% if f.cuantia_final %}{{ f.cuantia_final|safe }}{% endif %}</div>
                                 </td>
                                 <td class="td4">
                                     <!-- Comentarios -->
-                                    {% for comment in subvencion.comments.all %}
+                                    {% for comment in f.comments.all %}
                                         <span class="comment_user_date">{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</span>:
                                         {{ comment.contenido|safe_markdown }}
                                     {% endfor %}
@@ -118,14 +131,106 @@
                         {% endfor %}
                     </tbody>
                 </table>
-            {% else %}
-                {% if request.path == '/subvenciones/' %}
-                    <h2>No tiene subvenciones asignadas.</a></h2>
-                {% else %}
-                    <h2>No tiene subvenciones favoritas.</h2>
+            </div>
+        {% else %}
+            <div class="col-12 nopadding">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <strong>{{ message }}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
                 {% endif %}
-            {% endif %}
-        </div>
+
+                {% if subvenciones %}
+                    <table id="subv_table_ordering" class="table" width="100%">
+                        <thead class="thead-subv-table">
+                            <tr class="table-active">
+                                <th>Inicio</th>
+                                <th>Nombre y descripción</th>
+                                <th>Vencimiento</th>
+                                <th>Comentarios</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for subvencion in subvenciones %}
+                                <tr>
+                                    <td class="td1 {{ subvencion.ente }}">
+                                        <div class="bloque01">
+                                            <div class="fechaInicio">{{ subvencion.inicio|date:"d/m/Y" }}</div>
+                                            <div class="colectivo">
+                                                <ul>
+                                                    {% for colectivo in colectivos %}
+                                                        {% if colectivo in subvencion.colectivo.all %}
+                                                                <li>{{ colectivo }}</li>
+                                                        {% else %}
+                                                            <li class="apagado">{{ colectivo }}</li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="departamento depart{{ subvencion.area.id }}">
+                                            {{ subvencion.area }}
+                                        </div>
+                                        <div class="repositorios">
+                                            <div class="drive"><i class="fab fa-google-drive"></i>
+                                                {% if not subvencion.drive %}
+                                                {% else %}
+                                                    <a href="{{ subvencion.drive }}" target="_blank">{% if subvencion.nombre_carpeta_drive %}{{ subvencion.nombre_carpeta_drive }}{% else %}Drive{% endif %}</a>
+                                                {% endif %}
+                                            </div>
+                                            <div class="gestiona" style="overflow: hidden;">
+                                                <i class="fas fa-university"></i> {% if not subvencion.gestiona_expediente %}{% else %}<a href="{{ subvencion.gestiona_expediente }}" target="_blank">{{ subvencion.gestiona_expediente }}</a>{% endif %}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="td2">
+                                        <b>
+                                            <a href="{{ subvencion.get_absolute_url }}" target="_blank">
+                                                {{ subvencion.nombre|safe }}
+                                            </a>
+                                        </b>
+                                        <br />
+                                        {{ subvencion.descripcion|safe }}
+                                    </td>
+                                    <td class="td3" style="{% if subvencion.fin|daysuntil in days_until_estado %}background-color:#ff0000;color:#fff;{% elif subvencion.fin|daysuntil == 'passed days' %}background-color:{{ subvencion.estado.font_color }};{% else %}background-color:#fff;{% endif %}">
+                                        <div class="fechaInicio date-end">{{ subvencion.fin|date:"d/m/Y" }}</div>
+                                        <div class="estadoBloque estado">{{ subvencion.estado }}</div>
+                                        <div class="responsables">
+                                            {% for responsable in subvencion.responsable.all %}
+                                                <span class="badge badge-pill badge-inverse" tabindex="0" data-toggle="popover" data-trigger="hover" data-content="{{ responsable.username }}">
+                                                    {{ responsable|split_value }}
+                                                </span>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="cuantia"><i class="fas fa-dollar-sign"></i> {% if subvencion.cuantia_inicial %}{{ subvencion.cuantia_inicial|safe }}{% endif %}</div>
+                                        <div class="cuantia"><i class="fas fa-euro-sign"></i> {% if subvencion.cuantia_final %}{{ subvencion.cuantia_final|safe }}{% endif %}</div>
+                                    </td>
+                                    <td class="td4">
+                                        <!-- Comentarios -->
+                                        {% for comment in subvencion.comments.all %}
+                                            <span class="comment_user_date">{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</span>:
+                                            {{ comment.contenido|safe_markdown }}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    {% if request.path == '/subvenciones/' %}
+                        <h2>No tiene subvenciones asignadas.</h2>
+                    {% else %}
+                        <h2>No tiene subvenciones favoritas.</h2>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endif %}
     </div>
 
 {% endblock %}
@@ -160,4 +265,17 @@
     <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
     <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedm2m.js' %}"></script>
     <script type="text/javascript" src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
+    <script>
+        /* Sidebar Navigation */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.body.style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.body.style.marginLeft= "0";
+            document.body.style.backgroundColor = "white";
+        }
+    </script>
 {% endblock %}

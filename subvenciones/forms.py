@@ -6,6 +6,8 @@ from django.forms.models import inlineformset_factory
 from .models import Subvencion, Estado, Area, Ente, Comment
 from .sites import my_admin_site
 
+import django_filters
+
 class EstadoForm(forms.ModelForm):
     class Meta:
         model = Estado
@@ -20,6 +22,11 @@ class AreaForm(forms.ModelForm):
     class Meta:
         model = Area
         fields = ["nombre", "ente"]
+
+class SubvencionFilter(django_filters.FilterSet):
+    class Meta:
+        model = Subvencion
+        fields = ['estado', 'ente', 'area', 'responsable']
 
 class SubvencionForm(forms.ModelForm):
     class Meta:
@@ -58,16 +65,3 @@ class CommentForm(forms.ModelForm):
         fields = ['user', 'contenido']
 
 CommentFormSet = inlineformset_factory(Subvencion, Comment, form=CommentForm, extra=1, can_delete=False)
-
-class IndexSelectsForm(forms.ModelForm):
-    """
-    Form that I use in index to filter with chained select (ente, area)
-    """
-    class Meta:
-        model = Subvencion
-        fields = ['ente', 'area']
-        exclude = ('user','inicio','fin','estado','se_relaciona_con',
-                   'responsable','colectivo', 'nombre', 'procedimiento',
-                   'bases', 'solicitud', 'cuantia_inicial', 'cuantia_final',
-                   'descripcion', 'drive', 'gestiona_expediente',
-                   'nombre_carpeta_drive', 'likes')

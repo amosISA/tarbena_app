@@ -32,52 +32,36 @@ import weasyprint
 def index_subvenciones(request, estado_slug=None):
     """ List subvenciones """
 
-    estado, area, user = None, None, None
-
-    # Sidebar filtering
-    f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
-            'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
-        ).select_related(
-            'user', 'estado', 'ente', 'area'
-        ).all())
-
-    # If is superuser: list all subsidies, if not, only the related to the respective user
-    if request.user.is_superuser:
-        subvenciones = Subvencion.objects.prefetch_related(
-            'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
-        ).select_related(
-            'user', 'estado', 'ente', 'area'
-        ).extra(select={"day_mod": "date(fin)"}).order_by('day_mod')
-    else:
-        subvenciones = Subvencion.objects.prefetch_related(
-            'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
-        ).select_related(
-            'user', 'estado', 'ente', 'area'
-        ).filter(responsable=request.user)
-
     total_subvenciones = Subvencion.objects.count()
     colectivos = Colectivo.objects.all()
     userlikes = Subvencion.objects.filter(likes__in=[request.user])
+    days_until_estado = ['7d', '6d', '5d', '4d', '3d', '2d', '1d', 'expires today', 'expired']
 
     # Handle user favourites
     if request.path == '/subvenciones/favourites/':
-        subvenciones = Subvencion.objects.prefetch_related(
+        f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
             'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
         ).select_related(
             'user', 'estado', 'ente', 'area'
-        ).filter(likes__in=[request.user])
+        ).filter(likes__in=[request.user]))
     else:
-        subvenciones = Subvencion.objects.prefetch_related('likes', 'colectivo', 'responsable').all()
-
-    days_until_estado = ['7d', '6d', '5d', '4d', '3d', '2d', '1d', 'expires today', 'expired']
+        # If is superuser: list all subsidies, if not, only the related to the respective user
+        if request.user.is_superuser:
+            f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
+                'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
+            ).select_related(
+                'user', 'estado', 'ente', 'area'
+            ).extra(select={"day_mod": "date(fin)"}).order_by('day_mod'))
+        else:
+            f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
+                'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
+            ).select_related(
+                'user', 'estado', 'ente', 'area'
+            ).filter(responsable=request.user))
 
     return render(request,
                   'subvenciones/index.html',
-                  {'estado': estado,
-                   'area': area,
-                   'user': user,
-                   'subvenciones': subvenciones,
-                   'filter' : f,
+                  {'filter' : f,
                    'days_until_estado': days_until_estado,
                    'total_subvenciones': total_subvenciones,
                    'colectivos': colectivos,

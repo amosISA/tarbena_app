@@ -122,6 +122,13 @@ And then in the Created and UpdatedView in the formset:
                 markdown_find_mentions(self.request.POST['comments-0-contenido'], self.request.user, self.object)
         comments_formset.save()
 
+Filter subvenciones Index
+"""""""""""""""""""""""""
+For this purpose I used ``django-filter``:
+
+`http://django-filter.readthedocs.io/en/latest/guide/install.html <http://django-filter.readthedocs.io/en/latest/guide/install.html>`_
+
+
 Parcelas
 ^^^^^^^^
 Things you can do with this app:
@@ -225,7 +232,7 @@ When you use in template::
 
     comment.contenido|safe_markdown
 
-This has in `Lib/site-packages/martor/extensions/mentions.py` this code:
+This has in ``Lib/site-packages/martor/extensions/mentions.py`` this code:
 
 .. code-block:: python
 

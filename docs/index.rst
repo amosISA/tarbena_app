@@ -15,6 +15,7 @@ Contents:
    installation
    architecture
    deployment
+   celery
 
 Indices and tables
 ==================

@@ -28,20 +28,20 @@
     <!-- Side Navigation Menu for Filtering -->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <form action="" method="get" style="padding:5px;">
-            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+        <form action="" method="get" style="padding-left:15px;padding-right:15px;padding-bottom:15px;">
+            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
                 {{ filter.form.estado.label_tag }}
                 {{ filter.form.estado|htmlattributes:"class:form-control" }}
             </div>
-            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
                 {{ filter.form.ente.label_tag }}
                 {{ filter.form.ente|htmlattributes:"class:form-control" }}
             </div>
-            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
                 {{ filter.form.area.label_tag }}
                 {{ filter.form.area|htmlattributes:"class:form-control" }}
             </div>
-            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
                 {{ filter.form.responsable.label_tag }}
                 {{ filter.form.responsable|htmlattributes:"class:form-control" }}
             </div>
@@ -188,13 +188,13 @@
         /* Sidebar Navigation */
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
-            document.body.style.marginLeft = "250px";
+            // document.body.style.marginLeft = "250px";
         }
 
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
-            document.body.style.marginLeft= "0";
-            document.body.style.backgroundColor = "white";
+            // document.body.style.marginLeft= "0";
+            //document.body.style.backgroundColor = "white";
         }
     </script>
 {% endblock %}

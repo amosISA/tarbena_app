@@ -101,6 +101,7 @@ class Subvencion(TimeStampedModel):
     user = models.ForeignKey(User, blank=True, null=True)
     fecha_publicacion = models.DateField(blank=True, null=True)
     fin = models.DateField(blank=True, null=True)
+    fecha_resolucion = models.DateField(blank=True, null=True)
     responsable = models.ManyToManyField(User, related_name='responsable', blank=True)
     nombre = models.TextField(blank=False, default="")
 

@@ -133,12 +133,12 @@ input[type=checkbox], input[type=radio] {
 
 .sidenav .closebtn {
     position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
+    top: -10px;
+    right: 2px;
+    font-size: 20px;
     margin-left: 50px;
 }
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
+  .sidenav {padding-top: 30px;}
   .sidenav a {font-size: 18px;}
 }

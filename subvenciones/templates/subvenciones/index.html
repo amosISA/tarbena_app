@@ -51,19 +51,33 @@
 
     <!-- Info app: ESTADOS -->
         <div class="boards-drawer">
-            <div class="boards-drawer-content" style="max-height: 359px;">
+            <div class="boards-drawer-content" style="max-height: 450px;">
                 <div class="board-drawer-boards">
                     <div>
                         <div class="js-section-content">
                             <ul class="sidebar-boards-list">
+                                {% for e in estados %}
+                                    <li class="compact-board-tile">
+                                        <div class="compact-board-tile-wrapper">
+                                            <span class="compact-board-tile-background" style="background-color: {{ e.color }};"></span> <!-- Modify background color -->
+                                            <span class="compact-board-tile-fade"></span>
+                                            <a class="js-open-board compact-board-tile-link" href="#">
+                                                <span class="compact-board-tile-link-thumbnail" style="background-color: {{ e.color }};"></span> <!-- Modify background color -->
+                                                <span class="compact-board-tile-link-text">
+                                                    <span class="compact-board-tile-text-name">{{ e.nombre }} ({{e.the_count}})</span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                {% endfor %}
                                 <li class="compact-board-tile">
                                     <div class="compact-board-tile-wrapper">
-                                        <span class="compact-board-tile-background" style="background-color: #0079BF;"></span>
+                                        <span class="compact-board-tile-background" style="background-color: #ff0017;"></span>
                                         <span class="compact-board-tile-fade"></span>
-                                        <a class="js-open-board compact-board-tile-link" href="#">
-                                            <span class="compact-board-tile-link-thumbnail" style="background-color: #0079BF;"></span>
+                                        <a class="js-open-board compact-board-tile-link" href="{% url 'subvenciones:index' %}">
+                                            <span class="compact-board-tile-link-thumbnail" style="background-color: #ff0017;"></span>
                                             <span class="compact-board-tile-link-text">
-                                                <span class="compact-board-tile-text-name">Subvenciones</span>
+                                                <span class="compact-board-tile-text-name">Todas las subvenciones ({{ total_subvenciones }})</span>
                                             </span>
                                         </a>
                                     </div>
@@ -225,7 +239,28 @@
 
         /* Info ESTADOS */
         $('.estados-info').click(function() {
-            $('.boards-drawer').attr('display', 'block');
+            $('.boards-drawer:visible').length ? $('.boards-drawer').css('display', 'none') : $('.boards-drawer').css('display', 'block');
+        });
+
+        /* Estados hover */
+        $('.compact-board-tile-link').each(function() {
+            $(this).mouseover(function() {
+                $('span:first', this).css({'opacity': 1});
+            }).mouseleave(function() {
+                $('span:first', this).css({'opacity': .7});
+            });
+        });
+
+        // Close Estados tab when click outside of that DIV
+        $(document).mouseup(function(e)
+        {
+            var container = $(".boards-drawer");
+
+            // if the target of the click isn't the container nor a descendant of the container
+            if (!container.is(e.target) && container.has(e.target).length === 0)
+            {
+                container.hide();
+            }
         });
     </script>
 {% endblock %}

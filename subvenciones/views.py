@@ -36,6 +36,7 @@ def index_subvenciones(request, estado_slug=None):
     colectivos = Colectivo.objects.all()
     userlikes = Subvencion.objects.filter(likes__in=[request.user])
     days_until_estado = ['7d', '6d', '5d', '4d', '3d', '2d', '1d', 'expires today', 'expired']
+    estados = Estado.objects.all().annotate(the_count=Count('subvencion__estado')) # later in template i can use: e.the_count
 
     # Handle user favourites
     if request.path == '/subvenciones/favourites/':
@@ -65,7 +66,8 @@ def index_subvenciones(request, estado_slug=None):
                    'days_until_estado': days_until_estado,
                    'total_subvenciones': total_subvenciones,
                    'colectivos': colectivos,
-                   'userlikes': userlikes})
+                   'userlikes': userlikes,
+                   'estados': estados})
 
 # --------------- Get Areas related to each ente with AJAX --------------- #
 def ajax_se_relaciona_con(request):

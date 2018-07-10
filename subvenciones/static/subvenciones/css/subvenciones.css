@@ -140,9 +140,9 @@ input[type=checkbox], input[type=radio] {
   overflow: hidden;
   position: fixed;
   right: 55px;
-  width: 280px;
+  width: 315px;
   top: 51px;
-  z-index: 60; }
+  z-index: 1060; }
 
 .boards-drawer .is-shown {
   display: block; }
@@ -155,7 +155,8 @@ input[type=checkbox], input[type=radio] {
 .sidebar-boards-list {
   position: relative;
   padding: 0;
-  list-style: none; }
+  list-style: none;
+  margin-bottom: 0 !important; }
 
 .compact-board-tile {
   box-sizing: border-box;
@@ -207,7 +208,7 @@ input[type=checkbox], input[type=radio] {
 .compact-board-tile-link-text {
   flex: 1 1 auto;
   overflow: hidden;
-  padding: 9px 0 9px 10px; }
+  padding: 6px 0 9px 10px; }
 
 .compact-board-tile-text-name {
   display: block;

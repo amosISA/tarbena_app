@@ -24,6 +24,7 @@ class TimeStampedModel(models.Model):
 class Estado(TimeStampedModel):
     nombre = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique=True, default=None, blank=True, null=True)
+    color = models.CharField(max_length=250 ,default="#fff")
 
     def __str__(self):
         return '{}'.format(self.nombre)
@@ -40,7 +41,7 @@ class Estado(TimeStampedModel):
                        args=[self.slug])
 
     def count_subsidies(self):
-        return Subvencion.objects.filter(estado=self.id).count()
+        return Subvencion.objects.select_related('estado').filter(estado=self.id)
 
 class Colectivo(models.Model):
     nombre = models.CharField(max_length=250)

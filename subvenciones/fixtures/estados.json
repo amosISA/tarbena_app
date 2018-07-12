@@ -4,9 +4,10 @@
   "pk": 1,
   "fields": {
     "created": "2018-05-07T20:47:32.920Z",
-    "updated": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-07-10T11:42:14.818Z",
     "nombre": "Cerrada a espera de resoluci\u00f3n",
-    "slug": "cerrada-a-espera-de-resolucion"
+    "slug": "cerrada-a-espera-de-resolucion",
+    "color": "#99cc00"
   }
 },
 {
@@ -14,9 +15,10 @@
   "pk": 2,
   "fields": {
     "created": "2018-05-07T20:47:32.920Z",
-    "updated": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-07-10T11:44:02.329Z",
     "nombre": "No aplicable",
-    "slug": "no-aplicable"
+    "slug": "no-aplicable",
+    "color": "#333333"
   }
 },
 {
@@ -24,9 +26,10 @@
   "pk": 3,
   "fields": {
     "created": "2018-05-07T20:47:32.920Z",
-    "updated": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-07-10T11:44:41.553Z",
     "nombre": "Solicitada con detalles por definir",
-    "slug": "solicitada-con-detalles-por-definir"
+    "slug": "solicitada-con-detalles-por-definir",
+    "color": "#9fc5e8"
   }
 },
 {
@@ -34,9 +37,10 @@
   "pk": 4,
   "fields": {
     "created": "2018-05-07T20:47:32.920Z",
-    "updated": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-07-10T11:43:09.985Z",
     "nombre": "Defini\u00e9ndose",
-    "slug": "definiendose"
+    "slug": "definiendose",
+    "color": "#ffd966"
   }
 },
 {
@@ -44,9 +48,10 @@
   "pk": 5,
   "fields": {
     "created": "2018-05-07T20:47:32.920Z",
-    "updated": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-07-10T11:41:59.003Z",
     "nombre": "Aprobada",
-    "slug": "aprobada"
+    "slug": "aprobada",
+    "color": "#3c78d8"
   }
 },
 {
@@ -54,9 +59,10 @@
   "pk": 6,
   "fields": {
     "created": "2018-05-07T20:47:32.920Z",
-    "updated": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-07-10T11:43:24.001Z",
     "nombre": "Desestimada",
-    "slug": "desestimada"
+    "slug": "desestimada",
+    "color": "#666666"
   }
 },
 {
@@ -64,9 +70,10 @@
   "pk": 7,
   "fields": {
     "created": "2018-05-07T20:47:32.920Z",
-    "updated": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-07-10T11:43:35.695Z",
     "nombre": "Ejecutada y terminada",
-    "slug": "ejecutada-y-terminada"
+    "slug": "ejecutada-y-terminada",
+    "color": "#808000"
   }
 },
 {
@@ -74,9 +81,10 @@
   "pk": 8,
   "fields": {
     "created": "2018-05-07T20:47:32.920Z",
-    "updated": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-07-10T11:43:52.592Z",
     "nombre": "Limbo",
-    "slug": "limbo"
+    "slug": "limbo",
+    "color": "#ffff00"
   }
 },
 {
@@ -84,9 +92,10 @@
   "pk": 9,
   "fields": {
     "created": "2018-05-07T20:47:32.920Z",
-    "updated": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-07-10T11:44:25.910Z",
     "nombre": "Sin atender",
-    "slug": "sin-atender"
+    "slug": "sin-atender",
+    "color": "#FFFFFF"
   }
 },
 {
@@ -94,9 +103,10 @@
   "pk": 10,
   "fields": {
     "created": "2018-05-07T20:47:32.920Z",
-    "updated": "2018-05-07T20:47:32.920Z",
+    "updated": "2018-07-10T11:44:15.353Z",
     "nombre": "postergado",
-    "slug": "postergado"
+    "slug": "postergado",
+    "color": "#aaaaaa"
   }
 }
 ]

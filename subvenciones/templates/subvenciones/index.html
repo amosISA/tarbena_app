@@ -163,7 +163,7 @@
                                     <div class="estadoBloque estado">{{ f.estado }}</div>
                                     <div class="responsables">
                                         {% for responsable in f.responsable.all %}
-                                            <span class="badge badge-pill badge-inverse" tabindex="0" data-toggle="popover" data-trigger="hover" data-content="{{ responsable.username }}">
+                                            <span class="badge badge-pill badge-inverse" tabindex="0" data-toggle="popover" data-trigger="hover" data-content="{{ responsable.first_name }}">
                                                 {{ responsable|split_value }}
                                             </span>
                                         {% endfor %}
@@ -174,7 +174,7 @@
                                 <td class="td4">
                                     <!-- Comentarios -->
                                     {% for comment in f.comments.all %}
-                                        <span class="comment_user_date">{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</span>:
+                                        <span class="comment_user_date">{{ comment.user.first_name }}: {{ comment.created|date:"d/m/Y" }}</span>:
                                         {{ comment.contenido|safe_markdown }}
                                     {% endfor %}
                                 </td>

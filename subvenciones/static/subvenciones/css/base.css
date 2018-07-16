@@ -83,7 +83,7 @@ table#subv_table_ordering .bloque01 {
   margin: 0px;
 }
 table#subv_table_ordering .repositorios {
-width: 250px;
+width: 100%;
 float: left;
 display: block;}
 table#subv_table_ordering .drive {
@@ -93,7 +93,7 @@ table#subv_table_ordering .drive {
   margin: 2px;
   border-radius: 1px;
   padding: 3px 7px;
-  width: 96%;
+  width: 97%;
   color: #000;
 }
 table#subv_table_ordering .gestiona {
@@ -103,7 +103,7 @@ table#subv_table_ordering .gestiona {
   margin: 2px;
   border-radius: 1px;
   padding: 5px 7px;
-  width: 96%;
+  width: 97%;
   color: #000;
 }
 table#subv_table_ordering .cuantia {

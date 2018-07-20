@@ -26,8 +26,7 @@
 {% block content %}
 
     <!-- Side Navigation Menu for Filtering -->
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="cd-filter">
         <form action="" method="get" style="padding-left:15px;padding-right:15px;padding-bottom:15px;">
             <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
                 {{ filter.form.estado.label_tag }}
@@ -47,6 +46,7 @@
             </div>
             <input type="submit" value="Filtrar" />
         </form>
+        <a href="javascript:void(0)" onclick="closeNav()" class="cd-close">Cerrar</a>
     </div>
 
     <!-- Info app: ESTADOS -->
@@ -227,14 +227,11 @@
     <script>
         /* Sidebar Navigation */
         function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-            // document.body.style.marginLeft = "250px";
+            $('.cd-filter').toggleClass('filter-is-visible');
         }
 
         function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            // document.body.style.marginLeft= "0";
-            //document.body.style.backgroundColor = "white";
+            $('.cd-filter').toggleClass('filter-is-visible');
         }
 
         /* Info ESTADOS */

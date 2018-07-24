@@ -224,3 +224,6 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+
+# The max number of fields you can delete on admin site
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240

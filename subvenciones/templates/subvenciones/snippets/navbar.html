@@ -74,7 +74,7 @@
                         </li>
 
                         <div class="notification-box-list">
-                            {% user_notifications %}
+                            {% render_notifications using request.user.notifications.active.prefetch %}
                         </div>
 
                         <li class="footer bg-dark text-center">

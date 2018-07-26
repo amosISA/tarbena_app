@@ -1,24 +1,18 @@
 {% load notification_tags %}
 {% include_notify_js_variables %}
-<nav class="navbar navbar-expand-sm navbar-custom fixed-top">
-    <div class="row">
-        <div class="col brand-styled-nav">
-            <a data-toggle="collapse" href="#" {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' %}onclick="openNav()"{% endif %} class="navbar-brand">Gestión de Subvenciones</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCustom">
-                <i class="fa fa-bars fa-lg py-1 text-white"></i>
-            </button>
-        </div>
-    </div>
-
-    <div class="navbar-collapse collapse" id="navbarCustom">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item {% if request.path == '/subvenciones/' %}active{% endif %}">
-                <a class="nav-link" href="{% url 'subvenciones:index' %}"> <i class="fas fa-home"></i> Inicio</a>
+<div class="subvenciones-header-menu fixed">
+    <div class="subvenciones-header-menu__container">
+        <a class="subv-anchor-text" href="#" {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' %}onclick="openNav()"{% endif %}>
+            <div class="subvenciones-header-menu__logo">Gestión de Subvenciones</div>
+        </a>
+        <ul class="subvenciones-ul-nav subvencion-ui-navigation">
+            <li class="subv-li-nav subvenciones-ui-menu {% if request.path == '/subvenciones/' %}active{% else %}noactive{% endif %}">
+                <a href="{% url 'subvenciones:index' %}" class="subv-a-nav-menu"> <i class="fas fa-home"></i> Inicio</a>
             </li>
-            <li class="nav-item {% if request.path == '/subvenciones/new/' %}active{% endif %}">
-                <a class="nav-link" href="{% url 'subvenciones:create' %}"> <i class="far fa-file"></i> Crear subvención</a>
+            <li class="subv-li-nav subvenciones-ui-menu {% if request.path == '/subvenciones/new/' %}active{% else %}noactive{% endif %}">
+                <a href="{% url 'subvenciones:create' %}" class="subv-a-nav-menu"> <i class="far fa-file"></i> Crear subvención</a>
             </li>
-            <li class="nav-item">
+            <li class="subv-li-nav subvenciones-ui-menu">
                 <!-- Index, Cuando creas y cuando pinchas en favoritos aparecerá el contador de cuántas favortias tengo -->
                 <!-- También Estado, Area, Responsable -->
                 {% url 'subvenciones:subvencion_by_category' estado.slug as estado %}
@@ -29,19 +23,19 @@
                 {% url 'subvenciones:edit_subvencion' subvencion.id as editsubv %}
                 {% url 'subvenciones:delete_subvencion' subvencion.id as delsubv %}
                 {% if request.path == '/subvenciones/' or request.path == '/subvenciones/new/' or request.path == '/subvenciones/favourites/' or request.path == estado or request.path == area or request.get_full_path == responsable %}
-                    <a id="indexFavouritesButton" class="nav-link" href="{% url 'subvenciones:favourites' %}">
+                    <a id="indexFavouritesButton" href="{% url 'subvenciones:favourites' %}" class="subv-a-nav-menu">
                         <span id="badge-count-likes" class="badge">{{ userlikes.count }}</span>
                         <i class="far fa-bookmark"></i> Ver favoritos
                     </a>
                 <!-- En detalles, al editar, borrar la subvención, aparecerá como favorita o no -->
                 {% elif request.path == detail or request.path == editsubv or request.path == delsubv %}
                     {% with total_likes=subvencion.likes.count likes=subvencion.likes.all %}
-                        <a class="nav-link like-button-details" href="#" data-id="{{ subvencion.id }}" data-action="{% if request.user in likes %}un{% endif %}like">
+                        <a href="#" class="subv-a-nav-menu like-button-details" data-id="{{ subvencion.id }}" data-action="{% if request.user in likes %}un{% endif %}like">
                             <i class="likes_heart {% if request.user in likes %}fas{% else %}far{% endif %} fa-bookmark"></i> Ver favoritos
                         </a>
                     {% endwith %}
                 {% else %}
-                    <a id="indexFavouritesButton" class="nav-link" href="{% url 'subvenciones:favourites' %}">
+                    <a id="indexFavouritesButton" href="{% url 'subvenciones:favourites' %}" class="subv-a-nav-menu">
                         <span id="badge-count-likes" class="badge">{{ userlikes.count }}</span>
                         <i class="far fa-bookmark"></i> Ver favoritos
                     </a>
@@ -49,52 +43,65 @@
             </li>
         </ul>
 
-        <ul class="navbar-nav" style="margin-right:30px;">
+        <!-- Right menu -->
+        <div class="subvenciones-header-menu__right-item">
             {% if request.user.is_authenticated %}
                 {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' %}
-                    <li class="nav-item" style="margin-right:20px;margin-top: 8px;">
-                        <span id="button-actual-subsidie-navigation"><i class="fas fa-exchange-alt"></i></span>
-                    </li>
-                    <li class="nav-item" style="margin-right:20px;">
+                    <div class="subv-nav-search-bar search-bar-right-item">
                         <input type="text" id="search-on-navigation">
-                    </li>
-                {% endif  %}
-                <!-- Notification system -->
-                <li class="nav-item dropdown dropdown-notifications">
-                    <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-bell"></i>
-                    </a>
-                    <ul class="dropdown-menu row-user-notifications">
-                        <li class="head text-light bg-dark">
-                            <div class="row">
-                                <div class="col-lg-12 col-sm-12 col-12">
-                                    <span>Notificaciones</span>
-                                </div>
-                            </div>
-                        </li>
-
-                        <div class="notification-box-list">
-                            {% render_notifications using request.user.notifications.active.prefetch %}
+                    </div>
+                    <div class="subv-header-exchange">
+                        <div class="subvenciones-header-menu__right-item__icon">
+                            <span id="button-actual-subsidie-navigation" class="subvenciones-header-menu__right-item__span"><i class="fas fa-exchange-alt"></i></span>
                         </div>
+                    </div>
+                {% endif  %}
 
-                        <li class="footer bg-dark text-center">
-                            <!--<a href="" class="text-light">Ver Todo</a>-->
-                        </li>
-                    </ul>
-                </li>
+                <!-- Notification system -->
+                <div class="subv-header-notification">
+                    <div class="subvenciones-header-menu__right-item__icon">
+                        <span id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="subvenciones-header-menu__right-item__span"><i class="fa fa-bell"></i></span>
+                        <ul class="dropdown-menu row-user-notifications">
+                            <li class="head text-light bg-dark">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12 col-12">
+                                        <span>Notificaciones</span>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <div class="notification-box-list">
+                                {% render_notifications using request.user.notifications.active.prefetch %}
+                            </div>
+
+                            <li class="footer bg-dark text-center">
+                                <!--<a href="" class="text-light">Ver Todo</a>-->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
                 {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' %}
-                    <li class="nav-item estados-info">
-                        <a class="nav-link text-light" href="#"><i class="fas fa-clipboard-list"></i></a>
-                    </li>
+                    <div class="subv-header-notification estados-info">
+                        <span class="subvenciones-header-menu__right-item__span"><i class="fas fa-clipboard-list"></i></span>
+                    </div>
                 {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profiles:user_profile' username=request.user %}"> <i class="far fa-user"></i> {{ request.user.username|title }}</a>
-                </li>
-            {% else %}
-                <li class="nav-link" class="nav-item">Bienvenido nuevo usuario. Por favor inicie sesión</li>
-            {% endif %}
 
-            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"> <i class="fas fa-sign-out-alt"></i> Salir</a></li>
-        </ul>
+                <div class="subvenciones-header-settings">
+                    <div class="subvenciones-header-settings__user-info">
+                        <ul class="subvenciones-ul-nav subvencion-ui-navigation">
+                            <li class="subv-li-nav subvenciones-ui-menu">
+                                <a href="{% url 'profiles:user_profile' username=request.user %}" class="subv-a-nav-menu"> <i class="far fa-user"></i> {{ request.user.username|title }}</a>
+                            </li>
+                            <li class="subv-li-nav subvenciones-ui-menu">
+                                <a href="{% url 'logout' %}" class="subv-a-nav-menu"> <i class="fas fa-sign-out-alt"></i> Salir</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% else %}
+                <div>Bienvenido nuevo usuario. Por favor inicie sesión</div>
+            {% endif %}
+        </div>
     </div>
-</nav>
+</div>

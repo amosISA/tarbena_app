@@ -250,7 +250,7 @@
         });
 
         // Close Estados tab when click outside of that DIV
-        $(document).mouseup(function(e)
+        /*$(document).mouseup(function(e)
         {
             var container = $(".boards-drawer");
 
@@ -259,6 +259,9 @@
             {
                 container.hide();
             }
-        });
+        });*/
+
+        // Change label estado value, because filtering it leaves it as: "Estado nombre"
+        $('label[for="id_estado"]').html('Estado:');
     </script>
 {% endblock %}

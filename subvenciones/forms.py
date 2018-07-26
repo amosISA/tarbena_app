@@ -24,9 +24,15 @@ class AreaForm(forms.ModelForm):
         fields = ["nombre", "ente"]
 
 class SubvencionFilter(django_filters.FilterSet):
+    estado = django_filters.filters.ModelMultipleChoiceFilter(
+        field_name='estado__nombre',
+        to_field_name='nombre',
+        queryset=Estado.objects.all(),
+    )
+
     class Meta:
         model = Subvencion
-        fields = ['estado', 'ente', 'area', 'responsable']
+        fields = ['ente', 'area', 'responsable']
 
 class SubvencionForm(forms.ModelForm):
     class Meta:

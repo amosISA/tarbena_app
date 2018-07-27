@@ -277,7 +277,6 @@ body .subvenciones-header-menu {
     top: 0;
     background: #07889B;
     z-index: 504;
-    padding-right: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -310,6 +309,24 @@ body .subvencion-ui-navigation {
     flex: 1;
     z-index: 4;
     margin-left: 8px;
+}
+@media (max-width: 1180px) {
+    body .subvenciones-header-menu .subvencion-ui-navigation, body .subvenciones-header-menu .subvenciones-header-menu__right-item {
+        display: none;
+    }
+}
+@media (max-width: 365px) {
+    body .subvenciones-header-menu .subv-anchor-text {
+        background-color: #044a54;
+        padding-top: 0.7rem;
+        padding-right: 0.3rem;
+        padding-bottom: 0.8rem;
+        padding-left: 0.3rem;
+        margin-right: 1rem;
+        font-size: 1rem;
+        line-height: inherit;
+        white-space: nowrap;
+    }
 }
 ul.subvenciones-ul-nav {
     list-style: none;
@@ -352,15 +369,14 @@ body .subvenciones-header-menu__right-item {
 }
 
 body .subvenciones-header-menu__right-item .subv-nav-search-bar {
-    font-size: 12px;
-    padding: .8em 1.2em;
+    font-size: 17px;
+    padding-bottom: 9px;
     margin-right: 16px;
     min-width: 93px;
 }
 
 body .subv-nav-search-bar {
     color: #000;
-    background: #92cbd3;
 }
 
 body .subv-header-exchange {
@@ -380,7 +396,6 @@ body .subvenciones-header-menu__right-item__icon {
     justify-content: center;
 }
 span.subvenciones-header-menu__right-item__span {
-    display: inline-flex;
     margin: 0;
 }
 span.subvenciones-header-menu__right-item__span i {
@@ -399,7 +414,6 @@ body .subv-header-notification {
 
 body .subvenciones-header-settings {
     position: relative;
-    width: 200px;
 }
 body .subvenciones-header-settings__user-info {
     display: flex;
@@ -422,4 +436,118 @@ a.subv-anchor-text {
 }
 a.indexFavouritesButton {
     padding-right: 0;
+}
+span#badge-count-likes {
+    margin-top: 0!important;
+}
+span#navbarDropdown {
+    &:hover {
+        color: #dddddd;
+    }
+}
+span#estados__info-nav {
+    &:hover {
+        color: #dddddd;
+    }
+}
+.subvenciones-header-menu__right-item .subvenciones-nav-dropdown {
+    height: 100%;
+}
+.subvenciones-nav-dropdown .dropdown-menu-subv {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.dropdown-menu__icon.dropdown-subv__icon {
+    height: 26px;
+    width: 50px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dropdown-menu__icon.dropdown-subv__icon span.subv-dropdown-icon__span, .dropdown-subv__icon span:before, .dropdown-subv__icon span:after {
+    transition: all 300ms ease-in-out;
+    border-radius: 1px;
+    height: 3px;
+    width: 18px;
+    background-color: #fff;
+    position: absolute;
+    display: block;
+    content: '';
+}
+.dropdown-menu__icon span:before { top: -6px; }
+.dropdown-menu__icon span:after { top: 6px; }
+.dropdown-menu__icon--active.dropdown-subv__icon span.subv-dropdown-icon__span {
+    background-color: transparent;
+}
+.dropdown-menu__icon--active span { background-color: transparent; }
+.dropdown-menu__icon--active span:before {
+    transform: rotate(45deg);
+    top: 0;
+}
+.dropdown-menu__icon--active span:after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+.dropdown-menu__icon--active.dropdown-subv__icon span.subv-dropdown-icon__span:before, .dropdown-menu__icon--active.dropdown-subv__icon span.subv-dropdown-icon__span:after {
+    transition: all 150ms ease-in-out;
+}
+.dropdown-menu__icon.dropdown-subv__icon:hover span.subv-dropdown-icon__span {
+    background-color: #fff;
+    opacity: 0.8;
+}
+.dropdown-menu__icon--active.dropdown-subv__icon:hover span.subv-dropdown-icon__span {
+    background-color: transparent;
+}
+
+.dropdown-menu__box--hide.subvenciones-nav-dropdown {
+    display: none;
+}
+.dropdown-menu__box--right.subvenciones-nav-dropdown {
+    right: 0;
+}
+.dropdown-menu__box.subvenciones-nav-dropdown {
+    position: absolute;
+    width: 220px;
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.17);
+    top: 100%;
+    z-index: 4;
+}
+.menu-item.anchor-drop-dwn__subv {
+    display: inline-block;
+    padding: 12px 16px;
+    width: 100%;
+    font-size: 14px;
+    background: #fff;
+    color: #333;
+}
+.menu-item.anchor-drop-dwn__subv:hover {
+    text-decoration: none;
+    background-color: #f6f6f6;
+    color: #333;
+}
+div.subv_inside__anchor--drop {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+span.span__drop--itm {
+    display: inline-flex;
+    margin: 0;
+}
+span.span__drop--itm i {
+    width: 20px;
+    height: 20px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
 }

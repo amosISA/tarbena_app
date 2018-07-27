@@ -23,19 +23,19 @@
                 {% url 'subvenciones:edit_subvencion' subvencion.id as editsubv %}
                 {% url 'subvenciones:delete_subvencion' subvencion.id as delsubv %}
                 {% if request.path == '/subvenciones/' or request.path == '/subvenciones/new/' or request.path == '/subvenciones/favourites/' or request.path == estado or request.path == area or request.get_full_path == responsable %}
-                    <a id="indexFavouritesButton" href="{% url 'subvenciones:favourites' %}" class="subv-a-nav-menu">
+                    <a id="indexFavouritesButton" href="{% url 'subvenciones:favourites' %}" class="subv-a-nav-menu nav-link">
                         <span id="badge-count-likes" class="badge">{{ userlikes.count }}</span>
                         <i class="far fa-bookmark"></i> Ver favoritos
                     </a>
                 <!-- En detalles, al editar, borrar la subvención, aparecerá como favorita o no -->
                 {% elif request.path == detail or request.path == editsubv or request.path == delsubv %}
                     {% with total_likes=subvencion.likes.count likes=subvencion.likes.all %}
-                        <a href="#" class="subv-a-nav-menu like-button-details" data-id="{{ subvencion.id }}" data-action="{% if request.user in likes %}un{% endif %}like">
+                        <a href="#" class="subv-a-nav-menu like-button-details nav-link" data-id="{{ subvencion.id }}" data-action="{% if request.user in likes %}un{% endif %}like">
                             <i class="likes_heart {% if request.user in likes %}fas{% else %}far{% endif %} fa-bookmark"></i> Ver favoritos
                         </a>
                     {% endwith %}
                 {% else %}
-                    <a id="indexFavouritesButton" href="{% url 'subvenciones:favourites' %}" class="subv-a-nav-menu">
+                    <a id="indexFavouritesButton" href="{% url 'subvenciones:favourites' %}" class="subv-a-nav-menu nav-link">
                         <span id="badge-count-likes" class="badge">{{ userlikes.count }}</span>
                         <i class="far fa-bookmark"></i> Ver favoritos
                     </a>
@@ -47,13 +47,13 @@
         <div class="subvenciones-header-menu__right-item">
             {% if request.user.is_authenticated %}
                 {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' %}
-                    <div class="subv-nav-search-bar search-bar-right-item">
-                        <input type="text" id="search-on-navigation">
-                    </div>
                     <div class="subv-header-exchange">
                         <div class="subvenciones-header-menu__right-item__icon">
                             <span id="button-actual-subsidie-navigation" class="subvenciones-header-menu__right-item__span"><i class="fas fa-exchange-alt"></i></span>
                         </div>
+                    </div>
+                    <div class="subv-nav-search-bar search-bar-right-item">
+                        <input type="text" id="search-on-navigation">
                     </div>
                 {% endif  %}
 
@@ -83,25 +83,38 @@
 
                 {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' %}
                     <div class="subv-header-notification estados-info">
-                        <span class="subvenciones-header-menu__right-item__span"><i class="fas fa-clipboard-list"></i></span>
+                        <div class="subvenciones-header-menu__right-item__icon">
+                            <span id="estados__info-nav" class="subvenciones-header-menu__right-item__span"><i class="fas fa-clipboard-list"></i></span>
+                        </div>
                     </div>
                 {% endif %}
-
-                <div class="subvenciones-header-settings">
-                    <div class="subvenciones-header-settings__user-info">
-                        <ul class="subvenciones-ul-nav subvencion-ui-navigation">
-                            <li class="subv-li-nav subvenciones-ui-menu">
-                                <a href="{% url 'profiles:user_profile' username=request.user %}" class="subv-a-nav-menu"> <i class="far fa-user"></i> {{ request.user.username|title }}</a>
-                            </li>
-                            <li class="subv-li-nav subvenciones-ui-menu">
-                                <a href="{% url 'logout' %}" class="subv-a-nav-menu"> <i class="fas fa-sign-out-alt"></i> Salir</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            {% else %}
-                <div>Bienvenido nuevo usuario. Por favor inicie sesión</div>
             {% endif %}
+        </div>
+        <div class="subvenciones-nav-dropdown dropdown-menu-subv">
+            <div class="dropdown-subv__icon dropdown-menu__icon">
+                <span class="subv-dropdown-icon__span"></span>
+            </div>
+
+            <div id="subvenciones-nav-dropdown-toggle" class="subvenciones-nav-dropdown dropdown-menu__box dropdown-menu__box--hide dropdown-menu__box--right">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'profiles:user_profile' username=request.user %}" class="anchor-drop-dwn__subv menu-item">
+                    <div class="subv_inside__anchor--drop">
+                        Mi perfil <span class="span__drop--itm"><i class="far fa-user"></i></span>
+                    </div>
+                </a>
+                <a href="{% url 'logout' %}" class="anchor-drop-dwn__subv menu-item">
+                    <div class="subv_inside__anchor--drop">
+                        Salir <span class="span__drop--itm"><i class="fas fa-sign-out-alt"></i></span>
+                    </div>
+                </a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="anchor-drop-dwn__subv menu-item">
+                        <div class="subv_inside__anchor--drop">
+                            Login <span class="span__drop--itm"><i class="fas fa-sign-in-alt"></i></span>
+                        </div>
+                    </a>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>

@@ -66,6 +66,9 @@ urlpatterns = [
     url(r'^terms/$', views.terms_privacy_cookies, {'name':'terms'}, name='terms'),
     url(r'^privacy/$', views.terms_privacy_cookies, {'name':'privacy'}, name='privacy'),
     url(r'^cookies/$', views.terms_privacy_cookies, {'name':'cookies'}, name='cookies'),
+
+    # Holidays API
+    url(r'^api/', include('holidays.api.urls', namespace='api')),
 ]
 
 if settings.DEBUG:

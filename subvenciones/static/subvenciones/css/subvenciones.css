@@ -153,6 +153,22 @@ input[type=checkbox], input[type=radio] {
 .cd-filter .cd-close:hover {
   background: #021c1f; }
 
+.cd-filter ul#id_estado {
+  height: 100px;
+  overflow: auto; }
+  .cd-filter ul#id_estado li {
+    list-style-type: none;
+    position: relative; }
+  .cd-filter ul#id_estado label {
+    display: block;
+    padding-left: 20px;
+    padding-bottom: 2px; }
+    .cd-filter ul#id_estado label:hover {
+      cursor: pointer; }
+    .cd-filter ul#id_estado label input {
+      width: 14px;
+      margin: 5.4px 0 0 -17px !important; }
+
 /* Estados info div */
 .boards-drawer {
   background: #fff;

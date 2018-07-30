@@ -28,6 +28,7 @@ class SubvencionFilter(django_filters.FilterSet):
         field_name='estado__nombre',
         to_field_name='nombre',
         queryset=Estado.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
     )
 
     class Meta:

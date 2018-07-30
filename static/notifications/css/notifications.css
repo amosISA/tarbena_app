@@ -1,17 +1,25 @@
 .dropdown-menu{
-    top: 60px;
+    top: 25px!important;
     right: 0px;
-    left: unset;
-    width: 900px;
+    left: -90px!important;
+    width: 700px;
     box-shadow: 0px 5px 7px -1px #c1c1c1;
     padding-bottom: 0px;
     padding: 0px;
     background-color: #f5f5f5!important;
+    cursor: context-menu;
 }
 .dropdown-menu .notification-box-list {
     height: 294px;
     padding: 5px;
     overflow: auto;
+}
+.dropdown-menu .notification-box-list a {
+    color: #007bff;
+}
+.dropdown-menu .notification-box-list a:hover {
+    color: #007bff;
+    text-decoration: underline;
 }
 .dropdown-menu .notif-button-close {
     padding: 0;

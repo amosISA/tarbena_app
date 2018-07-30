@@ -29,7 +29,7 @@
     <!-- Side Navigation Menu for Filtering -->
     <div class="cd-filter">
         <form action="" method="get" style="padding-left:15px;padding-right:15px;padding-bottom:15px;">
-            <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
+            <div id="filter_estado__nombre" class="form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
                 {{ filter.form.estado.label_tag }}
                 {{ filter.form.estado|htmlattributes:"class:form-control" }}
             </div>
@@ -263,6 +263,6 @@
         });*/
 
         // Change label estado value, because filtering it leaves it as: "Estado nombre"
-        $('label[for="id_estado"]').html('Estado:');
+        $('#filter_estado__nombre > label').html('Estado:');
     </script>
 {% endblock %}

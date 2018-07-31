@@ -68,7 +68,20 @@ web-based tool for monitoring Celery. You can install Flower using the command
 Once installed, you can launch Flower running the following command from your
 project directory::
 
-    celery -A conf flower
+    celery -A config flower
 
 Open http://localhost:5555/dashboard in your browser. You will be able to see
-the active Celery workers and asynchronous tasks' statistics
+the active Celery workers and asynchronous tasks' statistics.
+The above command will tell you the tasks you have.
+
+| Another command for check if the tasks are successfully launched is.
+
+::
+
+    celery -A config worker -l info
+
+Things I have created:
+
+- celery.py # in my config folder
+- tasks.py # in the app you want to run tasks
+- then in views you define that task

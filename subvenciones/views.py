@@ -23,6 +23,7 @@ from notify.signals import notify
 
 from .forms import SubvencionForm, CommentFormSet, SubvencionFilter
 from .models import Subvencion, Estado, Colectivo, Area, Ente, Comment
+from .tasks import subvencion_mention_email, subvencion_create_email, subvencion_edit_email
 from src.config.settings.base import MARTOR_MARKDOWNIFY_FUNCTION
 
 import weasyprint
@@ -172,6 +173,15 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
                                        self.request.user.email,
                                        self.object,
                                        url)
+            else:
+                # Email that someone has created subsidie
+                location = reverse("subvenciones:subvencion_detail", kwargs={'id': self.object.pk})
+                url = self.request.build_absolute_uri(location)
+
+                # launch asynchronous task - celery
+                subvencion_create_email.delay(self.request.user.username, self.object.nombre, self.object, url,
+                                            self.request.user.email, ['amosisa700@gmail.com', 'jctarbena@gmail.com'])
+
 
         comments_formset.save()
 
@@ -240,6 +250,14 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
                                        self.request.user.email,
                                        self.object,
                                        url)
+            else:
+                # Email that someone has edited subsidie
+                location = reverse("subvenciones:subvencion_detail", kwargs={'id': self.object.pk})
+                url = self.request.build_absolute_uri(location)
+
+                # launch asynchronous task - celery
+                subvencion_edit_email.delay(self.request.user.username, self.object.nombre, self.object, url,
+                                            self.request.user.email, ['amosisa700@gmail.com', 'jctarbena@gmail.com'])
 
         comments_formset.save()
 
@@ -291,22 +309,8 @@ def markdown_find_mentions(markdown_text, user, user_username, name_subv, mail, 
                 if o.email:
                     email_list_users.append(o.email)
 
-    html_message = loader.render_to_string(
-        'subvenciones/subv_email_create.html',
-        {
-            'name_actor': user_username,
-            'name_subv': name_subv,
-            'object': object,
-            'url': url
-        }
-    )
-
-    send_mail('Gestión de subvenciones',
-              '',
-              mail,
-              email_list_users,  # recievers
-              html_message=html_message
-    )
+    # launch asynchronous task - celery
+    subvencion_mention_email.delay(user_username, name_subv, object, url, mail, email_list_users)
 
     if markdown_users:
         return notify.send(user, recipient_list=list(notify_list_users), actor=user,

@@ -58,35 +58,46 @@ $j(document).ready(function(){
 function businessDays(days) {
     var dataAvui = new Date($j('#id_fecha_publicacion').val());
 
-    var holidays = [
-        "01/01/2018", "06/01/2018", "30/03/2018", "01/05/2018", "15/08/2018", "12/08/2018", "01/11/2018", "06/12/2018",
-        "08/12/2018", "25/12/2018", "01/01/2019", "06/01/2019", "19/04/2019", "01/05/2019", "15/08/2019", "12/10/2019",
-        "01/11/2019", "06/12/2019", "25/12/2019"
-    ]
+    // get json API from holidays app
+    $.getJSON("/api/holidays", function(result){
+        var holidays = [];
+        $.each(result, function(i, v){
+            var new_date = new Date(v.date);
+            holidays.push(('0' + new_date.getDate()).slice(-2)+"/"+('0'+(new_date.getMonth()+1)).slice(-2)+"/"+new_date.getFullYear());
+        });
+        console.log(holidays);
 
-    for (var i=1;i<=days;i++)
-    {
-        var dataTemp = dataAvui;
-        var dataFormated = ('0' + dataTemp.getDate()).slice(-2)+"/"+('0'+(dataTemp.getMonth()+1)).slice(-2)+"/"+dataTemp.getFullYear();
-        //console.log(dataTemp.toString());
-        dataTemp.setDate(dataTemp.getDate() + 1);
-        if(dataTemp.getDay() == 6){
-            dataTemp.setDate(dataTemp.getDate() + 2);
-        }else if(dataTemp.getDay() == 0){
+        for (var i=1;i<=days;i++)
+        {
+            var dataTemp = dataAvui;
+            var dataFormated = ('0' + dataTemp.getDate()).slice(-2)+"/"+('0'+(dataTemp.getMonth()+1)).slice(-2)+"/"+dataTemp.getFullYear();
+            //console.log(dataTemp.toString());
             dataTemp.setDate(dataTemp.getDate() + 1);
-        }
-
-        for (var j = 0; j < holidays.length; j++) {
-            if (holidays[j] == dataFormated) {
-                console.log("holidays: "+holidays[j]);
-                console.log("data: "+dataFormated);
+            if(dataTemp.getDay() == 6){
+                dataTemp.setDate(dataTemp.getDate() + 2);
+            }else if(dataTemp.getDay() == 0){
                 dataTemp.setDate(dataTemp.getDate() + 1);
             }
-        }
 
-        dataAvui = dataTemp;
-        $j("#id_fin").val(dataAvui.toInputFormat());
-    }
+            for (var j = 0; j < holidays.length; j++) {
+                if (holidays[j] == dataFormated) {
+                    //console.log("holidays: "+holidays[j]);
+                    //console.log("data: "+dataFormated);
+
+                    dataTemp.setDate(dataTemp.getDate() + 1);
+                }
+            }
+
+            dataAvui = dataTemp;
+            $j("#id_fin").val(dataAvui.toInputFormat());
+        }
+    });
+
+//    var holidays = [
+//        "01/01/2018", "06/01/2018", "30/03/2018", "01/05/2018", "15/08/2018", "12/08/2018", "01/11/2018", "06/12/2018",
+//        "08/12/2018", "25/12/2018", "01/01/2019", "06/01/2019", "19/04/2019", "01/05/2019", "15/08/2019", "12/10/2019",
+//        "01/11/2019", "06/12/2019", "25/12/2019"
+//    ]
 }
 
 Date.prototype.toInputFormat = function() {

@@ -65,7 +65,7 @@ function businessDays(days) {
             var new_date = new Date(v.date);
             holidays.push(('0' + new_date.getDate()).slice(-2)+"/"+('0'+(new_date.getMonth()+1)).slice(-2)+"/"+new_date.getFullYear());
         });
-        console.log(holidays);
+        //console.log(holidays);
 
         for (var i=1;i<=days;i++)
         {

@@ -14,6 +14,7 @@ Apps
 - **Profiles**: this app provides additional user profile information
 - **Subvenciones**: subsidies management
 - **Parcelas**: parcels management with Google Maps
+- **Holidays**: holidays API with excluded days
 - **Django Honeypot**: admin security
 - **Django Admin Interface**: theme for Django Admin Panel
 - **smart-selects**: area-ente selects functionality
@@ -140,6 +141,12 @@ Things you can do with this app:
 .. note::
 
     You can download KML related to that parcel
+
+Holidays
+^^^^^^^^
+When you create or edit subsidie there are two fields: start and end day (datefield). So if you put 13/07/2018 on the start day you will have some extra options such as +10, +20, +30 days. So to avoid holidays and weekends I created this app with Django REST framework (API).
+
+Then in ``create_subvenciones.js`` I get the url with ``$.getJSON`` method.
 
 Django Honeypot
 ^^^^^^^^^^^^^^^

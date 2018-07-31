@@ -43,24 +43,24 @@ class SubvencionForm(forms.ModelForm):
             'fecha_publicacion': forms.DateInput(format='%Y-%m-%d', attrs={'type':'date'}),
             'fin': forms.DateInput(format='%Y-%m-%d', attrs={'type':'date'}),
             'fecha_resolucion': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
-            'estado': RelatedFieldWidgetWrapper(
-                Subvencion._meta.get_field('estado').formfield().widget,
-                Subvencion._meta.get_field('estado').rel,
-                my_admin_site,
-                can_add_related=True
-            ),
-            'ente': RelatedFieldWidgetWrapper(
-                Subvencion._meta.get_field('ente').formfield().widget,
-                Subvencion._meta.get_field('ente').rel,
-                my_admin_site,
-                can_add_related=True
-            ),
-            'area': RelatedFieldWidgetWrapper(
-                Subvencion._meta.get_field('area').formfield().widget,
-                Subvencion._meta.get_field('area').rel,
-                my_admin_site,
-                can_add_related=True
-            ),
+            # 'estado': RelatedFieldWidgetWrapper(
+            #     Subvencion._meta.get_field('estado').formfield().widget,
+            #     Subvencion._meta.get_field('estado').rel,
+            #     my_admin_site,
+            #     can_add_related=True
+            # ),
+            # 'ente': RelatedFieldWidgetWrapper(
+            #     Subvencion._meta.get_field('ente').formfield().widget,
+            #     Subvencion._meta.get_field('ente').rel,
+            #     my_admin_site,
+            #     can_add_related=True
+            # ),
+            # 'area': RelatedFieldWidgetWrapper(
+            #     Subvencion._meta.get_field('area').formfield().widget,
+            #     Subvencion._meta.get_field('area').rel,
+            #     my_admin_site,
+            #     can_add_related=True
+            # ),
             'se_relaciona_con': forms.CheckboxSelectMultiple(),
             'responsable': forms.CheckboxSelectMultiple(),
             'colectivo': forms.CheckboxSelectMultiple(),

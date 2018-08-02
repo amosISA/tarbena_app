@@ -1,56 +1,63 @@
+{% extends "home/base.html" %}
+{% load staticfiles %}
+{% load tags %}
 
-    <div class="ag_auth_page_register">
-        <form name="ag_register_form" class="ag_form_auth_register" method="post">
-            {% csrf_token %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'home/css/password_reset.css' %}">
+{% endblock %}
 
-            {% if form.errors %}
-                <div class="ag_form_login_message_error">
-                    {% for field in form %}
-                        {% if field.errors %}
-                            - {{ field.errors|striptags }}<br />
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            {% endif %}
+{% block title %}
+    Tárbena
+{% endblock %}
 
-            <div class="ag_form_block_input">
-                {{ form.username.label_tag }}
-                <div class="ag_form_inner_wrapper">
-                    {{ form.username }}
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+
+    {% include 'home/snippets/navbar.html' %}
+
+    <div class="topBlock">
+        <div class="topBlock__inner">
+            <div class="customizeContainer">
+                <div class="module">
+                    <h1 class="title-pass-h1">
+                        Configuración
+                    </h1>
+
+                    {% if form.errors %}
+                        <ul class="notice erros">
+                            {% for field in form %}
+                                {% if field.errors %}
+                                    - {{ field.errors|striptags }}<br />
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    <div class="session" style="height: 340px!important;">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <form method="post" accept-charset="UTF-8">
+                                    {% csrf_token %}
+
+                                    <div class="form-inputs">
+                                        {{ form.email }}
+                                        {{ form.username }}
+                                        {{ form.first_name }}
+                                        {{ form.last_name }}
+                                        <input class="reset_password__submit_button" type="submit" value="Actualizar">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="ag_form_block_input">
-                {{ form.email.label_tag }}
-                <div class="ag_form_inner_wrapper">
-                    {{ form.email }}
-                </div>
-            </div>
-
-            <div class="ag_form_block_input">
-                {{ form.first_name.label_tag }}
-                <div class="ag_form_inner_wrapper">
-                    {{ form.first_name }}
-                </div>
-            </div>
-
-            <div class="ag_form_block_input">
-                {{ form.last_name.label_tag }}
-                <div class="ag_form_inner_wrapper">
-                    {{ form.last_name }}
-                </div>
-            </div>
-
-            <div class="ag_form_block_input">
-                <div class="ag_form_inner_wrapper">
-                    <button class="ag_register_form_submit_button" type="submit">Guardar</button>
-                </div>
-            </div>
-
-            <div class="ag_auth_page_login_account_hint">
-                ¿Cambiar contraseña?
-                <a href="#" class="ag_auth_page_login_button">Change</a>
-            </div>
-
-        </form>
+        </div>
     </div>
+{% endblock %}
+
+{% block domready %}
+    $("#id_email").attr('autofocus');
+{% endblock %}

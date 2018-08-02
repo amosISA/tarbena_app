@@ -77,8 +77,10 @@
                             <div class="section-header__title">CONFIGURACIÓN</div>
                             <div class="section-header__right">
                                 <div class="user-profile__edit-btn">
-                                    <i class="fas fa-pencil-alt"></i>
-                                    EDITAR
+                                    <a href="{% url 'profiles:update_profile' %}" style="text-decoration: none;">
+                                        <i class="fas fa-pencil-alt"></i>
+                                        EDITAR
+                                    </a>
                                 </div>
                             </div>
                         </div>

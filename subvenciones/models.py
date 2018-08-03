@@ -112,6 +112,7 @@ class Subvencion(TimeStampedModel):
     solicitud = models.TextField(blank=True)
 
     cuantia_inicial = models.CharField(max_length=250, blank=True, null=True)
+    cuantia_solicitada = models.CharField(max_length=250, blank=True, null=True)
     cuantia_final = models.CharField(max_length=250, blank=True, null=True)
 
     descripcion = models.TextField(blank=True)

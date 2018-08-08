@@ -1,3 +1,21 @@
+@media (max-width: 1164px) {
+    #breadcrumb__subsidies div {
+        display: flex;
+        position: absolute;
+        padding-top: 30px;
+    }
+}
+@media (min-width: 1165px) {
+    #breadcrumb__subsidies div {
+        margin-left: calc(167px);
+        display: flex;
+    }
+}
+@media (max-width: 1164px) {
+    #breadcrumb__subsidies {
+        margin-bottom: 2.2rem!important;
+    }
+}
 #breadcrumb__subsidies {
   list-style: none;
   display: flex;
@@ -9,6 +27,7 @@
 }
 #breadcrumb__subsidies li {
   float: left;
+  white-space: nowrap;
 }
 #breadcrumb__subsidies li a {
   color: #000;

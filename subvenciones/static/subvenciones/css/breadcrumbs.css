@@ -7,7 +7,7 @@
 }
 @media (min-width: 1165px) {
     #breadcrumb__subsidies div {
-        margin-left: calc(167px);
+        margin-left: 124px;
         display: flex;
     }
 }

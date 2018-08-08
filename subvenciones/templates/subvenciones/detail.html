@@ -18,7 +18,19 @@
 {% load tags %}
     <div class="row forms_act_crea">
         <div class="ag_create_post_wrapper col-lg-12">
-            <h1 class="h1">Detalles Subvención</h1>
+
+            <ul id="breadcrumb__subsidies">
+                <li><a href="{% url 'subvenciones:index' %}"><span class="icon icon-home"> </span></a></li>
+                <li title="{{ subvencion.area }}"><a href="#">{{ subvencion.area|truncatechars:15 }}</a></li>
+                <li title="{{ subvencion.nombre }}"><a href="{{ subvencion.get_absolute_url }}">{{ subvencion.nombre|truncatechars:15 }}</a></li>
+                <li title="Creado por"><a href="#"><span class="icon icon-user"> </span> {{ subvencion.user|title }}, {{ subvencion.created }}</a></li>
+                <li title="Última modificación"><a href="#"><span class="icon icon-pencil"> </span> {{ subvencion.updated }}</a></li>
+                <div>
+                    <li><a href="{% url 'subvenciones:edit_subvencion' pk=subvencion.pk %}">Editar</a></li>
+                    <li><a href="{% url 'subvenciones:delete_subvencion' pk=subvencion.pk %}">Eliminar</a></li>
+                    <li><a href="{% url 'subvenciones:admin_subvencion_pdf' subvencion_id=subvencion.id %}" target="_blank">PDF</a></li>
+                </div>
+            </ul>
 
             <form class="form-horizontal">
                 <div class="row">
@@ -134,14 +146,6 @@
                                     <input type="text" value="{% if subvencion.cuantia_final %}{{ subvencion.cuantia_final }}{% endif %}" id="id_cuantia_final" class="form-control" readonly>
                                 </p>
                             </fieldset>
-                        </div>
-
-                        <div class="detailed-subv-actions">
-                            <div>Subvención creada por <b><i>{{ subvencion.user|title }}</i></b> el <span>{{ subvencion.created }}</span></div>
-                            <div>Última fecha de modificación: <span>{{ subvencion.updated }}</span></div>
-                            <div class="subv-edit-action"><a href="{% url 'subvenciones:edit_subvencion' pk=subvencion.pk %}">Editar subvención</a></div>
-                            <div class="subv-delete-action"><a href="{% url 'subvenciones:delete_subvencion' pk=subvencion.pk %}">Eliminar subvención</a></div>
-                            <div><a target="_blank" href="{% url 'subvenciones:admin_subvencion_pdf' subvencion_id=subvencion.id %}">PDF</a></div>
                         </div>
                     </div>
                     <div class="col-lg-6 doted-right">

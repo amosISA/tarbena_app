@@ -10,8 +10,6 @@
     <!--https://github.com/Semantic-Org/Semantic-UI-CSS/blob/master/components/menu.css-->
     <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet" />
     <link href="{% static 'martor/css/martor.min.css' %}" type="text/css" media="all" rel="stylesheet" />
-    <!-- Breadcrumb css -->
-    <link rel="stylesheet" href="{% static 'subvenciones/css/breadcrumbs.css' %}">
 {% endblock %}
 
 {% block title %} Crear{% endblock %}
@@ -24,14 +22,7 @@
 
     <div class="row forms_act_crea">
         <div class="ag_create_post_wrapper col-lg-12">
-
-            <ul id="breadcrumb__subsidies">
-                <li><a href="#"><span class="icon icon-home"> </span></a></li>
-                <li><a href="#"><span class="icon icon-beaker"> </span> Projects</a></li>
-                <li><a href="#"><span class="icon icon-double-angle-right"></span> Breadcrumb</a></li>
-                <li><a href="#"><span class="icon icon-rocket"> </span> Getting started</a></li>
-                <li><a href="#"><span class="icon icon-arrow-down"> </span> Download</a></li>
-            </ul>
+            <h1 class="h1">Crear Subvención</h1>
 
             {% if messages %}
                 {% for message in messages %}

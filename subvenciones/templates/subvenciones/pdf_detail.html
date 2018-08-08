@@ -1,217 +1,90 @@
 {% load staticfiles %}
 {% load martortags %}
 {% load tags %}
-    <div class="row forms_act_crea">
-        <div class="ag_create_post_wrapper col-lg-12">
-            <h1 class="h1">{{ subvencion.nombre }}</h1>
+    <div class="row align-items-center subv-table-row">
+        <div class="col-12 nopadding">
 
-            <form class="form-horizontal">
-                <div class="row">
-                    <div class="col-lg-3 doted-right">
-                        <div class="row">
-                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
-                                {{ subvencion.fecha_publicacion|date:'d/m/Y' }}
-                            </div>
-                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
-                                {{ subvencion.fin|date:'d/m/Y' }}
-                            </div>
-                        </div>
+            {% if subvencion %}
+                <table id="subv_table_ordering" class="table" width="100%">
+                    <thead class="thead-subv-table">
+                        <tr class="table-active">
+                            <th>Fecha publicación</th>
+                            <th>Nombre y descripción</th>
+                            <th>Vencimiento</th>
+                            <th>Comentarios</th>
+                        </tr>
+                    </thead>
 
-                        <!-- Responsable -->
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            <label>Responsable:</label>
-                            <ul id="id_responsable" class="form-control">
-                                {% for responsable in subvencion.responsable.all %}
-                                <li>
-                                    <label for="id_responsable_{{ responsable.id }}"><input checked onclick="return false;" type="checkbox" value="{{ responsable.id }}" id="id_responsable_{{ responsable.id }}">
-                                        {{ responsable.username }}
-                                    </label>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
-                                <!-- Gestiona Enlace -->
-                                <label for="id_drive">Drive:</label>
-                                <textarea id="id_drive" rows="1" cols="20" class="form-control" readonly {% if subvencion.drive %}tabindex="0" data-toggle="popover" data-trigger="hover" data-html="true" title="Drive" data-content="<a href='{{ subvencion.drive }}' target='_blank'>{{ subvencion.drive }}</a>"{% endif %}>{{ subvencion.drive }}</textarea>
-                            </div>
-                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
-                                <!-- Gestiona Expediente -->
-                                <label for="id_gestiona_expediente">Gestiona expediente:</label>
-                                <input type="text" value="{% if subvencion.gestiona_expediente %}{{ subvencion.gestiona_expediente }}{% endif %}" id="id_gestiona_expediente" class="form-control" readonly>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <!-- Nombre carpeta drive -->
-                            <div class="form-group col-md-10 title-create_post" style="text-align:justify;font-weight:bold;">
-                                <label for="id_nombre_carpeta_drive">Nombre carpeta drive:</label>
-                                <input type="text" value="{{ subvencion.nombre_carpeta_drive }}" id="id_nombre_carpeta_drive" class="form-control" readonly>
-                            </div>
-
-                            <!-- Impreso -->
-                            <div class="form-group col-md-2 title-create_post wrapper-impreso" style="text-align:justify;font-weight:bold;">
-                                <input type="checkbox" {% if subvencion.impreso %}checked{% endif %} onclick="return false;" id="id_impreso" class="form-check-input" readonly>
-                                <label for="id_impreso" class="{% if subvencion.impreso %}nested-icon-check{% endif %}">Impreso</label>
-                            </div>
-                        </div>
-
-                        <!-- Ente -->
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            <label for="id_ente">Ente:</label>
-                            <textarea id="id_ente" rows="1" cols="20" class="form-control" readonly>{{ subvencion.ente }}</textarea>
-                        </div>
-
-                        <!-- Area -->
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            <label for="id_area">Area:</label>
-                            <textarea id="id_area" rows="1" cols="20" class="form-control" readonly>{{ subvencion.area }}</textarea>
-                        </div>
-
-                        <!-- Colectivo -->
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            <label>Colectivo:</label>
-                            <ul id="id_colectivo" class="form-control">
-                                {% for colectivo in subvencion.colectivo.all %}
-                                <li>
-                                    <label for="id_colectivo_{{ colectivo.id }}"><input checked onclick="return false;" type="checkbox" value="{{ colectivo.id }}" id="id_colectivo_{{ colectivo.id }}">
-                                        {{ colectivo.nombre }}
-                                    </label>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-
-                        <!-- Estado -->
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            <label for="id_estado">Estado:</label>
-                            <input type="text" value="{{ subvencion.estado }}" id="id_estado" class="form-control" readonly>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
-                                <!-- Cuantia inicio -->
-                                <label for="id_cuantia_inicial">Cuantía inicio:</label>
-                                <textarea id="id_cuantia_inicial" rows="1" cols="20" class="form-control" readonly>{% if subvencion.cuantia_inicial %}{{ subvencion.cuantia_inicial }}{% endif %}</textarea>
-                            </div>
-                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
-                                <!-- Cuantia final -->
-                                <label for="id_cuantia_final">Cuantía final:</label>
-                                <textarea id="id_cuantia_final" rows="1" cols="20" class="form-control" readonly>{% if subvencion.cuantia_final %}{{ subvencion.cuantia_final }}{% endif %}</textarea>
-                            </div>
-                        </div>
-
-                        <div class="detailed-subv-actions">
-                            <div>Subvención creada por <b><i>{{ subvencion.user|title }}</i></b> el <span>{{ subvencion.created }}</span></div>
-                            <div>Última fecha de modificación: <span>{{ subvencion.updated }}</span></div>
-                            <div class="subv-edit-action"><a href="{% url 'subvenciones:edit_subvencion' pk=subvencion.pk %}">Editar subvención</a></div>
-                            <div class="subv-delete-action"><a href="{% url 'subvenciones:delete_subvencion' pk=subvencion.pk %}">Eliminar subvención</a></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 doted-right">
-                        <!-- Nombre -->
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            <label for="id_nombre">Nombre:</label>
-                            <textarea id="id_nombre" rows="1" cols="20" class="form-control" readonly tabindex="0" data-toggle="popover" data-trigger="hover" data-html="true" title="Nombre" data-content="{{ subvencion.nombre }}">{{ subvencion.nombre }}</textarea>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-4 title-create_post" style="text-align:justify;font-weight:bold;">
-                                <!-- Procedimiento -->
-                                <label for="id_procedimiento">Procedimiento:</label>
-                                <div id="id_procedimiento" class="form-control" style="overflow:hidden;">
-                                    <a href="{{ subvencion.procedimiento }}" target="_blank">{{ subvencion.procedimiento }}</a>
+                    <tbody>
+                        <tr>
+                            <td class="td1 {% if subvencion.ente.id == 1 %}diputacion{% elif subvencion.ente.id == 2 %}conselleria{% else %}gobierno{% endif %}">
+                                <div class="bloque01">
+                                    {% if subvencion.fecha_publicacion %}<div class="fechaInicio">{{ subvencion.fecha_publicacion|date:"d/m/Y" }}</div>{% endif %}
+                                    <div class="colectivo">
+                                        <ul>
+                                            {% for colectivo in colectivos %}
+                                                {% if colectivo in subvencion.colectivo.all %}
+                                                        <li>{{ colectivo }}</li>
+                                                {% else %}
+                                                    <li class="apagado">{{ colectivo }}</li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group col-md-4 title-create_post" style="text-align:justify;font-weight:bold;">
-                                <!-- Bases -->
-                                <label for="id_bases">Bases:</label>
-                                <div id="id_bases" class="form-control" style="overflow:hidden;">
-                                    <a href="{{ subvencion.bases }}" target="_blank">{{ subvencion.bases }}</a>
+                                <div class="departamento depart{{ subvencion.area.id }}">
+                                    {{ subvencion.area }}
                                 </div>
-                            </div>
-                            <div class="form-group col-md-4 title-create_post" style="text-align:justify;font-weight:bold;">
-                                <!-- Solicitud -->
-                                <label for="id_solicitud">Solicitud:</label>
-                                <div id="id_solicitud" class="form-control" style="overflow:hidden;">
-                                    <a href="{{ subvencion.solicitud }}" target="_blank">{{ subvencion.solicitud }}</a>
+                                <div class="repositorios">
+                                    <div class="drive"><i class="fab fa-google-drive"></i>
+                                        {% if not subvencion.drive %}
+                                        {% else %}
+                                            <a href="{{ subvencion.drive }}" target="_blank">{% if subvencion.nombre_carpeta_drive %}{{ subvencion.nombre_carpeta_drive }}{% else %}Drive{% endif %}</a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="gestiona" style="overflow: hidden;">
+                                        <i class="fas fa-university"></i> {% if not subvencion.gestiona_expediente %}{% else %}<a href="{{ subvencion.gestiona_expediente }}" target="_blank">{{ subvencion.gestiona_expediente }}</a>{% endif %}
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Descripcion -->
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            <label for="id_descripcion">Descripción:</label>
-                            <textarea id="id_descripcion" disabled rows="12" cols="20" class="form-control">{{ subvencion.descripcion|safe }}</textarea>
-                        </div>
-
-                        <!-- Comentarios -->
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            <label for="id_comentarios">Comentarios:</label>
-                            <div id="id_comentarios" disabled rows="12" cols="20" class="form-control">
+                            </td>
+                            <td class="td2">
+                                <b>
+                                    <a href="{{ subvencion.get_absolute_url }}" target="_blank">
+                                        {{ subvencion.nombre|safe }}
+                                    </a>
+                                </b>
+                                <br />
+                                {{ subvencion.descripcion|safe }}
+                            </td>
+                            <td class="td3" style="{% if subvencion.fin|daysuntil in days_until_estado %}background-color:#ff0000;color:#fff;{% elif subvencion.estado.id == 4 %}background-color:#ff0000;color:#fff;{% elif subvencion.estado.id == 8 %}background-color:#ff0000;color:#fff;{% elif subvencion.estado.id == 9 %}background-color:#ff0000;color:#fff;{% endif %}">
+                                {% if subvencion.fin %}<div class="fechaInicio date-end">{{ subvencion.fin|date:"d/m/Y" }}</div>{% endif %}
+                                <div class="estadoBloque estado">{{ subvencion.estado }}</div>
+                                <div class="responsables">
+                                    {% for responsable in subvencion.responsable.all %}
+                                        <span class="badge badge-pill badge-inverse" tabindex="0" data-toggle="popover" data-trigger="hover" data-content="{{ responsable.first_name }}">
+                                            {{ responsable|split_value }}
+                                        </span>
+                                    {% endfor %}
+                                </div>
+                                <div class="cuantia"><i class="fas fa-dollar-sign"></i> {% if subvencion.cuantia_inicial %}{{ subvencion.cuantia_inicial|safe }}{% endif %}</div>
+                                <div class="cuantia"><i class="fas fa-euro-sign"></i> {% if subvencion.cuantia_final %}{{ subvencion.cuantia_final|safe }}{% endif %}</div>
+                            </td>
+                            <td class="td4">
+                                <!-- Comentarios -->
                                 {% for comment in subvencion.comments.all %}
-                                    {% if comment.contenido %}
-                                        <span class="comment_user_date">{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</span>: {{ comment.contenido|safe_markdown }}
-                                    {% else %}
-                                            No hay comentarios para esta subvención.
-                                    {% endif %}
+                                    <span class="comment_user_date">{{ comment.user.first_name }}: {{ comment.created|date:"d/m/Y" }}</span>:
+                                    {{ comment.contenido|safe_markdown }}
                                 {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <!-- Se relacion con -->
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            <label>Se relaciona con:</label>
-                            <ul id="id_se_relaciona_con" class="form-control">
-                                {% if diputacion %}
-                                    --- Diputación de Alicante ---
-                                    {% for subv in diputacion %}
-                                        <li>
-                                            <label for="id_se_relaciona_con_{{ subv.id }}"><input checked onclick="return false;" type="checkbox" name="se_relaciona_con" value="{{ subv.id }}" id="id_se_relaciona_con_{{ subv.id }}">
-                                                {{ subv.nombre }}
-                                            </label>
-                                            <div style="text-align:right;">
-                                                <a href="{{ subv.get_absolute_url }}" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>
-                                            </div>
-                                        </li>
-                                    {% endfor %}
-                                {% endif %}
-
-                                {% if generalitat %}
-                                    --- Generalitat Valenciana ---
-                                    {% for subv in generalitat %}
-                                        <li>
-                                            <label for="id_se_relaciona_con_{{ subv.id }}"><input checked onclick="return false;" type="checkbox" name="se_relaciona_con" value="{{ subv.id }}" id="id_se_relaciona_con_{{ subv.id }}">
-                                                {{ subv.nombre }}
-                                            </label>
-                                            <div style="text-align:right;">
-                                                <a href="{{ subv.get_absolute_url }}" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>
-                                            </div>
-                                        </li>
-                                    {% endfor %}
-                                {% endif %}
-
-                                {% if gobierno %}
-                                    --- Gobierno de España ---
-                                    {% for subv in gobierno %}
-                                        <li>
-                                            <label for="id_se_relaciona_con_{{ subv.id }}"><input checked onclick="return false;" type="checkbox" name="se_relaciona_con" value="{{ subv.id }}" id="id_se_relaciona_con_{{ subv.id }}">
-                                                {{ subv.nombre }}
-                                            </label>
-                                            <div style="text-align:right;">
-                                                <a href="{{ subv.get_absolute_url }}" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>
-                                            </div>
-                                        </li>
-                                    {% endfor %}
-                                {% endif %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% else %}
+                {% if request.path == '/subvenciones/' %}
+                    <h2>No tiene subvenciones asignadas.</h2>
+                {% else %}
+                    <h2>No tiene subvenciones favoritas.</h2>
+                {% endif %}
+            {% endif %}
         </div>
     </div>

@@ -20,7 +20,7 @@
         <div class="ag_create_post_wrapper col-lg-12">
 
             <ul id="breadcrumb__subsidies">
-                <li><a href="{% url 'subvenciones:index' %}"><span class="icon icon-home"> </span></a></li>
+                <li title="Subvenciones"><a href="{% url 'subvenciones:index' %}"><span class="icon icon-home"> </span></a></li>
                 <li title="{{ subvencion.area }}"><a href="#">{{ subvencion.area|truncatechars:15 }}</a></li>
                 <li title="{{ subvencion.nombre }}"><a href="{{ subvencion.get_absolute_url }}">{{ subvencion.nombre|truncatechars:15 }}</a></li>
                 <li title="Creado por"><a href="#"><span class="icon icon-user"> </span> {{ subvencion.user|title }}, {{ subvencion.created }}</a></li>

@@ -35,24 +35,28 @@
             <form class="form-horizontal">
                 <div class="row">
                     <div class="col-lg-3 doted-right">
-                        <div class="row">
-                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
-                                <!-- Fecha publicación -->
-                                <label for="id_inicio">Fecha publicación:</label>
-                                <input type="text" id="id_inicio" value="{{ subvencion.fecha_publicacion|date:'d/m/Y' }}" class="form-control" readonly>
-                            </div>
-                            <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
-                                <!-- Fin -->
-                                <label for="id_fin">Fin:</label>
-                                <input type="text" id="id_fin" value="{{ subvencion.fin|date:'d/m/Y' }}" class="form-control" readonly>
+                        <div class="form-group title-create_post">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Group dates">
+                                <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;margin-right:2px;">
+                                    <!-- Fecha publicación -->
+                                    <label for="id_inicio">Publicación:</label>
+                                    <input type="text" id="id_inicio" value="{{ subvencion.fecha_publicacion|date:'d/m/Y' }}" class="form-control" readonly>
+                                </div>
+
+                                <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;margin-right:2px;">
+                                    <!-- Fin -->
+                                    <label for="id_fin">Fin:</label>
+                                    <input type="text" id="id_fin" value="{{ subvencion.fin|date:'d/m/Y' }}" class="form-control" readonly>
+                                </div>
+                                <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                                    <!-- Fecha resolucion -->
+                                    <label for="id_fecha_resolucion">Resolucion:</label>
+                                    <input type="text" id="id_fecha_resolucion" value="{{ subvencion.fecha_resolucion|date:'d/m/Y' }}" class="form-control" readonly>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            <!-- Fecha resolucion -->
-                            <label for="id_fin">Fecha resolucion:</label>
-                            <input type="text" id="id_fecha_resolucion" value="{{ subvencion.fecha_resolucion|date:'d/m/Y' }}" class="form-control" readonly>
-                        </div>
+
 
                         <!-- Responsable -->
                         <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
@@ -76,7 +80,7 @@
                             </div>
                             <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
                                 <!-- Gestiona Expediente -->
-                                <label for="id_gestiona_expediente">Gestiona expediente:</label>
+                                <label for="id_gestiona_expediente">Gestiona exp:</label>
                                 <input type="text" value="{% if subvencion.gestiona_expediente %}{{ subvencion.gestiona_expediente }}{% endif %}" id="id_gestiona_expediente" class="form-control" readonly>
                             </div>
                         </div>
@@ -104,7 +108,7 @@
                         <!-- Area -->
                         <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
                             <label for="id_area">Area:</label>
-                            <textarea id="id_area" rows="1" cols="20" class="form-control" readonly>{{ subvencion.area }}</textarea>
+                            <textarea title="{{ subvencion.area }}" id="id_area" rows="1" cols="20" class="form-control" readonly>{{ subvencion.area }}</textarea>
                         </div>
 
                         <!-- Colectivo -->
@@ -159,21 +163,21 @@
                             <div class="form-group col-md-4 title-create_post" style="text-align:justify;font-weight:bold;">
                                 <!-- Procedimiento -->
                                 <label for="id_procedimiento">Procedimiento:</label>
-                                <div id="id_procedimiento" class="form-control" style="overflow:hidden;">
+                                <div id="id_procedimiento" class="form-control" style="overflow:hidden;height:30px;">
                                     <a href="{{ subvencion.procedimiento }}" target="_blank">{{ subvencion.procedimiento }}</a>
                                 </div>
                             </div>
                             <div class="form-group col-md-4 title-create_post" style="text-align:justify;font-weight:bold;">
                                 <!-- Bases -->
                                 <label for="id_bases">Bases:</label>
-                                <div id="id_bases" class="form-control" style="overflow:hidden;">
+                                <div id="id_bases" class="form-control" style="overflow:hidden;height:30px;">
                                     <a href="{{ subvencion.bases }}" target="_blank">{{ subvencion.bases }}</a>
                                 </div>
                             </div>
                             <div class="form-group col-md-4 title-create_post" style="text-align:justify;font-weight:bold;">
                                 <!-- Solicitud -->
                                 <label for="id_solicitud">Solicitud:</label>
-                                <div id="id_solicitud" class="form-control" style="overflow:hidden;">
+                                <div id="id_solicitud" class="form-control" style="overflow:hidden;height:30px;">
                                     <a href="{{ subvencion.solicitud }}" target="_blank">{{ subvencion.solicitud }}</a>
                                 </div>
                             </div>
@@ -205,47 +209,16 @@
                         <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
                             <label>Se relaciona con:</label>
                             <ul id="id_se_relaciona_con" class="form-control">
-                                {% if diputacion %}
-                                    --- Diputación de Alicante ---
-                                    {% for subv in diputacion %}
-                                        <li>
-                                            <label for="id_se_relaciona_con_{{ subv.id }}"><input checked onclick="return false;" type="checkbox" name="se_relaciona_con" value="{{ subv.id }}" id="id_se_relaciona_con_{{ subv.id }}">
-                                                {{ subv.nombre }}
-                                            </label>
-                                            <div style="text-align:right;">
-                                                <a href="{{ subv.get_absolute_url }}" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>
-                                            </div>
-                                        </li>
-                                    {% endfor %}
-                                {% endif %}
-
-                                {% if generalitat %}
-                                    --- Generalitat Valenciana ---
-                                    {% for subv in generalitat %}
-                                        <li>
-                                            <label for="id_se_relaciona_con_{{ subv.id }}"><input checked onclick="return false;" type="checkbox" name="se_relaciona_con" value="{{ subv.id }}" id="id_se_relaciona_con_{{ subv.id }}">
-                                                {{ subv.nombre }}
-                                            </label>
-                                            <div style="text-align:right;">
-                                                <a href="{{ subv.get_absolute_url }}" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>
-                                            </div>
-                                        </li>
-                                    {% endfor %}
-                                {% endif %}
-
-                                {% if gobierno %}
-                                    --- Gobierno de España ---
-                                    {% for subv in gobierno %}
-                                        <li>
-                                            <label for="id_se_relaciona_con_{{ subv.id }}"><input checked onclick="return false;" type="checkbox" name="se_relaciona_con" value="{{ subv.id }}" id="id_se_relaciona_con_{{ subv.id }}">
-                                                {{ subv.nombre }}
-                                            </label>
-                                            <div style="text-align:right;">
-                                                <a href="{{ subv.get_absolute_url }}" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>
-                                            </div>
-                                        </li>
-                                    {% endfor %}
-                                {% endif %}
+                                {% for subv in subvencion.se_relaciona_con.all %}
+                                    <li>
+                                        <label for="id_se_relaciona_con_{{ subv.id }}"><input checked onclick="return false;" type="checkbox" name="se_relaciona_con" value="{{ subv.id }}" id="id_se_relaciona_con_{{ subv.id }}">
+                                            {{ subv.nombre }}
+                                        </label>
+                                        <div style="text-align:right;">
+                                            <a href="{{ subv.get_absolute_url }}" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>
+                                        </div>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>

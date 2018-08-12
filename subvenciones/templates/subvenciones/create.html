@@ -73,18 +73,18 @@
                 <div class="row">
                     <div class="col-lg-3 doted-right">
                         <div class="form-group title-create_post">
-                            <div style="display: flex;justify-content: space-between;padding: 0;margin: 0;">
-                                <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;width:60px;">
+                            <div class="wrapper-subvenciones_dates--inputs">
+                                <div class="form-group title-create_post subvenciones_dates--inputs" style="text-align:justify;font-weight:bold;">
                                     <!-- Fecha publicacion -->
                                     {{ form.fecha_publicacion.label_tag }}
                                     {{ form.fecha_publicacion|htmlattributes:"class:form-control" }}
                                 </div>
-                                <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;width:60px;">
+                                <div class="form-group title-create_post subvenciones_dates--inputs" style="text-align:justify;font-weight:bold;">
                                     <!-- Fin -->
                                     {{ form.fin.label_tag }}
                                     {{ form.fin|htmlattributes:"class:form-control" }}
                                 </div>
-                                <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;width:60px;">
+                                <div class="form-group title-create_post subvenciones_dates--inputs" style="text-align:justify;font-weight:bold;">
                                     <!-- Fecha resolucion -->
                                     {{ form.fecha_resolucion.label_tag }}
                                     {{ form.fecha_resolucion|htmlattributes:"class:form-control" }}
@@ -406,7 +406,7 @@
 
             // Change dates label text
             $("#id_fecha_publicacion").prev().empty().append('Publicación:');
-            $("#id_fecha_resolucion").prev().empty().append('Publicación:');
+            $("#id_fecha_resolucion").prev().empty().append('Resolución:');
         });
     </script>
     <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>

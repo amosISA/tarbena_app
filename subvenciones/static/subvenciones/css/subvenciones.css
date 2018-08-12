@@ -552,4 +552,44 @@ legend.scheduler-border {
   display: block;
   text-align: left; }
 
+/* Change input dates logo ========================================== */
+.wrapper-subvenciones_dates--inputs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0; }
+  .wrapper-subvenciones_dates--inputs input[type="date"] {
+    position: relative;
+    padding: 10px; }
+  .wrapper-subvenciones_dates--inputs input[type="date"]::-webkit-calendar-picker-indicator {
+    color: transparent;
+    background: none;
+    z-index: 1; }
+  .wrapper-subvenciones_dates--inputs input[type="date"]:before {
+    color: transparent;
+    background: none;
+    display: block;
+    font-family: 'FontAwesome';
+    content: '\f073';
+    /* This is the calendar icon in FontAwesome */
+    /*width: 15px;
+    height: 20px;*/
+    position: absolute;
+    top: 5px;
+    right: 6px;
+    color: #000; }
+  .wrapper-subvenciones_dates--inputs input[type="date"]::-webkit-inner-spin-button,
+  .wrapper-subvenciones_dates--inputs input[type="date"]::-webkit-clear-button {
+    /* remove arrow range from input dates and clear button */
+    display: none;
+    -webkit-appearance: none; }
+
+.subvenciones_dates--inputs {
+  width: 95px !important; }
+
+@media (max-width: 1315px) {
+  .wrapper-subvenciones_dates--inputs div:nth-child(-n+2) {
+    order: 1; } }
+
 /*# sourceMappingURL=subvenciones.css.map */

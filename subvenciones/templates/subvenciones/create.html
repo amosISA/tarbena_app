@@ -211,6 +211,33 @@
                             {{ comment_form.user }}
                             {{ comment_form.contenido }}
                         {% endfor %}
+
+                        <!-- Bloque fechas ejecución y justificación -->
+                        <div class="row">
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border">Ejecución y justificación</legend>
+                                <p class="scheduler-border--item" style="float:left;width:33%;padding-right:5px;">
+                                    <!-- Ejecución inicio -->
+                                    {{ form.incio_ejecucion.label_tag }}
+                                    {{ form.incio_ejecucion|htmlattributes:"class:form-control" }}
+                                </p>
+                                <p class="scheduler-border--item" style="float:left;width:33%;padding-right:5px;">
+                                    <!-- Ejecución fin -->
+                                    {{ form.fin_ejecucion.label_tag }}
+                                    {{ form.fin_ejecucion|htmlattributes:"class:form-control" }}
+                                </p>
+                                <p class="scheduler-border--item" style="float:left;width:33%;">
+                                    <!-- Fin justificación -->
+                                    {{ form.fin_justificacion.label_tag }}
+                                    {{ form.fin_justificacion|htmlattributes:"class:form-control" }}
+                                </p>
+                                <p class="scheduler-border--item" style="float:left;width:33%;">
+                                    <!-- Explicación justificación -->
+                                    {{ form.explicacion_justificacion.label_tag }}
+                                    {{ form.explicacion_justificacion|htmlattributes:"class:form-control" }}
+                                </p>
+                            </fieldset>
+                        </div>
                     </div>
 
                     <div class="col-lg-3">

@@ -142,6 +142,14 @@ class Subvencion(TimeStampedModel):
 
     likes = models.ManyToManyField(User, blank=True, related_name='subvencion_likes')
 
+    # Fechas Ejecución
+    incio_ejecucion = models.DateField(blank=True, null=True)
+    fin_ejecucion = models.DateField(blank=True, null=True)
+
+    # Fechas Justificación
+    fin_justificacion = models.DateField(blank=True, null=True)
+    explicacion_justificacion = models.TextField(blank=True)
+
     class Meta:
         ordering = ["fin"]
         verbose_name = 'Subvencion'

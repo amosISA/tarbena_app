@@ -68,4 +68,19 @@ For installing::
 
     To solve this I've got to install this: `https://tschoonj.github.io/blog/2014/02/08/gtk2-64-bit-windows-runtime-environment-installer/ <https://tschoonj.github.io/blog/2014/02/08/gtk2-64-bit-windows-runtime-environment-installer/>`_
 
-    
+Pycairo error installation
+--------------------------
+When doing `pip install -r requirements/production.txt` it will give me an error: `pycairo failed building wheel`
+
+To fix this in Linux:
+::
+
+    sudo apt-get install libcairo2-dev libjpeg-dev libgif-dev
+    pip install pycairo
+
+Mysql requirement production
+----------------------------
+Same as pycairo error. In Windows I install the mysql dependency from an exe but in Linux you should remove it from requirements when you install all of them and then install it by:
+::
+
+    sudo apt-get install libmysqlclient-dev

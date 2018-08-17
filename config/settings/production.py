@@ -9,7 +9,7 @@ SITE_ID = 2
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tarbena',
+        'NAME': 'tarbena_app',
         'USER': 'amos',
         'PASSWORD': os.getenv('MYSQL_PASSWORD'),
         # 'HOST': 'localhost',

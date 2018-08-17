@@ -24,7 +24,7 @@ from notify.signals import notify
 from .forms import SubvencionForm, CommentFormSet, SubvencionFilter
 from .models import Subvencion, Estado, Colectivo, Area, Ente, Comment
 from .tasks import subvencion_mention_email, subvencion_create_email, subvencion_edit_email
-from src.config.settings.base import MARTOR_MARKDOWNIFY_FUNCTION
+# from src.config.settings.base import MARTOR_MARKDOWNIFY_FUNCTION
 
 import weasyprint
 
@@ -290,7 +290,7 @@ def markdown_find_mentions(markdown_text, user, user_username, name_subv, mail, 
     input  : `markdown_text` or markdown content.
     return : `list` of usernames.
     """
-    markdownify = import_string(MARTOR_MARKDOWNIFY_FUNCTION)
+    markdownify = import_string(getattr(settings, 'MARTOR_MARKDOWNIFY_FUNCTION', None))
     mark = markdownify(markdown_text)
     soup = BeautifulSoup(mark, 'html.parser')
     markdown_users = list(set(

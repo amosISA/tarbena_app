@@ -11,6 +11,7 @@ class ParcelaAdmin(admin.ModelAdmin):
     search_fields = ('propietario__nombre', 'metros_cuadrados', 'poligono',
                      'numero_parcela',)
     empty_value_display = '-'
+    list_display_links = ('numero_parcela',)
     show_full_result_count = True
 my_admin_site.register(Parcela, ParcelaAdmin)
 admin.site.register(Parcela, ParcelaAdmin)

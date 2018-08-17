@@ -11,7 +11,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tarbena_app',
         'USER': 'amos',
-        'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+        'PASSWORD': 'cd52405f536e5c7a983c965b74895b3c',
         # 'HOST': 'localhost',
         # 'PORT': 3306,
         # 'OPTIONS': {

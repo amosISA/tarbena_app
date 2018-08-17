@@ -1,7 +1,7 @@
 /*** Body ***/
 /************/
 body {
-  font-size: 0.8rem; }
+  font-size: 0.75em; }
   body #map_canvas {
     height: 100%;
     width: 100%;
@@ -93,5 +93,31 @@ body {
         overflow: auto; }
         body .actions_parcels .card .card-header li {
           list-style-type: none; }
+
+/* Sidebar navigation - Accordion */
+.sidebar__navigation {
+  position: absolute;
+  top: 78px;
+  right: 0px;
+  width: 400px;
+  z-index: 300; }
+
+#buttonHide__sidebar--navigation {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 25px;
+  opacity: 0.8;
+  text-align: center;
+  color: white;
+  border-radius: 3px;
+  border: 1px solid #00677f;
+  z-index: 10;
+  background-color: #00677f; }
+
+.spanButtonHideNav {
+  padding: 0px 5px 0px 0px;
+  position: relative;
+  bottom: 8px; }
 
 /*# sourceMappingURL=base.css.map */

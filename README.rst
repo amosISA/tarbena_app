@@ -8,9 +8,3 @@ Tarbena App
    
    
 To dive into the details.. `Read the docs <https://tarbena-app.readthedocs.io/en/latest/index.html>`_
-
-.. raw:: html
-   
-   <p align="center">
-      <img src="readme_img.png" />
-   </p>

@@ -649,3 +649,43 @@ legend.scheduler-border {
         order: 1;
     }
 }
+
+/* Justificacion and ejecucion fieldset */
+.ejecucion__justitifacion--dates {
+    width: 100%;
+
+    input[type="date"] {
+      position: relative;
+      padding: 10px;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      color: transparent;
+      background: none;
+      z-index: 1;
+    }
+
+    input[type="date"]:before {
+      color: transparent;
+      background: none;
+      display: block;
+      font-family: 'FontAwesome';
+      content: '\f073';
+      /* This is the calendar icon in FontAwesome */
+      /*width: 15px;
+      height: 20px;*/
+      position: absolute;
+      top: 5px;
+      right: 6px;
+      color: #000;
+    }
+
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-clear-button { /* remove arrow range from input dates and clear button */
+        display: none;
+        -webkit-appearance: none;
+    }
+
+    p { text-align:left; }
+    p:last-child { margin-bottom: 15px; width: 100%; }
+}

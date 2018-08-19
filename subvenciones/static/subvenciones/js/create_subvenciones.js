@@ -6,6 +6,7 @@ $j(document).ready(function(){
     $j("textarea[name='cuantia_inicial']").attr({'cols': '20', 'rows': '1'});
     $j("textarea[name='cuantia_final']").attr({'cols': '20', 'rows': '1'});
     $j("textarea[name='nombre_carpeta_drive']").attr({'cols': '20', 'rows': '1'});
+    $j("textarea[name='explicacion_justificacion']").attr({'cols': '40', 'rows': '5'});
 
     // Add from admin site functionality
     $j('#add_id_estado').insertAfter($j('label[for="id_estado"]'));

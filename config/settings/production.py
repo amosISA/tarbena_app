@@ -22,6 +22,6 @@ DATABASES = {
 
 # Add logger to production for debugging
 try:
-    from src.config.logger_settings import *
+    from config.logger_settings import *
 except Exception as e:
     pass

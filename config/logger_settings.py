@@ -4,7 +4,7 @@ LOGGING = {
     'handlers': {
         'logfile': {
             'class': 'logging.FileHandler',
-            'filename': 'logs/server.log',
+            'filename': '/home/admin/tarbena/src/logs/server.log',
         },
     },
     'loggers': {

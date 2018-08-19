@@ -22,7 +22,7 @@ Requirements
 3. mysqlclient
 
 Get ready (Windows)
----------
+-------------------
 - Download `python <https://www.python.org/downloads/>`_
 - Install ``pip``. For windows we get it `here <https://bootstrap.pypa.io/get-pip.py>`_
 - Create an environment variable for pip::

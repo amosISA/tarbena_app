@@ -84,3 +84,65 @@ Same as pycairo error. In Windows I install the mysql dependency from an exe but
 ::
 
     sudo apt-get install libmysqlclient-dev
+
+Steps to deploy
+---------------
+1. In Ubuntu I can't install Mysql by my requirements file with the command. So I install this package first:
+::
+
+    sudo apt-get install libmysqlclient-dev
+    # Then I can do:
+    pip install mysqlclient
+
+2. Production settings I use:
+::
+
+    'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+
+    # Then I use this command:
+    export MYSQL_PASSWORD=asdasdasd23423
+
+    # So it gets the password from here
+    # Show all exported variables:
+    export -p
+
+    # Or search by one:
+    export -p | grep myvariable
+
+    # Delete an exported variable:
+    unset myvariable
+
+.. warning::
+    This has an error and is that when you turn off your command line the variables gets deleted so you can save them into a secrete         file into your server and get the info from there.
+
+3. WeasyPrint error:
+::
+
+    OSError: cannot load library 'pango-1.0': pango-1.0: cannot open shared object file: No such file or directory.  Additionally, ctypes.util.find_library() did not manage to locate a library called 'pango-1.0'
+
+    # With this error you just have to install:
+    apt-get install pango1.0-tests
+
+4. The wsgi.py file:
+In python2 the execfile function works but in python3 it does not so you have to replace:
+::
+
+    # This:
+    execfile(activate_this, dict(__file__=activate_this)) # py2
+
+    # For:
+    exec(open(activate_this).read()) #py3
+
+5. In administration panel add SITES_ID: 1 (development) and 2 (production)
+
+6. Add logging to production so you can debug in production server
+
+7. Settings file. I create a dir named settings and inside of him I make him module by creating `__init__.py`. And inside that y import them. And I create each file for each environment but I ignore the local one so that in production it gets only the production file.
+
+8. You can check your deployment and if you are using Apache you can check ur syntax:
+::
+
+    python3 manage.py check --deploy
+    sudo apache2ctl configtest
+
+9. Celery. In production server I need celery to run my tasks on the background. More info in my deploy file.

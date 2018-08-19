@@ -214,7 +214,7 @@
 
                         <!-- Bloque fechas ejecución y justificación -->
                         <div class="row">
-                            <fieldset class="scheduler-border">
+                            <fieldset class="scheduler-border ejecucion__justitifacion--dates">
                                 <legend class="scheduler-border">Ejecución y justificación</legend>
                                 <p class="scheduler-border--item" style="float:left;width:33%;padding-right:5px;">
                                     <!-- Ejecución inicio -->
@@ -231,7 +231,7 @@
                                     {{ form.fin_justificacion.label_tag }}
                                     {{ form.fin_justificacion|htmlattributes:"class:form-control" }}
                                 </p>
-                                <p class="scheduler-border--item" style="float:left;width:33%;">
+                                <p class="scheduler-border--item" style="float:left;">
                                     <!-- Explicación justificación -->
                                     {{ form.explicacion_justificacion.label_tag }}
                                     {{ form.explicacion_justificacion|htmlattributes:"class:form-control" }}

@@ -56,8 +56,6 @@
                             </div>
                         </div>
 
-
-
                         <!-- Responsable -->
                         <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
                             <label>Responsable:</label>
@@ -201,6 +199,33 @@
                                     {% endif %}
                                 {% endfor %}
                             </div>
+                        </div>
+
+                        <!-- Bloque fechas ejecución y justificación -->
+                        <div class="row">
+                            <fieldset class="scheduler-border ejecucion__justitifacion--dates">
+                                <legend class="scheduler-border">Ejecución y justificación</legend>
+                                <p class="scheduler-border--item" style="float:left;width:33%;padding-right:5px;">
+                                    <!-- Ejecución inicio -->
+                                    <label for="id_incio_ejecucion">Inicio ejecución:</label>
+                                    <input type="text" value="{% if subvencion.incio_ejecucion %}{{ subvencion.incio_ejecucion|date:'d/m/Y' }}{% endif %}" id="id_incio_ejecucion" class="form-control" readonly>
+                                </p>
+                                <p class="scheduler-border--item" style="float:left;width:33%;padding-right:5px;">
+                                    <!-- Ejecución fin -->
+                                    <label for="id_fin_ejecucion">Fin ejecución:</label>
+                                    <input type="text" value="{% if subvencion.fin_ejecucion %}{{ subvencion.fin_ejecucion|date:'d/m/Y' }}{% endif %}" id="id_fin_ejecucion" class="form-control" readonly>
+                                </p>
+                                <p class="scheduler-border--item" style="float:left;width:33%;">
+                                    <!-- Fin justificación -->
+                                    <label for="id_fin_justificacion">Fin justificación:</label>
+                                    <input type="text" value="{% if subvencion.fin_justificacion %}{{ subvencion.fin_justificacion|date:'d/m/Y' }}{% endif %}" id="id_fin_justificacion" class="form-control" readonly>
+                                </p>
+                                <p class="scheduler-border--item" style="float:left;">
+                                    <!-- Explicación justificación -->
+                                    <label for="id_explicacion_justificacion">Explicación justificación:</label>
+                                    <textarea id="id_explicacion_justificacion" disabled rows="5" cols="40" class="form-control">{{ subvencion.explicacion_justificacion|safe }}</textarea>
+                                </p>
+                            </fieldset>
                         </div>
                     </div>
 

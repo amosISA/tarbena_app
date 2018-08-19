@@ -1,15 +1,18 @@
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'logfile': {
-            'class': 'logging.FileHandler',
-            'filename': '/home/admin/tarbena/src/logs/server.log',
+from django.conf import settings
+
+if settings.DEBUG == False:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'logfile': {
+                'class': 'logging.FileHandler',
+                'filename': '/home/admin/tarbena/src/logs/server.log',
+            },
         },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['logfile'],
+        'loggers': {
+            'django': {
+                'handlers': ['logfile'],
+            },
         },
-    },
-}
+    }

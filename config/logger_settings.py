@@ -4,54 +4,42 @@ if settings.DEBUG == False:
     LOGGING = {
         'version': 1,
         'disable_existing_loggers': False,
-        'filters': {
-            'require_debug_false': {
-                '()': 'django.utils.log.RequireDebugFalse',
-            },
-            'require_debug_true': {
-                '()': 'django.utils.log.RequireDebugTrue',
-            },
-        },
         'formatters': {
-            'django.server': {
-                '()': 'django.utils.log.ServerFormatter',
-                'format': '[%(server_time)s] %(message)s',
+            'large': {
+                'format': '%(asctime)s  %(levelname)s  %(process)d  %(pathname)s  %(funcName)s  %(lineno)d  %(message)s  '
+            },
+            'tiny': {
+                'format': '%(asctime)s  %(message)s  '
             }
         },
         'handlers': {
-            'logfile': {
-                'class': 'logging.FileHandler',
-                'filename': '/home/admin/tarbena/src/logs/server.log',
-            },
-            'console': {
-                'level': 'INFO',
-                'filters': ['require_debug_true'],
-                'class': 'logging.StreamHandler',
-            },
-            'console_debug_false': {
+            'errors_file': {
                 'level': 'ERROR',
-                'filters': ['require_debug_false'],
-                'class': 'logging.StreamHandler',
+                'class': 'logging.handlers.TimedRotatingFileHandler',
+                'when': 'midnight',
+                'interval': 1,
+                'filename': '/home/admin/tarbena/src/logs/ErrorLoggers.log',
+                'formatter': 'large',
             },
-            'django.server': {
+            'info_file': {
                 'level': 'INFO',
-                'class': 'logging.StreamHandler',
-                'formatter': 'django.server',
+                'class': 'logging.handlers.TimedRotatingFileHandler',
+                'when': 'midnight',
+                'interval': 1,
+                'filename': '/home/admin/tarbena/src/logs/InfoLoggers.log',
+                'formatter': 'large',
             },
-            'mail_admins': {
-                'level': 'ERROR',
-                'filters': ['require_debug_false'],
-                'class': 'django.utils.log.AdminEmailHandler'
-            }
         },
         'loggers': {
-            'django': {
-                'handlers': ['logfile', 'console', 'console_debug_false', 'mail_admins'],
+            'error_logger': {
+                'handlers': ['errors_file'],
+                'level': 'WARNING',
+                'propagate': False,
             },
-            'django.server': {
-                'handlers': ['django.server'],
+            'info_logger': {
+                'handlers': ['info_file'],
                 'level': 'INFO',
                 'propagate': False,
-            }
+            },
         },
     }

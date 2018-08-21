@@ -16,6 +16,7 @@ Contents:
    architecture
    deployment
    celery
+   crontab
 
 Indices and tables
 ==================

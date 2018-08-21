@@ -146,3 +146,61 @@ In python2 the execfile function works but in python3 it does not so you have to
     sudo apache2ctl configtest
 
 9. Celery. In production server I need celery to run my tasks on the background. More info in my deploy file.
+
+Celery
+------
+Now we have intstalled with pip in our project celery so its time to start it.
+Nice guides:
+
+`https://www.digitalocean.com/community/tutorials/how-to-use-celery-with-rabbitmq-to-queue-tasks-on-an-ubuntu-vps <https://www.digitalocean.com/community/tutorials/how-to-use-celery-with-rabbitmq-to-queue-tasks-on-an-ubuntu-vps>`_
+
+
+`https://thomassileo.name/blog/2012/08/20/how-to-keep-celery-running-with-supervisor/ <https://thomassileo.name/blog/2012/08/20/how-to-keep-celery-running-with-supervisor/>`_
+
+
+| We will include a "&" character at the end of our string to put our worker process in the background:
+
+::
+
+    celery worker -A config &
+    celery -A config worker -l info
+
+    # This if I restart the server or if I close the server console by ssh stops working.
+    # So that I need a python program to keep runing celery in the background (supervisor).
+
+Keep in mind that I can't start celery as superadmin so I create a new user:
+::
+
+    sudo adduser celery
+    whoami
+    # swap to new user
+    su - celery
+    # swap back to root
+    su -
+
+    # Giver superadmin permissions to new user
+    visudo
+    # I need to be superuser to modify this doc
+    # So after my root user I put celery and the same permissions as root
+
+    $ pip install supervisor # python 2
+    $ pip install git+https://github.com/Supervisor/supervisor # python 3
+    $ cd /path/to/your/project
+    $ echo_supervisord_conf > supervisord.conf
+
+    # Now swap back to celery user and go to my root project and activate my virtualenv
+    # Then run this command inside:
+    supervisord
+
+    # Next, just add this section after the [supervisord] section:
+    [program:celeryd]
+    command=/home/thomas/virtualenvs/yourvenv/bin/celery worker --app=myapp -l info
+    stdout_logfile=/path/to/your/logs/celeryd.log
+    stderr_logfile=/path/to/your/logs/celeryd.log
+    autostart=true
+    autorestart=true
+    startsecs=10
+    stopwaitsecs=600
+
+
+		

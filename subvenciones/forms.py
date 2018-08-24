@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.contrib.auth.models import User
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 from django.forms.models import inlineformset_factory
 
@@ -36,6 +37,12 @@ class SubvencionFilter(django_filters.FilterSet):
         fields = ['ente', 'area', 'responsable']
 
 class SubvencionForm(forms.ModelForm):
+    # In reponsable field get user by first_name
+    def __init__(self, *args, **kwargs):
+        super(SubvencionForm, self).__init__(*args, **kwargs)
+        users = User.objects.all()
+        self.fields['responsable'].choices = [(user.pk, user.first_name) for user in users]
+
     class Meta:
         model = Subvencion
         fields = '__all__'

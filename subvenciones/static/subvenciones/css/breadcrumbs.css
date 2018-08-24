@@ -267,6 +267,20 @@
   border-left-color: #0069d9;
 }
 
+/* SAVE button =========================================================*/
+#breadcrumb__subsidies .breadcrumb__left--buttons .breadcrumb_detail__anchor--pdf input {
+  background: #28a745;
+  color: #fff;
+  padding-bottom: 2px;
+  color: #fff;
+  border-radius: 10px;
+  border: 1px #28a745;
+}
+#breadcrumb__subsidies .breadcrumb__left--buttons .breadcrumb_detail__anchor--pdf input:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
 /*#breadcrumb__subsidies li a:active {
   background-color: #16a085;
 }

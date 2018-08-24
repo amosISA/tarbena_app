@@ -43,15 +43,24 @@ $(document).ready(function() {
     // Scroll to subsidie that have the actual day and blink the subsidies that have as end date the actual day
     var CurrentDate = new Date();
     var dataFormated = ('0' + CurrentDate.getDate()).slice(-2)+"/"+('0'+(CurrentDate.getMonth()+1)).slice(-2)+"/"+CurrentDate.getFullYear();
+    console.log(dataFormated.   split("/"));
+
+    // Compare dates with format DD/MM/YYYY
+    function process(date){
+        var parts = date.split("/");
+        return new Date(parts[2], parts[1] - 1, parts[0]);
+    }
 
     // Navigation click on button that is left to the search box for scrolling to actual subsidie
     $('#button-actual-subsidie-navigation').click(function() {
-        $('.date-end').each(function() {
-            if ($.trim($(this).text()) == dataFormated) {
+        $('.date-end').each(function(i, v) {
+            // if date equals to today or if date is greater than today then get that one
+            if ($.trim($(this).text()) == dataFormated || process($.trim($(this).text())) > process(dataFormated)) {
                 $('html, body').animate({
                     scrollTop: $(this).parent().offset().top=($(this).parent().offset().top)-($(this).parent().outerHeight())
                 }, 250);
                 $(this).parent().parent().fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
+                return i === 0; // just return the first result 
             }
         });
     });

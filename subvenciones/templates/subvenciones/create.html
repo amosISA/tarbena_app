@@ -22,7 +22,6 @@
 
     <div class="row forms_act_crea">
         <div class="ag_create_post_wrapper col-lg-12">
-            <h1 class="h1">Crear Subvención</h1>
 
             {% if messages %}
                 {% for message in messages %}
@@ -34,6 +33,14 @@
                     </div>
                 {% endfor %}
             {% endif %}
+
+            <ul id="breadcrumb__subsidies">
+                <li title="Subvenciones"><a href="{% url 'subvenciones:index' %}"><span class="icon icon-home"> </span></a></li>
+                <li><a href="#">Crear subvención</a></li>
+                <div class="breadcrumb__left--buttons">
+                    <li class="breadcrumb_detail__anchor--pdf"><input type="submit" id="myTextField" form="some-form" value="Crear"></li>
+                </div>
+            </ul>
 
             {{ comments_formset.management_form }}
             {% for comment_form in comments_formset %}
@@ -255,7 +262,7 @@
                 </div>
 
                 <!--onclick="this.disabled=true,this.form.submit();"-->
-                <input class="button_submit_create_form" type="submit" value="Crear Subvención" />
+                <!--<input class="button_submit_create_form" type="submit" value="Crear Subvención" />-->
             </form>
 
             <!-- Modal -->

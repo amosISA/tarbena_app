@@ -110,6 +110,17 @@
   }
 },
 {
+  "model": "subvenciones.estado",
+  "pk": 11,
+  "fields": {
+    "created": "2018-08-24T08:13:58.788Z",
+    "updated": "2018-08-24T08:13:58.788Z",
+    "nombre": "Aprobada y ejecut\u00e1ndose",
+    "slug": "aprobada-y-ejecutandose",
+    "color": "#fff"
+  }
+},
+{
   "model": "subvenciones.colectivo",
   "pk": 1,
   "fields": {
@@ -1544,10 +1555,10 @@
   "pk": 43,
   "fields": {
     "created": "2018-08-22T11:56:06.150Z",
-    "updated": "2018-08-22T11:56:06.150Z",
+    "updated": "2018-08-24T12:06:46.323Z",
     "user": 2,
     "fecha_publicacion": "2018-07-26",
-    "fin": "2017-08-16",
+    "fin": "2018-08-16",
     "fecha_resolucion": null,
     "nombre": "EMCORD 2018 - Iniciativa social. Contrataci\u00f3n de personas desempleadas de larga duraci\u00f3n por Corporaciones Locales de la Comunitat Valenciana.",
     "procedimiento": "http://www.gva.es/es/inicio/procedimientos?id_proc=19524&version=amp",
@@ -5019,10 +5030,10 @@
   "pk": 128,
   "fields": {
     "created": "2018-08-23T09:51:45.914Z",
-    "updated": "2018-08-23T09:51:45.914Z",
+    "updated": "2018-08-24T12:04:37.543Z",
     "user": 2,
-    "fecha_publicacion": "2018-12-30",
-    "fin": "2018-01-30",
+    "fecha_publicacion": "2016-12-30",
+    "fin": "2017-01-30",
     "fecha_resolucion": null,
     "nombre": "Equipamiento instalaciones culturales municipales, 2017",
     "procedimiento": "",

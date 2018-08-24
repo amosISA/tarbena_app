@@ -3,69 +3,59 @@
 
 {% block content %}
 
-
-
 <!-- MAP -->
 <div id="map_canvas">
 </div>
 
-<!-- Sidebar -->
-<div class="sidebar__navigation">
-    <div id="buttonHide__sidebar--navigation" type="button" style="margin-right:0;">
-        <img id="imgHideButton__sidebar--nav" style="width:25px; height:25px" src="{% static 'parcelas/img/icon/left_arrow.png' %}">
-        <span id="spanOpenSidebar__navigation" class="spanButtonHideNav" style="display: inline;">Menú</span>
+<!-- PANEL ACTIONS COLLAPSE -->
+<div class="actions_parcels">
+
+    <div class="row">
+        <button class="accordion_for_card" data-toggle="collapse" data-target="#card">+</button>
+        <!-- GEOLOCATION -->
+        <img id="preloader" src="{% static 'parcelas/location/gps.png' %}">
+    </div>
+
+    <div class="row">
+        <div class="card collapse" id="card">
+            <!-- Check parcel and download KML -->
+            <div class="form-check-parcel">
+                <label for="inputPoligono">Polígono</label>
+                <input type="text" id="inputPoligono">
+                <label for="inputParcela">Parcela</label>
+                <input type="text" id="inputParcela">
+                <button class="formButtonCheckParcela">Comprobar</button>
+            </div>
+
+            <!-- Table with projects, sectors and parcels -->
+            <div class="card-header">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">Proyectos</li>
+                </ol>
+                <ul>
+                    {% for proyecto in proyectos %}
+                        <li>
+                            <a class="project-name" data-id="{{ proyecto.id }}" href="#">
+                                 - {{ proyecto.nombre }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- ADD PROJECTS, SECTORS AND PARCELS -->
+            <div class="add_new_data">
+                <!-- ADD PARCELS -->
+                <button class="button-add-parcel">
+                    <a class="related-widget-wrapper-link add-related" id="add_id_diputacion" href="/panel/parcelas/parcela/add/?_to_field=id&amp;_popup=1" title="Añadir parcela" style="display: block;" target="_blank">
+                        Añadir parcela
+                    </a>
+                </button>
+                <button class="button-kml-download">Descargar KML</button>
+            </div>
+        </div>
     </div>
 </div>
-
-<!-- PANEL ACTIONS COLLAPSE -->
-<!--<div class="actions_parcels">-->
-
-    <!--<div class="row">-->
-        <!--<button class="accordion_for_card" data-toggle="collapse" data-target="#card">+</button>-->
-        <!--&lt;!&ndash; GEOLOCATION &ndash;&gt;-->
-        <!--<img id="preloader" src="{% static 'parcelas/location/gps.png' %}">-->
-    <!--</div>-->
-
-    <!--<div class="row">-->
-        <!--<div class="card collapse" id="card">-->
-            <!--&lt;!&ndash; Check parcel and download KML &ndash;&gt;-->
-            <!--<div class="form-check-parcel">-->
-                <!--<label for="inputPoligono">Polígono</label>-->
-                <!--<input type="text" id="inputPoligono">-->
-                <!--<label for="inputParcela">Parcela</label>-->
-                <!--<input type="text" id="inputParcela">-->
-                <!--<button class="formButtonCheckParcela">Comprobar</button>-->
-            <!--</div>-->
-
-            <!--&lt;!&ndash; Table with projects, sectors and parcels &ndash;&gt;-->
-            <!--<div class="card-header">-->
-                <!--<ol class="breadcrumb">-->
-                    <!--<li class="breadcrumb-item active">Proyectos</li>-->
-                <!--</ol>-->
-                <!--<ul>-->
-                    <!--{% for proyecto in proyectos %}-->
-                        <!--<li>-->
-                            <!--<a class="project-name" data-id="{{ proyecto.id }}" href="#">-->
-                                <!-- - {{ proyecto.nombre }}-->
-                            <!--</a>-->
-                        <!--</li>-->
-                    <!--{% endfor %}-->
-                <!--</ul>-->
-            <!--</div>-->
-
-            <!--&lt;!&ndash; ADD PROJECTS, SECTORS AND PARCELS &ndash;&gt;-->
-            <!--<div class="add_new_data">-->
-                <!--&lt;!&ndash; ADD PARCELS &ndash;&gt;-->
-                <!--<button class="button-add-parcel">-->
-                    <!--<a class="related-widget-wrapper-link add-related" id="add_id_diputacion" href="/panel/parcelas/parcela/add/?_to_field=id&amp;_popup=1" title="Añadir parcela" style="display: block;" target="_blank">-->
-                        <!--Añadir parcela-->
-                    <!--</a>-->
-                <!--</button>-->
-                <!--<button class="button-kml-download">Descargar KML</button>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
 
 {% endblock %}
 

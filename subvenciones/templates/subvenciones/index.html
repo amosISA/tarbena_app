@@ -159,7 +159,7 @@
                                     <br />
                                     {{ f.descripcion|safe }}
                                 </td>
-                                <td class="td3" style="{% if f.fin|daysuntil in days_until_estado %}background-color:#ff0000;color:#fff;{% elif f.estado.id == 4 %}background-color:#ff0000;color:#fff;{% elif f.estado.id == 8 %}background-color:#ff0000;color:#fff;{% elif f.estado.id == 9 %}background-color:#ff0000;color:#fff;{% endif %}">
+                                <td class="td3 estado{{ f.estado.id }}" style="{% if f.fin|daysuntil in days_until_estado %}background-color:#ff0000;color:#fff;{% elif f.estado.id == 4 %}background-color:#ff0000;color:#fff;{% elif f.estado.id == 8 %}background-color:#ff0000;color:#fff;{% elif f.estado.id == 9 %}background-color:#ff0000;color:#fff;{% endif %}">
                                     {% if f.fin %}<div class="fechaInicio date-end">{{ f.fin|date:"d/m/Y" }}</div>{% endif %}
                                     <div class="estadoBloque estado">{{ f.estado }}</div>
                                     <div class="responsables">

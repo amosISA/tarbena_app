@@ -166,7 +166,7 @@
                                         {% for responsable in f.responsable.all %}
                                             <div class="card" style="width:35.5px;display:inline-block!important;" tabindex="0" data-toggle="popover" data-trigger="hover" data-content="{{ responsable.first_name }}">
                                                 <div class="card-body text-center" style="padding: 0.4rem; padding-bottom: 0!important;">
-                                                    <p style="margin:0;"><img class=" img-fluid" src='{% if responsable.profile.avatar %}{{ responsable.profile.avatar.url }}{% else %}{% static 'home/img/avatar/default.png' %}{% endif %}' alt="card image"></p>
+                                                    <p style="margin:0;"><img class="img-fluid" style="height:25px;width:40px;border-radius:50%;" src='{% if responsable.profile.avatar %}{{ responsable.profile.avatar.url }}{% else %}{% static 'home/img/avatar/default.png' %}{% endif %}' alt="card image"></p>
                                                     <h5 class="card-title" style="margin:0!important;font-size:13px;">{{ responsable.first_name|split_value }}</h5>
                                                 </div>
                                             </div>

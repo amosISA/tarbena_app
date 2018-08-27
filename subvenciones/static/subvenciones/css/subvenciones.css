@@ -590,7 +590,7 @@ legend.scheduler-border {
 
 @media (max-width: 1315px) {
   .wrapper-subvenciones_dates--inputs div:nth-child(-n+2) {
-    order: 1; } }
+    order: 0; } }
 /* Justificacion and ejecucion fieldset */
 .ejecucion__justitifacion--dates {
   width: 100%; }

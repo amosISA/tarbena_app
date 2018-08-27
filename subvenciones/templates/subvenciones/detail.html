@@ -19,6 +19,17 @@
     <div class="row forms_act_crea">
         <div class="ag_create_post_wrapper col-lg-12">
 
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
             <ul id="breadcrumb__subsidies">
                 <li title="Subvenciones"><a href="{% url 'subvenciones:index' %}"><span class="icon icon-home"> </span></a></li>
                 <li title="{{ subvencion.area }}"><a href="#">{{ subvencion.area|truncatechars:15 }}</a></li>

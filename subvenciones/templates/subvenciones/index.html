@@ -165,9 +165,9 @@
                                     <div class="responsables">
                                         {% for responsable in f.responsable.all %}
                                             <div class="card" style="width:35.5px;display:inline-block!important;" tabindex="0" data-toggle="popover" data-trigger="hover" data-content="{{ responsable.first_name }}">
-                                                <div class="card-body text-center" style="padding-bottom:0!important;padding-left:0rem;padding-right:0rem;padding-top:0.2rem;">
-                                                    <p style="margin:0;"><img style="height:30px;width:30px;border-radius:50%;" src='{% if responsable.profile.avatar %}{{ responsable.profile.avatar.url }}{% else %}{% static 'home/img/avatar/default.png' %}{% endif %}' alt="card image"></p>
-                                                    <h5 class="card-title" style="margin:0!important;font-size:13px;font-weight:bold;">{{ responsable.first_name|split_value }}</h5>
+                                                <div class="card-body text-center" style="padding-bottom:0!important;padding-left:0rem!important;padding-right:0rem!important;padding-top:0.2rem!important;">
+                                                    <p style="margin:0;"><img style="height:30px!important;width:30px!important;border-radius:50%!important;" src='{% if responsable.profile.avatar %}{{ responsable.profile.avatar.url }}{% else %}{% static 'home/img/avatar/default.png' %}{% endif %}' alt="card image"></p>
+                                                    <h5 class="card-title" style="color:#000!important;margin:0!important;font-size:13px!important;font-weight:bold!important;">{{ responsable.first_name|split_value }}</h5>
                                                 </div>
                                             </div>
                                         {% endfor %}

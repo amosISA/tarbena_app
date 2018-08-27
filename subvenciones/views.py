@@ -26,6 +26,7 @@ from .models import Subvencion, Estado, Colectivo, Area, Ente, Comment
 from .tasks import subvencion_mention_email, subvencion_create_email, subvencion_edit_email
 # from src.config.settings.base import MARTOR_MARKDOWNIFY_FUNCTION
 
+import csv
 import weasyprint
 
 # --------------- Index: List Subvenciones --------------- #
@@ -376,4 +377,18 @@ def admin_subvencion_pdf(request, subvencion_id):
                                            stylesheets=[weasyprint.CSS(
                                                settings.STATIC_ROOT + '/subvenciones/css/pdf.css'
                                            )])
+    return response
+
+# --------------- EXPORT TO CSV --------------- #
+def export_subvenciones_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="subvenciones.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Username', 'First name', 'Last name', 'Email address'])
+
+    users = User.objects.all().values_list('username', 'first_name', 'last_name', 'email')
+    for user in users:
+        writer.writerow(user)
+
     return response

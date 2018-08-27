@@ -20,4 +20,7 @@ urlpatterns = [
     url(r'^admin/subvencion/(?P<subvencion_id>\d+)/pdf/$',
         views.admin_subvencion_pdf,
         name='admin_subvencion_pdf'),
+
+    # Subvenciones CSV
+    url(r'^export/csv/$', views.export_subvenciones_csv, name='export_subvenciones_csv'),
 ]

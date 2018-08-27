@@ -164,9 +164,12 @@
                                     <div class="estadoBloque estado">{{ f.estado }}</div>
                                     <div class="responsables">
                                         {% for responsable in f.responsable.all %}
-                                            <span class="badge badge-pill badge-inverse" tabindex="0" data-toggle="popover" data-trigger="hover" data-content="{{ responsable.first_name }}">
-                                                {{ responsable|split_value }}
-                                            </span>
+                                            <div class="card" style="width:35.5px;display:inline-block!important;" tabindex="0" data-toggle="popover" data-trigger="hover" data-content="{{ responsable.first_name }}">
+                                                <div class="card-body text-center" style="padding: 0.4rem; padding-bottom: 0!important;">
+                                                    <p style="margin:0;"><img class=" img-fluid" src='{% if responsable.profile.avatar %}{{ responsable.profile.avatar.url }}{% else %}{% static 'home/img/avatar/default.png' %}{% endif %}' alt="card image"></p>
+                                                    <h5 class="card-title" style="margin:0!important;font-size:13px;">{{ responsable.first_name|split_value }}</h5>
+                                                </div>
+                                            </div>
                                         {% endfor %}
                                     </div>
                                     <div class="cuantia"><i class="fas fa-dollar-sign"></i> {% if f.cuantia_inicial %}{{ f.cuantia_inicial|safe }}{% endif %}</div>
@@ -264,5 +267,9 @@
 
         // Change label estado value, because filtering it leaves it as: "Estado nombre"
         $('#filter_estado__nombre > label').html('Estado:');
+
+        /*$("[data-toggle=popover]").popover({
+            html: true
+        });*/
     </script>
 {% endblock %}

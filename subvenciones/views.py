@@ -118,7 +118,6 @@ def likes(request):
 class SubvencionCreateView(LoginRequiredMixin, CreateView):
     form_class = SubvencionForm
     template_name = 'subvenciones/create.html'
-    success_url = reverse_lazy('subvenciones:index')
 
     def get_initial(self):
         super(SubvencionCreateView, self).get_initial()
@@ -197,7 +196,7 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
                     nf_type='create_subvencion')
 
         messages.success(self.request, 'Subvención añadida correctamente!')
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(reverse_lazy('subvenciones:subvencion_detail', kwargs={'id': self.object.pk}))
 
     def form_invalid(self, form, comments_formset):
         # Si es inválido el form de Subvención o el formset renderizamos los errores
@@ -210,7 +209,6 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
     model = Subvencion
     form_class = SubvencionForm
     template_name = 'subvenciones/edit.html'
-    success_url = reverse_lazy('subvenciones:index')
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -273,7 +271,7 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
                     nf_type='edit_subvencion')
 
         messages.success(self.request, 'Subvención actualizada correctamente!')
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(reverse_lazy('subvenciones:subvencion_detail', kwargs={'id': self.object.pk}))
 
     def form_invalid(self, form, comments_formset):
         messages.error(self.request, 'Error en la actualización de la subvención')

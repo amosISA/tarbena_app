@@ -43,7 +43,7 @@ $(document).ready(function() {
     // Scroll to subsidie that have the actual day and blink the subsidies that have as end date the actual day
     var CurrentDate = new Date();
     var dataFormated = ('0' + CurrentDate.getDate()).slice(-2)+"/"+('0'+(CurrentDate.getMonth()+1)).slice(-2)+"/"+CurrentDate.getFullYear();
-    console.log(dataFormated.   split("/"));
+    // console.log(dataFormated.   split("/"));
 
     // Compare dates with format DD/MM/YYYY
     function process(date){

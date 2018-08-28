@@ -21,6 +21,6 @@ urlpatterns = [
         views.admin_subvencion_pdf,
         name='admin_subvencion_pdf'),
 
-    # Subvenciones CSV
-    url(r'^export/csv/$', views.export_subvenciones_excel, name='export_subvenciones_excel'),
+    # Subvenciones Excel
+    url(r'^export/excel/$', views.export_subvenciones_excel, name='export_subvenciones_excel'),
 ]

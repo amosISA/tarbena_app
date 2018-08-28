@@ -380,6 +380,7 @@ def admin_subvencion_pdf(request, subvencion_id):
     return response
 
 # --------------- EXPORT TO EXCEL --------------- #
+import re
 def export_subvenciones_excel(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="subvenciones.xls"'
@@ -390,30 +391,44 @@ def export_subvenciones_excel(request):
     # Sheet header, first row
     row_num = 0
 
-    font_style = xlwt.XFStyle()
+    columns = [
+        ('G: Cód Gasto', 4000), ('G: Desc Gasto', 12000), ('G: Año', 4000),
+        ('G: Coeficiente Financiación', 2000), ('G: Aplic Presupuestaria', 5000),
+        ('I: Admón Que Financia', 4000), ('I: Año', 3000), ('I: Importe', 5000),
+        ('I: Aplic Presupuestaria', 5000)
+    ]
+
+    font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center;pattern: pattern solid, \
+                                       fore-colour light_blue ;border: left medium,right medium,top medium,bottom medium')
     font_style.font.bold = True
 
-    columns = ['G: Cód Gasto', 'G: Desc Gasto', 'G: Año', 'G: Coeficiente Financiación',
-               'G: Aplic Presupuestaria', 'I: Admón Que Financia', 'I: Año', 'I: Importe',
-               'I: Aplic Presupuestaria']
-
     for col_num in range(len(columns)):
-        ws.write(row_num, col_num, columns[col_num], font_style)
+        ws.write(row_num, col_num, columns[col_num][0], font_style)
+        # set column width
+        ws.col(col_num).width = columns[col_num][1]
 
     # Sheet body, remaining rows
-    font_style = xlwt.XFStyle()
+    font_style = xlwt.easyxf(
+        'align: wrap on,vert center, horiz left;border: left thin,right thin,top thin,bottom thin')
 
     # Subvenciones with estado_id: 5, 7 and 11
     rows = Subvencion.objects.all().filter(estado_id__in=[5,7,11]).values_list('impreso', 'nombre', 'cuantia_inicial', 'impreso',
-                                                                                                             'impreso', 'ente__nombre', 'impreso', 'cuantia_inicial',
-                                                                                                             'impreso')
+                                                                                'impreso', 'ente__nombre'.split(' ')[0], 'impreso',
+                                                                                'cuantia_inicial', 'impreso')
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):
-            ws.write(row_num, col_num, row[col_num], font_style)
+            if col_num == 5:
+                ws.write(row_num, col_num, row[col_num].split(' ')[0], font_style)
+            elif col_num == 2:
+                ws.write(row_num, col_num, re.sub("\D", "", str(row[col_num])), font_style)
+            else:
+                ws.write(row_num, col_num, row[col_num], font_style)
 
-    row_num += 6
-    ws.write(row_num, 0, 'DEFINIÉNDOSE', font_style)
+    row_num += 3
+    font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center;pattern: pattern solid \
+                                           ;border: left thin,right thin,top thin,bottom thin')
+    ws.write(row_num, 0, 'ESTADO DEFINIÉNDOSE', font_style)
 
     # Subvenciones with estado_id: 4
     rows_def = Subvencion.objects.all().filter(estado_id=4).values_list('impreso', 'nombre', 'cuantia_inicial',
@@ -421,6 +436,9 @@ def export_subvenciones_excel(request):
                                                                                  'impreso', 'ente__nombre', 'impreso',
                                                                                  'cuantia_inicial',
                                                                                  'impreso')
+
+    font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center;pattern: pattern solid \
+                                               ;border: left thin,right thin,top thin,bottom thin')
 
     for row in rows_def:
         row_num += 1

@@ -97,9 +97,9 @@
 
             <div id="subvenciones-nav-dropdown-toggle" class="subvenciones-nav-dropdown dropdown-menu__box dropdown-menu__box--hide dropdown-menu__box--right">
                 {% if request.user.is_authenticated %}
-                <a href="{% url 'subvenciones:export_subvenciones_csv' %}" class="anchor-drop-dwn__subv menu-item">
+                <a href="{% url 'subvenciones:export_subvenciones_excel' %}" class="anchor-drop-dwn__subv menu-item">
                     <div class="subv_inside__anchor--drop">
-                        Exportar CSV <span class="span__drop--itm"><i class="far fa-user"></i></span>
+                        Exportar a Excel <span class="span__drop--itm"><i class="far fa-file-excel"></i></span>
                     </div>
                 </a>
                 <a href="{% url 'profiles:user_profile' username=request.user %}" class="anchor-drop-dwn__subv menu-item">

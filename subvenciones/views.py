@@ -26,8 +26,8 @@ from .models import Subvencion, Estado, Colectivo, Area, Ente, Comment
 from .tasks import subvencion_mention_email, subvencion_create_email, subvencion_edit_email
 # from src.config.settings.base import MARTOR_MARKDOWNIFY_FUNCTION
 
-import csv
 import weasyprint
+import xlwt
 
 # --------------- Index: List Subvenciones --------------- #
 @login_required()
@@ -379,16 +379,53 @@ def admin_subvencion_pdf(request, subvencion_id):
                                            )])
     return response
 
-# --------------- EXPORT TO CSV --------------- #
-def export_subvenciones_csv(request):
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="subvenciones.csv"'
+# --------------- EXPORT TO EXCEL --------------- #
+def export_subvenciones_excel(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="subvenciones.xls"'
 
-    writer = csv.writer(response)
-    writer.writerow(['Username', 'First name', 'Last name', 'Email address'])
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Subvenciones')
 
-    users = User.objects.all().values_list('username', 'first_name', 'last_name', 'email')
-    for user in users:
-        writer.writerow(user)
+    # Sheet header, first row
+    row_num = 0
 
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['G: Cód Gasto', 'G: Desc Gasto', 'G: Año', 'G: Coeficiente Financiación',
+               'G: Aplic Presupuestaria', 'I: Admón Que Financia', 'I: Año', 'I: Importe',
+               'I: Aplic Presupuestaria']
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+
+    # Subvenciones with estado_id: 5, 7 and 11
+    rows = Subvencion.objects.all().filter(estado_id__in=[5,7,11]).values_list('impreso', 'nombre', 'cuantia_inicial', 'impreso',
+                                                                                                             'impreso', 'ente__nombre', 'impreso', 'cuantia_inicial',
+                                                                                                             'impreso')
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    row_num += 6
+    ws.write(row_num, 0, 'DEFINIÉNDOSE', font_style)
+
+    # Subvenciones with estado_id: 4
+    rows_def = Subvencion.objects.all().filter(estado_id=4).values_list('impreso', 'nombre', 'cuantia_inicial',
+                                                                                 'impreso',
+                                                                                 'impreso', 'ente__nombre', 'impreso',
+                                                                                 'cuantia_inicial',
+                                                                                 'impreso')
+
+    for row in rows_def:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
     return response

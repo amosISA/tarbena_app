@@ -2,7 +2,7 @@ $(document).ready(function() {
     // Mobile
     if ($(window).width() < 1180) {
         // Delete all but last and penultimate
-        $('#subvenciones-nav-dropdown-toggle a:not(:last)').prev().remove();
+        $('#subvenciones-nav-dropdown-toggle a:not(:last)').prev().prev().remove();
         $('<a href="/subvenciones/" class="anchor-drop-dwn__subv menu-item"> \
             <div class="subv_inside__anchor--drop">Inicio <span class="span__drop--itm"><i class="fas fa-home"></i></span></div> \
             </a> \
@@ -18,7 +18,7 @@ $(document).ready(function() {
     $(window).resize(function() {
         if ($(window).width() < 1180) {
             // Delete all but last and penultimate
-            $('#subvenciones-nav-dropdown-toggle a:not(:last)').prev().remove();
+            $('#subvenciones-nav-dropdown-toggle a:not(:last)').prev().prev().remove();
             $('<a href="/subvenciones/" class="anchor-drop-dwn__subv menu-item"> \
                 <div class="subv_inside__anchor--drop">Inicio <span class="span__drop--itm"><i class="fas fa-home"></i></span></div> \
                 </a> \

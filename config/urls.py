@@ -33,6 +33,9 @@ urlpatterns = [
     url(r'^subvenciones/', include('subvenciones.urls', namespace='subvenciones')),
     url(r'^parcelas/', include('parcelas.urls', namespace='parcelas')),
 
+    # Subvenciones Transparencia
+    url(r'^transparencia/', views.index_subvenciones_transparencia, name='transparencia'),
+
     # Entry point to main app: Index
     url(r'^$', views.index, name='index'),
 

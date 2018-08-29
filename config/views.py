@@ -6,12 +6,28 @@ from django.views.generic import CreateView
 
 from .forms import RegisterForm
 
+import sys
+sys.path.append("..")
+from subvenciones.models import Subvencion
+
 # --------------- Index --------------- #
 def index(request):
     if request.user.is_authenticated():
         return render(request, 'home/index.html', {})
     else:
         return HttpResponseRedirect(reverse('login'))
+
+# --------------- Subvenciones Transparencia --------------- #
+def index_subvenciones_transparencia(request):
+    f = Subvencion.objects.prefetch_related(
+        'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion', 'responsable__profile'
+    ).select_related(
+        'user', 'estado', 'ente', 'area', 'user__profile'
+    ).extra(select={"day_mod": "date(fin)"}).order_by('day_mod')
+
+    return render(request,
+                  'home/transparencia.html',
+                  {'filter' : f})
 
 # --------------- User Registration --------------- #
 class RegisterView(CreateView):

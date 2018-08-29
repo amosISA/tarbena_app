@@ -1,0 +1,120 @@
+{% extends "home/base.html" %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+    <!-- Datatables -->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/datatables/datatables.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.dataTables.css' %}">
+    <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.bootstrap4.css' %}">
+    <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.foundation.css' %}">
+    <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.jqueryui.css' %}">
+    <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.semanticui.css' %}">
+    <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/mixins.css' %}">
+{% endblock %}
+
+{% block title %}
+    Subvenciones Transparencia
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+<div>
+    <div>
+
+        {% include 'home/snippets/navbar.html' %}
+
+        <div>
+            <div class="rights-tarbena main">
+                <div class="rights-tarbena content">
+                    <div class="rights-tarbena">
+                        <div class="rights-tarbena md">
+
+                            <div class="row align-items-center subv-table-row">
+                                <div class="col-12 nopadding">
+
+                                    <table class="table" id="table_subs_transparencia" width="100%">
+                                        <thead class="thead-subv-table">
+                                            <tr class="table-active">
+                                                <th>Fecha publicación</th>
+                                                <th>Nombre y descripción</th>
+                                                <th>Vencimiento</th>
+                                                <th>Procedimiento</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            {% for f in filter %}
+                                                <tr>
+                                                    <td class="td1 {% if f.ente.id == 1 %}diputacion{% elif f.ente.id == 2 %}conselleria{% else %}gobierno{% endif %}">
+                                                        <div class="bloque01">
+                                                            {% if f.fecha_publicacion %}<div class="fechaInicio">{{ f.fecha_publicacion|date:"d/m/Y" }}</div>{% endif %}
+                                                        </div>
+                                                        <div class="departamento depart{{ f.area.id }}">
+                                                            {{ f.area }}
+                                                        </div>
+                                                    </td>
+                                                    <td class="td2">
+                                                        <b>
+                                                            <a href="{{ f.get_absolute_url }}" target="_blank">
+                                                                {{ f.nombre|safe }}
+                                                            </a>
+                                                        </b>
+                                                        <br />
+                                                        {{ f.descripcion|safe }}
+                                                    </td>
+                                                    <td class="td3 estado{{ f.estado.id }}">
+                                                        {% if f.fin %}<div class="fechaInicio date-end">{{ f.fin|date:"d/m/Y" }}</div>{% endif %}
+                                                        <div class="estadoBloque estado">{{ f.estado }}</div>
+                                                        <div class="cuantia"><i class="fas fa-dollar-sign"></i> {% if f.cuantia_inicial %}{{ f.cuantia_inicial|safe }}{% endif %}</div>
+                                                        <div class="cuantia"><i class="fas fa-euro-sign"></i> {% if f.cuantia_final %}{{ f.cuantia_final|safe }}{% endif %}</div>
+                                                    </td>
+                                                    <td class="td4">
+                                                        {{ f.procedimiento }}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block addscript %}
+    <!-- CDN for sorting the head on the table -->
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <script type="text/javascript" src="{% static 'home/datatables/datatables.min.js' %}"></script>
+
+    <!-- Sorting datatimes in datatables -->
+    <!--
+        https://datatables.net/blog/2014-12-18
+        Datatables plugin for sorting dates in the table
+    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="{% static 'subvenciones/js/datetime-moment.js' %}"></script>
+    <script src="{% static 'home/datatables/Buttons-1.5.1/js/dataTables.buttons.js' %}"></script>
+    <script src="{% static 'home/datatables/Buttons-1.5.1/js/buttons.flash.js' %}"></script>
+    <script src="{% static 'home/datatables/Buttons-1.5.1/js/buttons.bootstrap4.js' %}"></script>
+    <script src="{% static 'home/datatables/Buttons-1.5.1/js/buttons.colVis.js' %}"></script>
+    <script src="{% static 'home/datatables/Buttons-1.5.1/js/buttons.foundation.js' %}"></script>
+    <script src="{% static 'home/datatables/Buttons-1.5.1/js/buttons.html5.js' %}"></script>
+    <script src="{% static 'home/datatables/Buttons-1.5.1/js/buttons.jqueryui.js' %}"></script>
+    <script src="{% static 'home/datatables/Buttons-1.5.1/js/buttons.print.js' %}"></script>
+    <script src="{% static 'home/datatables/Buttons-1.5.1/js/buttons.semanticui.js' %}"></script>
+    <script src="{% static 'home/datatables/jszip.min.js' %}"></script>
+    <script src="{% static 'home/datatables/pdfmake.min.js' %}"></script>
+    <script src="{% static 'home/datatables/vfs_fonts.js' %}"></script>
+    <script src="{% static 'home/js/transparencia.js' %}"></script>
+{% endblock %}

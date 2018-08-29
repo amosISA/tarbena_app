@@ -213,7 +213,8 @@
                         <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
                             <div id="id_comentarios" disabled rows="12" cols="20" class="form-control">
                                 {% if subvencion.comments.all %}
-                                    {% for comment in subvencion.comments.all %}
+                                    <!-- for comment in subvencione.comments.all -->
+                                    {% for comment in subvencion.get_sub_comments %}
                                         {% if comment.contenido %}
                                             <span class="comment_user_date">{{ comment.user.username }}: {{ comment.created|date:"d/m/Y" }}</span>: {{ comment.contenido|safe_markdown }}
                                         {% else %}

@@ -165,6 +165,9 @@ class Subvencion(TimeStampedModel):
         return reverse('subvenciones:subvencion_detail',
                        args=[self.id])
 
+    def get_sub_comments(self):
+        return self.comments.all().select_related('user', 'subvencion')
+
 class Comment(TimeStampedModel):
     user = models.ForeignKey(User, blank=True, null=True)
     subvencion = models.ForeignKey(Subvencion, related_name='comments')

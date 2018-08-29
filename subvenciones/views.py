@@ -43,23 +43,23 @@ def index_subvenciones(request, estado_slug=None):
     # Handle user favourites
     if request.path == '/subvenciones/favourites/':
         f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
-            'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
+            'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion', 'responsable__profile'
         ).select_related(
-            'user', 'estado', 'ente', 'area'
+            'user', 'estado', 'ente', 'area', 'user__profile'
         ).filter(likes__in=[request.user]))
     else:
         # If is superuser: list all subsidies, if not, only the related to the respective user
         if request.user.is_superuser:
             f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
-                'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
+                'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion', 'responsable__profile'
             ).select_related(
-                'user', 'estado', 'ente', 'area'
+                'user', 'estado', 'ente', 'area', 'user__profile'
             ).extra(select={"day_mod": "date(fin)"}).order_by('day_mod'))
         else:
             f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
-                'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion'
+                'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion', 'responsable__profile'
             ).select_related(
-                'user', 'estado', 'ente', 'area'
+                'user', 'estado', 'ente', 'area', 'user__profile'
             ).filter(responsable=request.user))
 
     return render(request,
@@ -420,13 +420,13 @@ def export_subvenciones_excel(request):
         for col_num in range(len(row)):
             if col_num == 5:
                 ws.write(row_num, col_num, row[col_num].split(' ')[0], font_style)
-            elif col_num == 2:
+            elif col_num == 2 or col_num == 7:
                 ws.write(row_num, col_num, re.sub("\D", "", str(row[col_num])), font_style)
             else:
                 ws.write(row_num, col_num, row[col_num], font_style)
 
     row_num += 3
-    font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center;pattern: pattern solid \
+    font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center \
                                            ;border: left thin,right thin,top thin,bottom thin')
     ws.write(row_num, 0, 'ESTADO DEFINIÉNDOSE', font_style)
 
@@ -437,13 +437,18 @@ def export_subvenciones_excel(request):
                                                                                  'cuantia_inicial',
                                                                                  'impreso')
 
-    font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center;pattern: pattern solid \
+    font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz left \
                                                ;border: left thin,right thin,top thin,bottom thin')
 
     for row in rows_def:
         row_num += 1
         for col_num in range(len(row)):
-            ws.write(row_num, col_num, row[col_num], font_style)
+            if col_num == 5:
+                ws.write(row_num, col_num, row[col_num].split(' ')[0], font_style)
+            elif col_num == 2 or col_num == 7:
+                ws.write(row_num, col_num, re.sub("\D", "", str(row[col_num])), font_style)
+            else:
+                ws.write(row_num, col_num, row[col_num], font_style)
 
     wb.save(response)
     return response

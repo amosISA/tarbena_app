@@ -2,6 +2,7 @@
 {% load staticfiles %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'subvenciones/css/bootstrap.min.css' %}">
     <!-- Datatables -->
     <link rel="stylesheet" type="text/css" href="{% static 'home/datatables/datatables.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.dataTables.css' %}">
@@ -11,6 +12,8 @@
     <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/buttons.semanticui.css' %}">
     <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/common.css' %}">
     <link rel="stylesheet" href="{% static 'home/datatables/Buttons-1.5.1/css/mixins.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/transparencia.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 {% endblock %}
 
 {% block title %}
@@ -31,11 +34,10 @@
                 <div class="rights-tarbena content">
                     <div class="rights-tarbena">
                         <div class="rights-tarbena md">
-
                             <div class="row align-items-center subv-table-row">
                                 <div class="col-12 nopadding">
 
-                                    <table class="table" id="table_subs_transparencia" width="100%">
+                                    <table class="table" id="table_subs_transparencia">
                                         <thead class="thead-subv-table">
                                             <tr class="table-active">
                                                 <th>Fecha publicación</th>
@@ -71,7 +73,7 @@
                                                         <div class="cuantia"><i class="fas fa-dollar-sign"></i> {% if f.cuantia_inicial %}{{ f.cuantia_inicial|safe }}{% endif %}</div>
                                                         <div class="cuantia"><i class="fas fa-euro-sign"></i> {% if f.cuantia_final %}{{ f.cuantia_final|safe }}{% endif %}</div>
                                                     </td>
-                                                    <td class="td4">
+                                                    <td class="td4" style="overflow:auto;">
                                                         {{ f.procedimiento }}
                                                     </td>
                                                 </tr>

@@ -43,6 +43,7 @@ table, th, td {
 }
 table#subv_table_ordering th {background:#666; color: white; font-size: 1em;padding: 10px;}
 table#subv_table_ordering tr {padding: 5px 0px; border-top: 1px solid #000;}
+table#subv_table_ordering .responsables .card { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.22), 0px 0.5px 1px 0px rgba(0, 0, 0, 0.19); }
 table#subv_table_ordering .fechaInicio {float: left; display: block; background-color: rgba(255, 255, 255, 0.9); margin: 2px;border-radius: 1px; padding: 3px 7px; width: 110px; color: #000;}
 table#subv_table_ordering .estadoBloque {float: left; display: block; background: #ddd; margin: 2px; border-radius: 1px; padding: 3px 7px; width: 110px;}
 table#subv_table_ordering .colectivo {

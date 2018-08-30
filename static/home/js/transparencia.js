@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    oTable= $('#subv_table_ordering').DataTable({
+    oTable= $('#table_subs_transparencia').DataTable({
         "ordering": false,
         //"searching": false,
         "language": {

@@ -73,8 +73,8 @@
                                                         <div class="cuantia"><i class="fas fa-dollar-sign"></i> {% if f.cuantia_inicial %}{{ f.cuantia_inicial|safe }}{% endif %}</div>
                                                         <div class="cuantia"><i class="fas fa-euro-sign"></i> {% if f.cuantia_final %}{{ f.cuantia_final|safe }}{% endif %}</div>
                                                     </td>
-                                                    <td class="td4" style="overflow:auto;">
-                                                        {{ f.procedimiento }}
+                                                    <td class="td4">
+                                                        <a href="{{ f.procedimiento }}" target="_blank">{{ f.procedimiento }}</a>
                                                     </td>
                                                 </tr>
                                             {% endfor %}

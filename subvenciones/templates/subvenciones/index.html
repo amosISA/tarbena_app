@@ -152,7 +152,7 @@
                                 </td>
                                 <td class="td2">
                                     <b>
-                                        <a href="{{ f.get_absolute_url }}" target="_blank">
+                                        <a href="{% url 'subvenciones:edit_subvencion' pk=f.pk %}" target="_blank">
                                             {{ f.nombre|safe }}
                                         </a>
                                     </b>

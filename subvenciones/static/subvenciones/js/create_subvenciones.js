@@ -36,15 +36,15 @@ $j(document).ready(function(){
     });
     
     // Unsaved changes leaving page
-    var form = $j('#some-form'),
-    original = form.serialize();
-    form.submit(function(){
-        window.onbeforeunload = null
-    });
-    window.onbeforeunload = function(){
-        if (form.serialize() != original)
-            return 'Are you sure you want to leave?'
-    };
+//    var form = $j('#some-form'),
+//    original = form.serialize();
+//    form.submit(function(){
+//        window.onbeforeunload = null
+//    });
+//    window.onbeforeunload = function(){
+//        if (form.serialize() != original)
+//            return 'Are you sure you want to leave?'
+//    };
 
     // Hide comments user
     $('#id_comments-0-user').hide();

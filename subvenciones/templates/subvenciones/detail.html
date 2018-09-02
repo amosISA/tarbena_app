@@ -85,7 +85,7 @@
                             <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
                                 <!-- Gestiona Enlace -->
                                 <label for="id_drive">Drive:</label>
-                                <textarea id="id_drive" rows="1" cols="20" class="form-control" readonly {% if subvencion.drive %}tabindex="0" data-toggle="popover" data-trigger="hover" data-html="true" title="Drive" data-content="<a href='{{ subvencion.drive }}' target='_blank'>{{ subvencion.drive }}</a>"{% endif %}>{{ subvencion.drive }}</textarea>
+                                <textarea style="cursor:pointer;" id="id_drive" rows="1" cols="20" class="form-control" readonly>{{ subvencion.drive }}</textarea>
                             </div>
                             <div class="form-group col-md-6 title-create_post" style="text-align:justify;font-weight:bold;">
                                 <!-- Gestiona Expediente -->

@@ -40,12 +40,6 @@
                 <li title="{{ subvencion.nombre }}"><a href="{{ subvencion.get_absolute_url }}">{{ subvencion.nombre|truncatechars:15 }}</a></li>
                 <li title="Creado por"><a href="#"><span class="icon icon-user"> </span> {{ subvencion.user|title }}, {{ subvencion.created }}</a></li>
                 <li title="Última modificación"><a href="#"><span class="icon icon-pencil"> </span> {{ subvencion.updated }}</a></li>
-                <div class="breadcrumb__left--buttons">
-                    <!--<li class="breadcrumb_detail__anchor&#45;&#45;pdf"><input type="submit" id="myTextField" form="some-form" value="Guardar"></li>-->
-                    <li class="breadcrumb_detail__anchor--edit"><a href="#" onclick="document.forms['some-form'].submit();" id="alternative_submit"><span class="icon icon-pencil"> </span> Guardar</a></li>
-                    <li class="breadcrumb_detail__anchor--delete"><a href="{% url 'subvenciones:delete_subvencion' pk=subvencion.pk %}"><span class="icon icon-trash"> </span> Eliminar</a></li>
-                    <li class="breadcrumb_detail__anchor--pdf"><a href="{% url 'subvenciones:admin_subvencion_pdf' subvencion_id=subvencion.id %}" target="_blank"><span class="far fa-file-pdf"> </span> PDF</a></li>
-                </div>
             </ul>
 
             {{ comments_formset.management_form }}
@@ -282,7 +276,9 @@
                 </div>
 
                 <!--onclick="this.disabled=true,this.form.submit();"-->
-                <!--<input class="button_submit_create_form" type="submit" value="Actualizar Subvención" />-->
+                <div class="button_form--submit__wrapper">
+                    <button class="button_submit_create_form" type="submit">Guardar</button>
+                </div>
             </form>
 
             <!-- Modal -->
@@ -324,6 +320,7 @@
     <script type="text/javascript" src="{% static 'martor/js/martor.min.js' %}"></script>
 
     <script src="{% static 'subvenciones/js/create_subvenciones.js' %}"></script>
+    <script src="{% static 'subvenciones/js/edit_subvenciones.js' %}"></script>
     <script>
         // RELATED SUBVENCIONES WITH AJAX
         $(document).ready(function() {
@@ -463,59 +460,28 @@
 
 {% block js %}
     <script>
-        // AJAX FOR LIKES
-        $('a.like-button-details').click(function(e) {
-            e.preventDefault();
-            $.post('{% url "subvenciones:like" %}',
-                {
-                    id: $(this).data('id'),
-                    action: $(this).data('action')
-                },
-                function(data) {
-                    if(data['status'] == 'ok')
-                    {
-                        var button_likes = $('a.like-button-details');
-                        var previous_action = button_likes.data('action');
-                        //toggle data-action
-                        button_likes.data('action', previous_action == 'like' ? 'unlike' : 'like');
-                        //toggle link text
-                        $('.likes_heart').addClass(previous_action == 'like' ? $('.likes_heart').addClass("fas") : $('.likes_heart').removeClass('fas'));
-                    }
-                }
-            );
-        });
-    </script>
-    <script>
         $(document).ready(function() {
-            // If impreso is checked add class to toogle
-            if ($('input#id_impreso').is(':checked')) { $('input#id_impreso + label').addClass('nested-icon-check'); }
-
-            // Change cuantia label text
-            $("#id_cuantia_inicial").prev().empty().append('Inicio:').css({'display':'block', 'text-align':'left'});
-            $("#id_cuantia_solicitada").prev().empty().append('Solicitada:').css({'display':'block', 'text-align':'left'});
-            $("#id_cuantia_final").prev().empty().append('Final:').css({'display':'block', 'text-align':'left'});
-
-            // Disable button if user dont' make changes on the form
-            var form = $j('#some-form'),
-            original = form.serialize();
-            form.submit(function(){
-                window.onbeforeunload = null
+            // AJAX FOR LIKES
+            $('a.like-button-details').click(function(e) {
+                e.preventDefault();
+                $.post('{% url "subvenciones:like" %}',
+                    {
+                        id: $(this).data('id'),
+                        action: $(this).data('action')
+                    },
+                    function(data) {
+                        if(data['status'] == 'ok')
+                        {
+                            var button_likes = $('a.like-button-details');
+                            var previous_action = button_likes.data('action');
+                            //toggle data-action
+                            button_likes.data('action', previous_action == 'like' ? 'unlike' : 'like');
+                            //toggle link text
+                            $('.likes_heart').addClass(previous_action == 'like' ? $('.likes_heart').addClass("fas") : $('.likes_heart').removeClass('fas'));
+                        }
+                    }
+                );
             });
-            window.onbeforeunload = function(e){
-                if (form.serialize() != original) {
-                    return 'Tiene cambios sin guardar!';
-                }
-            };
-
-            $('form')
-                .each(function(){
-                    $(this).data('serialized', $(this).serialize())
-                })
-                .on('keyup change :input', function(){
-                    if ($(this).serialize() == $(this).data('serialized')) { $('a#alternative_submit').addClass('btn disabled'); } else { $('a#alternative_submit').removeClass(); }
-                 })
-            ;
-            $('a.ajax_relation_anchor').click(function() { $('a#alternative_submit').removeClass(); });
         });
     </script>
 {% endblock %}

@@ -37,9 +37,6 @@
             <ul id="breadcrumb__subsidies">
                 <li title="Subvenciones"><a href="{% url 'subvenciones:index' %}"><span class="icon icon-home"> </span></a></li>
                 <li><a href="#">Crear subvención</a></li>
-                <div class="breadcrumb__left--buttons">
-                    <li class="breadcrumb_detail__anchor--pdf"><input type="submit" id="myTextField" form="some-form" value="Crear"></li>
-                </div>
             </ul>
 
             {{ comments_formset.management_form }}
@@ -262,7 +259,9 @@
                 </div>
 
                 <!--onclick="this.disabled=true,this.form.submit();"-->
-                <!--<input class="button_submit_create_form" type="submit" value="Crear Subvención" />-->
+                <div class="button_form--submit__wrapper">
+                    <button class="button_submit_create_form" type="submit">Crear</button>
+                </div>
             </form>
 
             <!-- Modal -->

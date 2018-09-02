@@ -612,11 +612,11 @@ table#subv_table_ordering .badge a {text-decoration: none;}
     .ag_create_post_wrapper .image-preview-btn-defautl .badge {
       color: #fff;
       background-color: #333; }
-  .ag_create_post_wrapper .button_submit_create_form {
-    font-weight: bold;
+  /*.ag_create_post_wrapper .button_submit_create_form {
+    font-weight: bold;**/
     /*margin-bottom: 30px;
     padding: 16px;*/
-    padding-left:5px;
+    /*padding-left:5px;
     padding-right:5px;
     text-transform: none;
     height: 40px;
@@ -640,7 +640,7 @@ table#subv_table_ordering .badge a {text-decoration: none;}
   background: #253350;
   box-shadow: none;
   text-decoration: none;
-}
+}*/
 
 .ag_create_post_wrapper .smalls_for_departments { display: block; text-align: left; }
 

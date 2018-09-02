@@ -6,4 +6,14 @@ $(document).ready(function() {
 
     // Print or not print awesome icon
     $("label[for='id_impreso']").text('');
+
+    // Get Drive textarea anchor link
+    $('textarea#id_drive').click(function() {
+        var textarea_drive_url = $(this).val();
+        window.open(textarea_drive_url, '_blank');
+    }).hover(function() {
+        $(this).css('text-decoration', 'underline');
+    },function(){
+        $(this).css("text-decoration", "none");
+    });
 });

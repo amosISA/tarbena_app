@@ -151,6 +151,7 @@
                                     </div>
                                 </td>
                                 <td class="td2">
+                                    {% if f.leimotiv %}<div class="leimotiv">{{ f.leimotiv|safe }}</div>{% endif %}
                                     <b>
                                         <a href="{% url 'subvenciones:edit_subvencion' pk=f.pk %}" target="_blank">
                                             {{ f.nombre|safe }}

@@ -717,6 +717,11 @@ legend.scheduler-border {
   width: 15px;
   border-radius: 1px;
   text-align: center;
-  margin-right: 5px; }
+  margin-right: 5px;
+  color: #000; }
+
+.leimotiv {
+  font-size: 0.8em;
+  color: #141bc9; }
 
 /*# sourceMappingURL=subvenciones.css.map */

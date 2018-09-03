@@ -105,6 +105,7 @@ class Subvencion(TimeStampedModel):
     fecha_resolucion = models.DateField(blank=True, null=True)
     responsable = models.ManyToManyField(User, related_name='responsable', blank=True)
     nombre = models.TextField(blank=False, default="")
+    leimotiv = models.CharField(max_length=250, blank=True, null=True)
 
     # Links
     procedimiento = models.TextField(blank=True)

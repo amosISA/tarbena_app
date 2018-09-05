@@ -24,12 +24,13 @@
         <div class="entrypoin_aplications_wrapper__seen entrypoin_aplications__wrapper">
             <div class="aplications_details__cards">
                 <a href="{% url 'subvenciones:index' %}">
-                    <div class="application_cards__detail">
+                    <div class="application_cards__detail" style="margin-right:20px;">
                         <img src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="card">
                         <div class="application_detail__title">Subvenciones</div>
                         <div class="application_detail__body">
                             Gestiona las subvenciones correspondiente a cada departamento.
                         </div>
+                        <a style="z-index:900;font-size:14px;" href="{% url 'transparencia' %}">Transparencia</a>
                     </div>
                 </a>
                 <a href="{% url 'parcelas:index' %}">

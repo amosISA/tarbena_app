@@ -28,7 +28,15 @@
 
     <!-- Side Navigation Menu for Filtering -->
     <div class="cd-filter">
-        <form action="" method="get" style="padding-left:15px;padding-right:15px;padding-bottom:15px;">
+        <form id="filtering-form-subs" action="" method="get" style="padding-left:15px;padding-right:15px;padding-bottom:15px;">
+            <div id="filter_fecha_publicacion" class="form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
+                {{ filter.form.fecha_publicacion.label_tag }}
+                {{ filter.form.fecha_publicacion|htmlattributes:"class:form-control" }}
+            </div>
+            <div id="filter_fin" class="form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
+                {{ filter.form.fin.label_tag }}
+                {{ filter.form.fin|htmlattributes:"class:form-control" }}
+            </div>
             <div id="filter_estado__nombre" class="form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
                 {{ filter.form.estado.label_tag }}
                 {{ filter.form.estado|htmlattributes:"class:form-control" }}

@@ -25,22 +25,38 @@ class AreaForm(forms.ModelForm):
         fields = ["nombre", "ente"]
 
 class SubvencionFilter(django_filters.FilterSet):
+    fecha_publicacion = django_filters.CharFilter(
+        label='Año inicio',
+        lookup_expr='icontains',
+    )
+    fin = django_filters.CharFilter(
+        label='Año fin',
+        lookup_expr='icontains',
+    )
     estado = django_filters.filters.ModelMultipleChoiceFilter(
+        label='Estado',
         field_name='estado__nombre',
         to_field_name='nombre',
         queryset=Estado.objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )
+    responsable = django_filters.filters.ModelMultipleChoiceFilter(
+        label='Responsable',
+        field_name='responsable__first_name',
+        to_field_name='first_name',
+        queryset=User.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+    )
 
     class Meta:
         model = Subvencion
-        fields = ['ente', 'area', 'responsable']
+        fields = ['ente','area']
 
 class SubvencionForm(forms.ModelForm):
     # In reponsable field get user by first_name
     def __init__(self, *args, **kwargs):
         super(SubvencionForm, self).__init__(*args, **kwargs)
-        users = User.objects.all()
+        users = User.objects.all().values('first_name')
         self.fields['responsable'].choices = [(user.pk, user.first_name) for user in users]
 
     class Meta:

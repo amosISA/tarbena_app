@@ -783,25 +783,25 @@ ul#id_se_relaciona_con {
 }
 #id_se_relaciona_con li { position: relative; }
 
-#id_se_relaciona_con li, #id_responsable li, #id_colectivo li, #content_ajax_list {
+#id_se_relaciona_con li, #some-form #id_responsable li, #id_colectivo li, #content_ajax_list {
     list-style-type: none;
 }
 
-#id_se_relaciona_con li:nth-child(odd), #id_responsable li:nth-child(odd), #id_colectivo li:nth-child(odd) {
+#id_se_relaciona_con li:nth-child(odd), #some-form #id_responsable li:nth-child(odd), #id_colectivo li:nth-child(odd) {
     background-color: #ffd6d6;
 }
 
-#id_se_relaciona_con li:nth-child(even), #id_responsable li:nth-child(even), #id_colectivo li:nth-child(even) {
+#id_se_relaciona_con li:nth-child(even), #some-form #id_responsable li:nth-child(even), #id_colectivo li:nth-child(even) {
     background-color: #fff3d6;
 }
 
-#id_se_relaciona_con li label, #id_responsable li label, #id_colectivo li label, .filtro li label {
+#id_se_relaciona_con li label, #some-form #id_responsable li label, #id_colectivo li label, .filtro li label {
     display: block;
     padding-left:20px;
     padding-bottom:2px;
 }
 
-#id_se_relaciona_con li label:hover, #id_responsable li label:hover, #id_colectivo li label:hover, #content_ajax_list li label:hover {
+#id_se_relaciona_con li label:hover, #some-form #id_responsable li label:hover, #id_colectivo li label:hover, #content_ajax_list li label:hover {
     cursor:pointer;
 }
 

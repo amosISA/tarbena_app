@@ -114,15 +114,45 @@ input[type=checkbox], input[type=radio] {
     position: absolute;
     top: 50px;
     left: 0;
-    width: 25%;
+    width: 100%;
+    height: 108px;
     background: #fff;
     box-shadow: 4px 4px 20px transparent;
     z-index: 2;
-    backface-visibility: hidden;
+    background-color: #dee2e6;
+    /*backface-visibility: hidden;
     transform: translateX(-100%);
-    transition: transform .3s,box-shadow .3s;
+    transition: transform .3s,box-shadow .3s;*/
+    display: none;
 }
-.cd-filter.filter-is-visible {
+.custom-select, .custom-select2 {
+    width: 100%;
+    /*margin-top: 29px;*/
+    cursor:pointer;
+}
+div#custom-select-option-box, div#custom-select-option-box2 {
+    background: #FFF;
+    border: #80b2bb 1px solid;
+    color: #3892a2;
+    border-radius: 2px;
+    width: 91%;
+    z-index:50;
+    position: absolute;
+    display:none;
+}
+.custom-select-option, .custom-select-option2 {
+    width: 100%;
+    padding: 5px 15px;
+    margin: 1px 0px;
+    cursor: pointer;
+}
+#filtering-form-subs #id_ente:first-child, #filtering-form-subs #id_area:first-child {
+    font-weight:bold;
+}
+#filtering-form-subs #id_ente, #filtering-form-subs #id_area {
+    font-size: 0.9rem;
+}
+/*.cd-filter.filter-is-visible {
     transform: translateX(0);
     box-shadow: 4px 4px 20px rgba(0,0,0,.2);
 }
@@ -140,9 +170,9 @@ input[type=checkbox], input[type=radio] {
     padding-top: 10px;
     color: white;
     font-size: 20px;
-}
+}*/
 .cd-filter form {
-    padding: 70px 10%;
+    padding: 10px 10%;
 }
 .cd-filter.filter-is-visible .cd-close {
     opacity: 1;
@@ -167,7 +197,31 @@ input[type=checkbox], input[type=radio] {
 }
 
 .cd-filter ul#id_estado {
-    height: 100px;
+    height: 190px;
+    overflow: auto;
+
+    li {
+        list-style-type: none;
+        position: relative;
+    }
+
+    label {
+        display: block;
+        padding-left:20px;
+        padding-bottom:2px;
+
+        &:hover {
+            cursor:pointer;
+        }
+
+        input {
+            width: 14px;
+            margin: 5.4px 0 0 -17px !important;
+        }
+    }
+}
+.cd-filter ul#id_responsable {
+    height: 190px;
     overflow: auto;
 
     li {

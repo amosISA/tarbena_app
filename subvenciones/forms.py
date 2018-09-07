@@ -50,13 +50,13 @@ class SubvencionFilter(django_filters.FilterSet):
 
     class Meta:
         model = Subvencion
-        fields = ['ente','area']
+        fields = ['ente', 'area']
 
 class SubvencionForm(forms.ModelForm):
     # In reponsable field get user by first_name
     def __init__(self, *args, **kwargs):
         super(SubvencionForm, self).__init__(*args, **kwargs)
-        users = User.objects.all().values('first_name')
+        users = User.objects.all()
         self.fields['responsable'].choices = [(user.pk, user.first_name) for user in users]
 
     class Meta:

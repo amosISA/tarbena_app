@@ -1,3 +1,10 @@
+$(document).mouseup(function(e){
+    if($(e.target).attr("class") != "boards-drawer") {
+        $('.boards-drawer').hide();
+        e.stopPropagation();
+    }
+});
+
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
     //$.fn.dataTable.moment('D/M/YYYY');
@@ -87,4 +94,60 @@ $(document).ready(function() {
             }, 700);
         });
     }
+
+    /* Info ESTADOS */
+    $('.estados-info').click(function() {
+        $('.boards-drawer').toggle();
+    });
+    $('ul.sidebar-boards-list li').click(function() {
+        $('.boards-drawer').show();
+    });
+
+    /* Estados hover */
+    $('.compact-board-tile-link').each(function() {
+        $(this).mouseover(function() {
+            $('span:first', this).css({'opacity': 1});
+        }).mouseleave(function() {
+            $('span:first', this).css({'opacity': .7});
+        });
+    });
+
+
+
+    // Toggle filtering dropdown with checkboxes
+    $("#custom-select, #custom-select2").on("click",function(){
+        $("#custom-select-option-box, #custom-select-option-box2").toggle();
+    });
+
+    // Keep them open (dropdown filtering) when you click on the checkbox inside of them
+    function toggleFillColor(obj) {
+        $("#custom-select-option-box").show();
+    }
+    $(".custom-select-option").on("click", function() {
+        var checkboxObj = $(this).children("input");
+        toggleFillColor(checkboxObj);
+    });
+
+    function toggleFillColor2(obj) {
+        $("#custom-select-option-box2").show();
+    }
+    $(".custom-select-option2").on("click", function() {
+        var checkboxObj = $(this).children("input");
+        toggleFillColor2(checkboxObj);
+    });
+
+    $("body").on("click",function(e){ // Close dropdown filtering when click outside of them
+        if(e.target.id != "custom-select" && $(e.target).attr("class") != "custom-select-option") {
+            $("#custom-select-option-box").hide();
+        }
+        if (e.target.id != "custom-select2" && $(e.target).attr("class") != "custom-select-option2") {
+            $("#custom-select-option-box2").hide();
+        }
+    });
+
+    // Change filter placeholders
+    $('#filtering-form-subs #id_fecha_publicacion').attr('placeholder', 'Año inicio');
+    $('#filtering-form-subs #id_fin').attr('placeholder', 'Año fin');
+    $('#filtering-form-subs #id_ente option:selected').text('Ente');
+    $('#filtering-form-subs #id_area option:selected').text('Area');
 });

@@ -23,4 +23,7 @@ urlpatterns = [
 
     # Subvenciones Excel
     url(r'^export/excel/$', views.export_subvenciones_excel, name='export_subvenciones_excel'),
+
+    # Reset filter
+    url(r'^ajax/filter_reset/$', views.reset_filtering_button, name='ajax_filter_reset'),
 ]

@@ -38,9 +38,9 @@
                 </div>
                 <div id="filter_estado__nombre" class="col form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
                     <div class="custom-select" id="custom-select">Estado</div>
-                        <div id="custom-select-option-box">
-                            {{ filter.form.estado|htmlattributes:"class:custom-select-option" }}
-                        </div>
+                    <div id="custom-select-option-box">
+                        {{ filter.form.estado|htmlattributes:"class:custom-select-option" }}
+                    </div>
                 </div>
                 <div class="col form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
                     {{ filter.form.ente|htmlattributes:"class:form-control" }}
@@ -57,6 +57,10 @@
             </div>
             <input type="submit" value="Filtrar" />
         </form>
+        <div class="for__filtering--buttons">
+            <button class="reset_filter--session__fields">Reset</button>
+            <div class="filter_message__reset"></div>
+        </div>
         <!--<a href="javascript:void(0)" onclick="closeNav()" class="cd-close">Cerrar</a>-->
     </div>
 
@@ -237,9 +241,6 @@
     <script src="{% static 'home/datatables/vfs_fonts.js' %}"></script>
     <script src="{% static 'subvenciones/js/base.js' %}"></script>
     <script src="{% static 'notify/notifyX.js' %}"></script>
-    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
-    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedm2m.js' %}"></script>
-    <script type="text/javascript" src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
     <script>
         /* Sidebar Navigation */
         function openNav() {
@@ -267,5 +268,46 @@
         /*$("[data-toggle=popover]").popover({
             html: true
         });*/
+
+        $('ul#id_estado').prepend("<li><label for='id_toggleAll'><input type='checkbox' id='id_toggleAll' class='custom-select-option' onClick='toggleAllCheckboxes(this)' />Todos</label></li>");
+
+        // Check and uncheck all checkboxes inside Estado select
+        function toggleAllCheckboxes(source) {
+            checkboxes = document.getElementsByName('estado');
+            for(var i=0, n=checkboxes.length;i<n;i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+
+        // Reset variable session location and fields
+        $('button.reset_filter--session__fields').click(function() {
+            $.ajax({
+                url: '{% url 'subvenciones:ajax_filter_reset' %}',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.filter != 'No') {
+                        $('.filter_message__reset').text(data.filter);
+                        $('#filtering-form-subs')[0].reset();
+                        $('.filter_message__reset').css('background-color', '#000');
+                    } else {
+                        $('.filter_message__reset').text('¡Filtro ya reiniciado!');
+                        $('#filtering-form-subs')[0].reset();
+                        $('.filter_message__reset').css('background-color', '#000');
+                    }
+                }
+            });
+        });
     </script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedm2m.js' %}"></script>
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
+    <!-- For the admin site -->
+    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+    <script src="{% static 'admin/js/core.js' %}"></script>
+    <script src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>
 {% endblock %}

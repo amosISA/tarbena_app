@@ -852,3 +852,24 @@ legend.scheduler-border {
     font-size: 0.8em;
     color: #141bc9;
 }
+
+/* Filtering buttons */
+.for__filtering--buttons {
+    display: flex;
+    position: absolute;
+    margin-left: 80px;
+    margin-top: -45px;
+}
+.reset_filter--session__fields {
+    margin-right: 10px;
+}
+.filter_message__reset {
+    color: #fff;
+    background-color: #dee2e6;
+    text-align: center;
+    display: flex;
+    padding-left: 5px;
+    padding-right: 5px;
+    align-items: center;
+    justify-content: center;
+}

@@ -51,6 +51,7 @@ def index_subvenciones(request, estado_slug=None):
         # If is superuser: list all subsidies, if not, only the related to the respective user
         if request.user.is_superuser:
             request.session['urltoremember'] = request.get_full_path()
+            request.session.set_expiry(604800)
             f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
                 'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion', 'responsable__profile'
             ).select_related(
@@ -58,6 +59,7 @@ def index_subvenciones(request, estado_slug=None):
             ).extra(select={"day_mod": "date(fin)"}).order_by('day_mod'))
         else:
             request.session['urltoremember'] = request.get_full_path()
+            request.session.set_expiry(604800)
             f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
                 'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion', 'responsable__profile'
             ).select_related(
@@ -72,7 +74,7 @@ def index_subvenciones(request, estado_slug=None):
                    'colectivos': colectivos,
                    'userlikes': userlikes,
                    'estados': estados,
-                   'urltoremember': request.session['urltoremember']})
+                   'urltoremember': request.session.get('urltoremember', None)})
 
 # --------------- Get Areas related to each ente with AJAX --------------- #
 def ajax_se_relaciona_con(request):
@@ -211,7 +213,7 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         # Context to remember the index url if someone filter
         context = super(SubvencionCreateView, self).get_context_data(**kwargs)
-        context['urltoremember'] = self.request.session['urltoremember']
+        context['urltoremember'] = self.request.session.get('urltoremember', None)
         return context
 
 # --------------- Edit Subsidie --------------- #
@@ -291,7 +293,7 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         # Context to remember the index url if someone filter
         context = super(SubvencionUpdateView, self).get_context_data(**kwargs)
-        context['urltoremember'] = self.request.session['urltoremember']
+        context['urltoremember'] = self.request.session.get('urltoremember', None)
         return context
 
 def markdown_find_mentions(markdown_text, user, user_username, name_subv, mail, object, url):
@@ -352,7 +354,7 @@ def subvencion_detail(request, id):
                    'diputacion': diputacion,
                    'generalitat': generalitat,
                    'gobierno': gobierno,
-                   'urltoremember': request.session['urltoremember']})
+                   'urltoremember': request.session.get('urltoremember', None)})
 
 # --------------- Delete Subsidie --------------- #
 class SubvencionDeleteView(LoginRequiredMixin, DeleteView):
@@ -384,7 +386,7 @@ class SubvencionDeleteView(LoginRequiredMixin, DeleteView):
     def get_context_data(self, **kwargs):
         # Context to remember the index url if someone filter
         context = super(SubvencionDeleteView, self).get_context_data(**kwargs)
-        context['urltoremember'] = self.request.session['urltoremember']
+        context['urltoremember'] = self.request.session.get('urltoremember', None)
         return context
 
 # --------------- PDF Detail Subsidie --------------- #
@@ -403,6 +405,7 @@ def admin_subvencion_pdf(request, subvencion_id):
 
 # --------------- EXPORT TO EXCEL --------------- #
 import re
+@login_required
 def export_subvenciones_excel(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="subvenciones.xls"'
@@ -474,3 +477,16 @@ def export_subvenciones_excel(request):
 
     wb.save(response)
     return response
+
+# --------------- Ajax Reset Filtering Button --------------- #
+@login_required
+def reset_filtering_button(request):
+    if 'urltoremember' in request.session:
+        del request.session['urltoremember']
+        filter='¡Filtro reiniciado!'
+    else:
+        filter='No'
+    data = {
+        'filter': filter
+    }
+    return JsonResponse(data)

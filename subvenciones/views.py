@@ -50,12 +50,14 @@ def index_subvenciones(request, estado_slug=None):
     else:
         # If is superuser: list all subsidies, if not, only the related to the respective user
         if request.user.is_superuser:
+            request.session['urltoremember'] = request.get_full_path()
             f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
                 'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion', 'responsable__profile'
             ).select_related(
                 'user', 'estado', 'ente', 'area', 'user__profile'
             ).extra(select={"day_mod": "date(fin)"}).order_by('day_mod'))
         else:
+            request.session['urltoremember'] = request.get_full_path()
             f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
                 'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion', 'responsable__profile'
             ).select_related(
@@ -69,7 +71,8 @@ def index_subvenciones(request, estado_slug=None):
                    'total_subvenciones': total_subvenciones,
                    'colectivos': colectivos,
                    'userlikes': userlikes,
-                   'estados': estados})
+                   'estados': estados,
+                   'urltoremember': request.session['urltoremember']})
 
 # --------------- Get Areas related to each ente with AJAX --------------- #
 def ajax_se_relaciona_con(request):
@@ -205,6 +208,12 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
         return self.render_to_response(self.get_context_data(form=form,
                                                              comments_formset=comments_formset))
 
+    def get_context_data(self, **kwargs):
+        # Context to remember the index url if someone filter
+        context = super(SubvencionCreateView, self).get_context_data(**kwargs)
+        context['urltoremember'] = self.request.session['urltoremember']
+        return context
+
 # --------------- Edit Subsidie --------------- #
 class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
     model = Subvencion
@@ -279,6 +288,12 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
         return self.render_to_response(self.get_context_data(form=form,
                                                              comments_formset=comments_formset))
 
+    def get_context_data(self, **kwargs):
+        # Context to remember the index url if someone filter
+        context = super(SubvencionUpdateView, self).get_context_data(**kwargs)
+        context['urltoremember'] = self.request.session['urltoremember']
+        return context
+
 def markdown_find_mentions(markdown_text, user, user_username, name_subv, mail, object, url):
     """
     To find the users that mentioned
@@ -336,7 +351,8 @@ def subvencion_detail(request, id):
                   {'subvencion': subvencion,
                    'diputacion': diputacion,
                    'generalitat': generalitat,
-                   'gobierno': gobierno})
+                   'gobierno': gobierno,
+                   'urltoremember': request.session['urltoremember']})
 
 # --------------- Delete Subsidie --------------- #
 class SubvencionDeleteView(LoginRequiredMixin, DeleteView):
@@ -364,6 +380,12 @@ class SubvencionDeleteView(LoginRequiredMixin, DeleteView):
         else:
             # when data is coming from the form which lists all items
             return self.get(self, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        # Context to remember the index url if someone filter
+        context = super(SubvencionDeleteView, self).get_context_data(**kwargs)
+        context['urltoremember'] = self.request.session['urltoremember']
+        return context
 
 # --------------- PDF Detail Subsidie --------------- #
 @login_required()

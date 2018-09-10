@@ -24,15 +24,15 @@
         <div class="entrypoin_aplications_wrapper__seen entrypoin_aplications__wrapper">
             <div class="aplications_details__cards">
                 <a href="{% url 'subvenciones:index' %}">
-                    <div class="application_cards__detail" style="margin-right:20px;">
+                    <div class="application_cards__detail">
                         <img src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="card">
                         <div class="application_detail__title">Subvenciones</div>
                         <div class="application_detail__body">
                             Gestiona las subvenciones correspondiente a cada departamento.
                         </div>
-                        <a style="z-index:900;font-size:14px;" href="{% url 'transparencia' %}">Transparencia</a>
                     </div>
                 </a>
+                <a class="transparencia--anchor" href="{% url 'transparencia' %}">Transparencia</a>
                 <a href="{% url 'parcelas:index' %}">
                     <div class="application_cards__detail">
                         <img src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="card">
@@ -47,7 +47,16 @@
                         <img src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="card">
                         <div class="application_detail__title">Llaves</div>
                         <div class="application_detail__body">
-                            Sepa en cualquier momento quien ha utilizado las llaves, quien las tiene ...
+                            Sepa en cualquier momento quién ha utilizado las llaves, quién las tiene ...
+                        </div>
+                    </div>
+                </a>
+                <a href="http://biblioteca.tarbena.es/">
+                    <div class="application_cards__detail">
+                        <img src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="card">
+                        <div class="application_detail__title">Biblioteca</div>
+                        <div class="application_detail__body">
+                            Servicio que hace posible la lectura de libros electrónicos a través de internet.
                         </div>
                     </div>
                 </a>

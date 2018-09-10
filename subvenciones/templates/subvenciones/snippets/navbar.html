@@ -7,7 +7,7 @@
         </a>
         <ul class="subvenciones-ul-nav subvencion-ui-navigation">
             <li class="subv-li-nav subvenciones-ui-menu {% if request.path == '/subvenciones/' %}active{% else %}noactive{% endif %}">
-                <a href="{% url 'subvenciones:index' %}" class="subv-a-nav-menu"> <i class="fas fa-home"></i> Inicio</a>
+                <a href="{% if urltoremember %}{{ urltoremember }}{% else %}{% url 'subvenciones:index' %}{% endif %}" class="subv-a-nav-menu"> <i class="fas fa-home"></i> Inicio</a>
             </li>
             <li class="subv-li-nav subvenciones-ui-menu {% if request.path == '/subvenciones/new/' %}active{% else %}noactive{% endif %}">
                 <a href="{% url 'subvenciones:create' %}" class="subv-a-nav-menu"> <i class="far fa-file"></i> Crear subvención</a>

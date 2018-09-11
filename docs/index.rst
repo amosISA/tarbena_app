@@ -17,6 +17,7 @@ Contents:
    deployment
    celery
    crontab
+   biblioteca
 
 Indices and tables
 ==================

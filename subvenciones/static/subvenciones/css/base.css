@@ -986,7 +986,7 @@ table.mceLayout, textarea.tinyMCE {
 .dataTables_wrapper .dataTables_filter {
   float: right;
   text-align: right;
-  visibility: hidden;
+  display: none;
 }
 
 #search-on-navigation {

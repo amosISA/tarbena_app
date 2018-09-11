@@ -503,7 +503,3 @@ The one exception to the rule here is that, *when a release branch currently exi
     | This work-flow guide I brought it from:
     | `https://nvie.com/posts/a-successful-git-branching-model/ <https://nvie.com/posts/a-successful-git-branching-model/>`_
     | `http://aprendegit.com/que-es-git-flow/ <http://aprendegit.com/que-es-git-flow/>`_
-
-Varnish Cache
--------------------
-HTTP accelerator designed for content-heavy dynamic web sites as well as APIs. So that make our web faster.

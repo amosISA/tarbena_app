@@ -202,5 +202,6 @@ Keep in mind that I can't start celery as superadmin so I create a new user:
     startsecs=10
     stopwaitsecs=600
 
-
-		
+Varnish Cache
+-------------------
+HTTP accelerator designed for content-heavy dynamic web sites as well as APIs. So that make our web faster.

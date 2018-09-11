@@ -17,7 +17,7 @@ $(document).ready(function() {
         //"aaSorting": [[ 2, "asc" ]], // sort by fin
         "lengthMenu": [[10000, -1], [10000, "Todas"]],
         //if I want to show the lengthMenu also do this: Blfrtip
-        dom: 'Bfrtip',
+        dom: '<"toolbar">Bfrtip',
         columns: [
             { "orderable": false },
             { "orderable": false },
@@ -25,27 +25,24 @@ $(document).ready(function() {
             { "orderable": false }
         ],
         buttons: [
-            {
-                extend: 'collection',
-                text: 'Acciones',
-                buttons: [
-                    {extend: 'copy', orientation: 'landscape', pageSize: 'LEGAL'},
-                    {extend: 'excel', orientation: 'landscape', pageSize: 'LEGAL',
-                        customize: function( xlsx ) {
-                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                            $('row c[r^="C"]', sheet).attr( 's', '2' );
-                        }
-                    },
-                    {extend: 'csv', orientation: 'landscape', pageSize: 'LEGAL'},
-                    {extend: 'pdf', orientation: 'landscape', pageSize: 'LEGAL'},
-                    {extend: 'print', orientation: 'landscape', pageSize: 'LEGAL'}
-                ]
-            }
+            'print'
         ],
+
+        initComplete: function() {
+            var $buttons = $('.dt-buttons').hide();
+            $('.subvenciones-nav-dropdown-toggle').on('change', function() {
+                var btnClass = $(this).find(":selected")[0].id
+                ? '.buttons-' + $(this).find(":selected")[0].id
+                : null;
+                if (btnClass) $buttons.find(btnClass).click();
+            });
+        }
     });
     $('#search-on-navigation').keyup(function(){
           oTable.search($(this).val()).draw();
     });
+
+    $("div.toolbar").html('<b>Custom tool bar! Text/images etc.</b>');
 
     // Scroll to subsidie that have the actual day and blink the subsidies that have as end date the actual day
     var CurrentDate = new Date();

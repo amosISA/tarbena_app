@@ -97,6 +97,13 @@
 
             <div id="subvenciones-nav-dropdown-toggle" class="subvenciones-nav-dropdown dropdown-menu__box dropdown-menu__box--hide dropdown-menu__box--right">
                 {% if request.user.is_authenticated %}
+                {% if request.path == '/subvenciones/' %}
+                    <a href="#" class="anchor-drop-dwn__subv menu-item buttons-print" id="print">
+                        <div class="subv_inside__anchor--drop">
+                            Imprimir tabla <span class="span__drop--itm"><i class="fas fa-print"></i></span>
+                        </div>
+                    </a>
+                {% endif %}
                 <a href="{% url 'subvenciones:export_subvenciones_excel' %}" class="anchor-drop-dwn__subv menu-item">
                     <div class="subv_inside__anchor--drop">
                         Exportar a Excel <span class="span__drop--itm"><i class="far fa-file-excel"></i></span>

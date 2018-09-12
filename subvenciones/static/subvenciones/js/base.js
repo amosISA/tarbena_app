@@ -29,12 +29,21 @@ $(document).ready(function() {
         ],
 
         initComplete: function() {
+            // Hide actions buttons and delegate his functionality into the hamburger into the navbar
+            // Only for print functionality
             var $buttons = $('.dt-buttons').hide();
-            $('.subvenciones-nav-dropdown-toggle').on('change', function() {
-                var btnClass = $(this).find(":selected")[0].id
-                ? '.buttons-' + $(this).find(":selected")[0].id
-                : null;
-                if (btnClass) $buttons.find(btnClass).click();
+
+            $('#subvenciones-nav-dropdown-toggle').click(function(e) {
+                if ($(e.target).is('.buttons-print')) {
+                    var btnClass = '.buttons-' + $(e.target)[0].id;
+                    $buttons.find(btnClass).click();
+                } else if ($(e.target).is('.subv_inside__anchor--drop')) {
+                    var btnClass = '.buttons-' + $(e.target)[0].parentElement.id;
+                    $buttons.find(btnClass).click();
+                } else if ($(e.target).is('.fas.fa-print')) {
+                    var btnClass = '.buttons-' + $(e.target)[0].parentElement.parentElement.parentElement.id;
+                    $buttons.find(btnClass).click();
+                }
             });
         }
     });

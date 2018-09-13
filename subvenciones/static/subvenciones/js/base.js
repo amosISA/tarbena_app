@@ -45,13 +45,59 @@ $(document).ready(function() {
                     $buttons.find(btnClass).click();
                 }
             });
+
+            // Breadcrumb for filtering
+            var ul_inside_toolbar_datatables = $("<ul class='breadcrumb__filtering'><li class=''><span></span></li></ul>");
+            $("div.toolbar").append(ul_inside_toolbar_datatables);
+
+            var qd = {};
+            if (location.search) location.search.substr(1).split("&").forEach(function(item) {
+                var s = item.split("="),
+                    k = s[0],
+                    v = s[1] && decodeURIComponent(s[1].replace(/\+/g, ' ')); //  null-coalescing / short-circuit
+                //(k in qd) ? qd[k].push(v) : qd[k] = [v]
+                (qd[k] = qd[k] || []).push(v) // null-coalescing / short-circuit
+            })
+              
+            for (var key in qd) {
+                var obj = qd[key];
+
+                if (key === 'ente') {
+                    for (var prop in obj) {
+                        if (obj[prop]) {
+                            get_filter_ente_area_name('ente', obj[prop]);
+                        }
+                    }
+                } else if (key === 'area') {
+                    for (var prop in obj) {
+                        if (obj[prop]) {
+                            get_filter_ente_area_name('area', obj[prop]);
+                        }
+                    }
+                } else {
+                    for (var prop in obj) {
+                        if (obj[prop]) {
+                            $('.breadcrumb__filtering').append("<li class='filtered_choice'><span class='filtered_choice_remove'>x</span>" + obj[prop] + "</li>");
+                        }
+                    }
+                }
+            }
         }
     });
     $('#search-on-navigation').keyup(function(){
           oTable.search($(this).val()).draw();
     });
 
-    $("div.toolbar").html('<b>Custom tool bar! Text/images etc.</b>');
+    function push_into_filter_array(element, array) {
+        if (element) { array.push(element); }
+    }
+    function get_filter_ente_area_name(name, param) { // If area or ente, change the value number for the string inside select
+        $('#id_' + name + ' > option').each(function() {
+            if($(this).val() === param){
+                return $('.breadcrumb__filtering').append("<li class='filtered_choice'><span class='filtered_choice_remove'>x</span>" + $(this).text() + "</li>");
+            }
+        });
+    }
 
     // Scroll to subsidie that have the actual day and blink the subsidies that have as end date the actual day
     var CurrentDate = new Date();
@@ -154,6 +200,22 @@ $(document).ready(function() {
     // Change filter placeholders
     $('#filtering-form-subs #id_fecha_publicacion').attr('placeholder', 'Año inicio');
     $('#filtering-form-subs #id_fin').attr('placeholder', 'Año fin');
-    $('#filtering-form-subs #id_ente option:selected').text('Ente');
-    $('#filtering-form-subs #id_area option:selected').text('Area');
+    $('#filtering-form-subs #id_ente option:first-child').text('Ente');
+    $('#filtering-form-subs #id_area option:first-child').text('Area');
+
+    // Get parameters from url with jQuery
+    function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('='); // ["estado", "Aprobada"]
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1].replace(/\+/g, ' '));
+            }
+        }
+    };
 });

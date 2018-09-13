@@ -790,4 +790,35 @@ legend.scheduler-border {
   align-items: center;
   justify-content: center; }
 
+/* Breadcrumb filtering */
+ul.breadcrumb__filtering {
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0;
+  padding: 0 0;
+  width: 100%; }
+
+ul.breadcrumb__filtering li {
+  list-style: none; }
+
+ul.breadcrumb__filtering .filtered_choice {
+  background-color: #e4e4e4;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  cursor: default;
+  float: left;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 0 5px; }
+
+ul.breadcrumb__filtering .filtered_choice .filtered_choice_remove {
+  color: #999;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 700;
+  margin-right: 4px; }
+  ul.breadcrumb__filtering .filtered_choice .filtered_choice_remove:hover {
+    color: #333; }
+
 /*# sourceMappingURL=subvenciones.css.map */

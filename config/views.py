@@ -23,7 +23,7 @@ def index_subvenciones_transparencia(request):
         'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion', 'responsable__profile'
     ).select_related(
         'user', 'estado', 'ente', 'area', 'user__profile'
-    ).extra(select={"day_mod": "date(fin)"}).order_by('day_mod')
+    ).filter(estado_id__in=[5,7,11]).extra(select={"day_mod": "date(fin)"}).order_by('day_mod')
 
     return render(request,
                   'home/transparencia.html',

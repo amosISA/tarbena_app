@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 from django.core.signing import Signer
 import os
+import socket
+HOSTNAME = socket.gethostname()
 from django.core.urlresolvers import reverse_lazy
-from .django_secrets import SECRET_VALUE, SECRET_EMAIL_PASSWORD
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -24,7 +25,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # https://docs.djangoproject.com/en/1.11/topics/signing/
-SECRET_KEY = SECRET_VALUE
+if HOSTNAME == 'servidor':
+    with open('/home/admin/files/django_secret_key.txt') as f:
+        SECRET_KEY = f.read().strip()
+else:
+    from .django_secrets import SECRET_VALUE
+    SECRET_KEY = SECRET_VALUE
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -165,7 +171,14 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'agoraweb700@gmail.com'
-EMAIL_HOST_PASSWORD = SECRET_EMAIL_PASSWORD
+
+if HOSTNAME == 'servidor':
+    with open('/home/admin/files/django_secret_email.txt') as f:
+        EMAIL_HOST_PASSWORD = f.read().strip()
+else:
+    from .django_secrets import SECRET_EMAIL_PASSWORD
+    EMAIL_HOST_PASSWORD = SECRET_EMAIL_PASSWORD
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = 'agoraweb700@gmail.com'
 

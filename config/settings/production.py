@@ -1,3 +1,4 @@
+import socket
 from .base import *
 
 DEBUG = False
@@ -6,12 +7,20 @@ ALLOWED_HOSTS += ['*', ]
 
 SITE_ID = 3
 
+HOSTNAME = socket.gethostname()
+if HOSTNAME == 'servidor':
+    with open('/home/admin/files/django_prod_secret_dbpw.txt') as f:
+        DB_PW = f.read().strip()
+else:
+    from .django_secrets import PRODUCTION_DB_PASSWORD
+    DB_PW = PRODUCTION_DB_PASSWORD
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tarbena_app',
         'USER': 'amos',
-        'PASSWORD': 'cd52405f536e5c7a983c965b74895b3c',
+        'PASSWORD': DB_PW,
         # 'HOST': 'localhost',
         # 'PORT': 3306,
         # 'OPTIONS': {

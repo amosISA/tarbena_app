@@ -58,7 +58,7 @@
             <input type="submit" value="Filtrar" />
         </form>
         <div class="for__filtering--buttons">
-            <button class="reset_filter--session__fields">Reset</button>
+            <button class="reset_filter--session__fields" onclick="customReset();">Reset</button>
             <div class="filter_message__reset"></div>
         </div>
         <!--<a href="javascript:void(0)" onclick="closeNav()" class="cd-close">Cerrar</a>-->
@@ -288,15 +288,23 @@
                 success: function (data) {
                     if (data.filter != 'No') {
                         $('.filter_message__reset').text(data.filter);
-                        $('#filtering-form-subs')[0].reset();
                         $('.filter_message__reset').css('background-color', '#000');
                     } else {
                         $('.filter_message__reset').text('¡Filtro ya reiniciado!');
-                        $('#filtering-form-subs')[0].reset();
                         $('.filter_message__reset').css('background-color', '#000');
                     }
                 }
             });
         });
+
+        // Reset filtering form
+        function customReset() {
+            $('#id_fecha_publicacion').val('');
+            $('#id_fin').val('');
+            $("ul#id_estado input[type=checkbox]").prop("checked", false);
+            $("ul#id_responsable input[type=checkbox]").prop("checked", false);
+            $("#id_ente").val($("#id_ente option:first").val());
+            $("#id_area").val($("#id_area option:first").val());
+        }
     </script>
 {% endblock %}

@@ -198,8 +198,8 @@ $(document).ready(function() {
     });
 
     // Change filter placeholders
-    $('#filtering-form-subs #id_fecha_publicacion').attr('placeholder', 'Año inicio');
-    $('#filtering-form-subs #id_fin').attr('placeholder', 'Año fin');
+    $('#filtering-form-subs #id_fecha_publicacion').attr('placeholder', 'Inicio: 2018-03-26');
+    $('#filtering-form-subs #id_fin').attr('placeholder', 'Fin: 2018-03-26');
     $('#filtering-form-subs #id_ente option:first-child').text('Ente');
     $('#filtering-form-subs #id_area option:first-child').text('Area');
 

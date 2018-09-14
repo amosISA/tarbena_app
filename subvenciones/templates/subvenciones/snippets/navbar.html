@@ -9,9 +9,11 @@
             <li class="subv-li-nav subvenciones-ui-menu {% if request.path == '/subvenciones/' %}active{% else %}noactive{% endif %}">
                 <a href="{% if urltoremember %}{{ urltoremember }}{% else %}{% url 'subvenciones:index' %}{% endif %}" class="subv-a-nav-menu"> <i class="fas fa-home"></i> Inicio</a>
             </li>
+            {% if request.user.is_superuser %}
             <li class="subv-li-nav subvenciones-ui-menu {% if request.path == '/subvenciones/new/' %}active{% else %}noactive{% endif %}">
                 <a href="{% url 'subvenciones:create' %}" class="subv-a-nav-menu"> <i class="far fa-file"></i> Crear subvención</a>
             </li>
+            {% endif %}
             <li class="subv-li-nav subvenciones-ui-menu">
                 <!-- Index, Cuando creas y cuando pinchas en favoritos aparecerá el contador de cuántas favortias tengo -->
                 <!-- También Estado, Area, Responsable -->
@@ -103,12 +105,15 @@
                             Imprimir tabla <span class="span__drop--itm"><i class="fas fa-print"></i></span>
                         </div>
                     </a>
+
+                    {% if request.user.is_superuser %}
+                    <a href="{% url 'subvenciones:export_subvenciones_excel' %}" class="anchor-drop-dwn__subv menu-item">
+                        <div class="subv_inside__anchor--drop">
+                            Exportar a Excel <span class="span__drop--itm"><i class="far fa-file-excel"></i></span>
+                        </div>
+                    </a>
+                    {% endif %}
                 {% endif %}
-                <a href="{% url 'subvenciones:export_subvenciones_excel' %}" class="anchor-drop-dwn__subv menu-item">
-                    <div class="subv_inside__anchor--drop">
-                        Exportar a Excel <span class="span__drop--itm"><i class="far fa-file-excel"></i></span>
-                    </div>
-                </a>
                 <a href="{% url 'profiles:user_profile' username=request.user %}" class="anchor-drop-dwn__subv menu-item">
                     <div class="subv_inside__anchor--drop">
                         Mi perfil <span class="span__drop--itm"><i class="far fa-user"></i></span>

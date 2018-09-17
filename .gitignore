@@ -1,4 +1,7 @@
 # Created by https://www.gitignore.io
+# Supervisor celery
+celerybeat-schedule
+celerybeat.pid
 
 ### OSX ###
 .DS_Store

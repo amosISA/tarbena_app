@@ -23,7 +23,7 @@ from notify.signals import notify
 
 from .forms import SubvencionForm, CommentFormSet, SubvencionFilter
 from .models import Subvencion, Estado, Colectivo, Area, Ente, Comment
-from .tasks import subvencion_mention_email, subvencion_create_email, subvencion_edit_email
+from .tasks import subvencion_mention_email, subvencion_create_email, subvencion_edit_email, subvencion_responsable_email
 # from src.config.settings.base import MARTOR_MARKDOWNIFY_FUNCTION
 
 import weasyprint
@@ -187,6 +187,18 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
                 subvencion_create_email.delay(self.request.user.username, self.object.nombre, self.object, url,
                                             self.request.user.email, ['amosisa700@gmail.com', 'jctarbena@gmail.com'])
 
+        # send asynchronous task - celery when Subvencion is assigned to Users
+        assigned_responsables = form.cleaned_data.get("responsable")
+        if assigned_responsables:
+            resp_list = []
+            for r in assigned_responsables:
+                resp_list.append(r.email)
+
+                subvencion_responsable_email.delay(self.request.user.username, self.object.nombre, self.object,
+                                                   self.request.build_absolute_uri(
+                                                       reverse("subvenciones:subvencion_detail",
+                                                               kwargs={'id': self.object.pk})),
+                                                   self.request.user.email, resp_list)
 
         comments_formset.save()
 
@@ -243,6 +255,13 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
             return self.form_invalid(form, comments_formset)
 
     def form_valid(self, form, comments_formset):
+        # Get responsables pre_save
+        resp_list_before = []
+        before_responsable = self.get_initial_responsables()
+
+        for r in before_responsable:
+            resp_list_before.append(r.email)
+
         self.object = form.save()
         comments_formset.instance = self.object
 
@@ -269,6 +288,20 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
                 subvencion_edit_email.delay(self.request.user.username, self.object.nombre, self.object, url,
                                             self.request.user.email, ['amosisa700@gmail.com', 'jctarbena@gmail.com'])
 
+        # send asynchronous task - celery when Subvencion is assigned to Users
+        resp_list = []
+        assigned_responsables = form.cleaned_data['responsable']
+
+        if assigned_responsables:
+            for r in assigned_responsables:
+                resp_list.append(r.email)
+
+            assigned_resp_def = [item for item in resp_list if item not in resp_list_before]
+            if assigned_resp_def:
+                subvencion_responsable_email.delay(self.request.user.username, self.object.nombre, self.object,
+                                                   self.request.build_absolute_uri(reverse("subvenciones:subvencion_detail", kwargs={'id':self.object.pk})),
+                                                   self.request.user.email, assigned_resp_def)
+
         comments_formset.save()
 
         # If comments are saved without content, they are deleted
@@ -284,6 +317,10 @@ class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
 
         messages.success(self.request, 'Subvención actualizada correctamente!')
         return HttpResponseRedirect(reverse_lazy('subvenciones:subvencion_detail', kwargs={'id': self.object.pk}))
+
+    def get_initial_responsables(self):
+        assigned_responsables = Subvencion.objects.get(id=self.object.pk)
+        return assigned_responsables.responsable.all()
 
     def form_invalid(self, form, comments_formset):
         messages.error(self.request, 'Error en la actualización de la subvención')

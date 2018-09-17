@@ -77,3 +77,28 @@ def subvencion_edit_email(user_username, name_subv, object, url, mail, email_lis
               )
 
     return mail_sent
+
+@task
+def subvencion_responsable_email(user_username, name_subv, object, url, mail, email_list_users):
+    """
+    Task to send an e-mail notification when a subsidie is
+    assigned to someone.
+    """
+    html_message = loader.render_to_string(
+        'subvenciones/email/subv_email_responsable.html',
+        {
+            'name_actor': user_username,
+            'name_subv': name_subv,
+            'object': object,
+            'url': url
+        }
+    )
+
+    mail_sent = send_mail('Gestión de subvenciones',
+              '',
+              mail,
+              email_list_users,  # recievers
+              html_message=html_message
+              )
+
+    return mail_sent

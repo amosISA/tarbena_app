@@ -202,6 +202,125 @@ Keep in mind that I can't start celery as superadmin so I create a new user:
     startsecs=10
     stopwaitsecs=600
 
+But this does not seem to work on the background with &, so I tried this new guide that works like a charm.
+
+| `Guide I followed. <https://realpython.com/asynchronous-tasks-with-django-and-celery/#running-remotely>`_
+
+::
+
+    sudo apt-get install supervisor
+
+In the root project create a folder called supervisor and inside create the two following files:
+| **subvenciones_celery.conf**
+::
+
+    ; ==================================
+    ;  celery worker supervisor example
+    ; ==================================
+
+    ; the name of your supervisord program
+    [program:configcelery]
+
+    ; Set full path to celery program if using virtualenv
+    command=/home/admin/tarbena/bin/celery worker -A config --loglevel=INFO
+
+    ; The directory to your Django project
+    directory=/home/admin/tarbena
+
+    ; If supervisord is run as the root user, switch users to this UNIX user account
+    ; before doing any processing.
+    user=amos
+
+    ; Supervisor will start as many instances of this program as named by numprocs
+    numprocs=1
+
+    ; Put process stdout output in this file
+    stdout_logfile=/var/log/celery/subvenciones_worker.log
+
+    ; Put process stderr output in this file
+    stderr_logfile=/var/log/celery/subvenciones_worker.log
+
+    ; If true, this program will start automatically when supervisord is started
+    autostart=true
+
+    ; May be one of false, unexpected, or true. If false, the process will never
+    ; be autorestarted. If unexpected, the process will be restart when the program
+    ; exits with an exit code that is not one of the exit codes associated with this
+    ; process’ configuration (see exitcodes). If true, the process will be
+    ; unconditionally restarted when it exits, without regard to its exit code.
+    autorestart=true
+
+    ; The total number of seconds which the program needs to stay running after
+    ; a startup to consider the start successful.
+    startsecs=10
+
+    ; Need to wait for currently executing tasks to finish at shutdown.
+    ; Increase this if you have very long running tasks.
+
+| **subvenciones_celerybeat.conf**
+
+::
+
+    ================================
+    ;  celery beat supervisor example
+    ; ================================
+
+    ; the name of your supervisord program
+    [program:configcelerybeat]
+
+    ; Set full path to celery program if using virtualenv
+    command=/home/admin/tarbena/bin/celerybeat -A config --loglevel=INFO
+
+    ; The directory to your Django project
+    directory=/home/admin/tarbena/src
+
+    ; If supervisord is run as the root user, switch users to this UNIX user account
+    ; before doing any processing.
+    user=amos
+
+    ; Supervisor will start as many instances of this program as named by numprocs
+    numprocs=1
+
+    ; Put process stdout output in this file
+    stdout_logfile=/var/log/celery/subvenciones_beat.log
+
+    ; Put process stderr output in this file
+    stderr_logfile=/var/log/celery/subvenciones_beat.log
+
+    ; If true, this program will start automatically when supervisord is started
+    autostart=true
+
+    ; May be one of false, unexpected, or true. If false, the process will never
+    ; be autorestarted. If unexpected, the process will be restart when the program
+    ; exits with an exit code that is not one of the exit codes associated with this
+    ; process’ configuration (see exitcodes). If true, the process will be
+    ; unconditionally restarted when it exits, without regard to its exit code.
+    autorestart=true
+
+    ; The total number of seconds which the program needs to stay running after
+    ; a startup to consider the start successful.
+    startsecs=10
+
+    ; if your broker is supervised, set its priority higher
+    ; so it starts first
+    priority=999
+
+Then create the logs in `/var/log`.
+Now just copy these files to the remote server in the `/etc/supervisor/conf.d/` directory.
+Then:
+
+::
+
+    $ sudo supervisorctl reread
+    $ sudo supervisorctl update
+
+    $ sudo supervisorctl stop configcelery
+    $ sudo supervisorctl start configcelery
+    $ sudo supervisorctl status configcelery
+
+The default Celery scheduler creates some files to store its schedule locally. These files would be `celerybeat-schedule.db` and `celerybeat.pid`. If you are using a version control system like Git (which you should!), it is a good idea to ignore this files and not add them to your repository since they are for running processes locally.
+
+
 Varnish Cache
 -------------------
 HTTP accelerator designed for content-heavy dynamic web sites as well as APIs. So that make our web faster.

@@ -2,6 +2,9 @@
 # Supervisor celery
 celerybeat-schedule
 celerybeat.pid
+celerybeta-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir
 
 ### OSX ###
 .DS_Store

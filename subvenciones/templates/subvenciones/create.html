@@ -373,11 +373,11 @@
                             var ente = value.fields['ente'];
 
                             if(ente == 1) { // Diputacion
-                                dip_div.append('<li><label><input type="checkbox" name="se_relaciona_con" value="'+value.pk+'" id="id_se_relaciona_con_'+key+'">'+value.fields["nombre"]+'</label></li>');
+                                value.fields["fin"] ? dip_div.append('<li><label><input type="checkbox" name="se_relaciona_con" value="'+value.pk+'" id="id_se_relaciona_con_'+key+'">'+value.fields["nombre"]+', '+ value.fields["fin"].split('-')[0] +'</label></li>') : dip_div.append('<li><label><input type="checkbox" name="se_relaciona_con" value="'+value.pk+'" id="id_se_relaciona_con_'+key+'">'+value.fields["nombre"]+'</label></li>');
                             } else if (ente == 2) { // GV
-                                gene_div.append('<li><label><input type="checkbox" name="se_relaciona_con" value="'+value.pk+'" id="id_se_relaciona_con_'+key+'">'+value.fields["nombre"]+'</label></li>');
+                                value.fields["fin"] ? gene_div.append('<li><label><input type="checkbox" name="se_relaciona_con" value="'+value.pk+'" id="id_se_relaciona_con_'+key+'">'+value.fields["nombre"]+', '+ value.fields["fin"].split('-')[0] +'</label></li>') : gene_div.append('<li><label><input type="checkbox" name="se_relaciona_con" value="'+value.pk+'" id="id_se_relaciona_con_'+key+'">'+value.fields["nombre"]+'</label></li>');
                             } else if (ente == 3) { // Gobierno España
-                                gob_div.append('<li><label><input type="checkbox" name="se_relaciona_con" value="'+value.pk+'" id="id_se_relaciona_con_'+key+'">'+value.fields["nombre"]+'</label></li>');
+                                value.fields["fin"] ? gob_div.append('<li><label><input type="checkbox" name="se_relaciona_con" value="'+value.pk+'" id="id_se_relaciona_con_'+key+'">'+value.fields["nombre"]+', '+ value.fields["fin"].split('-')[0]+'</label></li>') : gob_div.append('<li><label><input type="checkbox" name="se_relaciona_con" value="'+value.pk+'" id="id_se_relaciona_con_'+key+'">'+value.fields["nombre"]+'</label></li>');
                             }
                         });
 

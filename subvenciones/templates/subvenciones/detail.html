@@ -171,7 +171,7 @@
                         <!-- Leimotiv -->
                         <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
                             <label for="id_leimotiv">Leimotiv:</label>
-                            <textarea id="id_leimotiv" rows="1" cols="20" class="form-control" readonly tabindex="0" data-toggle="popover" data-trigger="hover" data-html="true" title="Leimotiv" data-content="{{ subvencion.leimotiv }}">{{ subvencion.leimotiv }}</textarea>
+                            <textarea id="id_leimotiv" rows="1" cols="20" class="form-control" readonly tabindex="0" data-toggle="popover" data-trigger="hover" data-html="true" title="Leimotiv" data-content="{{ subvencion.leimotiv }}">{% if subvencion.leimotiv %}{{ subvencion.leimotiv }}{% endif %}</textarea>
                         </div>
 
                         <div class="row">

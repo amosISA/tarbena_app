@@ -69,7 +69,7 @@
                 {% if form.errors %}
                     <div class="ag_form_login_message_error">
                         {% for field,error in form.errors.items %}
-                            {{ field|capfirst }} - {{ error|striptags }}
+                            {{ field|capfirst }} - {{ error|striptags }}<br />
                         {% endfor %}
                     </div>
                 {% endif %}

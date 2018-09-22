@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files import File
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404, render
 from django.views.generic import DetailView
@@ -12,6 +14,10 @@ from django.views.generic.edit import UpdateView
 
 from .models import Profile
 from .forms import ProfileForm
+from PIL import Image
+from io import BytesIO
+
+import io
 
 User = get_user_model()
 
@@ -81,6 +87,14 @@ def upload_avatar(request):
     if request.method == "POST":
         if form.is_valid():
             image_avatar = request.FILES.get('avatar', False)
+
+            # Change image size
+            im = Image.open(image_avatar)
+            output = BytesIO()
+            im = im.resize((100, 100))
+            im = im.convert("RGB") # to avoid: cannot write mode RGBA as JPEG
+            im.save(output, format='JPEG', quality=100)
+
             instance.avatar = image_avatar
             instance.save()
             return HttpResponseRedirect(reverse('profiles:user_profile', kwargs={'username': request.user}))

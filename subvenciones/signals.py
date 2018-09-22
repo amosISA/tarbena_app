@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import datetime
+from datetime import datetime
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 

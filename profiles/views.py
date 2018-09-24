@@ -89,11 +89,12 @@ def upload_avatar(request):
             image_avatar = request.FILES.get('avatar', False)
 
             # Change image size
-            im = Image.open(image_avatar)
-            output = BytesIO()
-            im = im.resize((100, 100))
-            im = im.convert("RGB") # to avoid: cannot write mode RGBA as JPEG
-            im.save(output, format='JPEG', quality=100)
+            if image_avatar:
+                im = Image.open(image_avatar)
+                output = BytesIO()
+                im = im.resize((100, 100))
+                im = im.convert("RGB") # to avoid: cannot write mode RGBA as JPEG
+                im.save(output, format='JPEG', quality=100)
 
             instance.avatar = image_avatar
             instance.save()

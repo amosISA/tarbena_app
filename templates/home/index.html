@@ -5,6 +5,7 @@
 {% block stylesheets %}
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
     <link rel="stylesheet" href="{% static 'home/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/favourites.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -18,49 +19,176 @@
 
     {% include 'home/snippets/navbar_entrypoint.html' %}
 
-    <div class="entrypoint__content">
-        <h2>Aplicaciones</h2>
+    <div class="outer-wrapper fixed-to-top">
+        <div class="main-page-pau">
+            <div class="body-wrapper on">
+                <div class="sections-list">
+                    <!-- Fav Sites -->
+                    <section class="collapsible-section top-sites animation-enabled">
+                        <div class="section-top-bar">
+                            <h3 class="section-title">
+                                <span class="click-target">
+                                    <span class="icon icon-small-spacer icon-topsites" style="background-image: url('{% static "home/img/icons/glyph-topsites-16.svg"%}')"></span>
+                                    <span>Sitios favoritos</span>
+                                    <span class="collapsible-arrow icon icon-arrowhead-down-small" style="background-image: url('{% static "home/img/icons/glyph-arrowhead-down-12.svg"%}')"></span>
+                                </span>
+                            </h3>
+                            <div>
+                                <button class="context-menu-button icon" style="background-image: url('{% static "home/img/icons/page-action.svg"%}')">
+                                    <span class="sr-only"><span>Abrir la sección menú contextual</span></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="section-body">
+                            <ul class="top-sites-list" style="padding:0;">
+                                {% for fav in favourites %}
+                                    <li class="top-site-outer">
+                                        <div class="top-site-inner">
+                                            <a href="{{ fav.link }}" tabindex="0">
+                                                <div class="tile" aria-hidden="true" data-fallback="{{ fav.name|make_list|first }}">
+                                                    <div class="screenshot active" alt="{{ fav.name }}" data-url="{{ fav.link }}"></div>
+                                                    <div class="top-site-icon default-icon"></div>
+                                                </div>
+                                                <div class="title" title="{{ fav.name }}">
+                                                    <span dir="auto">{{ fav.name }}</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <div class="edit-topsites-wrapper"><!-- Here it goes modal add new fav site --></div>
+                        </div>
+                    </section>
 
-        <div class="entrypoin_aplications_wrapper__seen entrypoin_aplications__wrapper">
-            <div class="aplications_details__cards">
-                <a href="{% url 'subvenciones:index' %}">
-                    <div class="application_cards__detail">
-                        <img src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="card">
-                        <div class="application_detail__title">Subvenciones</div>
-                        <div class="application_detail__body">
-                            Gestiona las subvenciones correspondiente a cada departamento.
+                    <!-- Aplicaciones -->
+                    <section class="collapsible-section section compact-cards animation-enabled" data-section-id="highlights">
+                        <div class="section-top-bar">
+                            <h3 class="section-title">
+                                <span class="click-target">
+                                    <span class="icon icon-small-spacer icon-highlights" style="background-image: url('{% static "home/img/icons/glyph-highlights-16.svg"%}')"></span>
+                                    <span>Aplicaciones</span>
+                                    <span class="collapsible-arrow icon icon-arrowhead-down-small"></span>
+                                </span>
+                            </h3>
                         </div>
-                    </div>
-                </a>
-                <a class="transparencia--anchor" href="{% url 'transparencia' %}">Transparencia</a>
-                <a href="{% url 'parcelas:index' %}">
-                    <div class="application_cards__detail">
-                        <img src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="card">
-                        <div class="application_detail__title">Parcelas</div>
-                        <div class="application_detail__body">
-                            Busca las parcelas correspondiente al polígono respectivo. Descargue el KML correspondiente.
+                        <div class="section-body">
+                            <ul class="section-list" style="padding:0;">
+                                <!-- Subvenciones -->
+                                <li class="card-outer">
+                                    <a href="{% url 'subvenciones:index' %}">
+                                        <div class="card_from">
+                                            <div class="card-preview-image-outer" style="background-image: url('{% static "home/img/apps/app_subv.png"%}')"></div>
+                                            <div class="card-details">
+                                                <div class="card-host-name">Subvenciones</div>
+                                                <div class="card-text">
+                                                    <h4 class="card-title">Gestión de Subvenciones</h4>
+                                                </div>
+                                                <div class="card-context">
+                                                    <span class="card-context-icon icon icon-history-item" style="background-image: url('{% static "home/img/icons/history.svg"%}')"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <button class="context-menu-button icon">
+                                        <span class="sr-only">Open context menu for Subvenciones</span>
+                                    </button>
+                                </li>
+
+                                <!-- Transparencia -->
+                                <li class="card-outer">
+                                    <a href="{% url 'transparencia' %}">
+                                        <div class="card_from">
+                                            <div class="card-preview-image-outer" style="background-image: url('{% static "home/img/apps/app_transp.png"%}')"></div>
+                                            <div class="card-details">
+                                                <div class="card-host-name">Transparencia</div>
+                                                <div class="card-text">
+                                                    <h4 class="card-title">Transparencia de Subvenciones</h4>
+                                                </div>
+                                                <div class="card-context">
+                                                    <span class="card-context-icon icon icon-history-item" style="background-image: url('{% static "home/img/icons/history.svg"%}')"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <button class="context-menu-button icon">
+                                        <span class="sr-only">Open context menu for Transparencia Subvenciones</span>
+                                    </button>
+                                </li>
+
+                                <!-- Parcelas -->
+                                <li class="card-outer">
+                                    <a href="{% url 'parcelas:index' %}">
+                                        <div class="card_from">
+                                            <div class="card-preview-image-outer" style="background-image: url('{% static "home/img/apps/app_parcelas.png"%}')"></div>
+                                            <div class="card-details">
+                                                <div class="card-host-name">Parcelas</div>
+                                                <div class="card-text">
+                                                    <h4 class="card-title">Comprobación de Parcelas</h4>
+                                                </div>
+                                                <div class="card-context">
+                                                    <span class="card-context-icon icon icon-history-item" style="background-image: url('{% static "home/img/icons/history.svg"%}')"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <button class="context-menu-button icon">
+                                        <span class="sr-only">Open context menu for Parcelas</span>
+                                    </button>
+                                </li>
+
+                                <!-- Llaves -->
+                                <li class="card-outer">
+                                    <a href="#">
+                                        <div class="card_from">
+                                            <div class="card-preview-image-outer" style="background-image: url('{% static "home/img/apps/app_keys.jpg"%}')"></div>
+                                            <div class="card-details">
+                                                <div class="card-host-name">Llaves</div>
+                                                <div class="card-text">
+                                                    <h4 class="card-title">Gestión de Llaves</h4>
+                                                </div>
+                                                <div class="card-context">
+                                                    <span class="card-context-icon icon icon-history-item" style="background-image: url('{% static "home/img/icons/history.svg"%}')"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <button class="context-menu-button icon">
+                                        <span class="sr-only">Open context menu for Llaves</span>
+                                    </button>
+                                </li>
+
+                                <!-- Biblioteca -->
+                                <li class="card-outer">
+                                    <a href="http://biblioteca.tarbena.es/">
+                                        <div class="card_from">
+                                            <div class="card-preview-image-outer" style="background-image: url('{% static "home/img/apps/app_biblio.png"%}')"></div>
+                                            <div class="card-details">
+                                                <div class="card-host-name">Biblioteca</div>
+                                                <div class="card-text">
+                                                    <h4 class="card-title">Biblioteca Online</h4>
+                                                </div>
+                                                <div class="card-context">
+                                                    <span class="card-context-icon icon icon-history-item" style="background-image: url('{% static "home/img/icons/history.svg"%}')"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <button class="context-menu-button icon">
+                                        <span class="sr-only">Open context menu for Biblioteca Online</span>
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="application_cards__detail">
-                        <img src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="card">
-                        <div class="application_detail__title">Llaves</div>
-                        <div class="application_detail__body">
-                            Sepa en cualquier momento quién ha utilizado las llaves, quién las tiene ...
-                        </div>
-                    </div>
-                </a>
-                <a href="http://biblioteca.tarbena.es/">
-                    <div class="application_cards__detail">
-                        <img src="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" alt="card">
-                        <div class="application_detail__title">Biblioteca</div>
-                        <div class="application_detail__body">
-                            Servicio que hace posible la lectura de libros electrónicos a través de internet.
-                        </div>
-                    </div>
-                </a>
+                    </section>
+                </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block addscript %}
+    <script src="{% static 'home/js/favourites.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'home/js/url2img.js' %}"></script>
 {% endblock %}

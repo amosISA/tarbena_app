@@ -9,11 +9,13 @@ from .forms import RegisterForm
 import sys
 sys.path.append("..")
 from subvenciones.models import Subvencion
+from favourites.models import Favourite
 
 # --------------- Index --------------- #
 def index(request):
     if request.user.is_authenticated():
-        return render(request, 'home/index.html', {})
+        favourites = Favourite.objects.all().prefetch_related('user').select_related('type')
+        return render(request, 'home/index.html', {'favourites': favourites})
     else:
         return HttpResponseRedirect(reverse('login'))
 

@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'django_filters',
     'holidays',
     'rest_framework',
+    'favourites',
 ]
 
 REST_FRAMEWORK = {

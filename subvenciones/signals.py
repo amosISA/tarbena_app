@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.utils import timezone
 
 from .models import Subvencion
 from .tasks import task_alert_changed_estado
@@ -30,4 +31,4 @@ def check_changed_estado(sender, instance, **kwargs):
                                                          'https://google.es',
                                                          'amosisa700@gmail.com',
                                                          ['amosisa700@gmail.com', 'jctarbena@gmail.com']
-                                                         ], countdown=datetime.now() + datetime.timedelta(days=60))
+                                                         ], countdown=5184000)

@@ -3,7 +3,7 @@
 {% load tags %}
 
 {% block stylesheets %}
-    <style>input[type=checkbox] { margin: 2px 0 0 -15px !important; } .wrapper-impreso input[type=checkbox] { margin: 4.5px 0 0 -15px !important; } body .subv-anchor-text { padding-top: 1rem!important; padding-bottom: 1.2rem!important; }</style>
+    <style>#id_sin_cuantia { margin: 4px 0 0 -70px !important; } input[type=checkbox] { margin: 2px 0 0 -15px !important; } .wrapper-impreso input[type=checkbox] { margin: 4.5px 0 0 -15px !important; } body .subv-anchor-text { padding-top: 1rem!important; padding-bottom: 1.2rem!important; }</style>
     <!-- Martor - Markdown editor for comments -->
     <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
     <link href="{% static 'plugins/css/semantic.min.css' %}" type="text/css" media="all" rel="stylesheet" />
@@ -78,20 +78,29 @@
                     <div class="col-lg-3 doted-right">
                         <div class="form-group title-create_post">
                             <div class="wrapper-subvenciones_dates--inputs">
-                                <div class="form-group title-create_post subvenciones_dates--inputs" style="text-align:justify;font-weight:bold;">
-                                    <!-- Fecha publicacion -->
-                                    {{ form.fecha_publicacion.label_tag }}
-                                    {{ form.fecha_publicacion|htmlattributes:"class:form-control" }}
+                                <div class="dates_first__column" style="display:flex;">
+                                    <div class="form-group title-create_post subvenciones_dates--inputs" style="text-align:justify;font-weight:bold;width:100%!important;">
+                                        <!-- Fecha publicacion -->
+                                        {{ form.fecha_publicacion.label_tag }}
+                                        {{ form.fecha_publicacion|htmlattributes:"class:form-control" }}
+                                    </div>
+                                    <div class="form-group title-create_post subvenciones_dates--inputs" style="text-align:justify;font-weight:bold;width:100%!important;margin-left:10px;">
+                                        <!-- Fin -->
+                                        {{ form.fin.label_tag }}
+                                        {{ form.fin|htmlattributes:"class:form-control" }}
+                                    </div>
                                 </div>
-                                <div class="form-group title-create_post subvenciones_dates--inputs" style="text-align:justify;font-weight:bold;">
-                                    <!-- Fin -->
-                                    {{ form.fin.label_tag }}
-                                    {{ form.fin|htmlattributes:"class:form-control" }}
-                                </div>
-                                <div class="form-group title-create_post subvenciones_dates--inputs" style="text-align:justify;font-weight:bold;">
-                                    <!-- Fecha resolucion -->
-                                    {{ form.fecha_resolucion.label_tag }}
-                                    {{ form.fecha_resolucion|htmlattributes:"class:form-control" }}
+                                <div class="dates_first__column" style="display:flex;">
+                                    <div class="form-group title-create_post subvenciones_dates--inputs" style="text-align:justify;font-weight:bold;width:100%!important;">
+                                        <!-- Fecha envío -->
+                                        {{ form.fecha_envio.label_tag }}
+                                        {{ form.fecha_envio|htmlattributes:"class:form-control" }}
+                                    </div>
+                                    <div class="form-group title-create_post subvenciones_dates--inputs" style="text-align:justify;font-weight:bold;margin-left:10px;width:100%!important;">
+                                        <!-- Fecha resolucion -->
+                                        {{ form.fecha_resolucion.label_tag }}
+                                        {{ form.fecha_resolucion|htmlattributes:"class:form-control" }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -174,6 +183,12 @@
                                     {{ form.cuantia_final.label_tag }}
                                     {{ form.cuantia_final|htmlattributes:"class:form-control" }}
                                 </p>
+
+                                <!-- Sin cuantía -->
+                                <div class="form-check title-create_post" style="text-align:justify;font-weight:bold;margin-top:55px;">
+                                    {{ form.sin_cuantia.label_tag }}
+                                    {{ form.sin_cuantia|htmlattributes:"class:form-check-input" }}
+                                </div>
                             </fieldset>
                         </div>
                     </div>
@@ -442,6 +457,7 @@
             $("#id_cuantia_inicial").prev().empty().append('Inicio:').css({'display':'block', 'text-align':'left'});
             $("#id_cuantia_solicitada").prev().empty().append('Solicitada:').css({'display':'block', 'text-align':'left'});
             $("#id_cuantia_final").prev().empty().append('Final:').css({'display':'block', 'text-align':'left'});
+            $("#id_sin_cuantia").prev().empty().append('Sin cuantía');
 
             // Change dates label text
             $("#id_fecha_publicacion").prev().empty().append('Publicación:');

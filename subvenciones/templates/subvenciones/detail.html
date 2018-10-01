@@ -3,7 +3,7 @@
 {% load martortags %}
 
 {% block stylesheets %}
-    <style>#id_impreso + label { margin-left: -4px!important; }</style>
+    <style>#id_impreso + label { margin-left: -4px!important; } #id_sin_cuantia { margin: 6px 0 0 -76px !important; }</style>
 {% endblock %}
 
 {% block title %}
@@ -58,6 +58,11 @@
                                     <!-- Fin -->
                                     <label for="id_fin">Fin:</label>
                                     <input type="text" id="id_fin" value="{{ subvencion.fin|date:'d/m/Y' }}" class="form-control" readonly>
+                                </div>
+                                <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                                    <!-- Fecha envio -->
+                                    <label for="id_fecha_envio">Envío:</label>
+                                    <input type="text" id="id_fecha_envio" value="{{ subvencion.fecha_envio|date:'d/m/Y' }}" class="form-control" readonly>
                                 </div>
                                 <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
                                     <!-- Fecha resolucion -->
@@ -158,6 +163,12 @@
                                     <label for="id_cuantia_final">Final:</label>
                                     <input type="text" value="{% if subvencion.cuantia_final %}{{ subvencion.cuantia_final }}{% endif %}" id="id_cuantia_final" class="form-control" readonly>
                                 </p>
+
+                                <!-- Sin cuantía -->
+                                <div class="form-check title-create_post" style="text-align:justify;font-weight:bold;margin-top:55px;">
+                                    <label for="id_sin_cuantia">Sin cuantía</label>
+                                    <input {% if subvencion.sin_cuantia %}checked{% endif %} type="checkbox" id="id_sin_cuantia" class="form-check-input" onclick="return false;">
+                                </div>
                             </fieldset>
                         </div>
                     </div>

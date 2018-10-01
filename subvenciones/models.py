@@ -149,6 +149,7 @@ class Subvencion(TimeStampedModel, ModelDiffMixin):
     fecha_publicacion = models.DateField(blank=True, null=True)
     fin = models.DateField(blank=True, null=True)
     fecha_resolucion = models.DateField(blank=True, null=True)
+    fecha_envio = models.DateField(blank=True, null=True)
     responsable = models.ManyToManyField(User, related_name='responsable', blank=True)
     nombre = models.TextField(blank=False, default="")
     leimotiv = models.CharField(max_length=250, blank=True, null=True)
@@ -161,6 +162,7 @@ class Subvencion(TimeStampedModel, ModelDiffMixin):
     cuantia_inicial = models.CharField(max_length=250, blank=True, null=True)
     cuantia_solicitada = models.CharField(max_length=250, blank=True, null=True)
     cuantia_final = models.CharField(max_length=250, blank=True, null=True)
+    sin_cuantia = models.BooleanField(default=False)
 
     descripcion = models.TextField(blank=True)
     estado = models.ForeignKey(Estado)

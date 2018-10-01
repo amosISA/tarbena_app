@@ -69,6 +69,7 @@ class SubvencionForm(forms.ModelForm):
             'incio_ejecucion': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
             'fin_ejecucion': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
             'fin_justificacion': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
+            'fecha_envio': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
             # 'estado': RelatedFieldWidgetWrapper(
             #     Subvencion._meta.get_field('estado').formfield().widget,
             #     Subvencion._meta.get_field('estado').rel,

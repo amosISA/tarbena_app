@@ -64,46 +64,6 @@
         <!--<a href="javascript:void(0)" onclick="closeNav()" class="cd-close">Cerrar</a>-->
     </div>
 
-    <!-- Info app: ESTADOS -->
-    <div class="boards-drawer">
-        <div class="boards-drawer-content" style="max-height: 450px;">
-            <div class="board-drawer-boards">
-                <div>
-                    <div class="js-section-content">
-                        <ul class="sidebar-boards-list">
-                            {% for e in estados %}
-                                <li class="compact-board-tile">
-                                    <div class="compact-board-tile-wrapper">
-                                        <span class="compact-board-tile-background" style="background-color: {{ e.color }};"></span> <!-- Modify background color -->
-                                        <span class="compact-board-tile-fade"></span>
-                                        <a class="js-open-board compact-board-tile-link" href="#">
-                                            <span class="compact-board-tile-link-thumbnail" style="background-color: {{ e.color }};"></span> <!-- Modify background color -->
-                                            <span class="compact-board-tile-link-text">
-                                                <span class="compact-board-tile-text-name">{{ e.nombre }} ({{e.the_count}})</span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                            <li class="compact-board-tile">
-                                <div class="compact-board-tile-wrapper">
-                                    <span class="compact-board-tile-background" style="background-color: #ff0017;"></span>
-                                    <span class="compact-board-tile-fade"></span>
-                                    <a class="js-open-board compact-board-tile-link" href="{% url 'subvenciones:index' %}">
-                                        <span class="compact-board-tile-link-thumbnail" style="background-color: #ff0017;"></span>
-                                        <span class="compact-board-tile-link-text" title="Las subvenciones adquieren el color rojo cuando falta una semana para que acaben y además cuando tienen el estado de: definiéndose, limbo y sin atender.">
-                                            <span class="compact-board-tile-text-name">Todas las subvenciones ({{ total_subvenciones }})</span>
-                                        </span>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- BACK TO TOP -->
     <a href="#" id="back-to-top" title="Back to top">&uarr;</a>
 
@@ -240,7 +200,6 @@
     <script src="{% static 'home/datatables/pdfmake.min.js' %}"></script>
     <script src="{% static 'home/datatables/vfs_fonts.js' %}"></script>
     <script src="{% static 'subvenciones/js/base.js' %}"></script>
-    <script src="{% static 'notify/notifyX.js' %}"></script>
     <script>
         /* Sidebar Navigation */
         function openNav() {

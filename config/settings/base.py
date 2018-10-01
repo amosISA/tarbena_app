@@ -32,6 +32,8 @@ else:
     from .django_secrets import SECRET_VALUE
     SECRET_KEY = SECRET_VALUE
 
+# Ajax call to notify x update notifications every 5mins
+NOTIFY_UPDATE_TIME_INTERVAL = 300000
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

@@ -26,4 +26,4 @@ class Gym(TimeStampedModel):
     pagado = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user
+        return self.user.username

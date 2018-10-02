@@ -65,7 +65,3 @@ class Profile(TimeStampedModel):
                                   fail_silently=False,
                                   html_message=html_message)
             return sent_mail
-
-
-
-

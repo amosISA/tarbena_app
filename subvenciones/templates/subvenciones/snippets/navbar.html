@@ -73,7 +73,7 @@
                             </li>
 
                             <div class="notification-box-list">
-
+                                {% render_notifications using user.notifications.active.prefetch for box %}
                             </div>
 
                             <li class="footer bg-dark text-center">

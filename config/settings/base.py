@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'holidays',
     'rest_framework',
     'favourites',
+    'gym',
 ]
 
 REST_FRAMEWORK = {

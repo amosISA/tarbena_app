@@ -211,7 +211,7 @@ class SubvencionCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateVi
                 comment.delete()
 
         # Notify
-        users = User.objects.all()
+        users = User.objects.filter(Q(groups__name='staff') | Q(is_staff=True)).distinct()
         notify.send(self.request.user, recipient_list=list(users), actor=self.request.user,
                     verb='subvención', obj=self.object, target=self.object,
                     nf_type='create_subvencion')
@@ -315,7 +315,7 @@ class SubvencionUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateVi
                 comment.delete()
 
         # Notify update subvencion
-        users = User.objects.all()
+        users = User.objects.filter(Q(groups__name='staff') | Q(is_staff=True)).distinct()
         notify.send(self.request.user, recipient_list=list(users), actor=self.request.user,
                     verb='subvención', obj=self.object, target=self.object,
                     nf_type='edit_subvencion')
@@ -413,7 +413,7 @@ class SubvencionDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteVi
     def post(self, request, *args, **kwargs):
         if self.request.POST.get("confirm_delete"):
             # Notify
-            users = User.objects.all()
+            users = User.objects.filter(Q(groups__name='staff') | Q(is_staff=True)).distinct()
             notify.send(self.request.user, recipient_list=list(users), actor=self.request.user,
                         verb='subvención, %s' % (self.get_object()), nf_type='delete_subvencion')
 

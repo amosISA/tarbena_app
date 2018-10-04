@@ -41,20 +41,46 @@
                         </div>
                         <div class="section-body">
                             <ul class="top-sites-list" style="padding:0;">
+                                <!-- If user is staff show the perma favourites for staff members -->
+                                {% if request.user|has_group:"staff" or request.user.is_staff %}
+                                    {% for fav in favourites %}
+                                        {% if fav.group == 'staff' %}
+                                            <li class="top-site-outer">
+                                                <div class="top-site-inner">
+                                                    <a href="{{ fav.link }}" tabindex="0">
+                                                        <div class="tile" aria-hidden="true" data-fallback="{{ fav.name|make_list|first }}">
+                                                            <div class="screenshot active" alt="{{ fav.name }}" data-url="{{ fav.link }}"></div>
+                                                            <div class="top-site-icon default-icon"></div>
+                                                        </div>
+                                                        <div class="title" title="{{ fav.name }}">
+                                                            <span dir="auto">{{ fav.name }}</span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+
+                                <!-- If not show his owns favourites -->
                                 {% for fav in favourites %}
-                                    <li class="top-site-outer">
-                                        <div class="top-site-inner">
-                                            <a href="{{ fav.link }}" tabindex="0">
-                                                <div class="tile" aria-hidden="true" data-fallback="{{ fav.name|make_list|first }}">
-                                                    <div class="screenshot active" alt="{{ fav.name }}" data-url="{{ fav.link }}"></div>
-                                                    <div class="top-site-icon default-icon"></div>
-                                                </div>
-                                                <div class="title" title="{{ fav.name }}">
-                                                    <span dir="auto">{{ fav.name }}</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
+                                    {% for u in fav.user.all %}
+                                        {% if u == request.user %}
+                                        <li class="top-site-outer">
+                                            <div class="top-site-inner">
+                                                <a href="{{ fav.link }}" tabindex="0">
+                                                    <div class="tile" aria-hidden="true" data-fallback="{{ fav.name|make_list|first }}">
+                                                        <div class="screenshot active" alt="{{ fav.name }}" data-url="{{ fav.link }}"></div>
+                                                        <div class="top-site-icon default-icon"></div>
+                                                    </div>
+                                                    <div class="title" title="{{ fav.name }}">
+                                                        <span dir="auto">{{ fav.name }}</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        {% endif %}
+                                    {% endfor %}
                                 {% endfor %}
                             </ul>
                             <div class="edit-topsites-wrapper"><!-- Here it goes modal add new fav site --></div>
@@ -68,7 +94,7 @@
                                 <span class="click-target">
                                     <span class="icon icon-small-spacer icon-highlights" style="background-image: url('{% static "home/img/icons/glyph-highlights-16.svg"%}')"></span>
                                     <span>Aplicaciones</span>
-                                    <span class="collapsible-arrow icon icon-arrowhead-down-small"></span>
+                                    <span class="collapsible-arrow icon icon-arrowhead-down-small" style="background-image: url('{% static "home/img/icons/glyph-arrowhead-down-12.svg"%}')"></span>
                                 </span>
                             </h3>
                         </div>

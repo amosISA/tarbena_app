@@ -74,7 +74,7 @@
                         </div>
                         <div class="section-body">
                             <ul class="section-list" style="padding:0;">
-                                {% if request.user|has_group:"staff" %}
+                                {% if request.user|has_group:"staff" or request.user.is_staff %}
                                 <!-- Subvenciones -->
                                 <li class="card-outer">
                                     <a href="{% url 'subvenciones:index' %}">
@@ -118,7 +118,7 @@
                                     </button>
                                 </li>
 
-                                {% if request.user|has_group:"staff" %}
+                                {% if request.user|has_group:"staff" or request.user.is_staff %}
                                 <!-- Parcelas -->
                                 <li class="card-outer">
                                     <a href="{% url 'parcelas:index' %}">

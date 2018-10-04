@@ -42,27 +42,41 @@
                         <div class="section-body">
                             <ul class="top-sites-list" style="padding:0;">
                                 <!-- If user is staff show the perma favourites for staff members -->
-                                {% if request.user|has_group:"staff" or request.user.is_staff %}
-                                    {% for fav in favourites %}
-                                        {% if fav.group == 'staff' %}
-                                            <li class="top-site-outer">
-                                                <div class="top-site-inner">
-                                                    <a href="{{ fav.link }}" tabindex="0">
-                                                        <div class="tile" aria-hidden="true" data-fallback="{{ fav.name|make_list|first }}">
-                                                            <div class="screenshot active" alt="{{ fav.name }}" data-url="{{ fav.link }}"></div>
-                                                            <div class="top-site-icon default-icon"></div>
-                                                        </div>
-                                                        <div class="title" title="{{ fav.name }}">
-                                                            <span dir="auto">{{ fav.name }}</span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </li>
+                                {% for fav in favourites %}
+                                    {% if fav.type.name == 'Permanente staff' %}
+                                        {% if request.user|has_group:"staff" or request.user.is_staff %}
+                                        <li class="top-site-outer">
+                                            <div class="top-site-inner">
+                                                <a href="{{ fav.link }}" tabindex="0">
+                                                    <div class="tile" aria-hidden="true" data-fallback="{{ fav.name|make_list|first }}">
+                                                        <div class="screenshot active" alt="{{ fav.name }}" data-url="{{ fav.link }}"></div>
+                                                        <div class="top-site-icon default-icon"></div>
+                                                    </div>
+                                                    <div class="title" title="{{ fav.name }}">
+                                                        <span dir="auto">{{ fav.name }}</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
                                         {% endif %}
-                                    {% endfor %}
-                                {% endif %}
+                                    {% elif fav.type.name == 'Permanente ciudadanos' %}
+                                        <li class="top-site-outer">
+                                            <div class="top-site-inner">
+                                                <a href="{{ fav.link }}" tabindex="0">
+                                                    <div class="tile" aria-hidden="true" data-fallback="{{ fav.name|make_list|first }}">
+                                                        <div class="screenshot active" alt="{{ fav.name }}" data-url="{{ fav.link }}"></div>
+                                                        <div class="top-site-icon default-icon"></div>
+                                                    </div>
+                                                    <div class="title" title="{{ fav.name }}">
+                                                        <span dir="auto">{{ fav.name }}</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
 
-                                <!-- If not show his owns favourites -->
+                                <!-- If not, show his own favourites -->
                                 {% for fav in favourites %}
                                     {% for u in fav.user.all %}
                                         {% if u == request.user %}

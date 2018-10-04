@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import Group
 
 User = settings.AUTH_USER_MODEL
 
@@ -32,7 +31,6 @@ class Favourite(TimeStampedModel):
     name = models.CharField(max_length=250)
     link = models.TextField(blank=True)
     user = models.ManyToManyField(User, blank=True, related_name='favourite_users')
-    group = models.ForeignKey(Group, blank=True, related_name='favourite_group')
     type = models.ForeignKey(FavouriteTypes, related_name='favourite_types')
 
     class Meta:

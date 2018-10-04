@@ -5,8 +5,8 @@ from bs4 import BeautifulSoup
 from django.conf import settings
 from django.core import serializers
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -31,6 +31,7 @@ import xlwt
 
 # --------------- Index: List Subvenciones --------------- #
 @login_required()
+@permission_required('subvenciones.can_add_subvencion', raise_exception=True)
 def index_subvenciones(request, estado_slug=None):
     """ List subvenciones """
 
@@ -121,7 +122,9 @@ def likes(request):
         return JsonResponse({'status':'ko'})
 
 # --------------- Create New Subsidie --------------- #
-class SubvencionCreateView(LoginRequiredMixin, CreateView):
+class SubvencionCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    permission_required = ('subvenciones.can_add_subvencion')
+    raise_exception = True
     form_class = SubvencionForm
     template_name = 'subvenciones/create.html'
 
@@ -229,7 +232,9 @@ class SubvencionCreateView(LoginRequiredMixin, CreateView):
         return context
 
 # --------------- Edit Subsidie --------------- #
-class SubvencionUpdateView(LoginRequiredMixin, UpdateView):
+class SubvencionUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    permission_required = ('subvenciones.can_add_subvencion')
+    raise_exception = True
     model = Subvencion
     form_class = SubvencionForm
     template_name = 'subvenciones/edit.html'
@@ -373,6 +378,7 @@ def markdown_find_mentions(markdown_text, user, user_username, name_subv, mail, 
         return
 
 @login_required()
+@permission_required('subvenciones.can_add_subvencion', raise_exception=True)
 # --------------- Subsidie Details --------------- #
 def subvencion_detail(request, id):
     subvencion = get_object_or_404(Subvencion.objects.prefetch_related(
@@ -394,7 +400,9 @@ def subvencion_detail(request, id):
                    'urltoremember': request.session.get('urltoremember', None)})
 
 # --------------- Delete Subsidie --------------- #
-class SubvencionDeleteView(LoginRequiredMixin, DeleteView):
+class SubvencionDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = ('subvenciones.can_add_subvencion')
+    raise_exception = True
     model = Subvencion
     success_url = reverse_lazy('subvenciones:index')
 
@@ -428,6 +436,7 @@ class SubvencionDeleteView(LoginRequiredMixin, DeleteView):
 
 # --------------- PDF Detail Subsidie --------------- #
 @login_required()
+@permission_required('subvenciones.can_add_subvencion', raise_exception=True)
 def admin_subvencion_pdf(request, subvencion_id):
     subvencion = get_object_or_404(Subvencion, id=subvencion_id)
     html = render_to_string('subvenciones/pdf_detail.html',
@@ -443,6 +452,7 @@ def admin_subvencion_pdf(request, subvencion_id):
 # --------------- EXPORT TO EXCEL --------------- #
 import re
 @login_required
+@permission_required('subvenciones.can_add_subvencion', raise_exception=True)
 def export_subvenciones_excel(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="subvenciones.xls"'

@@ -273,7 +273,10 @@ body {
   background-repeat: no-repeat;
   border-radius: 6px;
   box-shadow: var(--newtab-topsites-icon-shadow);
-  position: absolute; }
+  position: absolute;
+  background-size: auto;
+  width: 30px;
+  height: 30px; }
 
 .top-site-outer .default-icon[data-fallback]::before, .top-site-outer .search-topsite[data-fallback]::before {
   content: attr(data-fallback); }

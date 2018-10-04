@@ -2,6 +2,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
+from django.db.models import Q
 from django.forms.models import inlineformset_factory
 
 from .models import Subvencion, Estado, Area, Ente, Comment
@@ -56,7 +57,7 @@ class SubvencionForm(forms.ModelForm):
     # In reponsable field get user by first_name
     def __init__(self, *args, **kwargs):
         super(SubvencionForm, self).__init__(*args, **kwargs)
-        users = User.objects.filter(groups__name='staff')
+        users = User.objects.filter(Q(groups__name='staff') | Q(is_staff=True)).distinct()
         self.fields['responsable'].choices = [(user.pk, user.first_name) for user in users]
 
     class Meta:

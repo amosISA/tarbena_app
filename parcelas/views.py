@@ -2,9 +2,11 @@
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib.auth.decorators import permission_required
 
 from .models import Parcela, Proyecto, SectorTrabajo
 
+@permission_required('parcelas.can_add_parcela', raise_exception=True)
 def index(request):
     parcelas = Parcela.objects.all()
     proyectos = Proyecto.objects.all()

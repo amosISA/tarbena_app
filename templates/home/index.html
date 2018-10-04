@@ -74,6 +74,7 @@
                         </div>
                         <div class="section-body">
                             <ul class="section-list" style="padding:0;">
+                                {% if request.user|has_group:"staff" %}
                                 <!-- Subvenciones -->
                                 <li class="card-outer">
                                     <a href="{% url 'subvenciones:index' %}">
@@ -94,6 +95,7 @@
                                         <span class="sr-only">Open context menu for Subvenciones</span>
                                     </button>
                                 </li>
+                                {% endif %}
 
                                 <!-- Transparencia -->
                                 <li class="card-outer">
@@ -116,6 +118,7 @@
                                     </button>
                                 </li>
 
+                                {% if request.user|has_group:"staff" %}
                                 <!-- Parcelas -->
                                 <li class="card-outer">
                                     <a href="{% url 'parcelas:index' %}">
@@ -136,6 +139,7 @@
                                         <span class="sr-only">Open context menu for Parcelas</span>
                                     </button>
                                 </li>
+                                {% endif %}
 
                                 <!-- Llaves -->
                                 <li class="card-outer">

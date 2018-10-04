@@ -56,7 +56,7 @@ class SubvencionForm(forms.ModelForm):
     # In reponsable field get user by first_name
     def __init__(self, *args, **kwargs):
         super(SubvencionForm, self).__init__(*args, **kwargs)
-        users = User.objects.all()
+        users = User.objects.filter(groups__name='staff')
         self.fields['responsable'].choices = [(user.pk, user.first_name) for user in users]
 
     class Meta:

@@ -1,7 +1,18 @@
 {% extends "parcelas/base.html" %}
 {% load staticfiles %}
 
+{% block favicon %}
+    <link rel="icon" href="{% static 'home/img/favicon/logoTarbenaCatastro.png' %}" type="image/x-icon"/>
+{% endblock %}
+
 {% block content %}
+
+<style>
+    /* Add opacity to KML layers when search for it */
+    #map_canvas img[src*='kml'] {
+        opacity: .5;
+    }
+</style>
 
 <!-- MAP -->
 <div id="map_canvas">

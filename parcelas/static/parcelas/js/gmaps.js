@@ -165,6 +165,7 @@ $('.card').on('change', '.parcela-google-maps-checkbox', function(){
 $('.button-kml-download').click(function() {
     var polig = $('#inputPoligono');
     var parc = $('#inputParcela');
+    var inputPobacion = $( "#inputPoblacion option:selected" ).val();
     var inputPolig = polig.val();
     var inputParc = parc.val();
     if (inputPolig.length === 0 || inputParc.length === 0) {
@@ -174,7 +175,7 @@ $('.button-kml-download').click(function() {
             inputPolig.length === 0 ? polig.focus() : parc.focus()
         }
     } else {
-        window.open('https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03127A'+ pad(inputPolig, 3) + pad(inputParc, 5) + '0000BP&del=3&mun=127&tipo=3d');
+        window.open('https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + inputPobacion + 'A'+ pad(inputPolig, 3) + pad(inputParc, 5) + '0000BP&del=3&mun=' + inputPobacion + '&tipo=3d');
     }
 });
 

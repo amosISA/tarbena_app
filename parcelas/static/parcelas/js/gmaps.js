@@ -181,6 +181,7 @@ $('.button-kml-download').click(function() {
 $('.formButtonCheckParcela').click(function() {
     var inputPolig = $('#inputPoligono').val();
     var inputParc = $('#inputParcela').val();
+    var inputPobacion = $( "#inputPoblacion option:selected" ).val();
     //console.log(layersForm);
 
     $.each(layersForm, function(i,v){
@@ -191,9 +192,10 @@ $('.formButtonCheckParcela').click(function() {
     });
 
     layersForm[inputParc] = new google.maps.KmlLayer({
-        url: 'https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03127A'+ pad(inputPolig, 3) + pad(inputParc, 5) + '0000BP&del=3&mun=127&tipo=3d',
+        url: 'https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + inputPobacion + 'A'+ pad(inputPolig, 3) + pad(inputParc, 5) + '0000BP&del=3&mun=' + inputPobacion + '&tipo=3d',
         suppressInfoWindows: false
     });
+    //console.log('https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + inputPobacion + 'A'+ pad(inputPolig, 3) + pad(inputParc, 5) + '0000BP&del=3&mun=' + inputPobacion + '&tipo=3d');
 
     layersForm[inputParc].setMap(map);
 });

@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'favourites',
     'gym',
+    'contracts',
 ]
 
 REST_FRAMEWORK = {

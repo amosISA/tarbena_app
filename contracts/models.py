@@ -29,6 +29,9 @@ class Contractor(TimeStampedModel):
     def __str__(self):
         return '{}'.format(self.name)
 
+    class Meta:
+        ordering = ["name"]
+
 class Contract(TimeStampedModel):
     type = models.ForeignKey(TypeContract, related_name='type_contract', blank=True, null=True)
     contractor = models.ForeignKey(Contractor, related_name='contract_contractor', blank=True, null=True)

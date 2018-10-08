@@ -3,8 +3,9 @@ from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import permission_required
+from django.views.generic.detail import DetailView
 
-from .models import Parcela, Proyecto, SectorTrabajo
+from .models import Parcela, Proyecto, SectorTrabajo, Propietario
 
 @permission_required('parcelas.can_add_parcela', raise_exception=True)
 def index(request):
@@ -39,3 +40,7 @@ def ajax_get_projects(request):
     query = Proyecto.objects.all()
     data = serializers.serialize('json', query)
     return HttpResponse(data, content_type="application/json")
+
+class DetailPropietarioParcela(DetailView):
+    model = Propietario
+    template_name = 'parcelas/propietario_detail.html'

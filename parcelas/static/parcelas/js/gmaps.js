@@ -65,11 +65,12 @@ $(document).ready(function() {
                 success_div.html('<ol class="breadcrumb"><li class="breadcrumb-item"><a href="#" class="proj-breadcrumb">Proyectos</a></li><li class="breadcrumb-item"><a href="#" class="sector-breadcrumb">Sectores</a></li><li class="breadcrumb-item">Parcelas</li></ol>');
 
                 $.each(data, function(key, value) {
+                    //console.log(value)
                     if (value.fields['estado'] == 1) {
                         table_rows += ('<tr class="table-success"><td><input checked class="parcela-google-maps-checkbox" type="checkbox" data-parcela="' + value.fields['numero_parcela'] + '" data-poligono="' + value.fields['poligono'] + '"></td>' +
                                        '<td>' + value.fields['poligono'] + '</td>' +
                                        '<td>' + value.fields['numero_parcela'] + '</td>' +
-                                       '<td>' + value.fields['propietario'] + '</td>' +
+                                       '<td><a onclick="return abrir_modal()">' + value.fields['propietario'] + '</a></td>' +
                                        '<td>' + value.fields['metros_cuadrados'] + '</td>' +
                                    '</tr>');
                     } else {

@@ -1,6 +1,9 @@
 from django.contrib import admin
+from django.conf.locale.es import formats
 
 from .models import Contract, TypeContract, Contractor
+
+formats.DATE_FORMAT = "d/m/Y"
 
 # Register your models here.
 class ContractsAdmin(admin.ModelAdmin):

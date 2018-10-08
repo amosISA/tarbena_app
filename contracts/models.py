@@ -39,6 +39,7 @@ class Contract(TimeStampedModel):
     iva = models.CharField(max_length=250, blank=True, null=True)
     total = models.CharField(max_length=250, blank=True, null=True)
     date_contract = models.DateField(blank=True, null=True)
+    description = models.TextField(blank=True)
 
     class Meta:
         ordering = ["type"]

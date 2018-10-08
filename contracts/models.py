@@ -39,6 +39,10 @@ class Contract(TimeStampedModel):
     iva = models.CharField(max_length=250, blank=True, null=True)
     total = models.CharField(max_length=250, blank=True, null=True)
     date_contract = models.DateField(blank=True, null=True)
+    cpv = models.CharField(max_length=250, blank=True, null=True)
+    duracion = models.CharField(max_length=250, blank=True, null=True)
+    objeto = models.TextField(blank=True)
+    aplicacion_presupuestaria = models.TextField(blank=True)
     description = models.TextField(blank=True)
 
     class Meta:

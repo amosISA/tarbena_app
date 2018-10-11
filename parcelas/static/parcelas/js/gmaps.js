@@ -68,6 +68,7 @@ $(document).ready(function() {
                     //console.log(value)
                     if (value.fields['estado'] == 1) {
                         table_rows += ('<tr class="table-success"><td><input checked class="parcela-google-maps-checkbox" type="checkbox" data-parcela="' + value.fields['numero_parcela'] + '" data-poligono="' + value.fields['poligono'] + '"></td>' +
+                                       '<td class="p1_poblacion">' + value.fields['poblacion'] + '</td>' +
                                        '<td>' + value.fields['poligono'] + '</td>' +
                                        '<td>' + value.fields['numero_parcela'] + '</td>' +
                                        '<td><a onclick="return abrir_modal()">' + value.fields['propietario'] + '</a></td>' +
@@ -75,6 +76,7 @@ $(document).ready(function() {
                                    '</tr>');
                     } else {
                         table_rows += ('<tr><td><input checked class="parcela-google-maps-checkbox" type="checkbox" data-parcela="' + value.fields['numero_parcela'] + '" data-poligono="' + value.fields['poligono'] + '"></td>' +
+                                       '<td class="p1_poblacion">' + value.fields['poblacion'] + '</td>' +
                                        '<td>' + value.fields['poligono'] + '</td>' +
                                        '<td>' + value.fields['numero_parcela'] + '</td>' +
                                        '<td>' + value.fields['propietario'] + '</td>' +
@@ -83,10 +85,20 @@ $(document).ready(function() {
                     }
                 });
                 success_div.append('<table class="table table-sm" style="width:100%;font-size:0.8rem;">' +
-                                        '<thead><tr><th></th><th>Polígono</th><th>Parcela</th><th>Propietario</th><th>m2</th></tr></thead>' +
+                                        '<thead><tr><th style="width: 20px;"></th><th title="Población" style="width: 25px;">P1</th><th title="Polígono" style="width: 25px;">P2</th><th title="Parcela" style="width: 25px;">P3</th><th>Propietario</th><th style="width: 40px;">m2</th></tr></thead>' +
                                         '<tbody>' + table_rows + '</tbody>' +
                                    '</table>'
                 );
+
+                // Change poblacion ID for CODIGO
+                $("#inputPoblacion > option").each(function() {
+                    var outside_this = $(this);
+
+                    $("table td.p1_poblacion").each(function() {
+                        $(this).text() == outside_this.attr("data-id") ? $(this).text(outside_this.val()) : $(this).text();
+                        if ($(this).text() == 'null') { $(this).text(''); }
+                    });
+                });
 
                 // First we set to null each kml
                 $.each(layers, function(i,v){

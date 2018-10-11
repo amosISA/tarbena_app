@@ -33,11 +33,9 @@
             <div class="form-check-parcel">
                 <!-- Select Poblacion -->
                 <select id="inputPoblacion">
-                    <option value="127">Tárbena</option>
-                    <option value="045">Bolulla</option>
-                    <option value="048">Callosa d'en Sarriá</option>
-                    <option value="029">Benigembla</option>
-                    <option value="100">Parcent</option>
+                    {% for p in poblacion %}
+                        <option data-id="{{ p.pk }}" value="{{ p.codigo }}">{{ p.nombre }}</option>
+                    {% endfor %}
                 </select>
 
                 <label for="inputPoligono">Polígono</label>
@@ -66,8 +64,8 @@
             <!-- ADD PROJECTS, SECTORS AND PARCELS -->
             <div class="add_new_data">
                 <!-- ADD PARCELS -->
-                <button class="button-add-parcel">
-                    <a class="related-widget-wrapper-link add-related" id="add_id_diputacion" href="/panel/parcelas/parcela/add/?_to_field=id&amp;_popup=1" title="Añadir parcela" style="display: block;" target="_blank">
+                <button id="add_parcelas">
+                    <a href="{% url 'parcelas:add_parcela' %}" data-toggle="modal" data-target="#open-modal">
                         Añadir parcela
                     </a>
                 </button>
@@ -77,14 +75,26 @@
     </div>
 </div>
 
+<!-- Modal: ADD PARCELA -->
+<div id="open-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Añadir parcela</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block js %}
-<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-
-<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
-
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
     <script>
         /*
             I declare the variables here because the url like this cant be declared
@@ -96,5 +106,57 @@
         var ajaxsectores_url = '{% url "parcelas:ajax_get_sectores" %}';
         var ajaxproyectos_url = '{% url "parcelas:ajax_get_proyectos" %}';
         var ajaxparcelas_url = '{% url "parcelas:ajax_get_parcelas" %}';
+
+        /* Ajax when clicking on create Parcela */
+        $("#add_parcelas").click(function () {
+            $.ajax({
+                url: '{% url "parcelas:add_parcela" %}',
+                type: 'get',
+                dataType: 'json',
+                beforeSend: function () {
+                    $("#open-modal").modal("show");
+                },
+                success: function (data) {
+                    $("#open-modal .modal-body").html(data.html_form);
+
+                    /* After form is up, charge poblacion, poligono and parcela values */
+                    $('#id_poligono').val($('#inputPoligono').val());
+                    $('#id_numero_parcela').val($('#inputParcela').val());
+
+                    /* Select */
+                    var id_poblacion_oustide = $("#inputPoblacion option:selected").attr("data-id");
+                    $("#id_poblacion > option").each(function() {
+                        if (this.value == id_poblacion_oustide) {
+                            $(this).attr("selected", "selected");
+                        }
+                    });
+
+                    // Add ref catastral to modal HEADER
+                    var header_poblacion = '<span class="badge badge-info">' + $("#inputPoblacion option:selected").val() + '</span>';
+                    var header_poligono = '<span class="badge badge-info">' + $('#inputPoligono').val() + '</span>';
+                    var header_parcela = '<span class="badge badge-info">' + $('#inputParcela').val() + '</span>';
+                    $('#exampleModalLabel').html("Añadir parcela: " + header_poblacion + " " + header_poligono + " " + header_parcela);
+                }
+            });
+        });
+
+        /* Ajax when creating parcela update parcelas */
+        $("#open-modal").on("submit", "#some-form", function () {
+            var form = $(this);
+            $.ajax({
+                url: form.attr("action"),
+                data: form.serialize(),
+                type: form.attr("method"),
+                dataType: 'json',
+                success: function (data) {
+                    if (data.form_is_valid) {
+                        $("#open-modal").modal("hide");  // <-- Close the modal
+                    } else {
+                        $("#open-modal #some-form").html(data.html_form);
+                    }
+                }
+            });
+            return false;
+        });
     </script>
 {% endblock %}

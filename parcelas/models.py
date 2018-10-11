@@ -30,10 +30,10 @@ class Propietario(TimeStampedModel):
         verbose_name_plural = "Propietarios"
 
     def __str__(self):
-        return '{}, {}'.format(self.apellidos, self.nombre)
+        return '{}, {}, {}'.format(self.nif ,self.apellidos, self.nombre)
 
     def natural_key(self):
-        return '{}, {}'.format(self.apellidos, self.nombre)
+        return '{}, {}, {}'.format(self.nif, self.apellidos, self.nombre)
 
 class Estado(models.Model):
     nombre = models.CharField(max_length=250, blank=False)
@@ -55,12 +55,25 @@ class SectorTrabajo(models.Model):
     def __str__(self):
         return '{}'.format(self.sector)
 
+class Poblacion(TimeStampedModel):
+    nombre = models.CharField(max_length=250, blank=True, null=True)
+    codigo = models.CharField(max_length=250, blank=True, null=True)
+
+    class Meta:
+        ordering = ["codigo"]
+        verbose_name = 'Poblacion'
+        verbose_name_plural = "Poblaciones"
+
+    def __str__(self):
+        return '{}, {}'.format(self.codigo, self.nombre)
+
 class Parcela(TimeStampedModel):
-    propietario = models.ForeignKey(Propietario, default=None, blank=True, null=True)
+    propietario = models.ForeignKey(Propietario, default='', blank=True)
+    poblacion = models.ForeignKey(Poblacion, default='')
     metros_cuadrados = models.CharField(max_length=250, blank=True)
-    poligono = models.CharField(max_length=250, blank=True)
-    numero_parcela = models.CharField(max_length=250, blank=True)
-    estado = models.ManyToManyField(Estado, blank=True)
+    poligono = models.CharField(max_length=250)
+    numero_parcela = models.CharField(max_length=250)
+    estado = models.ForeignKey(Estado, blank=True, null=True)
     comentarios = models.TextField(blank=True)
     # https://stackoverflow.com/questions/35459326/foreignkey-to-a-model-that-is-defined-after-below-the-current-model?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
     # nice help for use foreignkey for model that is below this one

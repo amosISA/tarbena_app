@@ -1,0 +1,54 @@
+{% load staticfiles %}
+{% load tags %}
+<form id="some-form" class="form-horizontal" method="post" enctype="multipart/form-data" action="{% url 'parcelas:add_parcela' %}">{% csrf_token %}
+
+    {% if form.errors %}
+        <div class="ag_form_login_message_error">
+            {% for field,error in form.errors.items %}
+                {{ field|capfirst }} - {{ error|striptags }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;display:none;">
+        {{ form.poblacion.label_tag }}
+        {{ form.poblacion|htmlattributes:"class:form-control" }}
+    </div>
+
+    <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+        {{ form.metros_cuadrados.label_tag }}
+        {{ form.metros_cuadrados|htmlattributes:"class:form-control" }}
+    </div>
+
+    <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;display:none;">
+        {{ form.poligono.label_tag }}
+        {{ form.poligono|htmlattributes:"class:form-control" }}
+    </div>
+
+    <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;display:none;">
+        {{ form.numero_parcela.label_tag }}
+        {{ form.numero_parcela|htmlattributes:"class:form-control" }}
+    </div>
+
+    <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+        {{ form.propietario.label_tag }}
+        {{ form.propietario|htmlattributes:"class:form-control" }}
+    </div>
+
+    <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+        {{ form.estado.label_tag }}
+        {{ form.estado|htmlattributes:"class:form-control" }}
+    </div>
+
+    <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+        {{ form.sector_trabajo.label_tag }}
+        {{ form.sector_trabajo|htmlattributes:"class:form-control" }}
+    </div>
+
+    <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+        {{ form.comentarios.label_tag }}
+        {{ form.comentarios|htmlattributes:"class:form-control, rows:4, cols:40" }}
+    </div>
+
+    <input class="button_submit_create_form" type="submit" value="Añadir parcela" />
+</form>

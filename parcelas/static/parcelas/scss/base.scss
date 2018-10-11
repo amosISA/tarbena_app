@@ -101,8 +101,6 @@ body {
     }
 
     // Accordion
-
-
     .card {
       font-size: 0.8rem!important;
       display: none;
@@ -127,4 +125,17 @@ body {
       }
     }
   }
+}
+
+/* ADD PARCELAS TABLE */
+.modal-dialog {
+    font-size: 0.75rem!important;
+}
+
+.title-create_post label {
+    display: inline-block;
+    font-weight: normal;
+    color: #000;
+    margin-bottom: 0;
+    font-size: 0.8rem;
 }

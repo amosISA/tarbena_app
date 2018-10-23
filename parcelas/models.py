@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.db import models
+
+User = settings.AUTH_USER_MODEL
 
 class TimeStampedModel(models.Model):
     """
@@ -16,9 +19,10 @@ class TimeStampedModel(models.Model):
 class Propietario(TimeStampedModel):
     nombre = models.CharField(max_length=250, blank=False)
     apellidos = models.CharField(max_length=250, blank=True)
-    nif = models.CharField(max_length=250, blank=True)
+    apellidos2 = models.CharField(max_length=250, blank=True)
+    nif = models.CharField(max_length=250, blank=True, unique=True)
     poblacion = models.CharField(max_length=250, blank=True)
-    calle = models.CharField(max_length=250, blank=True)
+    direccion = models.CharField(max_length=250, blank=True)
     telefono_fijo = models.CharField(max_length=250, blank=True)
     telefono_movil = models.CharField(max_length=250, blank=True)
     email = models.CharField(max_length=250, blank=True)
@@ -30,10 +34,10 @@ class Propietario(TimeStampedModel):
         verbose_name_plural = "Propietarios"
 
     def __str__(self):
-        return '{}, {}, {}'.format(self.nif ,self.apellidos, self.nombre)
+        return '{}, {} {}, {}, ({})'.format(self.nif ,self.apellidos, self.apellidos2, self.nombre, self.direccion)
 
     def natural_key(self):
-        return '{}, {}, {}'.format(self.nif, self.apellidos, self.nombre)
+        return '{}, {} {}, {}, ({})'.format(self.nif, self.apellidos, self.apellidos2, self.nombre, self.direccion)
 
 class Estado(models.Model):
     nombre = models.CharField(max_length=250, blank=False)
@@ -68,6 +72,7 @@ class Poblacion(TimeStampedModel):
         return '{}, {}'.format(self.codigo, self.nombre)
 
 class Parcela(TimeStampedModel):
+    #user = models.ForeignKey(User, blank=True, null=True)
     propietario = models.ForeignKey(Propietario, default='', blank=True)
     poblacion = models.ForeignKey(Poblacion, default='')
     metros_cuadrados = models.CharField(max_length=250, blank=True)

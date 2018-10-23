@@ -76,7 +76,7 @@
 </div>
 
 <!-- Modal: ADD PARCELA -->
-<div id="open-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div id="open-modal" class="modal fade" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -106,6 +106,7 @@
         var ajaxsectores_url = '{% url "parcelas:ajax_get_sectores" %}';
         var ajaxproyectos_url = '{% url "parcelas:ajax_get_proyectos" %}';
         var ajaxparcelas_url = '{% url "parcelas:ajax_get_parcelas" %}';
+        var ajaxparcelas_m2 = '{% url "parcelas:ajax_get_m2" %}';
 
         /* Ajax when clicking on create Parcela */
         $("#add_parcelas").click(function () {
@@ -131,11 +132,30 @@
                         }
                     });
 
+                    var header_modal = $('#exampleModalLabel').html();
+
                     // Add ref catastral to modal HEADER
                     var header_poblacion = '<span class="badge badge-info">' + $("#inputPoblacion option:selected").val() + '</span>';
                     var header_poligono = '<span class="badge badge-info">' + $('#inputPoligono').val() + '</span>';
                     var header_parcela = '<span class="badge badge-info">' + $('#inputParcela').val() + '</span>';
-                    $('#exampleModalLabel').html("Añadir parcela: " + header_poblacion + " " + header_poligono + " " + header_parcela);
+                    $('#exampleModalLabel').html("Añadir parcela: " + header_poblacion + " " + header_poligono + " " + header_parcela + " ");
+
+                    /* Add also m2 with ajax - BeautifulSoup */
+                    $.ajax({
+                        method: 'GET',
+                        url: ajaxparcelas_m2,
+                        data: {
+                            'poblacion': '127',
+                            'poligono': pad($('#id_poligono').val(), 3),
+                            'parcela': pad($('#id_numero_parcela').val(), 5)
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            m2_data = $('#id_metros_cuadrados').val(data);
+                            var header_m2 = '<span class="badge badge-info">' + $('input#id_metros_cuadrados').val() + ' m2</span>';
+                            $('#exampleModalLabel').append(header_m2);
+                        }
+                    });
                 }
             });
         });
@@ -152,7 +172,9 @@
                     if (data.form_is_valid) {
                         $("#open-modal").modal("hide");  // <-- Close the modal
                     } else {
+
                         $("#open-modal #some-form").html(data.html_form);
+                        $("#open-modal #some-form").prepend("<p style='color:red;'><strong>No se ha podido añadir la parcela. Ha ocurrido un error.</strong></p>");
                     }
                 }
             });

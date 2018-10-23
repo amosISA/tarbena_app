@@ -15,7 +15,7 @@
         {{ form.poblacion|htmlattributes:"class:form-control" }}
     </div>
 
-    <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+    <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;display:none;">
         {{ form.metros_cuadrados.label_tag }}
         {{ form.metros_cuadrados|htmlattributes:"class:form-control" }}
     </div>
@@ -52,3 +52,5 @@
 
     <input class="button_submit_create_form" type="submit" value="Añadir parcela" />
 </form>
+
+{{ form.media }}

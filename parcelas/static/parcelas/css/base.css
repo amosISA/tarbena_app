@@ -105,4 +105,10 @@ body {
   margin-bottom: 0;
   font-size: 0.8rem; }
 
+/* Select for display text autocompletion propietario */
+#select2-id_propietario-container {
+  font-size: 0.8rem;
+  margin-top: -7px;
+  font-weight: 400; }
+
 /*# sourceMappingURL=base.css.map */

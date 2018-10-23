@@ -71,7 +71,7 @@ $(document).ready(function() {
                                        '<td class="p1_poblacion">' + value.fields['poblacion'] + '</td>' +
                                        '<td>' + value.fields['poligono'] + '</td>' +
                                        '<td>' + value.fields['numero_parcela'] + '</td>' +
-                                       '<td><a onclick="return abrir_modal()">' + value.fields['propietario'] + '</a></td>' +
+                                       '<td>' + value.fields['propietario'] + '</td>' +
                                        '<td>' + value.fields['metros_cuadrados'] + '</td>' +
                                    '</tr>');
                     } else {
@@ -130,7 +130,7 @@ $(document).ready(function() {
                     });*/
 
                     layers[parc] = new google.maps.KmlLayer({
-                        url: 'https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03127A'+ pad(polig, 3) + pad(parc, 5) + '0000BP&del=3&mun=127&tipo=3d',
+                        url: 'https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + $('td.p1_poblacion').first().text() + 'A' + pad(polig, 3) + pad(parc, 5) + '0000BP&del=3&mun=127&tipo=3d',
                         suppressInfoWindows: false
                         //preserveViewport: true
                     });

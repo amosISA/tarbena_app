@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'admin_interface',
     'flat_responsive',
     'colorfield',
+    'dal',
+    'dal_select2',
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.auth',

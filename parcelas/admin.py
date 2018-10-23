@@ -5,11 +5,11 @@ from .models import Parcela, Propietario, SectorTrabajo, Estado, Proyecto, Pobla
 from .sites import my_admin_site
 
 class ParcelaAdmin(admin.ModelAdmin):
-    list_display = ['poligono', 'numero_parcela', 'propietario', 'metros_cuadrados']
+    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'metros_cuadrados']
     list_filter = ['propietario__nombre', 'metros_cuadrados', 'poligono',
-                    'numero_parcela']
+                    'numero_parcela', 'poblacion']
     search_fields = ('propietario__nombre', 'metros_cuadrados', 'poligono',
-                     'numero_parcela',)
+                     'numero_parcela', 'poblacion')
     empty_value_display = '-'
     list_display_links = ('numero_parcela',)
     show_full_result_count = True
@@ -17,11 +17,11 @@ my_admin_site.register(Parcela, ParcelaAdmin)
 admin.site.register(Parcela, ParcelaAdmin)
 
 class PropietarioAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'apellidos', 'nif', 'poblacion', 'calle',
+    list_display = ['nombre', 'apellidos', 'apellidos2', 'direccion', 'nif', 'poblacion',
                     'telefono_fijo', 'telefono_movil', 'comentarios']
-    list_filter = ['nombre', 'apellidos', 'nif', 'poblacion', 'calle',
+    list_filter = ['nombre', 'apellidos', 'nif', 'poblacion',
                    'telefono_fijo', 'telefono_movil', 'comentarios']
-    search_fields = ('nombre', 'apellidos', 'nif', 'poblacion', 'calle',
+    search_fields = ('nombre', 'apellidos', 'nif', 'poblacion',
                      'telefono_fijo', 'telefono_movil', 'comentarios',)
     empty_value_display = '-'
     show_full_result_count = True

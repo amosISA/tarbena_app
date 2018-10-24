@@ -48,7 +48,7 @@
         <!-- Right menu -->
         <div class="subvenciones-header-menu__right-item">
             {% if request.user.is_authenticated %}
-                {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' %}
+                {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' or request.path == area or request.path == estado %}
                     <div class="subv-header-exchange">
                         <div class="subvenciones-header-menu__right-item__icon">
                             <span id="button-actual-subsidie-navigation" class="subvenciones-header-menu__right-item__span"><i class="fas fa-exchange-alt"></i></span>

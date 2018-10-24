@@ -35,6 +35,9 @@ import xlwt
 def index_subvenciones(request, estado_slug=None):
     """ List subvenciones """
 
+    area = None
+    estado = None
+
     total_subvenciones = Subvencion.objects.count()
     colectivos = Colectivo.objects.all()
     userlikes = Subvencion.objects.filter(likes__in=[request.user])
@@ -67,6 +70,24 @@ def index_subvenciones(request, estado_slug=None):
                 'user', 'estado', 'ente', 'area', 'user__profile'
             ).filter(responsable=request.user))
 
+    if estado_slug:
+        if Area.objects.filter(slug=estado_slug).exists():
+            area = get_object_or_404(Area, slug=estado_slug)
+            f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
+                'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion',
+                'responsable__profile'
+            ).select_related(
+                'user', 'estado', 'ente', 'area', 'user__profile'
+            ).filter(area=area))
+        elif Estado.objects.filter(slug=estado_slug).exists():
+            estado = get_object_or_404(Estado, slug=estado_slug)
+            f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
+                'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion',
+                'responsable__profile'
+            ).select_related(
+                'user', 'estado', 'ente', 'area', 'user__profile'
+            ).filter(estado=estado))
+
     return render(request,
                   'subvenciones/index.html',
                   {'filter' : f,
@@ -75,7 +96,9 @@ def index_subvenciones(request, estado_slug=None):
                    'colectivos': colectivos,
                    'userlikes': userlikes,
                    'estados': estados,
-                   'urltoremember': request.session.get('urltoremember', None)})
+                   'urltoremember': request.session.get('urltoremember', None),
+                   'area': area,
+                   'estado': estado})
 
 # --------------- Get Areas related to each ente with AJAX --------------- #
 def ajax_se_relaciona_con(request):

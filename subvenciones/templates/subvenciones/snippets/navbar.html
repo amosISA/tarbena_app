@@ -1,8 +1,15 @@
 {% load notification_tags %}
 {% include_notify_js_variables %}
+{% url 'subvenciones:subvencion_by_category' estado.slug as estado %}
+{% url 'subvenciones:subvencion_by_category' area.slug as area %}
+{% url 'subvenciones:subvencion_by_category' responsable__username.username as responsable %}
+
+{% url 'subvenciones:subvencion_detail' subvencion.id as detail %}
+{% url 'subvenciones:edit_subvencion' subvencion.id as editsubv %}
+{% url 'subvenciones:delete_subvencion' subvencion.id as delsubv %}
 <div class="subvenciones-header-menu fixed">
     <div class="subvenciones-header-menu__container">
-        <a class="subv-anchor-text" href="#" {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' %}onclick="openNav()"{% endif %}>
+        <a class="subv-anchor-text" href="#" {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' or request.path == area or request.path == estado %}onclick="openNav()"{% endif %}>
             <div class="subvenciones-header-menu__logo">Gestión de Subvenciones</div>
         </a>
         <ul class="subvenciones-ul-nav subvencion-ui-navigation">
@@ -17,13 +24,6 @@
             <li class="subv-li-nav subvenciones-ui-menu">
                 <!-- Index, Cuando creas y cuando pinchas en favoritos aparecerá el contador de cuántas favortias tengo -->
                 <!-- También Estado, Area, Responsable -->
-                {% url 'subvenciones:subvencion_by_category' estado.slug as estado %}
-                {% url 'subvenciones:subvencion_by_category' area.slug as area %}
-                {% url 'subvenciones:subvencion_by_category' responsable__username.username as responsable %}
-
-                {% url 'subvenciones:subvencion_detail' subvencion.id as detail %}
-                {% url 'subvenciones:edit_subvencion' subvencion.id as editsubv %}
-                {% url 'subvenciones:delete_subvencion' subvencion.id as delsubv %}
                 {% if request.path == '/subvenciones/' or request.path == '/subvenciones/new/' or request.path == '/subvenciones/favourites/' or request.path == estado or request.path == area or request.get_full_path == responsable %}
                     <a id="indexFavouritesButton" href="{% url 'subvenciones:favourites' %}" class="subv-a-nav-menu nav-link">
                         <span id="badge-count-likes" class="badge">{{ userlikes.count }}</span>

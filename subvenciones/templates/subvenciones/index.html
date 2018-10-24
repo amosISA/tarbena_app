@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
                                     <div class="departamento depart{{ f.area.id }}">
-                                        {{ f.area }}
+                                        <a style="color:#000;" href="{{ f.area.get_absolute_url }}">{{ f.area }}</a>
                                     </div>
                                     <div class="repositorios">
                                         <div class="drive"><i class="fab fa-google-drive"></i>
@@ -136,7 +136,7 @@
                                 </td>
                                 <td class="td3 estado{{ f.estado.id }}" style="{% if f.fin|daysuntil in days_until_estado %}background-color:#ff0000;color:#fff;{% elif f.estado.id == 4 %}background-color:#ff0000;color:#fff;{% elif f.estado.id == 8 %}background-color:#ff0000;color:#fff;{% elif f.estado.id == 9 %}background-color:#ff0000;color:#fff;{% endif %}">
                                     {% if f.fin %}<div class="fechaInicio date-end">{{ f.fin|date:"d/m/Y" }}</div>{% endif %}
-                                    <div class="estadoBloque estado">{{ f.estado }}</div>
+                                    <div class="estadoBloque estado"><a style="color:#fff;" href="{{ f.estado.get_absolute_url }}">{{ f.estado }}</a></div>
                                     <div class="responsables">
                                         {% for responsable in f.responsable.all %}
                                             <div class="card" tabindex="0" data-toggle="popover" data-trigger="hover" data-content="{{ responsable.first_name }}">

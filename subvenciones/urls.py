@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^edit/(?P<pk>[\w-]+)/$', views.SubvencionUpdateView.as_view(), name='edit_subvencion'),
     url(r'^delete/(?P<pk>[\w-]+)/$', views.SubvencionDeleteView.as_view(), name='delete_subvencion'),
     url(r'^(?P<id>\d+)/$', views.subvencion_detail, name='subvencion_detail'),
+    url(r'^(?P<estado_slug>[-\w ]+)/$', views.index_subvenciones, name='subvencion_by_category'),
 
     # Two urls pointing to same view but different parameters
     url(r'^(?P<estado_slug>[-\w ]+)/$', views.index_subvenciones, name='subvencion_by_category'),

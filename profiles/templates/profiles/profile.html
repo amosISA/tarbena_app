@@ -121,9 +121,79 @@
                                         <!-- Last name -->
                                         <li class="user_profile__list-item">
                                             <div class="user_profile__list-flex">
-                                                <div class="user_profile__list-h3">Apellidos</div>
+                                                <div class="user_profile__list-h3">Primer Apellido</div>
                                                 <div class="user_profile__list-input">
                                                     <span>{{ user.last_name }}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Last name 2 -->
+                                        <li class="user_profile__list-item">
+                                            <div class="user_profile__list-flex">
+                                                <div class="user_profile__list-h3">Segundo Apellido</div>
+                                                <div class="user_profile__list-input">
+                                                    <span>{{ user.profile.apellidos2 }}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- NIF -->
+                                        <li class="user_profile__list-item">
+                                            <div class="user_profile__list-flex">
+                                                <div class="user_profile__list-h3">NIF</div>
+                                                <div class="user_profile__list-input">
+                                                    <span>{{ user.profile.nif }}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Población -->
+                                        <li class="user_profile__list-item">
+                                            <div class="user_profile__list-flex">
+                                                <div class="user_profile__list-h3">Población</div>
+                                                <div class="user_profile__list-input">
+                                                    <span>{{ user.profile.poblacion }}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Dirección -->
+                                        <li class="user_profile__list-item">
+                                            <div class="user_profile__list-flex">
+                                                <div class="user_profile__list-h3">Dirección</div>
+                                                <div class="user_profile__list-input">
+                                                    <span>{% if user.profile.direccion %}{{ user.profile.direccion }}{% endif %}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Tlf fijo -->
+                                        <li class="user_profile__list-item">
+                                            <div class="user_profile__list-flex">
+                                                <div class="user_profile__list-h3">Teléfono fijo</div>
+                                                <div class="user_profile__list-input">
+                                                    <span>{% if user.profile.telefono_fijo %}{{ user.profile.telefono_fijo }}{% endif %}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Tlf móvil -->
+                                        <li class="user_profile__list-item">
+                                            <div class="user_profile__list-flex">
+                                                <div class="user_profile__list-h3">Teléfono móvil</div>
+                                                <div class="user_profile__list-input">
+                                                    <span>{{ user.profile.telefono_movil }}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!-- Comentarios -->
+                                        <li class="user_profile__list-item">
+                                            <div class="user_profile__list-flex">
+                                                <div class="user_profile__list-h3">Comentarios</div>
+                                                <div class="user_profile__list-input">
+                                                    <span title="{{ user.profile.comentarios }}">{{ user.profile.comentarios|truncatechars:200 }}</span>
                                                 </div>
                                             </div>
                                         </li>

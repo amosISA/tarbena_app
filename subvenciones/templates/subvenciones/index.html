@@ -139,12 +139,14 @@
                                     <div class="estadoBloque estado"><a style="color:#fff;" href="{{ f.estado.get_absolute_url }}">{{ f.estado }}</a></div>
                                     <div class="responsables">
                                         {% for responsable in f.responsable.all %}
-                                            <div class="card" tabindex="0" data-toggle="popover" data-trigger="hover" data-content="{{ responsable.first_name }}">
-                                                <div class="card-body text-center">
-                                                    <p><img src='{% if responsable.profile.avatar %}{{ responsable.profile.avatar.url }}{% else %}{% static 'home/img/avatar/default.png' %}{% endif %}' alt="card image"></p>
-                                                    <h5 class="card-title">{{ responsable.first_name|split_value }}</h5>
+                                            <a href="{{ responsable.profile.get_absolute_url }}">
+                                                <div class="card" tabindex="0" data-toggle="popover" data-trigger="hover" data-content="{{ responsable.first_name }}">
+                                                    <div class="card-body text-center">
+                                                        <p><img src='{% if responsable.profile.avatar %}{{ responsable.profile.avatar.url }}{% else %}{% static 'home/img/avatar/default.png' %}{% endif %}' alt="card image"></p>
+                                                        <h5 class="card-title">{{ responsable.first_name|split_value }}</h5>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </a>
                                         {% endfor %}
                                     </div>
                                     <div class="cuantia"><div class="cuantia_index__span">I</div><div class="cuantia_index__numbers">{% if f.cuantia_inicial %}{{ f.cuantia_inicial|safe }}{% endif %}</div></div>

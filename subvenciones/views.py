@@ -29,6 +29,10 @@ from .tasks import subvencion_mention_email, subvencion_create_email, subvencion
 import weasyprint
 import xlwt
 
+import sys
+sys.path.append("..")
+from profiles.models import Profile
+
 # --------------- Index: List Subvenciones --------------- #
 @login_required()
 @permission_required('subvenciones.can_add_subvencion', raise_exception=True)
@@ -37,6 +41,7 @@ def index_subvenciones(request, estado_slug=None):
 
     area = None
     estado = None
+    profile = None
 
     total_subvenciones = Subvencion.objects.count()
     colectivos = Colectivo.objects.all()
@@ -87,6 +92,14 @@ def index_subvenciones(request, estado_slug=None):
             ).select_related(
                 'user', 'estado', 'ente', 'area', 'user__profile'
             ).filter(estado=estado))
+        elif Profile.objects.filter(slug=estado_slug).exists():
+            profile = get_object_or_404(Profile, slug=estado_slug)
+            f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
+                'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion',
+                'responsable__profile'
+            ).select_related(
+                'user', 'estado', 'ente', 'area', 'user__profile'
+            ).filter(responsable__profile=profile))
 
     return render(request,
                   'subvenciones/index.html',
@@ -98,7 +111,8 @@ def index_subvenciones(request, estado_slug=None):
                    'estados': estados,
                    'urltoremember': request.session.get('urltoremember', None),
                    'area': area,
-                   'estado': estado})
+                   'estado': estado,
+                   'profile': profile})
 
 # --------------- Get Areas related to each ente with AJAX --------------- #
 def ajax_se_relaciona_con(request):

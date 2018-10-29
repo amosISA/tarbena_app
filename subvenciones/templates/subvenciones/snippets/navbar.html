@@ -3,13 +3,14 @@
 {% url 'subvenciones:subvencion_by_category' estado.slug as estado %}
 {% url 'subvenciones:subvencion_by_category' area.slug as area %}
 {% url 'subvenciones:subvencion_by_category' responsable__username.username as responsable %}
+{% url 'subvenciones:subvencion_by_category' profile.slug as usuario %}
 
 {% url 'subvenciones:subvencion_detail' subvencion.id as detail %}
 {% url 'subvenciones:edit_subvencion' subvencion.id as editsubv %}
 {% url 'subvenciones:delete_subvencion' subvencion.id as delsubv %}
 <div class="subvenciones-header-menu fixed">
     <div class="subvenciones-header-menu__container">
-        <a class="subv-anchor-text" href="#" {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' or request.path == area or request.path == estado %}onclick="openNav()"{% endif %}>
+        <a class="subv-anchor-text" href="#" {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' or request.path == area or request.path == estado or request.path == usuario %}onclick="openNav()"{% endif %}>
             <div class="subvenciones-header-menu__logo">Gestión de Subvenciones</div>
         </a>
         <ul class="subvenciones-ul-nav subvencion-ui-navigation">
@@ -48,7 +49,7 @@
         <!-- Right menu -->
         <div class="subvenciones-header-menu__right-item">
             {% if request.user.is_authenticated %}
-                {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' or request.path == area or request.path == estado %}
+                {% if request.path == '/subvenciones/' or request.path == '/subvenciones/favourites/' or request.path == area or request.path == estado or request.path == usuario %}
                     <div class="subv-header-exchange">
                         <div class="subvenciones-header-menu__right-item__icon">
                             <span id="button-actual-subsidie-navigation" class="subvenciones-header-menu__right-item__span"><i class="fas fa-exchange-alt"></i></span>

@@ -8,7 +8,7 @@ from .models import Contract
 @permission_required('subvenciones.can_add_subvencion', raise_exception=True)
 def index_contracts(request):
     contracts = Contract.objects.all().extra(
-        select={'myinteger': 'CAST(identificador AS INTEGER)'}
+        select={'myinteger': 'CAST(identificador AS UNSIGNED)'}
     ).order_by('myinteger')
 
     return render(request,

@@ -223,6 +223,7 @@
                                     </button>
                                 </li>
 
+                                {% if request.user|has_group:"staff" or request.user.is_staff %}
                                 <!-- Contratos -->
                                 <li class="card-outer">
                                     <a href="{% url 'contracts:index' %}">
@@ -243,6 +244,7 @@
                                         <span class="sr-only">Open context menu for Contratos</span>
                                     </button>
                                 </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </section>

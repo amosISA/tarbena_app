@@ -72,6 +72,9 @@ urlpatterns = [
 
     # Holidays API
     url(r'^api/', include('holidays.api.urls', namespace='api')),
+
+    # Contracts
+    url(r'^contratos/', include('contracts.urls', namespace='contracts')),
 ]
 
 if settings.DEBUG:

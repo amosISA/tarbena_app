@@ -1,0 +1,61 @@
+{% extends "contracts/base.html" %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+    <!-- Datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+{% endblock %}
+
+{% block title %}
+    Contratos
+{% endblock %}
+
+{% block content %}
+
+    {% if contratos %}
+        <table id="contractsTable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nº</th>
+                    <th>Tipo</th>
+                    <th>Contratista</th>
+                    <th>BASE</th>
+                    <th>IVA</th>
+                    <th>TOTAL</th>
+                    <th>FECHA</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in contratos %}
+                <tr>
+                    <td>{{ c.identificador }}</td>
+                    <td>{{ c.type.name }}</td>
+                    <td>{{ c.contractor.name }}</td>
+                    <td>{{ c.base }}</td>
+                    <td>{{ c.iva }}</td>
+                    <td>{{ c.total }}</td>
+                    <td>{{ c.date_contract }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>No hay contratos registrados.</h2>
+    {% endif %}
+
+{% endblock %}
+
+{% block addscript %}
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#contractsTable').DataTable({
+                "ordering": false,
+                "language": {
+                    url: "/static/home/location/es_ES.json"
+                },
+                "lengthMenu": [[-1], ["Todas"]],
+            });
+        } );
+    </script>
+{% endblock %}

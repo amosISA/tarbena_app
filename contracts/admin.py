@@ -7,7 +7,7 @@ formats.DATE_FORMAT = "d/m/Y"
 
 # Register your models here.
 class ContractsAdmin(admin.ModelAdmin):
-    list_display = ['type', 'contractor', 'base',
+    list_display = ['identificador' ,'type', 'contractor', 'base',
                     'iva', 'total', 'date_contract']
     list_filter = ['type__name', 'contractor__name', 'date_contract']
     search_fields = ('type__name', 'contractor__name', 'date_contract',)

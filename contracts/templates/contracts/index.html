@@ -16,6 +16,63 @@
 
 {% block content %}
 
+    <!-- MODAL 1: TYPES OF CONTRACT -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Crear Contrato</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="modal-anchors-contracts_types">
+                        <li><a href="#" data-toggle="modal" data-target="#exampleModal2">Contrato de Servicios</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#exampleModal2">Contrato de Suministros</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#exampleModal2">Contrato de Obras</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: TYPES OF SUBTYPE CONTRACT -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Crear Contrato</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="modal-anchors-contracts">
+                        <li><a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">Decreto de Alcaldía</a></li>
+                        <li><a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">Informe de Intervención</a></li>
+                        <li><a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">Informe de Secretaría</a></li>
+                        <li><a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">Providencia de Alcaldía</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3 CONTECT OF CONTRACT -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myLargeModalLabel">Crear Contrato</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {% if contratos %}
         <table id="contractsTable" class="table table-striped table-bordered" style="width:100%">
             <thead>
@@ -59,6 +116,13 @@
                     url: "/static/home/location/es_ES.json"
                 },
                 "lengthMenu": [[-1], ["Todas"]],
+            });
+
+            $('ul.modal-anchors-contracts_types li a').click(function() {
+                $('#exampleModal1, .bd-example-modal-lg').modal("hide");
+            });
+            $('ul.modal-anchors-contracts li a').click(function() {
+                $('#exampleModal1, #exampleModal2').modal("hide");
             });
         } );
     </script>

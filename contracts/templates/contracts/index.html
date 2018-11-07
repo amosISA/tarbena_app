@@ -10,10 +10,14 @@
     Contratos
 {% endblock %}
 
+{% block navbar %}
+    {% include 'contracts/snippets/navbar.html' %}
+{% endblock %}
+
 {% block content %}
 
     {% if contratos %}
-        <table id="contractsTable" class="display" style="width:100%">
+        <table id="contractsTable" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
                     <th>Nº</th>

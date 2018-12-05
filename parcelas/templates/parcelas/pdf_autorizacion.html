@@ -1,0 +1,36 @@
+<html>
+<head>
+  <title>Autorización</title>
+  <style>
+    body {
+      font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; font-style: normal; font-variant: normal; font-weight: 400; line-height: 26.4px;
+    }
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 20%;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  {% load staticfiles %}
+  <img src="{% static 'home/img/favicon/logo_vector_rojo_trans.png' %}" />
+
+  Por medio de la presente, YO, <strong>{{ parcela.propietario.apellidos }} {{ parcela.propietario.apellidos2 }} {{ parcela.propietario.nombre }}</strong>, con documento de identidad nº <strong>{{ parcela.propietario.nif }}</strong>, propietario/a de la parcela <strong>{{ parcela.numero_parcela }}</strong> polígono <strong>{{ parcela.poligono }}</strong> del término municipal de Tárbena, confiero autorización al Ayuntamiento de dicho municipio a ejercer labores selvícolas  en la mencionada parcela. Me han sido explicados la finalidad y el método de ejecución de dichos labores y la presente autorización tiene validez hasta que se finalicen dichas labores.
+  <br /><br />
+  Para mayor conformidad sobre la zona de actuación se adjunta a continuación la delimitación de la parcela según los datos obtenidos del SIGPAC:
+
+  <div class="signature" style="position: fixed;bottom: 0;width: 100%;text-align:right;margin-bottom:80px;">
+    Firmado el {{ now.day }} de {% now "F" %} del {{ now.year }}<br /><br /><br />
+
+    ……………………………………………………………..
+  </div>
+
+  <div class="footer" style="position: fixed;bottom: 0;width: 100%;text-align:center;font-size:13px;">
+    <span>C/ San Miguel nº 1 - 03518 Tàrbena, Alacant</span><br />
+    <span>Tlf.: 965 884 234 - Fax: 965 884 105 - ajuntament@tarbena.es</span>
+  </div>
+</body>
+</html>

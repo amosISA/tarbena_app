@@ -63,6 +63,7 @@
 
             <!-- ADD PROJECTS, SECTORS AND PARCELS -->
             <div class="add_new_data">
+                <a target="_blank" href="{% url 'parcelas:get_autorizacion' parcela_id=2 %}">asd</a>
                 <!-- ADD PARCELS -->
                 <button id="add_parcelas">
                     <a href="{% url 'parcelas:add_parcela' %}" data-toggle="modal" data-target="#open-modal">
@@ -107,6 +108,11 @@
         var ajaxproyectos_url = '{% url "parcelas:ajax_get_proyectos" %}';
         var ajaxparcelas_url = '{% url "parcelas:ajax_get_parcelas" %}';
         var ajaxparcelas_m2 = '{% url "parcelas:ajax_get_m2" %}';
+
+        // Reverse url so I can use it in js
+        function generete_some_url(id){
+            return "{% url 'parcelas:get_autorizacion' parcela_id=112233 %}".replace("112233", id);
+        }
 
         /* Ajax when clicking on create Parcela */
         $("#add_parcelas").click(function () {

@@ -11,4 +11,7 @@ urlpatterns = [
     # url(r'^detail_propietario/(?P<pk>.+)/$', views.DetailPropietarioParcela.as_view(), name="detail_propietario"),
     url(r'^add/$', views.ParcelaCreate, name="add_parcela"),
     url(r'^propietario-autocomplete/$', views.PropietarioAutocomplete.as_view(), name='propietario-autocomplete'),
+    url(r'^autorizacion/(?P<parcela_id>\d+)/pdf/$',
+            views.autorization_pdf_maker,
+            name='get_autorizacion'),
 ]

@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from django.core import serializers
 from django.core.urlresolvers import reverse_lazy
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template.loader import render_to_string
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 
@@ -16,8 +18,11 @@ from .forms import ParcelaForm
 
 from bs4 import BeautifulSoup
 from dal import autocomplete
+from weasyprint import HTML
 
+import datetime
 import urllib.request
+import weasyprint
 
 @permission_required('parcelas.can_add_parcela', raise_exception=True)
 def index(request):
@@ -143,3 +148,14 @@ def get_m2_url(request):
         break
 
     return JsonResponse(data, safe=False)
+
+def autorization_pdf_maker(request, parcela_id):
+    now = datetime.datetime.now()
+    parcela = get_object_or_404(Parcela, id=parcela_id)
+    html = render_to_string('parcelas/pdf_autorizacion.html',
+                            {'parcela': parcela,
+                             'now': now})
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename=parcela_{}.pdf'.format(parcela.id)
+    weasyprint.HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(response)
+    return response

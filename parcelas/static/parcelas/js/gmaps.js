@@ -74,7 +74,6 @@ $(document).ready(function() {
                                        '<td><a target="_blank" title="Obtener autorización" href="' + generete_some_url(value.pk) + '">' + value.fields['propietario'] + '</a></td>' +
                                        '<td>' + value.fields['metros_cuadrados'] + '</td>' +
                                    '</tr>');
-                                   console.log('<td><a href="' + generete_some_url(value.pk) + '">' + value.fields['propietario'] + '</a></td>');
                     } else {
                         table_rows += ('<tr><td><input checked class="parcela-google-maps-checkbox" type="checkbox" data-parcela="' + value.fields['numero_parcela'] + '" data-poligono="' + value.fields['poligono'] + '"></td>' +
                                        '<td class="p1_poblacion">' + value.fields['poblacion'] + '</td>' +

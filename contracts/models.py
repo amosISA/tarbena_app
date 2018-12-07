@@ -88,6 +88,9 @@ class Contract(TimeStampedModel):
     porcentaje = models.CharField(max_length=250, blank=True, null=True, help_text='% sobre los recursos')
     organo = models.ForeignKey(Organos, related_name='aplic_presup_organo', blank=True, null=True)
 
+    decl_responsable = models.BooleanField(default=False, help_text='Declaración responsable de no incurrir en prohibición de contratar')
+    certificado_hacienda = models.BooleanField(default=False, help_text='Certificado Hacienda de estar al corriente de sus obligaciones')
+
     class Meta:
         ordering = ["type"]
         verbose_name = 'Contratos'

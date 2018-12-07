@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.conf.locale.es import formats
 
-from .models import Contract, TypeContract, Contractor, AplicacionPresupuestaria, Organos
+from .models import Contract, TypeContract, Contractor, AplicacionPresupuestaria, Organos, Cpv
 
 formats.DATE_FORMAT = "d/m/Y"
 
 # Register your models here.
 class ContractsAdmin(admin.ModelAdmin):
-    list_display = ['identificador' ,'type', 'contractor', 'base',
+    list_display = ['type', 'contractor', 'base',
                     'iva', 'total', 'date_contract']
     list_filter = ['type__name', 'contractor__name', 'date_contract']
     search_fields = ('type__name', 'contractor__name', 'date_contract',)
@@ -42,12 +42,9 @@ class ContractorAdmin(admin.ModelAdmin):
 admin.site.register(Contractor, ContractorAdmin)
 
 class AplicacionPresupuestariaAdmin(admin.ModelAdmin):
-    list_display = ['ejercicio', 'aplicacion_presupuestaria', 'importe', 'importe_recursos',
-                    'valor_estimado', 'porcentaje', 'organo']
-    list_filter = ['ejercicio', 'aplicacion_presupuestaria', 'importe', 'importe_recursos',
-                    'valor_estimado', 'porcentaje', 'organo']
-    search_fields = ['ejercicio', 'aplicacion_presupuestaria', 'importe', 'importe_recursos',
-                    'valor_estimado', 'porcentaje', 'organo']
+    list_display = ['aplicacion_presupuestaria']
+    list_filter = ['aplicacion_presupuestaria']
+    search_fields = ['aplicacion_presupuestaria']
     empty_value_display = '-'
     list_display_links = ('aplicacion_presupuestaria',)
     show_full_result_count = True
@@ -61,3 +58,12 @@ class OrganosAdmin(admin.ModelAdmin):
     list_display_links = ('name',)
     show_full_result_count = True
 admin.site.register(Organos, OrganosAdmin)
+
+class CpvAdmin(admin.ModelAdmin):
+    list_display = ['cpv']
+    list_filter = ['cpv']
+    search_fields = ['cpv']
+    empty_value_display = '-'
+    list_display_links = ('cpv',)
+    show_full_result_count = True
+admin.site.register(Cpv, CpvAdmin)

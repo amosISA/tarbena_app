@@ -77,8 +77,8 @@
         <table id="contractsTable" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th>Nº</th>
                     <th>Tipo</th>
+                    <th>CIF/NIE</th>
                     <th>Contratista</th>
                     <th>BASE</th>
                     <th>IVA</th>
@@ -88,9 +88,9 @@
             </thead>
             <tbody>
                 {% for c in contratos %}
-                <tr>
-                    <td>{{ c.identificador }}</td>
+                <tr data-style="{{ c.contractor.id }}">
                     <td>{{ c.type.name }}</td>
+                    <td class="cif_dni">{{ c.contractor.dni }}</td>
                     <td>{{ c.contractor.name }}</td>
                     <td>{{ c.base }}</td>
                     <td>{{ c.iva }}</td>

@@ -7,9 +7,7 @@ from .models import Contract
 @login_required()
 @permission_required('subvenciones.can_add_subvencion', raise_exception=True)
 def index_contracts(request):
-    contracts = Contract.objects.all().extra(
-        select={'myinteger': 'CAST(identificador AS UNSIGNED)'}
-    ).order_by('myinteger')
+    contracts = Contract.objects.all().prefetch_related('type', 'contractor', 'aplic_presupuestaria').order_by('contractor', 'contractor__dni', 'date_contract')
 
     return render(request,
                   'contracts/index.html',

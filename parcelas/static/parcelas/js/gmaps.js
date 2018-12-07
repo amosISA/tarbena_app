@@ -71,21 +71,23 @@ $(document).ready(function() {
                                        '<td class="p1_poblacion">' + value.fields['poblacion'] + '</td>' +
                                        '<td>' + value.fields['poligono'] + '</td>' +
                                        '<td>' + value.fields['numero_parcela'] + '</td>' +
-                                       '<td><a target="_blank" title="Obtener autorización" href="' + generete_some_url(value.pk) + '">' + value.fields['propietario'] + '</a></td>' +
+                                       '<td>' + value.fields['propietario'] + '</td>' +
                                        '<td>' + value.fields['metros_cuadrados'] + '</td>' +
+                                       '<td><a target="_blank" title="Obtener autorización" href="' + generete_some_url(value.pk) + '"><i class="fas fa-file-alt"></i></a></td>' +
                                    '</tr>');
                     } else {
                         table_rows += ('<tr><td><input checked class="parcela-google-maps-checkbox" type="checkbox" data-parcela="' + value.fields['numero_parcela'] + '" data-poligono="' + value.fields['poligono'] + '"></td>' +
                                        '<td class="p1_poblacion">' + value.fields['poblacion'] + '</td>' +
                                        '<td>' + value.fields['poligono'] + '</td>' +
                                        '<td>' + value.fields['numero_parcela'] + '</td>' +
-                                       '<td><a target="_blank" title="Obtener autorización" href="' + generete_some_url(value.pk) + '">' + value.fields['propietario'] + '</a></td>' +
+                                       '<td>' + value.fields['propietario'] + '</td>' +
                                        '<td>' + value.fields['metros_cuadrados'] + '</td>' +
+                                       '<td><a target="_blank" title="Obtener autorización" href="' + generete_some_url(value.pk) + '"><i class="fas fa-file-alt"></i></a></td>' +
                                    '</tr>');
                     }
                 });
                 success_div.append('<table class="table table-sm" style="width:100%;font-size:0.8rem;">' +
-                                        '<thead><tr><th style="width: 20px;"></th><th title="Población" style="width: 25px;">P1</th><th title="Polígono" style="width: 25px;">P2</th><th title="Parcela" style="width: 25px;">P3</th><th>Propietario</th><th style="width: 40px;">m2</th></tr></thead>' +
+                                        '<thead><tr><th style="width: 20px;"></th><th title="Población" style="width: 25px;">P1</th><th title="Polígono" style="width: 25px;">P2</th><th title="Parcela" style="width: 25px;">P3</th><th>Propietario</th><th style="width: 40px;">m2</th><th></th></tr></thead>' +
                                         '<tbody>' + table_rows + '</tbody>' +
                                    '</table>'
                 );

@@ -27,6 +27,7 @@ class Contractor(TimeStampedModel):
     dni = models.CharField(max_length=250)
     email = models.CharField(max_length=250, default="", blank=True, null=True)
     telefono = models.CharField(max_length=250, default="", blank=True, null=True)
+    pagina_web = models.CharField(max_length=250, default="", blank=True, null=True)
     direccion = models.CharField(max_length=250, default="", blank=True, null=True)
     provincia = models.CharField(max_length=250, default="", blank=True, null=True)
     poblacion = models.CharField(max_length=250, default="", blank=True, null=True)

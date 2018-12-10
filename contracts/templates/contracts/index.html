@@ -88,9 +88,9 @@
             </thead>
             <tbody>
                 {% for c in contratos %}
-                <tr data-style="{{ c.contractor.id }}">
+                <tr style="background-color: #{{ c.contractor.color }}">
                     <td>{{ c.type.name }}</td>
-                    <td class="cif_dni">{{ c.contractor.dni }}</td>
+                    <td>{{ c.contractor.dni }}</td>
                     <td>{{ c.contractor.name }}</td>
                     <td>{{ c.base }}</td>
                     <td>{{ c.iva }}</td>

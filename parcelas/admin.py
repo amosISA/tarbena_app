@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from .models import Parcela, Propietario, SectorTrabajo, Estado, Proyecto, Poblacion
+from .models import Parcela, Propietario, SectorTrabajo, Estado, Proyecto, Poblacion, Estado_Parcela_Trabajo
 from .sites import my_admin_site
 
 class ParcelaAdmin(admin.ModelAdmin):
@@ -50,6 +50,14 @@ class EstadoAdmin(admin.ModelAdmin):
     empty_value_display = '-'
     show_full_result_count = True
 admin.site.register(Estado, EstadoAdmin)
+
+class EstadoParcelaTrabajoAdmin(admin.ModelAdmin):
+    list_display = ['nombre', 'porcentaje']
+    list_filter = ['nombre']
+    search_fields = ('nombre',)
+    empty_value_display = '-'
+    show_full_result_count = True
+admin.site.register(Estado_Parcela_Trabajo, EstadoParcelaTrabajoAdmin)
 
 class PoblacionAdmin(admin.ModelAdmin):
     list_display = ['codigo', 'nombre']

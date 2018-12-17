@@ -71,6 +71,18 @@ class Poblacion(TimeStampedModel):
     def __str__(self):
         return '{}, {}'.format(self.codigo, self.nombre)
 
+class Estado_Parcela_Trabajo(TimeStampedModel):
+    nombre = models.CharField(max_length=250)
+    porcentaje = models.CharField(max_length=250)
+
+    class Meta:
+        ordering = ["nombre"]
+        verbose_name = 'Estado Parcela Trabajo'
+        verbose_name_plural = "Estados Parcelas Trabajo"
+
+    def __str__(self):
+        return '{} ({})'.format(self.nombre, self.porcentaje)
+
 class Parcela(TimeStampedModel):
     #user = models.ForeignKey(User, blank=True, null=True)
     propietario = models.ForeignKey(Propietario, default='', blank=True)
@@ -79,6 +91,7 @@ class Parcela(TimeStampedModel):
     poligono = models.CharField(max_length=250)
     numero_parcela = models.CharField(max_length=250)
     estado = models.ForeignKey(Estado, blank=True, null=True)
+    #estado_parcela_trabajo = models.ForeignKey(Estado_Parcela_Trabajo, blank=True, null=True)
     comentarios = models.TextField(blank=True)
     # https://stackoverflow.com/questions/35459326/foreignkey-to-a-model-that-is-defined-after-below-the-current-model?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
     # nice help for use foreignkey for model that is below this one

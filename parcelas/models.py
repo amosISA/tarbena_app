@@ -20,7 +20,7 @@ class Propietario(TimeStampedModel):
     nombre = models.CharField(max_length=250, blank=False)
     apellidos = models.CharField(max_length=250, blank=True)
     apellidos2 = models.CharField(max_length=250, blank=True)
-    nif = models.CharField(max_length=250, blank=True, unique=True)
+    nif = models.CharField(max_length=250, blank=True, unique=True, help_text='Ejemplo: 12345678-T')
     poblacion = models.CharField(max_length=250, blank=True)
     direccion = models.CharField(max_length=250, blank=True)
     telefono_fijo = models.CharField(max_length=250, blank=True)
@@ -91,7 +91,7 @@ class Parcela(TimeStampedModel):
     poligono = models.CharField(max_length=250)
     numero_parcela = models.CharField(max_length=250)
     estado = models.ForeignKey(Estado, blank=True, null=True)
-    #estado_parcela_trabajo = models.ForeignKey(Estado_Parcela_Trabajo, blank=True, null=True)
+    estado_parcela_trabajo = models.ForeignKey(Estado_Parcela_Trabajo, blank=True, null=True, default=3)
     comentarios = models.TextField(blank=True)
     # https://stackoverflow.com/questions/35459326/foreignkey-to-a-model-that-is-defined-after-below-the-current-model?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
     # nice help for use foreignkey for model that is below this one

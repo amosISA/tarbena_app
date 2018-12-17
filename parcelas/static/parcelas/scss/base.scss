@@ -146,3 +146,24 @@ body {
     margin-top: -7px;
     font-weight: 400;
 }
+
+/* Anchors inside the table where I display parcelas */
+a.project-name, a.sector-name {
+    margin: 10px 0;
+    display: block;
+}
+
+a.modify_parcela_anchor {
+    color: #000;
+
+    &:hover {
+        color: #000;
+    }
+}
+
+/* Span for total count parcelas  */
+span.total_count_parcelas {
+    font-weight: bold;
+    font-size: 10px;
+    cursor: pointer;
+}

@@ -70,8 +70,8 @@ $(document).ready(function() {
                         table_rows += ('<tr class="table-success"><td><input checked class="parcela-google-maps-checkbox" type="checkbox" data-parcela="' + value.fields['numero_parcela'] + '" data-poligono="' + value.fields['poligono'] + '"></td>' +
                                        '<td class="p1_poblacion">' + value.fields['poblacion'] + '</td>' +
                                        '<td>' + value.fields['poligono'] + '</td>' +
-                                       '<td>' + value.fields['numero_parcela'] + '</td>' +
-                                       '<td>' + value.fields['propietario'] + '</td>' +
+                                       '<td><a class="modify_parcela_anchor" target="_blank" title="Modificar parcela" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/parcela/' +  value.pk + '/change">' + value.fields['numero_parcela'] + '</a></td>' +
+                                       '<td>' + value.fields['propietario'] + ' <span class="total_count_parcelas" onclick="getPropietarioParcelas(3)" title="Click para saber las parcelas que pertenecen a este usuario.">*</span></td>' +
                                        '<td>' + value.fields['metros_cuadrados'] + '</td>' +
                                        '<td><a target="_blank" title="Obtener autorización" href="' + generete_some_url(value.pk) + '"><i class="fas fa-file-alt"></i></a></td>' +
                                    '</tr>');
@@ -79,7 +79,7 @@ $(document).ready(function() {
                         table_rows += ('<tr><td><input checked class="parcela-google-maps-checkbox" type="checkbox" data-parcela="' + value.fields['numero_parcela'] + '" data-poligono="' + value.fields['poligono'] + '"></td>' +
                                        '<td class="p1_poblacion">' + value.fields['poblacion'] + '</td>' +
                                        '<td>' + value.fields['poligono'] + '</td>' +
-                                       '<td>' + value.fields['numero_parcela'] + '</td>' +
+                                       '<td><a class="modify_parcela_anchor" target="_blank" title="Modificar parcela" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/parcela/' +  value.pk + '/change">' + value.fields['numero_parcela'] + '</a></td>' +
                                        '<td>' + value.fields['propietario'] + '</td>' +
                                        '<td>' + value.fields['metros_cuadrados'] + '</td>' +
                                        '<td><a target="_blank" title="Obtener autorización" href="' + generete_some_url(value.pk) + '"><i class="fas fa-file-alt"></i></a></td>' +

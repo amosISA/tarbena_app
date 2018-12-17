@@ -14,4 +14,7 @@ urlpatterns = [
     url(r'^autorizacion/(?P<parcela_id>\d+)/pdf/$',
             views.autorization_pdf_maker,
             name='get_autorizacion'),
+    url(r'^propietario/getparcelas/$',
+            views.get_propietario_parcelas,
+            name='get_propietario_parcelas'),
 ]

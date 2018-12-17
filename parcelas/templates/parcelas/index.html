@@ -113,6 +113,21 @@
             return "{% url 'parcelas:get_autorizacion' parcela_id=112233 %}".replace("112233", id);
         }
 
+        /* Tooltip for total parcelas from a user */
+        function getPropietarioParcelas(prop_id) {
+            $.ajax({
+                url: '{% url "parcelas:get_propietario_parcelas" %}',
+                data: {
+                    'id_propietario': prop_id,
+                },
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
         /* Ajax when clicking on create Parcela */
         $("#add_parcelas").click(function () {
             var polig = $('#inputPoligono');

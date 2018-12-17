@@ -5,9 +5,9 @@ from .models import Parcela, Propietario, SectorTrabajo, Estado, Proyecto, Pobla
 from .sites import my_admin_site
 
 class ParcelaAdmin(admin.ModelAdmin):
-    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'metros_cuadrados']
-    list_filter = ['propietario__nombre', 'metros_cuadrados', 'poligono',
-                    'numero_parcela', 'poblacion']
+    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'metros_cuadrados', 'estado_parcela_trabajo']
+    list_filter = ['propietario__nombre', 'propietario__apellidos', 'metros_cuadrados', 'poligono',
+                    'numero_parcela', 'poblacion', 'propietario__apellidos2']
     search_fields = ('propietario__nombre', 'metros_cuadrados', 'poligono',
                      'numero_parcela', 'poblacion')
     empty_value_display = '-'

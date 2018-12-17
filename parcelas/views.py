@@ -159,3 +159,14 @@ def autorization_pdf_maker(request, parcela_id):
     response['Content-Disposition'] = 'filename=parcela_{}.pdf'.format(parcela.id)
     weasyprint.HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(response)
     return response
+
+def get_propietario_parcelas(request):
+    id_propietario = request.GET.get('id_propietario', '999999')
+    parcelas_prop = Parcela.objects.all().prefetch_related(
+            'sector_trabajo'
+        ).select_related(
+            'propietario', 'poblacion', 'estado', 'estado_parcela_trabajo'
+        ).filter(propietario_id=id_propietario)
+
+    data = serializers.serialize('json', parcelas_prop)
+    return HttpResponse(data, content_type="application/json")

@@ -70,8 +70,9 @@ urlpatterns = [
     url(r'^privacy/$', views.terms_privacy_cookies, {'name':'privacy'}, name='privacy'),
     url(r'^cookies/$', views.terms_privacy_cookies, {'name':'cookies'}, name='cookies'),
 
-    # Holidays API
+    # Holidays and Parcelas API
     url(r'^api/', include('holidays.api.urls', namespace='api')),
+    url(r'^apiparcelas/', include('parcelas.api.urls', namespace='apiparcelas')),
 
     # Contracts
     url(r'^contratos/', include('contracts.urls', namespace='contracts')),

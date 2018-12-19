@@ -42,7 +42,11 @@ def ajax_get_parcelas(request):
     # get sectores that belong to a project
     # antes de cambiarlo a manytomany en parcelas para sectores, estaba así sin quitar el manytomany en sectores
     # query = Parcela.objects.all().filter(sectortrabajo=sector)
-    query = Parcela.objects.all().filter(sector_trabajo=sector)
+    query = Parcela.objects.all().prefetch_related(
+            'sector_trabajo'
+        ).select_related(
+            'propietario', 'poblacion', 'estado', 'estado_parcela_trabajo'
+        ).filter(sector_trabajo=sector)
     data = serializers.serialize('json', query, indent=2,
                                  use_natural_foreign_keys=True, use_natural_primary_keys=True)
     return HttpResponse(data, content_type="application/json")

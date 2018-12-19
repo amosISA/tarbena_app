@@ -48,6 +48,9 @@ class Estado(models.Model):
     def __str__(self):
         return '{}'.format(self.nombre)
 
+    def estado_nombre(self):
+        return '{}'.format(self.nombre)
+
 class SectorTrabajo(models.Model):
     sector = models.CharField(max_length=250, blank=False)
 
@@ -85,12 +88,12 @@ class Estado_Parcela_Trabajo(TimeStampedModel):
 
 class Parcela(TimeStampedModel):
     #user = models.ForeignKey(User, blank=True, null=True)
-    propietario = models.ForeignKey(Propietario, default='', blank=True)
+    propietario = models.ForeignKey(Propietario, related_name='propietario', default='', blank=True)
     poblacion = models.ForeignKey(Poblacion, default='')
     metros_cuadrados = models.CharField(max_length=250, blank=True)
     poligono = models.CharField(max_length=250)
     numero_parcela = models.CharField(max_length=250)
-    estado = models.ForeignKey(Estado, blank=True, null=True)
+    estado = models.ForeignKey(Estado, related_name='estado', blank=True, null=True)
     estado_parcela_trabajo = models.ForeignKey(Estado_Parcela_Trabajo, blank=True, null=True, default=3)
     comentarios = models.TextField(blank=True)
     # https://stackoverflow.com/questions/35459326/foreignkey-to-a-model-that-is-defined-after-below-the-current-model?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa

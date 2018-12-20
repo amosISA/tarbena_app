@@ -116,9 +116,9 @@ a.project-name, a.sector-name {
   margin: 10px 0;
   display: block; }
 
-a.modify_parcela_anchor {
+a.modify_parcela_anchor, a.modify_propietario_anchor {
   color: #000; }
-  a.modify_parcela_anchor:hover {
+  a.modify_parcela_anchor:hover, a.modify_propietario_anchor:hover {
     color: #000; }
 
 /* Span for total count parcelas  */

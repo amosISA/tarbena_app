@@ -64,11 +64,20 @@ $(document).ready(function() {
                 success_div.html('<ol class="breadcrumb"><li class="breadcrumb-item"><a href="#" class="proj-breadcrumb">Proyectos</a></li><li class="breadcrumb-item"><a href="#" class="sector-breadcrumb">Sectores</a></li><li class="breadcrumb-item">Parcelas</li></ol>');
 
                 $.each(data, function(key, value) {
-                    table_rows += ('<tr class="table-success"><td><input checked class="parcela-google-maps-checkbox" type="checkbox" data-parcela="' + value['numero_parcela'] + '" data-poligono="' + value['poligono'] + '"></td>' +
-                                   '<td class="p1_poblacion">' + value['poblacion'].codigo + '</td>' +
+                    if (value['estado'] != null) {
+                        if (value['estado'].id == 1) {
+                            table_rows += ('<tr class="table-success"><td><input checked class="parcela-google-maps-checkbox" type="checkbox" data-parcela="' + value['numero_parcela'] + '" data-poligono="' + value['poligono'] + '"></td>');
+                        } else {
+                            table_rows += ('<tr><td><input checked class="parcela-google-maps-checkbox" type="checkbox" data-parcela="' + value['numero_parcela'] + '" data-poligono="' + value['poligono'] + '"></td>');
+                        }
+                    } else {
+                        table_rows += ('<tr><td><input checked class="parcela-google-maps-checkbox" type="checkbox" data-parcela="' + value['numero_parcela'] + '" data-poligono="' + value['poligono'] + '"></td>');
+                    }
+
+                    table_rows += ('<td class="p1_poblacion">' + value['poblacion'].codigo + '</td>' +
                                    '<td>' + value['poligono'] + '</td>' +
                                    '<td><a class="modify_parcela_anchor" target="_blank" title="Modificar parcela" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/parcela/' +  value['id'] + '/change">' + value['numero_parcela'] + '</a></td>' +
-                                   '<td>' + value['propietario'].nif + ', ' + value['propietario'].apellidos + ' ' + value['propietario'].apellidos2 + ', ' + value['propietario'].nombre + ', (' + value['propietario'].direccion + ') <span class="total_count_parcelas" onclick="getPropietarioParcelas(3)" title="Click para saber las parcelas que pertenecen a este usuario.">*</span></td>' +
+                                   '<td><a class="modify_propietario_anchor" target="_blank" title="Modificar propietario" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/propietario/' +  value['propietario'].id + '/change">' + value['propietario'].nif + ', ' + value['propietario'].apellidos + ' ' + value['propietario'].apellidos2 + ', ' + value['propietario'].nombre + ', (' + value['propietario'].direccion + ')</td>' +
                                    '<td>' + value['metros_cuadrados'] + '</td>' +
                                    '<td><a target="_blank" title="Obtener autorización" href="' + generete_some_url(value['id']) + '"><i class="fas fa-file-alt"></i></a></td>'
                                );

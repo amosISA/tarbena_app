@@ -4,8 +4,13 @@ from django.contrib import admin
 from .models import Parcela, Propietario, SectorTrabajo, Estado, Proyecto, Poblacion, Estado_Parcela_Trabajo
 from .sites import my_admin_site
 
+class ParcelaInline(admin.TabularInline):
+    model = Parcela
+    max_num = 1
+    show_change_link = True
+
 class ParcelaAdmin(admin.ModelAdmin):
-    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'metros_cuadrados', 'estado_parcela_trabajo']
+    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'metros_cuadrados', 'estado_parcela_trabajo', 'estado']
     list_filter = ['propietario__nombre', 'propietario__apellidos', 'metros_cuadrados', 'poligono',
                     'numero_parcela', 'poblacion', 'propietario__apellidos2']
     search_fields = ('propietario__nombre', 'metros_cuadrados', 'poligono',
@@ -25,6 +30,7 @@ class PropietarioAdmin(admin.ModelAdmin):
                      'telefono_fijo', 'telefono_movil', 'comentarios',)
     empty_value_display = '-'
     show_full_result_count = True
+    inlines = [ParcelaInline]
 admin.site.register(Propietario, PropietarioAdmin)
 
 class SectorTrabajoAdmin(admin.ModelAdmin):

@@ -268,7 +268,16 @@ function initialize(){
     var myOptions = {
         zoom: 11,
         center: {lat: 38.691351, lng: -0.100658},
-        mapTypeId: google.maps.MapTypeId.SATELLITE
+        mapTypeId: google.maps.MapTypeId.SATELLITE,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+            position: google.maps.ControlPosition.TOP_RIGHT
+        },
+        fullscreenControl: true,
+        fullscreenControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_TOP
+        },
     };
     map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
 }

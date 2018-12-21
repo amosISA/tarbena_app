@@ -3,6 +3,8 @@ $(document).ready(function() {
     // Global Breadcrumbs Variables
     var global_project_txt;
     var global_sector_txt;
+    var global_sector_by_id;
+    var global_project_by_id;
 
     /****** AJAX FOR RIGHT SIDE *****/
     // If i dont do it by "on", this wont work, the on is for future elements,
@@ -31,10 +33,36 @@ $(document).ready(function() {
         });
     });
 
+    // WHEN YOU CLICK ON SECTORS ON BREADCRUMBS
+    card.on("click", ".sector-breadcrumb", function() {
+        $.ajax({
+            method: 'GET',
+            url: ajaxsectores_url,
+            data: {
+                'project_name': global_project_by_id
+            },
+            dataType: 'json',
+            success: function (data) {
+                var header = $('.widget-header__breadcrumb');
+                var body_widget = $('#widget .widget-body .line');
+                body_widget.html('');
+                header.html('');
+                header.html('<a href="#" class="proj-breadcrumb">Proyectos (' + global_project_txt + ')</a> / <a href="#" class="active">Sectores</a>');
+
+                $.each(data, function(key, value) {
+                    body_widget.append('<div class="fieldset line"><a class="legend accordion-toggle sector-name" href="#" data-id="' + value.pk + '">' + value.fields['sector'] + '</a></div>');
+                });
+            }
+        });
+    });
+
     // WHEN YOU CLICK ON EACH PROJECT TO SWITCH TO SECTORES
     card.on('click', '.project-name', function() {
         global_project_txt = null;
         global_project_txt = $(this).text();
+        global_project_by_id = null;
+        global_project_by_id = $(this).attr('data-id');
+
         $.ajax({
             method: 'GET',
             url: ajaxsectores_url,
@@ -60,6 +88,9 @@ $(document).ready(function() {
     card.on('click', '.sector-name', function() {
         global_sector_txt = null;
         global_sector_txt = $(this).text();
+        global_sector_by_id = null;
+        global_sector_by_id = $(this).attr('data-id');
+
         $.ajax({
             method: 'GET',
             url: document.location.href.replace('parcelas/#', '') + 'apiparcelas/getparcelassector/' + $(this).attr('data-id'),

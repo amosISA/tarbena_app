@@ -134,7 +134,7 @@ $(document).ready(function() {
 
                     table_rows += ('</tr>');
                 });
-                body_widget.append('<table class="table table-sm panel_table_parcelas" style="width:100%;font-size:0.8rem;background-color: #ffff;color:#000;height:400px;overflow-y:scroll;display:block;">' +
+                body_widget.append('<table class="table table-sm panel_table_parcelas" style="width:100%;font-size:0.8rem;background-color: #ffff;color:#000;max-height:400px;overflow-y:scroll;display:block;">' +
                                         '<thead><tr><th style="width: 20px;"></th><th title="Población" style="width: 25px;">P1</th><th title="Polígono" style="width: 25px;">P2</th><th title="Parcela" style="width: 25px;">P3</th><th>Propietario</th><th style="width: 40px;">m2</th><th></th></tr></thead>' +
                                         '<tbody style="font-size:12px;">' + table_rows + '</tbody>' +
                                    '</table>'

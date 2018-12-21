@@ -5,7 +5,7 @@ $(document).ready(function() {
     // this is: proj-breadcrumb anchors created after in card for clicking callback
 
     // WHEN YOU CLICK ON PROJECTS ON BREADCRUMBS
-    var card = $('.card');
+    var card = $('#widget');
     card.on("click", ".proj-breadcrumb", function() {
         $.ajax({
             method: 'GET',
@@ -14,15 +14,14 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function (data) {
-                var success_div = $('.card .card-header');
-                var li_proj;
-                success_div.html('');
-                success_div.html('<ol class="breadcrumb">' +
-                                    '<li class="breadcrumb-item active">Proyectos</li>' +
-                                 '</ol>');
+                var header = $('.widget-header__breadcrumb');
+                var body_widget = $('#widget .widget-body .line');
+                body_widget.html('');
+                header.html('');
+                header.html('Proyectos');
 
                 $.each(data, function(key, value) {
-                    success_div.append('<li><a class="project-name" data-id="' + value.pk + '" href="#">' + value.fields['nombre'] + '</a></li>');
+                    body_widget.append('<a class="legend accordion-toggle project-name" data-id="' + value.pk + '" href="#">' + value.fields['nombre'] + '</a>');
                 });
             }
         });
@@ -38,12 +37,14 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function (data) {
-                var success_div = $('.card .card-header');
-                success_div.html('');
-                success_div.html('<ol class="breadcrumb"><li class="breadcrumb-item"><a href="#" class="proj-breadcrumb">Proyectos</a></li><li class="breadcrumb-item active">Sectores</li></ol>');
+                var header = $('.widget-header__breadcrumb');
+                var body_widget = $('#widget .widget-body .line');
+                body_widget.html('');
+                header.html('');
+                header.html('<a href="#" class="proj-breadcrumb">Proyectos</a> / <a href="#" class="active">Sectores</a>');
 
                 $.each(data, function(key, value) {
-                    success_div.append('<li><a class="sector-name" href="#" data-id="' + value.pk + '">' + value.fields['sector'] + '</a></li>');
+                    body_widget.append('<div class="fieldset line"><a class="legend accordion-toggle sector-name" href="#" data-id="' + value.pk + '">' + value.fields['sector'] + '</a></div>');
                 });
             }
         });
@@ -58,10 +59,12 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function (data) {
-                var success_div = $('.card .card-header');
+                var header = $('.widget-header__breadcrumb');
+                var body_widget = $('#widget .widget-body .line');
+                body_widget.html('');
                 var table_rows = '';
-                success_div.html('');
-                success_div.html('<ol class="breadcrumb"><li class="breadcrumb-item"><a href="#" class="proj-breadcrumb">Proyectos</a></li><li class="breadcrumb-item"><a href="#" class="sector-breadcrumb">Sectores</a></li><li class="breadcrumb-item">Parcelas</li></ol>');
+                header.html('');
+                header.html('<a href="#" class="proj-breadcrumb">Proyectos</a><a href="#" class="sector-breadcrumb"> / Sectores</a> / <a href="#" class="active">Parcelas</a>');
 
                 $.each(data, function(key, value) {
                     if (value['estado'] != null) {
@@ -79,7 +82,7 @@ $(document).ready(function() {
                                    '<td><a class="modify_parcela_anchor" target="_blank" title="Modificar parcela" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/parcela/' +  value['id'] + '/change">' + value['numero_parcela'] + '</a></td>' +
                                    '<td><a class="modify_propietario_anchor" target="_blank" title="Modificar propietario" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/propietario/' +  value['propietario'].id + '/change">' + value['propietario'].nif + ', ' + value['propietario'].apellidos + ' ' + value['propietario'].apellidos2 + ', ' + value['propietario'].nombre + ', (' + value['propietario'].direccion + ')</td>' +
                                    '<td>' + value['metros_cuadrados'] + '</td>' +
-                                   '<td><a target="_blank" title="Obtener autorización" href="' + generete_some_url(value['id']) + '"><i class="fas fa-file-alt"></i></a></td>'
+                                   '<td><a class="anchor_autorizacion_parcelas" target="_blank" title="Obtener autorización" href="' + generete_some_url(value['id']) + '"><i class="fas fa-file-alt"></i></a></td>'
                                );
 
                     if (value['estado'] != null) {
@@ -88,7 +91,7 @@ $(document).ready(function() {
 
                     table_rows += ('</tr>');
                 });
-                success_div.append('<table class="table table-sm" style="width:100%;font-size:0.8rem;">' +
+                body_widget.append('<table class="table table-sm panel_table_parcelas" style="width:100%;font-size:0.8rem;background-color: #ffff;color:#000;">' +
                                         '<thead><tr><th style="width: 20px;"></th><th title="Población" style="width: 25px;">P1</th><th title="Polígono" style="width: 25px;">P2</th><th title="Parcela" style="width: 25px;">P3</th><th>Propietario</th><th style="width: 40px;">m2</th><th></th></tr></thead>' +
                                         '<tbody>' + table_rows + '</tbody>' +
                                    '</table>'
@@ -155,7 +158,7 @@ var layers = [];
 var layersForm = [];
 var map;
 
-$('.card').on('change', '.parcela-google-maps-checkbox', function(){
+$('#widget').on('change', '.parcela-google-maps-checkbox', function(){
     var polig = parseInt($(this).attr('data-poligono'));
     var parc = parseInt($(this).attr('data-parcela'));
     if($(this).is(':checked')) {
@@ -225,9 +228,12 @@ function initialize(){
         mapTypeId: google.maps.MapTypeId.SATELLITE
     };
     map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
+//    google.maps.event.addDomListener(map, 'tilesloaded', function(){
+//        $('div.gmnoprint').remove();
+//    });
 }
-
 google.maps.event.addDomListener(window, 'load', initialize);
+
 
 
 ////////////////////////

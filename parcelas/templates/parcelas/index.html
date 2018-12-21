@@ -18,17 +18,27 @@
 <div id="map_canvas">
 </div>
 
-<!-- PANEL ACTIONS COLLAPSE -->
-<div class="actions_parcels">
+<!-- PANEL ACTIONS COLLAPSE PARCELAS -->
+<div id="wms-manager" class="widget wms-manager" style="position: absolute; top: 163px; left: -1px;">
+    <a href="#" class="button collapse buton_show--widget__panel">
+        <i class="fa fa-globe"></i>
+    </a>
 
-    <div class="row">
-        <button class="accordion_for_card" data-toggle="collapse" data-target="#card">+</button>
-        <!-- GEOLOCATION -->
-        <!--<img id="preloader" src="{% static 'parcelas/location/gps.png' %}">-->
-    </div>
+    <div id="widget" class="widget-panel" style="display:none;">
+        <header class="widget-header">
+            <span class="widget-header__breadcrumb">Proyectos</span>
+        </header>
 
-    <div class="row">
-        <div class="card collapse" id="card">
+        <div class="widget-body">
+            <!-- Table with projects, sectors and parcels -->
+            <div class="line">
+                {% for proyecto in proyectos %}
+                    <div class="fieldset line">
+                        <a href="#" data-id="{{ proyecto.id }}" class="legend accordion-toggle project-name">{{ proyecto.nombre }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+
             <!-- Check parcel and download KML -->
             <div class="form-check-parcel">
                 <!-- Select Poblacion -->
@@ -43,22 +53,6 @@
                 <label for="inputParcela">Parcela</label>
                 <input type="text" id="inputParcela">
                 <button class="formButtonCheckParcela">Comprobar</button>
-            </div>
-
-            <!-- Table with projects, sectors and parcels -->
-            <div class="card-header">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active">Proyectos</li>
-                </ol>
-                <ul>
-                    {% for proyecto in proyectos %}
-                        <li>
-                            <a class="project-name" data-id="{{ proyecto.id }}" href="#">
-                                 - {{ proyecto.nombre }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
             </div>
 
             <!-- ADD PROJECTS, SECTORS AND PARCELS -->
@@ -220,6 +214,11 @@
                 }
             });
             return false;
+        });
+
+        $('.buton_show--widget__panel').click(function() {
+            $('#widget').toggle();
+            $(".widget .button.collapse").toggleClass("in");
         });
     </script>
 {% endblock %}

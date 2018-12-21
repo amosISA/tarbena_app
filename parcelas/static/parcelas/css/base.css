@@ -269,4 +269,13 @@ span.total_count_parcelas {
       color: #000;
       text-decoration: none; }
 
+.tr-table-aprobado {
+  background-color: #c3e6cb; }
+
+.tr-table-noaceptado {
+  background-color: #ff8787; }
+
+.tr-table-intermedio {
+  background-color: #cccc0061; }
+
 /*# sourceMappingURL=base.css.map */

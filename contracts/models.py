@@ -93,7 +93,7 @@ class Contract(TimeStampedModel):
     certificado_hacienda = models.BooleanField(default=False, help_text='Certificado Hacienda de estar al corriente de sus obligaciones')
 
     class Meta:
-        ordering = ["type"]
+        ordering = ["contractor", "contractor__dni", "date_contract"]
         verbose_name = 'Contratos'
         verbose_name_plural = "Contratos"
 

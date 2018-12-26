@@ -14,6 +14,7 @@ class ContractsAdmin(admin.ModelAdmin):
     empty_value_display = '-'
     list_display_links = ('contractor',)
     show_full_result_count = True
+    raw_id_fields = ("cpv",)
 
     # https://medium.com/@hakibenita/things-you-must-know-about-django-admin-as-your-app-gets-bigger-6be0b0ee9614
     list_select_related = (

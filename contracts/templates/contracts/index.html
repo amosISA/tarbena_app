@@ -78,7 +78,7 @@
             <thead>
                 <tr>
                     <th>Tipo</th>
-                    <th>CIF/NIE</th>
+                    <!--<th>CIF/NIE</th>-->
                     <th>Contratista</th>
                     <th>BASE</th>
                     <th>IVA</th>
@@ -88,14 +88,14 @@
             </thead>
             <tbody>
                 {% for c in contratos %}
-                <tr style="background-color: #{{ c.contractor.color }}">
+                <tr>
                     <td>{{ c.type.name }}</td>
-                    <td>{{ c.contractor.dni }}</td>
-                    <td>{{ c.contractor.name }}</td>
+                    <!--<td>{{ c.contractor.dni }}</td>-->
+                    <td style="background-color: #{{ c.contractor.color }};font-weight:bold;">{{ c.contractor.name }}</td>
                     <td>{{ c.base }}</td>
                     <td>{{ c.iva }}</td>
                     <td>{{ c.total }}</td>
-                    <td>{{ c.date_contract }}</td>
+                    <td style="background-color: #{{ c.contractor.color }};">{{ c.date_contract }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

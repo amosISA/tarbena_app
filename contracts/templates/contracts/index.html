@@ -91,11 +91,11 @@
                 <tr>
                     <td>{{ c.type.name }}</td>
                     <!--<td>{{ c.contractor.dni }}</td>-->
-                    <td style="background-color: #{{ c.contractor.color }};font-weight:bold;">{{ c.contractor.name }}</td>
+                    <td style="background-color: #{{ c.contractor.color }};font-weight:bold;border-color:#000;">{{ c.contractor.name }}</td>
                     <td>{{ c.base }}</td>
                     <td>{{ c.iva }}</td>
                     <td>{{ c.total }}</td>
-                    <td style="background-color: #{{ c.contractor.color }};">{{ c.date_contract }}</td>
+                    <td style="background-color: #{{ c.contractor.color }};font-weight:bold;border-color:#000;">{{ c.date_contract }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

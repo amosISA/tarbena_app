@@ -1,11 +1,61 @@
 from django.contrib import admin
 from django.conf.locale.es import formats
+from django.http import HttpResponse
 
 from .models import Contract, TypeContract, Contractor, AplicacionPresupuestaria, Organos, Cpv
 
+import xlwt
+import datetime
+
 formats.DATE_FORMAT = "d/m/Y"
 
-# Register your models here.
+def export_xls(modeladmin, request, queryset):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=contratos.xls'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet("Contratos")
+
+    row_num = 0
+
+    columns = [
+        ('Tipo', 4000), ('Contratista', 15000), ('Base', 4000),
+        ('IVA', 3000), ('Total', 3000), ('Fecha', 3000)
+    ]
+
+    font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center;pattern: pattern solid, \
+                                   fore-colour light_orange;border: left thin,right thin,top thin,bottom thin')
+    font_style.font.bold = True
+    font_style.alignment.wrap = 1
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num][0], font_style)
+        # set column width
+        ws.col(col_num).width = columns[col_num][1]
+
+    font_style = xlwt.XFStyle()
+    font_style.alignment.wrap = 1
+
+    for obj in queryset:
+        row_num += 1
+        row = [
+            obj.type.name,
+            obj.contractor.name,
+            obj.base,
+            obj.iva,
+            obj.total,
+            obj.date_contract,
+        ]
+        for col_num in range(len(row)):
+            if isinstance(row[col_num], datetime.date):
+                font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center;border: left thin,right thin,top thin,bottom thin\
+                                                     ', num_format_str='DD-MM-YYYY')
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response
+
+export_xls.short_description = "Exportar a Excel"
+
 class ContractsAdmin(admin.ModelAdmin):
     list_display = ['type', 'contractor', 'base',
                     'iva', 'total', 'date_contract']
@@ -15,6 +65,8 @@ class ContractsAdmin(admin.ModelAdmin):
     list_display_links = ('contractor',)
     show_full_result_count = True
     raw_id_fields = ("cpv",)
+
+    actions = [export_xls]
 
     # https://medium.com/@hakibenita/things-you-must-know-about-django-admin-as-your-app-gets-bigger-6be0b0ee9614
     list_select_related = (

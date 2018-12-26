@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'favourites',
     'gym',
     'contracts',
+    'import_export',
 ]
 
 REST_FRAMEWORK = {

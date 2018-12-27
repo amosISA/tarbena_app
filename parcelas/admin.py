@@ -6,7 +6,7 @@ from .sites import my_admin_site
 
 class ParcelaInline(admin.TabularInline):
     model = Parcela
-    max_num = 1
+    max_num = 0
     show_change_link = True
 
 class ParcelaAdmin(admin.ModelAdmin):

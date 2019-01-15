@@ -70,17 +70,7 @@ INSTALLED_APPS = [
     'gym',
     'contracts',
     'import_export',
-    'corsheaders', # allow cors on headers - parcelas app
 ]
-
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_WHITELIST = (
-    'localhost:8000/parcelas',
-)
-CORS_ORIGIN_REGEX_WHITELIST = (
-    'localhost:8000/parcelas',
-)
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -91,7 +81,6 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware', # allow cors on headers - parcelas app
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -178,7 +178,18 @@ $(document).ready(function() {
                     var ref_cat = '03' + $('td.p1_poblacion').first().text() + 'A' + pad(polig, 3) + pad(parc, 5) + '0000BP';
 
                     array_ref_catas.push({color:data_color, ref_catas:ref_cat});
-                    var my_kml_url = 'https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + $('td.p1_poblacion').first().text() + 'A' + pad(polig, 3) + pad(parc, 5) + '0000BP&del=3&mun=127&tipo=3d';
+
+                    /*
+
+                    How to Hack CORS / CORB
+                    https://medium.com/netscape/hacking-it-out-when-cors-wont-let-you-be-great-35f6206cc646
+                    https://cors-anywhere.herokuapp.com/
+
+                    I use the above url and then I pase my kml_url live in my vairbale my_kml_url and
+                    it does the trick!!!
+
+                    */
+                    var my_kml_url = 'https://cors-anywhere.herokuapp.com/http://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + $('td.p1_poblacion').first().text() + 'A' + pad(polig, 3) + pad(parc, 5) + '0000BP&del=3&mun=127&tipo=3d';
                     //console.log(my_kml_url);
                     geoXml.parse(my_kml_url);
                 });

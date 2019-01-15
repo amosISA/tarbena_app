@@ -97,6 +97,12 @@ $(document).ready(function() {
             }
         });
 
+        if (!!geoXml && !!geoXml.docs){
+            for (var i=0;i<geoXml.docs.length;i++) {
+                geoXml.hideDocument(geoXml.docs[i]);
+            }
+        }
+
         geoXml = new geoXML3.parser({
             map: map,
             zoom: true,

@@ -145,7 +145,7 @@ $(document).ready(function() {
                     table_rows += ('<td class="p1_poblacion">' + value['poblacion'].codigo + '</td>' +
                                    '<td>' + value['poligono'] + '</td>' +
                                    '<td><a class="modify_parcela_anchor" target="_blank" title="Modificar parcela" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/parcela/' +  value['id'] + '/change">' + value['numero_parcela'] + '</a></td>' +
-                                   '<td><a class="modify_propietario_anchor" target="_blank" title="Modificar propietario" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/propietario/' +  value['propietario'].id + '/change">' + value['propietario'].nif + ', ' + value['propietario'].apellidos + ' ' + value['propietario'].apellidos2 + ', ' + value['propietario'].nombre + ', (' + value['propietario'].direccion + ')</td>' +
+                                   '<td><a class="modify_propietario_anchor" target="_blank" title="' + value['propietario'].apellidos + ' ' + value['propietario'].apellidos2 + ', ' + value['propietario'].nombre + ', (' + value['propietario'].direccion + ')" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/propietario/' +  value['propietario'].id + '/change">' + value['propietario'].nif + '</td>' +
                                    '<td>' + value['metros_cuadrados'] + '</td>' +
                                    '<td><a class="anchor_autorizacion_parcelas" target="_blank" title="Obtener autorización" href="' + generete_some_url(value['id']) + '"><i class="fas fa-file-alt"></i></a></td>'
                                );
@@ -326,7 +326,7 @@ function functionAfterParseFindParcela(doc){
                 var pol_constr = parseInt(pol_title.substring(14,18));
                 var pol_control = parseInt(pol_title.substring(18,20));
                 doc[j].gpolygons[i].infoWindow.content = '<div><h3>' + pol_title + '</h3></div>';
-                doc[j].gpolygons[i].infoWindowOptions.content = '<div><h3><a style="font-size:20px;" href="https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCListaBienes.aspx?del=' + pad(pol_prov, 1) + '&amp;muni=' + pol_mun + '&amp;rc1=' + pol_title.substring(0,7) + '&amp;rc2=' + pol_title.substring(7, 14) +  '" target="_blank">' + pol_title + '</a></h3></div>';
+                doc[j].gpolygons[i].infoWindowOptions.content = '<div><h3><a style="font-size:23px;font-weight:300;" href="https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCListaBienes.aspx?del=' + pad(pol_prov, 1) + '&amp;muni=' + pol_mun + '&amp;rc1=' + pol_title.substring(0,7) + '&amp;rc2=' + pol_title.substring(7, 14) +  '" target="_blank">' + pol_title + '</a></h3></div>';
             }
 
             // clear polygons colors so that I can set a new ones in the loop of array_ref_catas

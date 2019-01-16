@@ -62,7 +62,7 @@ class SectorTrabajo(models.Model):
     def __str__(self):
         return '{}'.format(self.sector)
 
-class Poblacion(TimeStampedModel):
+class Provincia(TimeStampedModel):
     nombre = models.CharField(max_length=250, blank=True, null=True)
     codigo = models.CharField(max_length=250, blank=True, null=True)
 
@@ -73,6 +73,31 @@ class Poblacion(TimeStampedModel):
 
     def __str__(self):
         return '{}, {}'.format(self.codigo, self.nombre)
+
+class Poblacion(TimeStampedModel):
+    nombre = models.CharField(max_length=250, blank=True, null=True)
+    codigo = models.CharField(max_length=250, blank=True, null=True)
+    provincia = models.ForeignKey(Provincia, blank=True, null=True)
+
+    class Meta:
+        ordering = ["codigo"]
+        verbose_name = 'Poblacion'
+        verbose_name_plural = "Poblaciones"
+
+    def __str__(self):
+        return '{}, {}'.format(self.codigo, self.nombre)
+
+class PoblacionesFavoritas(TimeStampedModel):
+    user = models.ForeignKey(User, blank=True, null=True)
+    poblacion = models.ManyToManyField(Poblacion, blank=True)
+
+    class Meta:
+        ordering = ["user"]
+        verbose_name = 'Poblaciones favoritas'
+        verbose_name_plural = "Poblaciones favoritas"
+
+    def __str__(self):
+        return '{}'.format(self.user)
 
 class Estado_Parcela_Trabajo(TimeStampedModel):
     nombre = models.CharField(max_length=250)

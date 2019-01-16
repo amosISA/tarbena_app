@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from .models import Parcela, Propietario, SectorTrabajo, Estado, Proyecto, Poblacion, Estado_Parcela_Trabajo
+from .models import Parcela, Propietario, SectorTrabajo, Estado, Proyecto, Poblacion, Estado_Parcela_Trabajo, Provincia, PoblacionesFavoritas
 from .sites import my_admin_site
 
 import urllib.request
@@ -84,9 +84,25 @@ class EstadoParcelaTrabajoAdmin(admin.ModelAdmin):
 admin.site.register(Estado_Parcela_Trabajo, EstadoParcelaTrabajoAdmin)
 
 class PoblacionAdmin(admin.ModelAdmin):
+    list_display = ['codigo', 'nombre', 'provincia']
+    list_filter = ['codigo', 'nombre', 'provincia']
+    search_fields = ('codigo', 'nombre', 'provincia',)
+    empty_value_display = '-'
+    show_full_result_count = True
+admin.site.register(Poblacion, PoblacionAdmin)
+
+class ProvinciaAdmin(admin.ModelAdmin):
     list_display = ['codigo', 'nombre']
     list_filter = ['codigo', 'nombre']
     search_fields = ('codigo', 'nombre',)
     empty_value_display = '-'
     show_full_result_count = True
-admin.site.register(Poblacion, PoblacionAdmin)
+admin.site.register(Provincia, ProvinciaAdmin)
+
+class PoblacionesFavoritasAdmin(admin.ModelAdmin):
+    list_display = ['user']
+    list_filter = ['user', 'poblacion']
+    search_fields = ('user', 'poblacion',)
+    empty_value_display = '-'
+    show_full_result_count = True
+admin.site.register(PoblacionesFavoritas, PoblacionesFavoritasAdmin)

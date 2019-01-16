@@ -257,8 +257,11 @@ span.total_count_parcelas {
   text-decoration: underline; }
 
 .form-check-parcel {
-  margin-top: 40px;
-  font-size: 12px; }
+  margin-top: 20px;
+  font-size: 12px;
+  text-align: center; }
+  .form-check-parcel select {
+    margin-bottom: 10px; }
 
 .add_new_data {
   text-align: center;
@@ -278,5 +281,10 @@ span.total_count_parcelas {
 
 .tr-table-intermedio {
   background-color: #cccc0061; }
+
+#inputPoblacion {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
 
 /*# sourceMappingURL=base.css.map */

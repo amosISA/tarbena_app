@@ -44,6 +44,7 @@ class PropietarioAdmin(admin.ModelAdmin):
                     'telefono_fijo', 'telefono_movil', 'comentarios']
     list_filter = ['nombre', 'apellidos', 'nif', 'poblacion',
                    'telefono_fijo', 'telefono_movil', 'comentarios']
+    list_editable = ('poblacion',)
     search_fields = ('nombre', 'apellidos', 'nif', 'poblacion',
                      'telefono_fijo', 'telefono_movil', 'comentarios',)
     empty_value_display = '-'

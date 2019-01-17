@@ -40,11 +40,11 @@ my_admin_site.register(Parcela, ParcelaAdmin)
 admin.site.register(Parcela, ParcelaAdmin)
 
 class PropietarioAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'apellidos', 'apellidos2', 'direccion', 'nif', 'poblacion',
+    list_display = ['nombre', 'apellidos', 'apellidos2', 'direccion', 'nif',
                     'telefono_fijo', 'telefono_movil', 'comentarios']
-    list_filter = ['nombre', 'apellidos', 'nif', 'poblacion',
+    list_filter = ['nombre', 'apellidos', 'nif',
                    'telefono_fijo', 'telefono_movil', 'comentarios']
-    list_editable = ('poblacion',)
+    #list_editable = ('poblacion',)
     search_fields = ('nombre', 'apellidos', 'nif', 'poblacion',
                      'telefono_fijo', 'telefono_movil', 'comentarios',)
     empty_value_display = '-'

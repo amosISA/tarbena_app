@@ -16,12 +16,37 @@ class TimeStampedModel(models.Model):
     class Meta:
         abstract = True
 
+class Provincia(TimeStampedModel):
+    nombre = models.CharField(max_length=250, blank=True, null=True)
+    codigo = models.CharField(max_length=250, blank=True, null=True)
+
+    class Meta:
+        ordering = ["codigo"]
+        verbose_name = 'Poblacion'
+        verbose_name_plural = "Poblaciones"
+
+    def __str__(self):
+        return '{}, {}'.format(self.codigo, self.nombre)
+
+class Poblacion(TimeStampedModel):
+    nombre = models.CharField(max_length=250, blank=True, null=True)
+    codigo = models.CharField(max_length=250, blank=True, null=True)
+    provincia = models.ForeignKey(Provincia, blank=True, null=True)
+
+    class Meta:
+        ordering = ["codigo"]
+        verbose_name = 'Poblacion'
+        verbose_name_plural = "Poblaciones"
+
+    def __str__(self):
+        return '{}, {}'.format(self.codigo, self.nombre)
+
 class Propietario(TimeStampedModel):
     nombre = models.CharField(max_length=250, blank=False)
     apellidos = models.CharField(max_length=250, blank=True)
     apellidos2 = models.CharField(max_length=250, blank=True)
     nif = models.CharField(max_length=250, blank=True, unique=True, help_text='Ejemplo: 12345678-T')
-    poblacion = models.CharField(max_length=250, blank=True)
+    #poblacion = models.ForeignKey(Poblacion, blank=True, null=True)
     direccion = models.CharField(max_length=250, blank=True)
     telefono_fijo = models.CharField(max_length=250, blank=True)
     telefono_movil = models.CharField(max_length=250, blank=True)
@@ -61,31 +86,6 @@ class SectorTrabajo(models.Model):
 
     def __str__(self):
         return '{}'.format(self.sector)
-
-class Provincia(TimeStampedModel):
-    nombre = models.CharField(max_length=250, blank=True, null=True)
-    codigo = models.CharField(max_length=250, blank=True, null=True)
-
-    class Meta:
-        ordering = ["codigo"]
-        verbose_name = 'Poblacion'
-        verbose_name_plural = "Poblaciones"
-
-    def __str__(self):
-        return '{}, {}'.format(self.codigo, self.nombre)
-
-class Poblacion(TimeStampedModel):
-    nombre = models.CharField(max_length=250, blank=True, null=True)
-    codigo = models.CharField(max_length=250, blank=True, null=True)
-    provincia = models.ForeignKey(Provincia, blank=True, null=True)
-
-    class Meta:
-        ordering = ["codigo"]
-        verbose_name = 'Poblacion'
-        verbose_name_plural = "Poblaciones"
-
-    def __str__(self):
-        return '{}, {}'.format(self.codigo, self.nombre)
 
 class PoblacionesFavoritas(TimeStampedModel):
     user = models.ForeignKey(User, blank=True, null=True)

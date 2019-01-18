@@ -46,7 +46,7 @@ class Propietario(TimeStampedModel):
     apellidos = models.CharField(max_length=250, blank=True)
     apellidos2 = models.CharField(max_length=250, blank=True)
     nif = models.CharField(max_length=250, blank=True, unique=True, help_text='Ejemplo: 12345678-T')
-    #poblacion = models.ForeignKey(Poblacion, blank=True, null=True)
+    poblacion = models.ForeignKey(Poblacion, blank=True, null=True, related_name='propietario_poblacion')
     direccion = models.CharField(max_length=250, blank=True)
     telefono_fijo = models.CharField(max_length=250, blank=True)
     telefono_movil = models.CharField(max_length=250, blank=True)

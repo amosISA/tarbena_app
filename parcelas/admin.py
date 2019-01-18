@@ -15,7 +15,7 @@ class ParcelaInline(admin.TabularInline):
 
 class ParcelaAdmin(admin.ModelAdmin):
     list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'metros_cuadrados', 'estado_parcela_trabajo', 'estado']
-    list_editable = ('poblacion',)
+    #list_editable = ('poblacion',)
     list_filter = ['propietario__nombre', 'propietario__apellidos', 'metros_cuadrados', 'poligono',
                     'numero_parcela', 'poblacion', 'propietario__apellidos2']
     search_fields = ('propietario__nombre', 'metros_cuadrados', 'poligono',
@@ -111,4 +111,10 @@ class PoblacionesFavoritasAdmin(admin.ModelAdmin):
     search_fields = ('user', 'poblacion',)
     empty_value_display = '-'
     show_full_result_count = True
+    exclude = ('user',)
+
+    def save_model(self, request, obj, form, change):
+        # save user because has a hidden field
+        obj.user = request.user
+        super(PoblacionesFavoritasAdmin, self).save_model(request, obj, form, change)
 admin.site.register(PoblacionesFavoritas, PoblacionesFavoritasAdmin)

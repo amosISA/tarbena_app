@@ -13,7 +13,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 
-from .models import Parcela, Proyecto, SectorTrabajo, Poblacion, Propietario
+from .models import Parcela, Proyecto, SectorTrabajo, Poblacion, Propietario, PoblacionesFavoritas
 from .forms import ParcelaForm
 
 from bs4 import BeautifulSoup
@@ -29,12 +29,14 @@ def index(request):
     parcelas = Parcela.objects.all()
     proyectos = Proyecto.objects.all()
     poblacion = Poblacion.objects.all()
+    poblaciones_fav = Poblacion.objects.all().select_related('provincia')
 
     return render(request,
                   'parcelas/index.html',
                   {'parcelas': parcelas,
                    'proyectos': proyectos,
-                   'poblacion': poblacion})
+                   'poblacion': poblacion,
+                   'poblacionesfav': poblaciones_fav})
 
 def ajax_get_parcelas(request):
     sector = request.GET.get('sector-name', '99999')

@@ -90,7 +90,7 @@ class SectorTrabajo(models.Model):
 
 class PoblacionesFavoritas(TimeStampedModel):
     user = models.ForeignKey(User, blank=True, null=True)
-    poblacion = models.ManyToManyField(Poblacion, blank=True)
+    poblacion = models.ManyToManyField(Poblacion, blank=True, related_name='poblacion')
 
     class Meta:
         ordering = ["user"]

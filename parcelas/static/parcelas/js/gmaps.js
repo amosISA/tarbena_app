@@ -167,14 +167,14 @@ $(document).ready(function() {
                 );
 
                 // Change poblacion ID for CODIGO
-                $("#inputPoblacion > option").each(function() {
+                /*$("#inputPoblacion > option").each(function() {
                     var outside_this = $(this);
 
                     $("table td.p1_poblacion").each(function() {
                         $(this).text() == outside_this.attr("data-id") ? $(this).text(outside_this.val()) : $(this).text();
                         if ($(this).text() == 'null') { $(this).text(''); }
                     });
-                });
+                });*/
 
                 // Now print all checkboxes with their kml
                 $('.parcela-google-maps-checkbox').each(function() {
@@ -195,7 +195,7 @@ $(document).ready(function() {
                     it does the trick!!!
 
                     */
-                    var my_kml_url = 'https://cors-anywhere.herokuapp.com/http://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + $('td.p1_poblacion').first().text() + 'A' + pad(polig, 3) + pad(parc, 5) + '0000BP&del=3&mun=127&tipo=3d';
+                    var my_kml_url = 'https://cors-anywhere.herokuapp.com/http://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + $('td.p1_poblacion').first().text() + 'A' + pad(polig, 3) + pad(parc, 5) + '0000BP&del=3&mun=' + $('td.p1_poblacion').first().text() + '&tipo=3d';
                     //console.log(my_kml_url);
                     geoXml.parse(my_kml_url);
                 });

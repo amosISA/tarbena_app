@@ -21,9 +21,9 @@ class Provincia(TimeStampedModel):
     codigo = models.CharField(max_length=250, blank=True, null=True)
 
     class Meta:
-        ordering = ["codigo"]
-        verbose_name = 'Poblacion'
-        verbose_name_plural = "Poblaciones"
+        ordering = ["nombre"]
+        verbose_name = 'Provincia'
+        verbose_name_plural = "Provincias"
 
     def __str__(self):
         return '{}, {}'.format(self.codigo, self.nombre)
@@ -32,6 +32,7 @@ class Poblacion(TimeStampedModel):
     nombre = models.CharField(max_length=250, blank=True, null=True)
     codigo = models.CharField(max_length=250, blank=True, null=True)
     provincia = models.ForeignKey(Provincia, blank=True, null=True)
+    dc = models.CharField(max_length=250, blank=True, null=True)
 
     class Meta:
         ordering = ["codigo"]

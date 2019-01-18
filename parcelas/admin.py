@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
+from import_export.admin import ImportExportModelAdmin
 from .models import Parcela, Propietario, SectorTrabajo, Estado, Proyecto, Poblacion, Estado_Parcela_Trabajo, Provincia, PoblacionesFavoritas
 from .sites import my_admin_site
 
@@ -39,12 +40,12 @@ class ParcelaAdmin(admin.ModelAdmin):
 my_admin_site.register(Parcela, ParcelaAdmin)
 admin.site.register(Parcela, ParcelaAdmin)
 
-class PropietarioAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'apellidos', 'apellidos2', 'direccion', 'nif',
+class PropietarioAdmin(ImportExportModelAdmin):
+    list_display = ['nombre', 'apellidos', 'apellidos2', 'poblacion', 'direccion', 'nif',
                     'telefono_fijo', 'telefono_movil', 'comentarios']
     list_filter = ['nombre', 'apellidos', 'nif',
                    'telefono_fijo', 'telefono_movil', 'comentarios']
-    #list_editable = ('poblacion',)
+    list_editable = ('poblacion',)
     search_fields = ('nombre', 'apellidos', 'nif', 'poblacion',
                      'telefono_fijo', 'telefono_movil', 'comentarios',)
     empty_value_display = '-'
@@ -84,17 +85,20 @@ class EstadoParcelaTrabajoAdmin(admin.ModelAdmin):
     show_full_result_count = True
 admin.site.register(Estado_Parcela_Trabajo, EstadoParcelaTrabajoAdmin)
 
-class PoblacionAdmin(admin.ModelAdmin):
+class PoblacionAdmin(ImportExportModelAdmin):
     list_display = ['codigo', 'nombre', 'provincia']
     list_filter = ['codigo', 'nombre', 'provincia']
+    list_display_links = ('nombre',)
     search_fields = ('codigo', 'nombre', 'provincia',)
     empty_value_display = '-'
     show_full_result_count = True
 admin.site.register(Poblacion, PoblacionAdmin)
 
-class ProvinciaAdmin(admin.ModelAdmin):
+class ProvinciaAdmin(ImportExportModelAdmin):
     list_display = ['codigo', 'nombre']
+    #list_editable = ('codigo',)
     list_filter = ['codigo', 'nombre']
+    list_display_links = ('nombre',)
     search_fields = ('codigo', 'nombre',)
     empty_value_display = '-'
     show_full_result_count = True

@@ -91,28 +91,6 @@ $(document).ready(function() {
         global_sector_by_id = null;
         global_sector_by_id = $(this).attr('data-id');
 
-        $.each(layers, function(i,v){
-            if (v instanceof Object) {
-                layers[i].setMap(null);
-            }
-        });
-
-        if (!!geoXml && !!geoXml.docs){
-            for (var i=0;i<geoXml.docs.length;i++) {
-                geoXml.hideDocument(geoXml.docs[i]);
-            }
-        }
-
-        geoXml = new geoXML3.parser({
-            map: map,
-            zoom: true,
-            suppressInfoWindows: false,
-            afterParse: functionAfterParseFindParcela,
-            markerOptions: {
-                icon: "http://maps.google.com/mapfiles/ms/micons/blue.png"
-              }
-        });
-
         $.ajax({
             method: 'GET',
             url: document.location.href.replace('parcelas/#', '') + 'apiparcelas/getparcelassector/' + $(this).attr('data-id'),
@@ -176,6 +154,12 @@ $(document).ready(function() {
                     });
                 });*/
 
+                $.each(layers, function(i,v){
+                    if (v instanceof Object) {
+                        layers[i].setMap(null);
+                    }
+                });
+
                 // Now print all checkboxes with their kml
                 $('.parcela-google-maps-checkbox').each(function() {
                     var polig = parseInt($(this).attr('data-poligono'));
@@ -195,11 +179,18 @@ $(document).ready(function() {
                     it does the trick!!!
 
                     */
-                    var my_kml_url = 'https://cors-anywhere.herokuapp.com/http://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + $('td.p1_poblacion').first().text() + 'A' + pad(polig, 3) + pad(parc, 5) + '0000BP&del=3&mun=' + $('td.p1_poblacion').first().text() + '&tipo=3d';
-                    geoXml.parse(my_kml_url);
+                    var my_kml_url = 'http://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + $('td.p1_poblacion').first().text() + 'A' + pad(polig, 3) + pad(parc, 5) + '0000BP&del=3&mun=' + $('td.p1_poblacion').first().text() + '&tipo=3d';
+//                    geoXml.parse(my_kml_url);
 
                     //console.log(my_kml_url);
 
+                    layers[parc] = new google.maps.KmlLayer({
+                        url: my_kml_url,
+                        suppressInfoWindows: false
+                        //preserveViewport: true
+                    });
+
+                    layers[parc].setMap(map);
                 });
             }
         });

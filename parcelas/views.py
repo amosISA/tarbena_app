@@ -26,17 +26,18 @@ import weasyprint
 
 @permission_required('parcelas.can_add_parcela', raise_exception=True)
 def index(request):
-    parcelas = Parcela.objects.all()
-    proyectos = Proyecto.objects.all()
-    poblacion = Poblacion.objects.all()
-    poblaciones_fav = Poblacion.objects.all().select_related('provincia')
+    parcelas = Parcela.objects.all().prefetch_related('sector_trabajo'
+        ).select_related(
+            'propietario', 'poblacion', 'estado', 'estado_parcela_trabajo'
+        )
+    proyectos = Proyecto.objects.all().prefetch_related('sector_trabajo')
+    poblacion = Poblacion.objects.all().select_related('provincia')
 
     return render(request,
                   'parcelas/index.html',
                   {'parcelas': parcelas,
                    'proyectos': proyectos,
-                   'poblacion': poblacion,
-                   'poblacionesfav': poblaciones_fav})
+                   'poblacion': poblacion})
 
 def ajax_get_parcelas(request):
     sector = request.GET.get('sector-name', '99999')
@@ -62,7 +63,7 @@ def ajax_get_sectores(request):
     return HttpResponse(data, content_type="application/json")
 
 def ajax_get_projects(request):
-    query = Proyecto.objects.all()
+    query = Proyecto.objects.all().prefetch_related('sector_trabajo')
     data = serializers.serialize('json', query)
     return HttpResponse(data, content_type="application/json")
 

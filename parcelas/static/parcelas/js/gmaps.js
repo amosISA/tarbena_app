@@ -196,8 +196,10 @@ $(document).ready(function() {
 
                     */
                     var my_kml_url = 'https://cors-anywhere.herokuapp.com/http://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + $('td.p1_poblacion').first().text() + 'A' + pad(polig, 3) + pad(parc, 5) + '0000BP&del=3&mun=' + $('td.p1_poblacion').first().text() + '&tipo=3d';
-                    //console.log(my_kml_url);
                     geoXml.parse(my_kml_url);
+
+                    //console.log(my_kml_url);
+
                 });
             }
         });

@@ -13,7 +13,7 @@ class ParcelaInline(admin.TabularInline):
     max_num = 0
     show_change_link = True
 
-class ParcelaAdmin(admin.ModelAdmin):
+class ParcelaAdmin(ImportExportModelAdmin):
     list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'metros_cuadrados', 'estado_parcela_trabajo', 'estado']
     #list_editable = ('poblacion',)
     list_filter = ['propietario__nombre', 'propietario__apellidos', 'metros_cuadrados', 'poligono',

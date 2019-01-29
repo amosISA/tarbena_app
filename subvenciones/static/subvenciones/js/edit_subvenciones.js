@@ -16,5 +16,5 @@ $(document).ready(function() {
             if ($(this).serialize() == $(this).data('serialized')) { $('.button_form--submit__wrapper button').attr('disabled', 'disabled'); } else { $('.button_form--submit__wrapper button').removeAttr('disabled'); }
          })
     ;
-    $('a.ajax_relation_anchor').click(function() { $('.button_form--submit__wrapper button').attr('disabled', 'disabled'); });
+    $('a.ajax_relation_anchor').click(function() { $('.button_form--submit__wrapper button').removeAttr('disabled', 'disabled'); });
 });

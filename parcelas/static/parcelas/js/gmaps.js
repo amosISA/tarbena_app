@@ -125,10 +125,11 @@ $(document).ready(function() {
                     //https://stackoverflow.com/questions/5445085/understanding-colors-on-android-six-characters/11019879#11019879
                     //table for transparency in hex colors at the beggining 66...
                     if(value['estado']) {
+                        console.log(value['estado'].color);
                         var full_kml = '<?xml version="1.0" encoding="ISO-8859-1"  ?>' +
                                            '<kml xmlns="http://www.opengis.net/kml/2.2">' +
                                        '<Document>' +
-                                           '<Style id="polygon_style"><LineStyle><color>FF' + value['estado'].color + '</color><width>2</width></LineStyle><PolyStyle><color>66' + value['estado'].color + '</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
+                                           '<Style id="polygon_style"><LineStyle><color>' + value['estado'].color + '</color><width>2</width></LineStyle><PolyStyle><color>66' + value['estado'].color + '</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
                                            '<name>' + ref_cat + '</name><Placemark>' + '<name>' + ref_cat + '</name>' +
                                             '<Polygon>' + '<styleUrl>#polygon_style</styleUrl>' +
                                             '<tessellate>1</tessellate><outerBoundaryIs><LinearRing>' + kml_coordinates +
@@ -267,6 +268,7 @@ function functionAfterParseFindParcela(doc){
                     geoXmlDoc = doc;
 
                     for (var i = 0; i < doc[j].gpolygons.length; i++) {
+                        console.log(doc[j].gpolygons[i]);
                         if (value['estado'] != null) {
                             if (value['estado'].nombre == 'Aceptado') {
                                 table_rows += ('<tr class="tr-table-aprobado"><td><input checked class="parcela-google-maps-checkbox" type="checkbox" data-color="#c3e6cb" data-parcela="' + value['numero_parcela'] + '" data-poligono="' + value['poligono'] + '"></td>');
@@ -315,6 +317,13 @@ function functionAfterParseFindParcela(doc){
                             table_rows += ('</tr>');
                             //highlightPoly(doc[j].gpolygons[i], 'ffffff');
                         }
+
+                        google.maps.event.addListener(doc[j].gpolygons[i], "mouseover", function() {
+                            this.setOptions({fillOpacity: "0"});
+                        });
+                        google.maps.event.addListener(doc[j].gpolygons[i], "mouseout", function() {
+                            this.setOptions({fillOpacity: ".3"});
+                        });
                     }
                 }
             });

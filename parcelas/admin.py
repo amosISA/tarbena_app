@@ -14,8 +14,8 @@ class ParcelaInline(admin.TabularInline):
     show_change_link = True
 
 class ParcelaAdmin(ImportExportModelAdmin):
-    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'metros_cuadrados', 'estado_parcela_trabajo', 'estado', 'kml']
-    list_editable = ('kml',)
+    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'metros_cuadrados', 'estado_parcela_trabajo', 'estado']
+    #list_editable = ('kml',)
     list_filter = ['propietario__nombre', 'propietario__apellidos', 'metros_cuadrados', 'poligono',
                     'numero_parcela', 'poblacion', 'propietario__apellidos2']
     search_fields = ('propietario__nombre', 'metros_cuadrados', 'poligono',
@@ -42,25 +42,25 @@ class ParcelaAdmin(ImportExportModelAdmin):
 
     # Massive parcelas upload bbdd to add their kml if not exist
     # This function pops the save button for the editable_list option of admin
-    def changelist_view(self, request, extra_context=None):
-        #if request.POST.has_key("_save"):
-        if "_save" in request.POST:
-            parcelas = Parcela.objects.all().prefetch_related('sector_trabajo'
-            ).select_related(
-                'propietario', 'poblacion', 'estado', 'estado_parcela_trabajo'
-            )
-            for p in parcelas:
-                if not p.kml:
-                    context = ssl._create_unverified_context()
-                    kml_url = 'https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + p.poblacion.codigo + 'A' + "{:03n}".format(
-                        int(p.poligono)) + "{:05n}".format(
-                        int(p.numero_parcela)) + '0000BP&del=3&mun=' + p.poblacion.codigo + '&tipo=3d'
-                    fp = urllib.request.urlopen(kml_url, context=context)
-                    mybytes = fp.read()
-                    mykml = mybytes.decode('unicode_escape').encode('utf-8')
-                    p.kml = mykml
-                    p.save()
-        return admin.ModelAdmin.changelist_view(self, request, extra_context)
+    # def changelist_view(self, request, extra_context=None):
+    #     #if request.POST.has_key("_save"):
+    #     if "_save" in request.POST:
+    #         parcelas = Parcela.objects.all().prefetch_related('sector_trabajo'
+    #         ).select_related(
+    #             'propietario', 'poblacion', 'estado', 'estado_parcela_trabajo'
+    #         )
+    #         for p in parcelas:
+    #             if not p.kml:
+    #                 context = ssl._create_unverified_context()
+    #                 kml_url = 'https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + p.poblacion.codigo + 'A' + "{:03n}".format(
+    #                     int(p.poligono)) + "{:05n}".format(
+    #                     int(p.numero_parcela)) + '0000BP&del=3&mun=' + p.poblacion.codigo + '&tipo=3d'
+    #                 fp = urllib.request.urlopen(kml_url, context=context)
+    #                 mybytes = fp.read()
+    #                 mykml = mybytes.decode('unicode_escape').encode('utf-8')
+    #                 p.kml = mykml
+    #                 p.save()
+    #     return admin.ModelAdmin.changelist_view(self, request, extra_context)
 
 my_admin_site.register(Parcela, ParcelaAdmin)
 admin.site.register(Parcela, ParcelaAdmin)

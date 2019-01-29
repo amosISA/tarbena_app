@@ -67,6 +67,7 @@ class Propietario(TimeStampedModel):
 
 class Estado(models.Model):
     nombre = models.CharField(max_length=250, blank=False)
+    color = models.CharField(max_length=250, null=True, blank=True)
 
     class Meta:
         ordering = ["nombre"]
@@ -125,6 +126,7 @@ class Parcela(TimeStampedModel):
     # https://stackoverflow.com/questions/35459326/foreignkey-to-a-model-that-is-defined-after-below-the-current-model?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
     # nice help for use foreignkey for model that is below this one
     sector_trabajo = models.ManyToManyField(SectorTrabajo, blank=True)
+    coordinates = models.TextField(blank=True, null=True)
     kml = models.TextField(blank=True, null=True)
 
     class Meta:

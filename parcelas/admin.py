@@ -15,7 +15,7 @@ class ParcelaInline(admin.TabularInline):
 
 class ParcelaAdmin(ImportExportModelAdmin):
     list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'metros_cuadrados', 'estado_parcela_trabajo', 'estado']
-    #list_editable = ('poblacion',)
+    list_editable = ('poblacion',)
     list_filter = ['propietario__nombre', 'propietario__apellidos', 'metros_cuadrados', 'poligono',
                     'numero_parcela', 'poblacion', 'propietario__apellidos2']
     search_fields = ('propietario__nombre', 'metros_cuadrados', 'poligono',
@@ -25,19 +25,18 @@ class ParcelaAdmin(ImportExportModelAdmin):
     show_full_result_count = True
 
     # Make kml for each parcela
-    # def save_model(self, request, obj, form, change):
-    #     super(ParcelaAdmin, self).save_model(request, obj, form, change)
-    #     #https://stackoverflow.com/questions/3813735/in-python-how-to-specify-a-format-when-converting-int-to-string
-    #
-    #     if not obj.kml:
-    #         context = ssl._create_unverified_context()
-    #         kml_url='https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + obj.poblacion.codigo + 'A'+ "{:03n}".format(int(obj.poligono)) + "{:05n}".format(int(obj.numero_parcela)) + '0000BP&del=3&mun=' + obj.poblacion.codigo + '&tipo=3d'
-    #         fp = urllib.request.urlopen(kml_url,context=context)
-    #         mybytes = fp.read()
-    #         mykml = mybytes.decode('unicode_escape').encode('utf-8')
-    #         print(mykml)
-    #         obj.kml = mykml
-    #         obj.save()
+    def save_model(self, request, obj, form, change):
+        super(ParcelaAdmin, self).save_model(request, obj, form, change)
+        #https://stackoverflow.com/questions/3813735/in-python-how-to-specify-a-format-when-converting-int-to-string
+
+        if not obj.kml:
+            context = ssl._create_unverified_context()
+            kml_url='https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + obj.poblacion.codigo + 'A'+ "{:03n}".format(int(obj.poligono)) + "{:05n}".format(int(obj.numero_parcela)) + '0000BP&del=3&mun=' + obj.poblacion.codigo + '&tipo=3d'
+            fp = urllib.request.urlopen(kml_url,context=context)
+            mybytes = fp.read()
+            mykml = mybytes.decode('unicode_escape').encode('utf-8')
+            obj.kml = mykml
+            obj.save()
 my_admin_site.register(Parcela, ParcelaAdmin)
 admin.site.register(Parcela, ParcelaAdmin)
 

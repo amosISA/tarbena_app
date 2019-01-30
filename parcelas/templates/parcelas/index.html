@@ -101,6 +101,7 @@
         var ajaxproyectos_url = '{% url "parcelas:ajax_get_proyectos" %}';
         var ajaxparcelas_url = '{% url "parcelas:ajax_get_parcelas" %}';
         var ajaxparcelas_m2 = '{% url "parcelas:ajax_get_m2" %}';
+        var ajaxparcela_info = '{% url "parcelas:ajax_get_parcela_info" %}';
 
         // Reverse url so I can use it in js
         function generete_some_url(id){
@@ -168,12 +169,16 @@
                         var header_parcela = '<span class="badge badge-info">' + $('#inputParcela').val() + '</span>';
                         $('#exampleModalLabel').html("Añadir parcela: " + header_poblacion + " " + header_poligono + " " + header_parcela + " ");
 
+                        // poblacion selected option
+                        var e_inp_pobl = document.getElementById("inputPoblacion");
+                        var e_inp_pobl_value = e_inp_pobl.options[e_inp_pobl.selectedIndex].value;
+
                         /* Add also m2 with ajax - BeautifulSoup */
                         $.ajax({
                             method: 'GET',
                             url: ajaxparcelas_m2,
                             data: {
-                                'poblacion': '127',
+                                'poblacion': e_inp_pobl_value,
                                 'poligono': pad($('#id_poligono').val(), 3),
                                 'parcela': pad($('#id_numero_parcela').val(), 5)
                             },

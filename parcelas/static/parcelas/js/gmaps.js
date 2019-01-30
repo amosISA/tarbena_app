@@ -121,16 +121,35 @@ $(document).ready(function() {
                     var coord_end = kml_bbdd.indexOf('</coordinates>');
                     var kml_coordinates = kml_bbdd.substring(coord_start, coord_end) + "</coordinates>";
                     var ref_cat = '03' + value['poblacion'].codigo + 'A' + pad(value['poligono'], 3) + pad(value['numero_parcela'], 5) + '0000BP';
+                    // poblacion selected option
+                    var e_inp_pobl = document.getElementById("inputPoblacion");
+                    var e_inp_pobl_value = e_inp_pobl.options[e_inp_pobl.selectedIndex].value;
+
+                    // Info parcela with
+//                    $.ajax({
+//                        method: 'GET',
+//                        url: ajaxparcela_info,
+//                        data: {
+//                            'poblacion': e_inp_pobl_value,
+//                            'poligono': pad(value['poligono'], 3),
+//                            'parcela': pad(value['numero_parcela'], 5)
+//                        },
+//                        dataType: 'json',
+//                        success: function (data) {
+//                            console.log(data.m2);
+//                        }
+//                    });
 
                     //https://stackoverflow.com/questions/5445085/understanding-colors-on-android-six-characters/11019879#11019879
                     //table for transparency in hex colors at the beggining 66...
                     if(value['estado']) {
-                        console.log(value['estado'].color);
+                        //console.log(value['estado'].color);
                         var full_kml = '<?xml version="1.0" encoding="ISO-8859-1"  ?>' +
                                            '<kml xmlns="http://www.opengis.net/kml/2.2">' +
                                        '<Document>' +
                                            '<Style id="polygon_style"><LineStyle><color>' + value['estado'].color + '</color><width>2</width></LineStyle><PolyStyle><color>66' + value['estado'].color + '</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
-                                           '<name>' + ref_cat + '</name><Placemark>' + '<name>' + ref_cat + '</name>' +
+                                           '<name>' + ref_cat + '</name><Placemark>' + '<name><![CDATA[<font size=+1>Polígono ' + value['poligono'] + ' Parcela ' + value['numero_parcela'] + '</font>]]></name>' +
+                                           '<description><![CDATA[<font size=+1>Consultar en la Sede Electrónica<br>del Catastro la parcela:</font><br><font size=+2><A href="">' + ref_cat + '</a></font>]]></description>' +
                                             '<Polygon>' + '<styleUrl>#polygon_style</styleUrl>' +
                                             '<tessellate>1</tessellate><outerBoundaryIs><LinearRing>' + kml_coordinates +
                                             '</LinearRing></outerBoundaryIs></Polygon></Placemark></Document></kml>';
@@ -139,7 +158,8 @@ $(document).ready(function() {
                                            '<kml xmlns="http://www.opengis.net/kml/2.2">' +
                                        '<Document>' +
                                            '<Style id="polygon_style"><LineStyle><color>ffffff</color><width>2</width></LineStyle><PolyStyle><color>66ffffff</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
-                                           '<name>' + ref_cat + '</name><Placemark>' + '<name>' + ref_cat + '</name>' +
+                                           '<name>' + ref_cat + '</name><Placemark>' + '<name><![CDATA[<font size=+1>Polígono ' + value['poligono'] + ' Parcela ' + value['numero_parcela'] + '</font>]]></name>' +
+                                           '<description><![CDATA[<font size=+1>Consultar en la Sede Electrónica<br>del Catastro la parcela:</font><br><font size=+2><A href="">' + ref_cat + '</a></font>]]></description>' +
                                             '<Polygon>' + '<styleUrl>#polygon_style</styleUrl>' +
                                             '<tessellate>1</tessellate><outerBoundaryIs><LinearRing>' + kml_coordinates +
                                             '</LinearRing></outerBoundaryIs></Polygon></Placemark></Document></kml>';
@@ -268,7 +288,7 @@ function functionAfterParseFindParcela(doc){
                     geoXmlDoc = doc;
 
                     for (var i = 0; i < doc[j].gpolygons.length; i++) {
-                        console.log(doc[j].gpolygons[i]);
+                        //console.log(doc[j].gpolygons[i]);
                         if (value['estado'] != null) {
                             if (value['estado'].nombre == 'Aceptado') {
                                 table_rows += ('<tr class="tr-table-aprobado"><td><input checked class="parcela-google-maps-checkbox" type="checkbox" data-color="#c3e6cb" data-parcela="' + value['numero_parcela'] + '" data-poligono="' + value['poligono'] + '"></td>');

@@ -156,6 +156,49 @@ def get_m2_url(request):
 
     return JsonResponse(data, safe=False)
 
+# Ajax for gettings parcela info from url with b4
+import re
+def cleanhtml(raw_html):
+    """
+    Function to remove tags from a string
+
+    """
+    cleanr = re.compile('<.*?>')
+    cleantext = re.sub(cleanr, '', raw_html)
+    return cleantext
+
+def get_parcela_info_url(request):
+    poblacion = request.GET.get('poblacion', '127')
+    poligono = request.GET.get('poligono', '10')
+    parcela = request.GET.get('parcela', '99999')
+    data = {}
+
+    my_url = "https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCConCiud.aspx?del=3&mun=" + poblacion + "&UrbRus=&RefC=03" + poblacion + "A" + poligono + parcela + "0000BL&Apenom=&esBice=&RCBice1=&RCBice2=&DenoBice=&latitud=&longitud=&gradoslat=&minlat=&seglat=&gradoslon=&minlon=&seglon=&x=&y=&huso=&tipoCoordenadas="
+    uClient = urllib.request.urlopen(my_url)
+    page_html = uClient.read()
+    uClient.close()
+
+    page_soup = BeautifulSoup(page_html, "html.parser")
+
+    labels = page_soup.findAll("sup")
+    labels_page = page_soup.find_all("label")
+    for index, item in enumerate(labels_page, start=0):
+        if index == 1:
+            print(cleanhtml(str(item)))
+            data['localizacion'] = cleanhtml(str(item))
+        elif index == 2:
+            data['clase'] = cleanhtml(str(item))
+        elif index == 3:
+            data['uso_principal'] = cleanhtml(str(item))
+
+    data['url'] = my_url
+    for l in labels:
+        x = l.previous_sibling.split('m')
+        data['m2'] = x[0]
+        break
+
+    return JsonResponse(data, safe=False)
+
 def autorization_pdf_maker(request, parcela_id):
     now = datetime.datetime.now()
     parcela = get_object_or_404(Parcela, id=parcela_id)

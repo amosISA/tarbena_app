@@ -17,5 +17,5 @@ class ParcelasSerializer(serializers.ModelSerializer):
         #fields = '__all__'
         fields = ('id', 'propietario', 'poblacion', 'metros_cuadrados',
                   'poligono', 'numero_parcela', 'estado_parcela_trabajo', 'estado',
-                  'comentarios', 'sector_trabajo', 'kml')
+                  'comentarios', 'sector_trabajo', 'kml', 'localizacion', 'url')
         depth = 3

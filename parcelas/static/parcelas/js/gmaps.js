@@ -148,8 +148,8 @@ $(document).ready(function() {
                                            '<kml xmlns="http://www.opengis.net/kml/2.2">' +
                                        '<Document>' +
                                            '<Style id="polygon_style"><LineStyle><color>' + value['estado'].color + '</color><width>2</width></LineStyle><PolyStyle><color>66' + value['estado'].color + '</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
-                                           '<name>' + ref_cat + '</name><Placemark>' + '<name><![CDATA[<font size=+1>Polígono ' + value['poligono'] + ' Parcela ' + value['numero_parcela'] + '</font>]]></name>' +
-                                           '<description><![CDATA[<font size=+1>Consultar en la Sede Electrónica<br>del Catastro la parcela:</font><br><font size=+2><A href="">' + ref_cat + '</a></font>]]></description>' +
+                                           '<name>' + ref_cat + '</name><Placemark>' + '<name><![CDATA[<font size=+1><a class="modify_parcela_anchor" target="_blank" title="Modificar parcela" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/parcela/' +  value['id'] + '/change">Polígono ' + value['poligono'] + ' Parcela ' + value['numero_parcela'] + '</a></font>]]></name>' +
+                                           '<description><![CDATA[<font size=+0><A href="#">' + ref_cat + '</a></font><br><font size=+0><span style="margin-top:10px;"><strong>Propietario</strong>: <a class="modify_propietario_anchor" target="_blank" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/propietario/' +  value['propietario'].id + '/change">' + value['propietario'].apellidos + ' ' + value['propietario'].apellidos2 + ', ' + value['propietario'].nombre + ',<br> (' + value['propietario'].direccion + ')</a><br><strong>Estado: </strong>' + value['estado'].nombre + '<br><strong>m2: </strong>' + value['metros_cuadrados'] + ' m2<br><a class="anchor_autorizacion_parcelas" target="_blank" title="Obtener autorización" href="' + generete_some_url(value['id']) + '"><i class="fas fa-file-alt"></i></a></font>]]></description>' +
                                             '<Polygon>' + '<styleUrl>#polygon_style</styleUrl>' +
                                             '<tessellate>1</tessellate><outerBoundaryIs><LinearRing>' + kml_coordinates +
                                             '</LinearRing></outerBoundaryIs></Polygon></Placemark></Document></kml>';
@@ -159,7 +159,7 @@ $(document).ready(function() {
                                        '<Document>' +
                                            '<Style id="polygon_style"><LineStyle><color>ffffff</color><width>2</width></LineStyle><PolyStyle><color>66ffffff</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
                                            '<name>' + ref_cat + '</name><Placemark>' + '<name><![CDATA[<font size=+1>Polígono ' + value['poligono'] + ' Parcela ' + value['numero_parcela'] + '</font>]]></name>' +
-                                           '<description><![CDATA[<font size=+1>Consultar en la Sede Electrónica<br>del Catastro la parcela:</font><br><font size=+2><A href="">' + ref_cat + '</a></font>]]></description>' +
+                                           '<description><![CDATA[<font size=+0><A href="#">' + ref_cat + '</a></font><br><font size=+0><span style="margin-top:10px;"><strong>Propietario</strong>: ' + value['propietario'].apellidos + ' ' + value['propietario'].apellidos2 + ', ' + value['propietario'].nombre + ',<br> (' + value['propietario'].direccion + ')</span><br><strong>Estado: </strong>Aceptado<br><strong>m2: </strong>' + value['metros_cuadrados'] + ' m2<br> <strong>Obtener autorización: </strong> <a class="anchor_autorizacion_parcelas" target="_blank" title="Obtener autorización" href="' + generete_some_url(value['id']) + '"><i class="fas fa-file-alt"></i></a></font>]]></description>' +
                                             '<Polygon>' + '<styleUrl>#polygon_style</styleUrl>' +
                                             '<tessellate>1</tessellate><outerBoundaryIs><LinearRing>' + kml_coordinates +
                                             '</LinearRing></outerBoundaryIs></Polygon></Placemark></Document></kml>';
@@ -351,10 +351,15 @@ function functionAfterParseFindParcela(doc){
             body_widget.append('<table class="table table-sm panel_table_parcelas" style="width:100%;font-size:0.8rem;background-color: #ffff;color:#000;max-height:400px;overflow-y:scroll;display:block;">' +
                                     '<thead><tr><th style="width: 20px;"></th><th title="Población" style="width: 25px;">P1</th><th title="Polígono" style="width: 25px;">P2</th><th title="Parcela" style="width: 25px;">P3</th><th>Propietario</th><th style="width: 40px;">m2</th><th></th><th></th></tr></thead>' +
                                     '<tbody style="font-size:12px;">' + table_rows + '</tbody>' +
-                               '</table>'
+                               '</table><input type="checkbox" onclick="aytoParc()">Parcelas del Ayuntamiento'
             );
         }
     });
+}
+
+/* Pop up Ayuntamiento Parcelas */
+function aytoParc() {
+
 }
 
 function kmlHighlightPoly(doc,poly,color) {

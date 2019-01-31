@@ -37,7 +37,7 @@ class ParcelaAdmin(ImportExportModelAdmin):
     list_max_show_all = 4000
     #list_per_page = 4000
 
-    # Make kml for each parcela
+    # Make kml for each parcela and save their localizacion and url
     def save_model(self, request, obj, form, change):
         super(ParcelaAdmin, self).save_model(request, obj, form, change)
         #https://stackoverflow.com/questions/3813735/in-python-how-to-specify-a-format-when-converting-int-to-string
@@ -51,42 +51,56 @@ class ParcelaAdmin(ImportExportModelAdmin):
             obj.kml = mykml
             obj.save()
 
+        if not obj.localizacion:
+            my_url = "https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCConCiud.aspx?del=3&mun=" + obj.poblacion.codigo + "&UrbRus=&RefC=03" + obj.poblacion.codigo + "A" + "{:03n}".format(int(obj.poligono)) + "{:05n}".format(int(obj.numero_parcela)) + "0000BL&Apenom=&esBice=&RCBice1=&RCBice2=&DenoBice=&latitud=&longitud=&gradoslat=&minlat=&seglat=&gradoslon=&minlon=&seglon=&x=&y=&huso=&tipoCoordenadas="
+            uClient = urllib.request.urlopen(my_url)
+            page_html = uClient.read()
+            uClient.close()
+            obj.url = my_url
+
+            page_soup = BeautifulSoup(page_html, "html.parser")
+            labels_page = page_soup.find_all("label")
+            for index, item in enumerate(labels_page, start=0):
+                if index == 1:
+                    remove_br = re.sub('<br/>', ' ', str(item))
+                    obj.localizacion = cleanhtml(remove_br)
+                    obj.save()
+
     # Massive parcelas upload bbdd to add their kml if not exist
     # This function pops the save button for the editable_list option of admin
     # This functions also add localizacion and the url to parcela where we can find her in the catastro if not exists those fields
-    def changelist_view(self, request, extra_context=None):
-        #if request.POST.has_key("_save"):
-        if "_save" in request.POST:
-            parcelas = Parcela.objects.all().prefetch_related('sector_trabajo'
-            ).select_related(
-                'propietario', 'poblacion', 'estado', 'estado_parcela_trabajo'
-            )
-            for p in parcelas:
-                # if not p.kml:
-                #     context = ssl._create_unverified_context()
-                #     kml_url = 'https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + p.poblacion.codigo + 'A' + "{:03n}".format(
-                #         int(p.poligono)) + "{:05n}".format(
-                #         int(p.numero_parcela)) + '0000BP&del=3&mun=' + p.poblacion.codigo + '&tipo=3d'
-                #     fp = urllib.request.urlopen(kml_url, context=context)
-                #     mybytes = fp.read()
-                #     mykml = mybytes.decode('unicode_escape').encode('utf-8')
-                #     p.kml = mykml
-                #     p.save()
-                my_url = "https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCConCiud.aspx?del=3&mun=" + p.poblacion.codigo + "&UrbRus=&RefC=03" + p.poblacion.codigo + "A" + "{:03n}".format(int(p.poligono)) + "{:05n}".format(int(p.numero_parcela)) + "0000BL&Apenom=&esBice=&RCBice1=&RCBice2=&DenoBice=&latitud=&longitud=&gradoslat=&minlat=&seglat=&gradoslon=&minlon=&seglon=&x=&y=&huso=&tipoCoordenadas="
-                uClient = urllib.request.urlopen(my_url)
-                page_html = uClient.read()
-                uClient.close()
-                p.url = my_url
-                print(my_url)
-
-                page_soup = BeautifulSoup(page_html, "html.parser")
-                labels_page = page_soup.find_all("label")
-                for index, item in enumerate(labels_page, start=0):
-                    if index == 1:
-                        remove_br = re.sub('<br/>', ' ', str(item))
-                        p.localizacion = cleanhtml(remove_br)
-                        p.save()
-        return admin.ModelAdmin.changelist_view(self, request, extra_context)
+    # def changelist_view(self, request, extra_context=None):
+    #     #if request.POST.has_key("_save"):
+    #     if "_save" in request.POST:
+    #         parcelas = Parcela.objects.all().prefetch_related('sector_trabajo'
+    #         ).select_related(
+    #             'propietario', 'poblacion', 'estado', 'estado_parcela_trabajo'
+    #         )
+    #         for p in parcelas:
+    #             # if not p.kml:
+    #             #     context = ssl._create_unverified_context()
+    #             #     kml_url = 'https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + p.poblacion.codigo + 'A' + "{:03n}".format(
+    #             #         int(p.poligono)) + "{:05n}".format(
+    #             #         int(p.numero_parcela)) + '0000BP&del=3&mun=' + p.poblacion.codigo + '&tipo=3d'
+    #             #     fp = urllib.request.urlopen(kml_url, context=context)
+    #             #     mybytes = fp.read()
+    #             #     mykml = mybytes.decode('unicode_escape').encode('utf-8')
+    #             #     p.kml = mykml
+    #             #     p.save()
+    #             my_url = "https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCConCiud.aspx?del=3&mun=" + p.poblacion.codigo + "&UrbRus=&RefC=03" + p.poblacion.codigo + "A" + "{:03n}".format(int(p.poligono)) + "{:05n}".format(int(p.numero_parcela)) + "0000BL&Apenom=&esBice=&RCBice1=&RCBice2=&DenoBice=&latitud=&longitud=&gradoslat=&minlat=&seglat=&gradoslon=&minlon=&seglon=&x=&y=&huso=&tipoCoordenadas="
+    #             uClient = urllib.request.urlopen(my_url)
+    #             page_html = uClient.read()
+    #             uClient.close()
+    #             p.url = my_url
+    #
+    #             page_soup = BeautifulSoup(page_html, "html.parser")
+    #             labels_page = page_soup.find_all("label")
+    #             for index, item in enumerate(labels_page, start=0):
+    #                 if index == 1:
+    #                     remove_br = re.sub('<br/>', ' ', str(item))
+    #                     p.localizacion = cleanhtml(remove_br)
+    #                     p.save()
+    #     return admin.ModelAdmin.changelist_view(self, request, extra_context)
 
 my_admin_site.register(Parcela, ParcelaAdmin)
 admin.site.register(Parcela, ParcelaAdmin)

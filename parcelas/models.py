@@ -128,6 +128,8 @@ class Parcela(TimeStampedModel):
     sector_trabajo = models.ManyToManyField(SectorTrabajo, blank=True)
     coordinates = models.TextField(blank=True, null=True)
     kml = models.TextField(blank=True, null=True)
+    localizacion = models.TextField(blank=True, null=True)
+    url = models.TextField(blank=True, null=True)
 
     class Meta:
         ordering = ["-created"]

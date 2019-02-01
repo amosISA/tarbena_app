@@ -32,12 +32,14 @@ def index(request):
         )
     proyectos = Proyecto.objects.all().prefetch_related('sector_trabajo')
     poblacion = Poblacion.objects.all().select_related('provincia')
+    poblaciones_favs = PoblacionesFavoritas.objects.all().prefetch_related('poblacion').select_related('user').values('poblacion__pk', 'poblacion__nombre', 'poblacion__codigo').filter(user=request.user)
 
     return render(request,
                   'parcelas/index.html',
                   {'parcelas': parcelas,
                    'proyectos': proyectos,
-                   'poblacion': poblacion})
+                   'poblacion': poblacion,
+                   'poblaciones_favs': poblaciones_favs})
 
 def ajax_get_parcelas(request):
     sector = request.GET.get('sector-name', '99999')

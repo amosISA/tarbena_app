@@ -43,9 +43,13 @@
             <div class="form-check-parcel">
                 <!-- Select Poblacion -->
                 <select id="inputPoblacion">
-                    {% for p in poblacion %}
-                        <option data-id="{{ p.pk }}" value="{{ p.codigo }}">{{ p.nombre }}</option>
-                    {% endfor %}
+                    {% if poblaciones_favs %}
+                        {% for f in poblaciones_favs %}
+                            <option data-id="{{ f.poblacion__pk }}" value="{{ f.poblacion__codigo }}">{{ f.poblacion__nombre }}</option>
+                        {% endfor %}
+                    {% else %}
+                        <option data-id="" value="">No tiene favoritos</option>
+                    {% endif %}
                 </select>
 
                 <!--<label for="inputPoligono">Polígono</label>-->
@@ -225,5 +229,17 @@
             $('#widget').toggle();
             $(".widget .button.collapse").toggleClass("in");
         });
+
+        /* Fix select poblaciones split and sort the elements */
+        $('#inputPoblacion > option').each(function() {
+            if($(this).text() == 'Tárbena') {
+                $(this).attr('selected', 'selected');
+            }
+        });
+
+        $("#inputPoblacion").append($("#inputPoblacion option").remove().sort(function(a, b) {
+            var at = $(a).text(), bt = $(b).text();
+            return (at > bt)?1:((at < bt)?-1:0);
+        }));
     </script>
 {% endblock %}

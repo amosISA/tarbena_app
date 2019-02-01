@@ -15,6 +15,12 @@ class ParcelaInline(admin.TabularInline):
     max_num = 0
     show_change_link = True
 
+class SectorTrabajoInline(admin.TabularInline):
+    # https://docs.djangoproject.com/en/dev/ref/contrib/admin/#working-with-many-to-many-models
+    # Guide to inline with ManyToMany relationship
+    model = Parcela.sector_trabajo.through
+    extra = 0
+
 def cleanhtml(raw_html):
     """
     Function to remove tags from a string
@@ -25,17 +31,18 @@ def cleanhtml(raw_html):
     return cleantext
 
 class ParcelaAdmin(ImportExportModelAdmin):
-    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'metros_cuadrados', 'estado_parcela_trabajo', 'estado', 'localizacion', 'url']
-    list_editable = ('localizacion', 'url',)
-    list_filter = ['propietario__nombre', 'propietario__apellidos', 'metros_cuadrados', 'poligono',
-                    'numero_parcela', 'poblacion', 'propietario__apellidos2']
-    search_fields = ('propietario__nombre', 'metros_cuadrados', 'poligono',
-                     'numero_parcela', 'poblacion')
+    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'metros_cuadrados', 'estado_parcela_trabajo',
+                    'estado']
+    #list_editable = ('localizacion', 'url',)
+    list_filter = ['estado_parcela_trabajo']
+    search_fields = ('propietario__nombre', 'propietario__apellidos', 'propietario__apellidos2', 'propietario__nif',
+                     'propietario__email', 'metros_cuadrados', 'poligono', 'numero_parcela', 'poblacion__nombre')
     empty_value_display = '-'
     list_display_links = ('numero_parcela',)
     show_full_result_count = True
     list_max_show_all = 4000
     #list_per_page = 4000
+    inlines = [SectorTrabajoInline]
 
     # Make kml for each parcela and save their localizacion and url
     def save_model(self, request, obj, form, change):
@@ -108,10 +115,9 @@ admin.site.register(Parcela, ParcelaAdmin)
 class PropietarioAdmin(ImportExportModelAdmin):
     list_display = ['nombre', 'apellidos', 'apellidos2', 'poblacion', 'direccion', 'nif',
                     'telefono_fijo', 'telefono_movil', 'comentarios']
-    list_filter = ['nombre', 'apellidos', 'nif',
-                   'telefono_fijo', 'telefono_movil', 'comentarios']
+    list_filter = ['nombre']
     list_editable = ('poblacion',)
-    search_fields = ('nombre', 'apellidos', 'nif', 'poblacion',
+    search_fields = ('nombre', 'apellidos', 'nif', 'poblacion__nombre',
                      'telefono_fijo', 'telefono_movil', 'comentarios',)
     empty_value_display = '-'
     show_full_result_count = True
@@ -124,18 +130,20 @@ class SectorTrabajoAdmin(admin.ModelAdmin):
     search_fields = ('sector',)
     empty_value_display = '-'
     show_full_result_count = True
+    inlines = [SectorTrabajoInline]
 admin.site.register(SectorTrabajo, SectorTrabajoAdmin)
 
 class ProyectoAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'descripcion', 'comentarios']
-    list_filter = ['nombre', 'descripcion', 'comentarios']
+    list_filter = ['nombre']
     search_fields = ('nombre', 'descripcion', 'comentarios',)
     empty_value_display = '-'
     show_full_result_count = True
 admin.site.register(Proyecto, ProyectoAdmin)
 
 class EstadoAdmin(admin.ModelAdmin):
-    list_display = ['nombre']
+    list_display = ['nombre', 'color']
+    list_editable = ('color',)
     list_filter = ['nombre']
     search_fields = ('nombre',)
     empty_value_display = '-'
@@ -152,7 +160,7 @@ admin.site.register(Estado_Parcela_Trabajo, EstadoParcelaTrabajoAdmin)
 
 class PoblacionAdmin(ImportExportModelAdmin):
     list_display = ['codigo', 'nombre', 'provincia']
-    list_filter = ['codigo', 'nombre', 'provincia']
+    #list_filter = ['codigo', 'nombre', 'provincia']
     list_display_links = ('nombre',)
     search_fields = ('codigo', 'nombre', 'provincia',)
     empty_value_display = '-'
@@ -162,7 +170,7 @@ admin.site.register(Poblacion, PoblacionAdmin)
 class ProvinciaAdmin(ImportExportModelAdmin):
     list_display = ['codigo', 'nombre']
     #list_editable = ('codigo',)
-    list_filter = ['codigo', 'nombre']
+    #list_filter = ['codigo', 'nombre']
     list_display_links = ('nombre',)
     search_fields = ('codigo', 'nombre',)
     empty_value_display = '-'
@@ -170,9 +178,9 @@ class ProvinciaAdmin(ImportExportModelAdmin):
 admin.site.register(Provincia, ProvinciaAdmin)
 
 class PoblacionesFavoritasAdmin(admin.ModelAdmin):
-    list_display = ['user']
-    list_filter = ['user', 'poblacion']
-    search_fields = ('user', 'poblacion',)
+    list_display = ['user', 'poblaciones_favoritas']
+    #list_filter = ['user', 'poblacion']
+    search_fields = ('user__username', 'poblacion__nombre',)
     empty_value_display = '-'
     show_full_result_count = True
     exclude = ('user',)

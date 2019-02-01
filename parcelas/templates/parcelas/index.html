@@ -48,7 +48,7 @@
                             <option data-id="{{ f.poblacion__pk }}" value="{{ f.poblacion__codigo }}">{{ f.poblacion__nombre }}</option>
                         {% endfor %}
                     {% else %}
-                        <option data-id="" value="">No tiene favoritos</option>
+                        <option data-id="" value="no_favs">No tiene favoritos</option>
                     {% endif %}
                 </select>
 
@@ -234,6 +234,9 @@
         $('#inputPoblacion > option').each(function() {
             if($(this).text() == 'Tárbena') {
                 $(this).attr('selected', 'selected');
+            }
+            if($(this).val() == 'no_favs') {
+                $('#inputPoblacion').after('<span style="float:right;margin-top:-38px;margin-right:57px;font-size:20px;"><a style="color:#fff;" target="_blank" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/poblacionesfavoritas/add/">+</a></span>');
             }
         });
 

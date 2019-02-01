@@ -101,6 +101,9 @@ class PoblacionesFavoritas(TimeStampedModel):
     def __str__(self):
         return '{}'.format(self.user)
 
+    def poblaciones_favoritas(self):
+        return '\n'.join([str(p) for p in self.poblacion.all()])
+
 class Estado_Parcela_Trabajo(TimeStampedModel):
     nombre = models.CharField(max_length=250)
     porcentaje = models.CharField(max_length=250)

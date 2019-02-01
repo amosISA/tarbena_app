@@ -80,7 +80,6 @@ class ParcelaCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
     success_url = reverse_lazy('parcelas:index')
 
     def form_valid(self, form):
-        print(self.object)
         return super(ParcelaCreateView, self).form_valid(form)
 
 @permission_required('parcelas.can_add_parcela', raise_exception=True)

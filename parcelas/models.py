@@ -135,7 +135,7 @@ class Parcela(TimeStampedModel):
     url = models.TextField(blank=True, null=True)
 
     class Meta:
-        ordering = ["-created"]
+        ordering = ["propietario", "poligono"]
         verbose_name = 'Parcela'
         verbose_name_plural = "Parcelas"
 

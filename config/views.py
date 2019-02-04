@@ -15,6 +15,7 @@ from favourites.models import Favourite
 def index(request):
     if request.user.is_authenticated():
         favourites = Favourite.objects.all().prefetch_related('user').select_related('type')
+        print(request)
         return render(request, 'home/index.html', {'favourites': favourites})
     else:
         return HttpResponseRedirect(reverse('login'))

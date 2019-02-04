@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
 from django.contrib import admin
+from django.http import HttpResponse
 
 from import_export.admin import ImportExportModelAdmin
 from .models import Parcela, Propietario, SectorTrabajo, Estado, Proyecto, Poblacion, Estado_Parcela_Trabajo, Provincia, PoblacionesFavoritas
@@ -9,6 +10,74 @@ from .sites import my_admin_site
 import urllib.request
 import re
 import ssl
+import xlwt
+
+def export_xls(modeladmin, request, queryset):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=parcelas.xls'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet("Parcelas")
+
+    row_num = 0
+
+    columns = [
+        ('ID', 2000), ('Población', 4000), ('Polígono', 3000),
+        ('Parcela', 3000), ('Propietario', 16000),
+        ('Metros cuadrados', 3000), ('Estado', 3000), ('Estado parcela trabajo', 3000),
+    ]
+
+    font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center;pattern: pattern solid, \
+                                   fore-colour light_orange;border: left thin,right thin,top thin,bottom thin')
+    font_style.font.bold = True
+    font_style.alignment.wrap = 1
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num][0], font_style)
+        # set column width
+        ws.col(col_num).width = columns[col_num][1]
+
+    font_style = xlwt.XFStyle()
+    font_style.alignment.wrap = 1
+
+    for obj in queryset:
+        if obj.estado:
+            row_num += 1
+            row = [
+                str(obj.pk),
+                obj.poblacion.nombre,
+                obj.poligono,
+                obj.numero_parcela,
+                '{}, {} {}, {}, ({})'.format(obj.propietario.nif, obj.propietario.apellidos, obj.propietario.apellidos2, obj.propietario.nombre, obj.propietario.direccion),
+                obj.metros_cuadrados,
+                obj.estado.nombre,
+                obj.estado_parcela_trabajo.nombre
+            ]
+            for col_num in range(len(row)):
+                font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center ; pattern: pattern solid,\
+                                      fore-colour light_yellow;border: left thin,right thin,top thin,bottom thin')
+                ws.write(row_num, col_num, row[col_num], font_style)
+        else:
+            row_num += 1
+            row = [
+                str(obj.pk),
+                obj.poblacion.nombre,
+                obj.poligono,
+                obj.numero_parcela,
+                '{}, {} {}, {}, ({})'.format(obj.propietario.nif, obj.propietario.apellidos, obj.propietario.apellidos2,
+                                             obj.propietario.nombre, obj.propietario.direccion),
+                obj.metros_cuadrados,
+                '',
+                obj.estado_parcela_trabajo.nombre
+            ]
+            for col_num in range(len(row)):
+                font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center ; pattern: pattern solid,\
+                                                  fore-colour light_yellow;border: left thin,right thin,top thin,bottom thin')
+                ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response
+
+export_xls.short_description = "Exportar a Excel"
 
 class ParcelaInline(admin.TabularInline):
     model = Parcela
@@ -36,13 +105,25 @@ class ParcelaAdmin(ImportExportModelAdmin):
     #list_editable = ('localizacion', 'url',)
     list_filter = ['estado_parcela_trabajo']
     search_fields = ('propietario__nombre', 'propietario__apellidos', 'propietario__apellidos2', 'propietario__nif',
-                     'propietario__email', 'metros_cuadrados', 'poligono', 'numero_parcela', 'poblacion__nombre')
+                     'propietario__email', 'metros_cuadrados', 'poligono', 'numero_parcela', 'poblacion__nombre',
+                     'sector_trabajo__sector')
     empty_value_display = '-'
     list_display_links = ('numero_parcela',)
     show_full_result_count = True
     list_max_show_all = 4000
     #list_per_page = 4000
+
+    # https://medium.com/@hakibenita/things-you-must-know-about-django-admin-as-your-app-gets-bigger-6be0b0ee9614
+    list_select_related = (
+        'poblacion',
+        'propietario',
+        'estado',
+        'estado_parcela_trabajo',
+        'poblacion__provincia',
+    )
+
     inlines = [SectorTrabajoInline]
+    actions = [export_xls]
 
     # Make kml for each parcela and save their localizacion and url
     def save_model(self, request, obj, form, change):
@@ -116,12 +197,17 @@ class PropietarioAdmin(ImportExportModelAdmin):
     list_display = ['nombre', 'apellidos', 'apellidos2', 'poblacion', 'direccion', 'nif',
                     'telefono_fijo', 'telefono_movil', 'comentarios']
     list_filter = ['nombre']
-    list_editable = ('poblacion',)
+    #list_editable = ('poblacion',)
     search_fields = ('nombre', 'apellidos', 'nif', 'poblacion__nombre',
                      'telefono_fijo', 'telefono_movil', 'comentarios',)
     empty_value_display = '-'
     show_full_result_count = True
     inlines = [ParcelaInline]
+
+    list_select_related = (
+        'poblacion',
+        'poblacion__provincia',
+    )
 admin.site.register(Propietario, PropietarioAdmin)
 
 class SectorTrabajoAdmin(admin.ModelAdmin):
@@ -165,6 +251,10 @@ class PoblacionAdmin(ImportExportModelAdmin):
     search_fields = ('codigo', 'nombre', 'provincia',)
     empty_value_display = '-'
     show_full_result_count = True
+
+    list_select_related = (
+        'provincia',
+    )
 admin.site.register(Poblacion, PoblacionAdmin)
 
 class ProvinciaAdmin(ImportExportModelAdmin):
@@ -184,6 +274,10 @@ class PoblacionesFavoritasAdmin(admin.ModelAdmin):
     empty_value_display = '-'
     show_full_result_count = True
     exclude = ('user',)
+
+    list_select_related = (
+        'user',
+    )
 
     def save_model(self, request, obj, form, change):
         # save user because has a hidden field

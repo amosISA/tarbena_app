@@ -168,20 +168,25 @@
                         <div class="row">
                             <fieldset class="scheduler-border">
                                 <legend class="scheduler-border">Cuantías</legend>
-                                <p class="scheduler-border--item" style="float:left;width:33%;padding-right:5px;">
+                                <p class="scheduler-border--item" style="float:left;width:25%;padding-right:5px;">
                                     <!-- Cuantia inicio -->
                                     {{ form.cuantia_inicial.label_tag }}
                                     {{ form.cuantia_inicial|htmlattributes:"class:form-control" }}
                                 </p>
-                                <p class="scheduler-border--item" style="float:left;width:33%;padding-right:5px;">
+                                <p class="scheduler-border--item" style="float:left;width:25%;padding-right:5px;">
                                     <!-- Cuantia solicitada -->
                                     {{ form.cuantia_solicitada.label_tag }}
                                     {{ form.cuantia_solicitada|htmlattributes:"class:form-control" }}
                                 </p>
-                                <p class="scheduler-border--item" style="float:left;width:33%;">
+                                <p class="scheduler-border--item" style="float:left;width:25%;padding-right:5px;">
                                     <!-- Cuantia final -->
                                     {{ form.cuantia_final.label_tag }}
                                     {{ form.cuantia_final|htmlattributes:"class:form-control" }}
+                                </p>
+                                <p class="scheduler-border--item" style="float:left;width:25%;text-align:left;">
+                                    <!-- Porcentaje subvencionable -->
+                                    {{ form.porcentaje_subvencionable.label_tag }}
+                                    {{ form.porcentaje_subvencionable|htmlattributes:"class:form-control" }}
                                 </p>
 
                                 <!-- Sin cuantía -->

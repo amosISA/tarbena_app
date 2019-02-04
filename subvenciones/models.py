@@ -162,6 +162,7 @@ class Subvencion(TimeStampedModel, ModelDiffMixin):
     cuantia_inicial = models.CharField(max_length=250, blank=True, null=True)
     cuantia_solicitada = models.CharField(max_length=250, blank=True, null=True)
     cuantia_final = models.CharField(max_length=250, blank=True, null=True)
+    porcentaje_subvencionable = models.CharField(max_length=250, blank=True, null=True)
     sin_cuantia = models.BooleanField(default=False)
 
     descripcion = models.TextField(blank=True)

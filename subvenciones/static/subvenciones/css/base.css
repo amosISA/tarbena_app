@@ -746,7 +746,7 @@ a.alert_message:hover{color: grey;}
 }
 
 .forms_act_crea .ag_create_post_wrapper label {
-    display: inline-block;
+    /*display: inline-block;*/
     font-weight: normal;
     color: #000;
     margin-bottom: 0;

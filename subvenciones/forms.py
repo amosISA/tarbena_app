@@ -59,6 +59,7 @@ class SubvencionForm(forms.ModelForm):
         super(SubvencionForm, self).__init__(*args, **kwargs)
         users = User.objects.filter(Q(groups__name='staff') | Q(is_staff=True)).distinct()
         self.fields['responsable'].choices = [(user.pk, user.first_name) for user in users]
+        self.fields['porcentaje_subvencionable'].label = "% subv."
 
     class Meta:
         model = Subvencion

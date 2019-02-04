@@ -99,9 +99,9 @@ $(document).ready(function() {
         global_sector_by_id = $(this).attr('data-id');
 
         if (!!geoXml && !!geoXml.docs){
-                    for (var i=0;i<geoXml.docs.length;i++) {
-                        geoXml.hideDocument(geoXml.docs[i]);
-                    }
+            for (var i=0;i<geoXml.docs.length;i++) {
+                geoXml.hideDocument(geoXml.docs[i]);
+            }
         }
 
         geoXml = new geoXML3.parser({
@@ -189,7 +189,7 @@ $(document).ready(function() {
                         var full_kml = '<?xml version="1.0" encoding="ISO-8859-1"  ?>' +
                                            '<kml xmlns="http://www.opengis.net/kml/2.2">' +
                                        '<Document>' +
-                                           '<Style id="polygon_style"><LineStyle><color>' + value['estado'].color + '</color><width>2</width></LineStyle><PolyStyle><color>66' + value['estado'].color + '</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
+                                           '<Style id="polygon_style"><LineStyle><color>ffffff</color><width>2</width></LineStyle><PolyStyle><color>66ffffff</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
                                            '<name>' + ref_cat + '</name><Placemark>' + '<name><![CDATA[<font size=+1><a class="modify_parcela_anchor" target="_blank" title="Modificar parcela" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/parcela/' +  value['id'] + '/change">' + value['localizacion'] + '</a></font>]]></name>' +
                                            '<description><![CDATA[<font size=+0><A href="' + value['url']  + '" target="_blank">' + ref_cat + '</a></font><br><font size=+0><span style="margin-top:10px;"><strong>Propietario</strong>: <a class="modify_propietario_anchor" target="_blank" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/propietario/' +  value['propietario'].id + '/change">' + value['propietario'].apellidos + ' ' + value['propietario'].apellidos2 + ', ' + value['propietario'].nombre + ',<br> (' + value['propietario'].direccion + ')</a><br><strong>Estado: </strong>' + value['estado'].nombre + '<br><strong>m2: </strong>' + value['metros_cuadrados'] + ' m2<br><a class="anchor_autorizacion_parcelas" target="_blank" title="Obtener autorización" href="' + generete_some_url(value['id']) + '"><i class="fas fa-file-alt"></i></a></font>]]></description>' +
                                             '<Polygon>' + '<styleUrl>#polygon_style</styleUrl>' +
@@ -346,10 +346,29 @@ function functionAfterParseFindParcela(doc){
 }
 
 /* Pop up Ayuntamiento Parcelas */
+/* Pop up ayto parcelas if checkbox is checked */
+$('input#aytoParcelasCheck').click(function() {
+    if ($(this).is(':checked')) {
+        aytoParc();
+    } else {
+        if (!!geoXml && !!geoXml.docs){
+            for (var i=0;i<geoXml.docs.length;i++) {
+                geoXml.hideDocument(geoXml.docs[i]);
+            }
+        }
+    }
+});
+
+function moveToLocation(lat, lng){
+    var center = new google.maps.LatLng(lat, lng);
+    map.panTo(center);
+}
+
 function aytoParc() {
     geoXml = new geoXML3.parser({
         map: map,
         zoom: true,
+        disableAutoPan: true,
         suppressInfoWindows: false,
         afterParse: functionAfterParseFindParcela
     });
@@ -380,7 +399,7 @@ function aytoParc() {
                     var full_kml = '<?xml version="1.0" encoding="ISO-8859-1"  ?>' +
                                        '<kml xmlns="http://www.opengis.net/kml/2.2">' +
                                    '<Document>' +
-                                       '<Style id="polygon_style"><LineStyle><color>' + value['estado'].color + '</color><width>2</width></LineStyle><PolyStyle><color>66' + value['estado'].color + '</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
+                                       '<Style id="polygon_style"><LineStyle><color>6478E6F0</color><width>2</width></LineStyle><PolyStyle><color>6478E6F0</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
                                        '<name>' + ref_cat + '</name><Placemark>' + '<name><![CDATA[<font size=+1><a class="modify_parcela_anchor" target="_blank" title="Modificar parcela" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/parcela/' +  value['id'] + '/change">' + value['localizacion'] + '</a></font>]]></name>' +
                                        '<description><![CDATA[<font size=+0><A href="' + value['url']  + '" target="_blank">' + ref_cat + '</a></font><br><font size=+0><span style="margin-top:10px;"><strong>Propietario</strong>: <a class="modify_propietario_anchor" target="_blank" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/propietario/' +  value['propietario'].id + '/change">' + value['propietario'].apellidos + ' ' + value['propietario'].apellidos2 + ', ' + value['propietario'].nombre + ',<br> (' + value['propietario'].direccion + ')</a><br><strong>Estado: </strong>' + value['estado'].nombre + '<br><strong>m2: </strong>' + value['metros_cuadrados'] + ' m2<br><a class="anchor_autorizacion_parcelas" target="_blank" title="Obtener autorización" href="' + generete_some_url(value['id']) + '"><i class="fas fa-file-alt"></i></a></font>]]></description>' +
                                         '<Polygon>' + '<styleUrl>#polygon_style</styleUrl>' +
@@ -390,7 +409,7 @@ function aytoParc() {
                     var full_kml = '<?xml version="1.0" encoding="ISO-8859-1"  ?>' +
                                        '<kml xmlns="http://www.opengis.net/kml/2.2">' +
                                    '<Document>' +
-                                       '<Style id="polygon_style"><LineStyle><color>ffffff</color><width>2</width></LineStyle><PolyStyle><color>66ffffff</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
+                                       '<Style id="polygon_style"><LineStyle><color>6478E6F0</color><width>2</width></LineStyle><PolyStyle><color>6478E6F0</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
                                         '<name>' + ref_cat + '</name><Placemark>' + '<name><![CDATA[<font size=+1><a class="modify_parcela_anchor" target="_blank" title="Modificar parcela" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/parcela/' +  value['id'] + '/change">' + value['localizacion'] + '</a></font>]]></name>' +
                                         '<description><![CDATA[<font size=+0><A href="' + value['url']  + '" target="_blank">' + ref_cat + '</a></font><br><font size=+0><span style="margin-top:10px;"><strong>Propietario</strong>: <a class="modify_propietario_anchor" target="_blank" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/propietario/' +  value['propietario'].id + '/change">' + value['propietario'].apellidos + ' ' + value['propietario'].apellidos2 + ', ' + value['propietario'].nombre + ',<br> (' + value['propietario'].direccion + ')</a><br><strong>Estado: </strong><br><strong>m2: </strong>' + value['metros_cuadrados'] + ' m2<br><a class="anchor_autorizacion_parcelas" target="_blank" title="Obtener autorización" href="' + generete_some_url(value['id']) + '"><i class="fas fa-file-alt"></i></a></font>]]></description>' +
                                         '<Polygon>' + '<styleUrl>#polygon_style</styleUrl>' +
@@ -401,6 +420,8 @@ function aytoParc() {
             });
         }
     });
+
+    //moveToLocation( -34, 150 );
 }
 
 function kmlHighlightPoly(doc,poly,color) {

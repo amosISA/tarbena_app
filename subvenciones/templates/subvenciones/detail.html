@@ -148,20 +148,25 @@
                         <div class="row">
                             <fieldset class="scheduler-border">
                                 <legend class="scheduler-border">Cuantías</legend>
-                                <p class="scheduler-border--item" style="float:left;width:33%;padding-right:5px;">
+                                <p class="scheduler-border--item" style="float:left;width:25%;padding-right:5px;">
                                     <!-- Cuantia inicio -->
                                     <label for="id_cuantia_inicial">Inicio:</label>
                                     <input type="text" value="{% if subvencion.cuantia_inicial %}{{ subvencion.cuantia_inicial }}{% endif %}" id="id_cuantia_inicial" class="form-control" readonly>
                                 </p>
-                                <p class="scheduler-border--item" style="float:left;width:33%;padding-right:5px;">
+                                <p class="scheduler-border--item" style="float:left;width:25%;padding-right:5px;">
                                     <!-- Cuantia solicitada -->
                                     <label for="id_cuantia_solicitada">Solicitada:</label>
                                     <input type="text" value="{% if subvencion.cuantia_solicitada %}{{ subvencion.cuantia_solicitada }}{% endif %}" id="id_cuantia_solicitada" class="form-control" readonly>
                                 </p>
-                                <p class="scheduler-border--item" style="float:left;width:33%;">
+                                <p class="scheduler-border--item" style="float:left;width:25%;padding-right:5px;">
                                     <!-- Cuantia final -->
                                     <label for="id_cuantia_final">Final:</label>
                                     <input type="text" value="{% if subvencion.cuantia_final %}{{ subvencion.cuantia_final }}{% endif %}" id="id_cuantia_final" class="form-control" readonly>
+                                </p>
+                                <p class="scheduler-border--item" style="float:left;width:25%;">
+                                    <!-- Porcentaje subvencionable -->
+                                    <label for="id_porcentaje_subvencionable">Final:</label>
+                                    <input type="text" value="{% if subvencion.porcentaje_subvencionable %}{{ subvencion.porcentaje_subvencionable }}{% endif %}" id="id_porcentaje_subvencionable" class="form-control" readonly>
                                 </p>
 
                                 <!-- Sin cuantía -->

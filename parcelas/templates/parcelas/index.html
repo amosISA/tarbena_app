@@ -41,16 +41,35 @@
 
             <!-- Check parcel and download KML -->
             <div class="form-check-parcel">
-                <!-- Select Poblacion -->
-                <select id="inputPoblacion">
-                    {% if poblaciones_favs %}
-                        {% for f in poblaciones_favs %}
-                            <option data-id="{{ f.poblacion__pk }}" value="{{ f.poblacion__codigo }}">{{ f.poblacion__nombre }}</option>
-                        {% endfor %}
-                    {% else %}
-                        <option data-id="" value="no_favs">No tiene favoritos</option>
-                    {% endif %}
-                </select>
+                <div class="selects_for_poblaciones" style="margin-bottom: 10px;">
+                    <!-- Select Poblacion -->
+                    <select id="inputPoblacion">
+                    </select>
+
+                    <select id="inputPobl">
+                        {% if poblaciones_favs %}
+                            <optgroup label="Favoritos">
+                                {% for f in poblaciones_favs %}
+                                    {% if f.superfavorita == f.poblacion__pk %}
+                                        <option data-option="selected_option" data-id="{{ f.poblacion__pk }}" value="{{ f.poblacion__codigo }}">{{ f.poblacion__nombre }}</option>
+                                    {% else %}
+                                        <option data-id="{{ f.poblacion__pk }}" value="{{ f.poblacion__codigo }}">{{ f.poblacion__nombre }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </optgroup>
+                        {% else %}
+                            <option data-id="" value="no_favs">No tiene favoritos</option>
+                        {% endif %}
+
+                        <optgroup id="outside_select_all" label="Todos">
+                            {% if poblacion %}
+                                {% for p in poblacion %}
+                                    <option data-id="{{ p.pk }}" value="{{ p.codigo }}">{{ p.nombre }}</option>
+                                {% endfor %}
+                            {% endif %}
+                        </optgroup>
+                    </select>
+                </div>
 
                 <!--<label for="inputPoligono">Polígono</label>-->
                 <input type="text" id="inputPoligono" placeholder="Polígono" maxlength="4" size="3">
@@ -98,6 +117,8 @@
 {% endblock %}
 
 {% block js %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
         /*
             I declare the variables here because the url like this cant be declared
@@ -235,19 +256,30 @@
             $(".widget .button.collapse").toggleClass("in");
         });
 
-        /* Fix select poblaciones split and sort the elements */
-        $('#inputPoblacion > option').each(function() {
-            if($(this).text() == 'Tárbena') {
-                $(this).attr('selected', 'selected');
-            }
-            if($(this).val() == 'no_favs') {
-                $('#inputPoblacion').after('<span style="float:right;margin-top:-38px;margin-right:57px;font-size:20px;"><a style="color:#fff;" target="_blank" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/poblacionesfavoritas/add/">+</a></span>');
-            }
-        });
-
         $("#inputPoblacion").append($("#inputPoblacion option").remove().sort(function(a, b) {
             var at = $(a).text(), bt = $(b).text();
             return (at > bt)?1:((at < bt)?-1:0);
         }));
+
+        /* Select2 for dropdown poblaciones parcelas */
+        /*$("#inputPoblacion").select2({
+            width: '100%',
+            theme: 'classic'
+        });*/
+
+        /* Clone items form one select to other */
+        $('#inputPoblacion').append($('#inputPobl').html());
+        $('#inputPobl').remove();
+        $("#inputPoblacion option[data-option=selected_option]").attr('selected', 'selected');
+
+        /* Fix select poblaciones split and sort the elements */
+        $('#inputPoblacion > option').each(function() {
+            /*if($(this).text() == 'Tárbena') {
+                $(this).attr('selected', 'selected');
+            }*/
+            if($(this).val() == 'no_favs') {
+                $('#inputPoblacion').after('<span style="float:right;margin-top:-38px;margin-right:57px;font-size:20px;"><a style="color:#fff;" target="_blank" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/poblacionesfavoritas/add/">+</a></span>');
+            }
+        });
     </script>
 {% endblock %}

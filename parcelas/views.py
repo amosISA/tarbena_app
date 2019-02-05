@@ -32,8 +32,14 @@ def index(request):
         )
     proyectos = Proyecto.objects.all().prefetch_related('sector_trabajo')
     poblacion = Poblacion.objects.all().select_related('provincia')
-    poblaciones_favs = PoblacionesFavoritas.objects.all().prefetch_related('poblacion').select_related('user').values('poblacion__pk', 'poblacion__nombre', 'poblacion__codigo').filter(user=request.user)
-
+    poblaciones_favs = PoblacionesFavoritas.objects.all().prefetch_related(
+        'poblacion'
+    ).select_related(
+        'user', 'superfavorita'
+    ).values(
+        'superfavorita', 'poblacion__pk', 'poblacion__nombre', 'poblacion__codigo'
+    ).filter(user=request.user)
+    print(poblaciones_favs)
     return render(request,
                   'parcelas/index.html',
                   {'parcelas': parcelas,

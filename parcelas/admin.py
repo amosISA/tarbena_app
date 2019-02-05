@@ -268,7 +268,7 @@ class ProvinciaAdmin(ImportExportModelAdmin):
 admin.site.register(Provincia, ProvinciaAdmin)
 
 class PoblacionesFavoritasAdmin(admin.ModelAdmin):
-    list_display = ['user', 'poblaciones_favoritas']
+    list_display = ['user', 'poblaciones_favoritas', 'superfavorita']
     #list_filter = ['user', 'poblacion']
     search_fields = ('user__username', 'poblacion__nombre',)
     empty_value_display = '-'
@@ -277,6 +277,7 @@ class PoblacionesFavoritasAdmin(admin.ModelAdmin):
 
     list_select_related = (
         'user',
+        'superfavorita',
     )
 
     def save_model(self, request, obj, form, change):

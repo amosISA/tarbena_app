@@ -473,6 +473,13 @@
                 });
                 $('#id_se_relaciona_con input:checkbox').prop('checked', true);
             });
+
+            /* Clickable href on procedimiento if so */
+            var txtarea = $('textarea#id_procedimiento');
+
+            $('textarea#id_procedimiento, textarea#id_bases, textarea#id_solicitud').click(function() {
+                window.open($(this).text(),'_blank');
+            });
         });
     </script>
     <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>

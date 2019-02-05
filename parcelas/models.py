@@ -92,6 +92,7 @@ class SectorTrabajo(models.Model):
 class PoblacionesFavoritas(TimeStampedModel):
     user = models.ForeignKey(User, blank=True, null=True)
     poblacion = models.ManyToManyField(Poblacion, blank=True, related_name='poblacion')
+    superfavorita = models.ForeignKey(Poblacion, blank=True, null=True, related_name='poblacionsuperfav')
 
     class Meta:
         ordering = ["user"]

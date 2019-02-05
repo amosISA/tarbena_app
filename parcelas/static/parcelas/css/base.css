@@ -283,6 +283,7 @@ span.total_count_parcelas {
   background-color: #cccc0061; }
 
 #inputPoblacion {
+  width: 50%;
   display: block;
   margin-left: auto;
   margin-right: auto; }

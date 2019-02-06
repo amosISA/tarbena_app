@@ -18,12 +18,12 @@ def export_xls(modeladmin, request, queryset):
     row_num = 0
 
     columns = [
-        ('Tipo', 4000), ('Contratista', 15000), ('Base', 4000),
-        ('IVA', 3000), ('Total', 3000), ('Fecha', 3000)
+        ('Tipo', 3500), ('Contratista', 10000), ('Base', 2400),
+        ('IVA', 2300), ('Total', 2400), ('Fecha', 2500)
     ]
 
-    font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center;pattern: pattern solid, \
-                                   fore-colour light_orange;border: left thin,right thin,top thin,bottom thin')
+    font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center; \
+                                   border: left thin,right thin,top thin,bottom thin')
     font_style.font.bold = True
     font_style.alignment.wrap = 1
 
@@ -40,14 +40,14 @@ def export_xls(modeladmin, request, queryset):
         row = [
             obj.type.name,
             obj.contractor.name,
-            obj.base,
-            obj.iva,
-            obj.total,
+            obj.base.replace("€","").replace(" ",""),
+            obj.iva.replace("€","").replace(" ",""),
+            obj.total.replace("€","").replace(" ",""),
             obj.date_contract,
         ]
         for col_num in range(len(row)):
             if isinstance(row[col_num], datetime.date):
-                font_style = xlwt.easyxf('align: wrap yes,vert centre, horiz center;border: left thin,right thin,top thin,bottom thin\
+                font_style = xlwt.easyxf('border: left thin,right thin,top thin,bottom thin\
                                                      ', num_format_str='DD-MM-YYYY')
             ws.write(row_num, col_num, row[col_num], font_style)
 

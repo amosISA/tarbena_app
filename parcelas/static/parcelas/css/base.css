@@ -282,6 +282,9 @@ span.total_count_parcelas {
 .tr-table-intermedio {
   background-color: #cccc0061; }
 
+.tr-table-pendiente {
+  background-color: #d0d0d0; }
+
 #inputPoblacion {
   width: 50%;
   display: block;

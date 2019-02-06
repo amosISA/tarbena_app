@@ -60,12 +60,12 @@ class ContractsAdmin(admin.ModelAdmin):
     list_display = ['type', 'contractor', 'base',
                     'iva', 'total', 'date_contract']
     list_filter = ['type__name', 'contractor__name', 'date_contract']
-    list_editable = ('date_contract',)
+    #list_editable = ('date_contract',)
     search_fields = ('type__name', 'contractor__name', 'date_contract',)
     empty_value_display = '-'
     list_display_links = ('contractor',)
     show_full_result_count = True
-    raw_id_fields = ("cpv",)
+    #raw_id_fields = ("cpv",)
 
     actions = [export_xls]
 
@@ -73,6 +73,8 @@ class ContractsAdmin(admin.ModelAdmin):
     list_select_related = (
         'type',
         'contractor',
+        'aplic_presupuestaria',
+        'organo',
     )
 
 admin.site.register(Contract, ContractsAdmin)

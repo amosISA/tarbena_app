@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import CreateView
@@ -15,7 +16,6 @@ from favourites.models import Favourite
 def index(request):
     if request.user.is_authenticated():
         favourites = Favourite.objects.all().prefetch_related('user').select_related('type')
-        print(request)
         return render(request, 'home/index.html', {'favourites': favourites})
     else:
         return HttpResponseRedirect(reverse('login'))
@@ -33,7 +33,7 @@ def index_subvenciones_transparencia(request):
                   {'filter' : f})
 
 # --------------- User Registration --------------- #
-class RegisterView(CreateView):
+class RegisterView(LoginRequiredMixin, CreateView):
     form_class = RegisterForm
     template_name = "registration/register.html"
     success_url = reverse_lazy("index")

@@ -278,7 +278,11 @@
                 $(this).attr('selected', 'selected');
             }*/
             if($(this).val() == 'no_favs') {
-                $('#inputPoblacion').after('<span style="float:right;margin-top:-38px;margin-right:57px;font-size:20px;"><a style="color:#fff;" target="_blank" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/poblacionesfavoritas/add/">+</a></span>');
+                if (document.location.origin == 'http://localhost:8000') {
+                    $('#inputPoblacion').after('<span style="float:right;margin-top:-38px;margin-right:57px;font-size:20px;"><a style="color:#fff;" target="_blank" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/poblacionesfavoritas/add/">+</a></span>');
+                } else {
+                    $('#inputPoblacion').after('<span style="float:right;margin-top:-38px;margin-right:57px;font-size:20px;"><a style="color:#fff;" target="_blank" href="http://pau.tarbena.es/panel/parcelas/poblacionesfavoritas/add/">+</a></span>');
+                }
             }
         });
     </script>

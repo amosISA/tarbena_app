@@ -85,7 +85,10 @@ class SubvencionAdmin(admin.ModelAdmin):
                      'fin_justificacion', 'explicacion_justificacion',)
     empty_value_display = '-'
     list_display_links = ('nombre',)
+    date_hierarchy = 'fin'
     show_full_result_count = True
+    list_max_show_all = 4000
+    list_per_page = 4000
 
     # https://medium.com/@hakibenita/things-you-must-know-about-django-admin-as-your-app-gets-bigger-6be0b0ee9614
     list_select_related = (

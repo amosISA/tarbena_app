@@ -9,6 +9,7 @@ from .models import Subvencion, Estado, Area, Ente, Comment
 from .sites import my_admin_site
 
 import django_filters
+from django_filters.widgets import RangeWidget
 
 class EstadoForm(forms.ModelForm):
     class Meta:
@@ -26,14 +27,8 @@ class AreaForm(forms.ModelForm):
         fields = ["nombre", "ente"]
 
 class SubvencionFilter(django_filters.FilterSet):
-    fecha_publicacion = django_filters.CharFilter(
-        label='Año inicio',
-        lookup_expr='icontains',
-    )
-    fin = django_filters.CharFilter(
-        label='Año fin',
-        lookup_expr='icontains',
-    )
+    fecha_publicacion = django_filters.DateFromToRangeFilter(widget=RangeWidget(attrs={'type':'date'}))
+    fin = django_filters.DateFromToRangeFilter(widget=RangeWidget(attrs={'type':'date'}))
     estado = django_filters.filters.ModelMultipleChoiceFilter(
         label='Estado',
         field_name='estado__nombre',

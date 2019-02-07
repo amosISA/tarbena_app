@@ -30,25 +30,25 @@
     <div class="cd-filter">
         <form id="filtering-form-subs" action="" method="get" style="padding-left:15px;padding-right:15px;padding-bottom:15px;">
             <div class="row">
-                <div id="filter_fecha_publicacion" class="col form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
+                <div id="filter_fecha_publicacion" class="col form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;margin-bottom:0;">
                     {{ filter.form.fecha_publicacion|htmlattributes:"class:form-control" }}
                 </div>
                 <div id="filter_fin" class="col form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
                     {{ filter.form.fin|htmlattributes:"class:form-control" }}
                 </div>
-                <div id="filter_estado__nombre" class="col form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
+                <div id="filter_estado__nombre" class="col form-group title-create_post" style="margin-top: 29px;text-align:justify;font-weight:bold;font-size:0.9rem;">
                     <div class="custom-select" id="custom-select">Estado</div>
                     <div id="custom-select-option-box">
                         {{ filter.form.estado|htmlattributes:"class:custom-select-option" }}
                     </div>
                 </div>
-                <div class="col form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
+                <div class="col form-group title-create_post" style="margin-top: 29px;text-align:justify;font-weight:bold;font-size:0.9rem;">
                     {{ filter.form.ente|htmlattributes:"class:form-control" }}
                 </div>
-                <div class="col form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
+                <div class="col form-group title-create_post" style="margin-top: 29px;text-align:justify;font-weight:bold;font-size:0.9rem;">
                     {{ filter.form.area|htmlattributes:"class:form-control" }}
                 </div>
-                <div class="col form-group title-create_post" style="text-align:justify;font-weight:bold;font-size:0.9rem;">
+                <div class="col form-group title-create_post" style="margin-top: 29px;text-align:justify;font-weight:bold;font-size:0.9rem;">
                     <div class="custom-select" id="custom-select2">Responsable</div>
                     <div id="custom-select-option-box2">
                         {{ filter.form.responsable|htmlattributes:"class:custom-select-option2" }}
@@ -272,5 +272,16 @@
         $('ul#id_responsable input').each(function() {
             $(this).prop( "checked", false );
         });
+
+        // Filtering date ranges insert label before and placeholders
+        $('#filter_fecha_publicacion').prepend('<span style="font-size:13px;display:block;margin-left:2px;">Fecha publicación:</span>');
+        $('#filter_fin').prepend('<span style="font-size:13px;display:block;margin-left:2px;">Fecha fin:</span>');
+
+        // Remove text nodes from a specific element, date ranges divs filtering
+        $('#filter_fecha_publicacion, #filter_fin')
+            .contents()
+            .filter(function() {
+            return this.nodeType == 3; //Node.TEXT_NODE
+        }).remove();
     </script>
 {% endblock %}

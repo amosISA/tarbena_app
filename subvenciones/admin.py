@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 
 from .models import Subvencion, Estado, Colectivo, Ente, Area, Comment
@@ -75,9 +76,13 @@ export_xls.short_description = "Exportar a Excel"
 
 class SubvencionAdmin(admin.ModelAdmin):
     list_display = ['fecha_publicacion', 'nombre', 'fin', 'cuantia_inicial', 'cuantia_final',
-                    'estado', 'ente', 'user', subvencion_pdf]
-    list_filter = ['nombre', 'estado', 'colectivo', 'cuantia_inicial', 'cuantia_final', 'ente']
-    search_fields = ('nombre',)
+                    'estado', 'ente', subvencion_pdf]
+    list_filter = ['estado', 'colectivo', 'ente']
+    search_fields = ('nombre', 'estado__nombre', 'ente__nombre', 'area__nombre', 'colectivo__nombre', 'fin',
+                     'cuantia_inicial', 'cuantia_final', 'user__username', 'fecha_resolucion', 'fecha_envio',
+                     'responsable__username', 'leimotiv', 'porcentaje_subvencionable', 'descripcion',
+                     'gestiona_expediente', 'nombre_carpeta_drive', 'incio_ejecucion', 'fin_ejecucion',
+                     'fin_justificacion', 'explicacion_justificacion',)
     empty_value_display = '-'
     list_display_links = ('nombre',)
     show_full_result_count = True
@@ -119,6 +124,11 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('user', 'subvencion', 'contenido', 'active')
     list_filter = ('active', 'created', 'updated')
     search_fields = ('subvencion', 'contenido')
+
+    list_select_related = (
+        'user',
+        'subvencion',
+    )
 admin.site.register(Comment, CommentAdmin)
 
 

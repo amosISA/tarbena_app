@@ -103,7 +103,7 @@ input[type=checkbox], input[type=radio] {
   top: 50px;
   left: 0;
   width: 100%;
-  height: 108px;
+  height: 142px;
   background: #fff;
   box-shadow: 4px 4px 20px transparent;
   z-index: 2;
@@ -820,5 +820,14 @@ ul.breadcrumb__filtering .filtered_choice .filtered_choice_remove {
   margin-right: 4px; }
   ul.breadcrumb__filtering .filtered_choice .filtered_choice_remove:hover {
     color: #333; }
+
+/* Date inputs range date filtering index */
+#filter_fecha_publicacion {
+  margin-bottom: 0; }
+
+#id_fecha_publicacion_0, #id_fecha_publicacion_1, #id_fin_0, #id_fin_1 {
+  width: 170px;
+  height: 30px;
+  display: inline-block; }
 
 /*# sourceMappingURL=subvenciones.css.map */

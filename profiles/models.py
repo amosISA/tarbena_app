@@ -45,7 +45,7 @@ class Profile(TimeStampedModel):
     poblacion = models.CharField(max_length=250, blank=True)
     direccion = models.CharField(max_length=250, blank=True, null=True)
     comentarios = models.TextField(blank=True)
-    slug = models.SlugField(max_length=250, unique=True, default=None, blank=True, null=True)
+    #slug = models.SlugField(max_length=250, unique=True, default=None, blank=True, null=True)
 
     def __str__(self):
         return self.user.username
@@ -54,9 +54,9 @@ class Profile(TimeStampedModel):
     #     self.slug = slugify(self.user.first_name)
     #     super(Profile, self).save()
 
-    def get_absolute_url(self):
-        return reverse('subvenciones:subvencion_by_category',
-                       args=[self.slug])
+    # def get_absolute_url(self):
+    #     return reverse('subvenciones:subvencion_by_category',
+    #                    args=[self.slug])
 
     def send_activation_email(self):
         current_site = Site.objects.get_current().domain

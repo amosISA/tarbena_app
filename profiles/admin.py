@@ -12,10 +12,10 @@ class UserProfileInline(admin.StackedInline):
 class UsersAdmin(UserAdmin):
     inlines = [UserProfileInline]
 
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'slug']
-    list_editable = ('slug',)
-admin.site.register(Profile, ProfileAdmin)
+# class ProfileAdmin(admin.ModelAdmin):
+#     # list_display = ['user', 'slug']
+#     # list_editable = ('slug',)
+# admin.site.register(Profile, ProfileAdmin)
 
 admin.site.unregister(User)
 admin.site.register(User, UsersAdmin)

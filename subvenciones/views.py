@@ -92,14 +92,14 @@ def index_subvenciones(request, estado_slug=None):
             ).select_related(
                 'user', 'estado', 'ente', 'area', 'user__profile'
             ).filter(estado=estado))
-        elif Profile.objects.filter(slug=estado_slug).exists():
-            profile = get_object_or_404(Profile, slug=estado_slug)
-            f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
-                'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion',
-                'responsable__profile'
-            ).select_related(
-                'user', 'estado', 'ente', 'area', 'user__profile'
-            ).filter(responsable__profile=profile))
+        # elif Profile.objects.filter(slug=estado_slug).exists():
+        #     profile = get_object_or_404(Profile, slug=estado_slug)
+        #     f = SubvencionFilter(request.GET, queryset=Subvencion.objects.prefetch_related(
+        #         'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion',
+        #         'responsable__profile'
+        #     ).select_related(
+        #         'user', 'estado', 'ente', 'area', 'user__profile'
+        #     ).filter(responsable__profile=profile))
 
     return render(request,
                   'subvenciones/index.html',

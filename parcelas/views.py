@@ -66,7 +66,10 @@ def ajax_get_sectores(request):
     proyecto = request.GET.get('project_name', '99999')
 
     # get sectores that belong to a project
-    query = SectorTrabajo.objects.all().filter(proyecto=proyecto)
+    if request.user.is_superuser:
+        query = SectorTrabajo.objects.all().filter(proyecto=proyecto)
+    else:
+        query = SectorTrabajo.objects.all().filter(proyecto=proyecto).filter(usuarios__in=[request.user.pk])
     data = serializers.serialize('json', query)
     return HttpResponse(data, content_type="application/json")
 

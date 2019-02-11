@@ -80,6 +80,7 @@ class Estado(models.Model):
 
 class SectorTrabajo(models.Model):
     sector = models.CharField(max_length=250, blank=False)
+    usuarios = models.ManyToManyField(User, blank=True, related_name='sector_usuarios')
 
     class Meta:
         ordering = ["sector"]

@@ -24,7 +24,7 @@ import datetime
 import urllib.request
 import weasyprint
 
-@permission_required('parcelas.can_add_parcela', raise_exception=True)
+@permission_required('parcelas.acceder_parcelas', raise_exception=True)
 def index(request):
     parcelas = Parcela.objects.all().prefetch_related('sector_trabajo'
         ).select_related(

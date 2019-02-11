@@ -139,6 +139,9 @@ class Parcela(TimeStampedModel):
         ordering = ["propietario", "poligono"]
         verbose_name = 'Parcela'
         verbose_name_plural = "Parcelas"
+        permissions = (
+            ("acceder_parcelas", "Puede acceder a la app de parcelas"),
+        )
 
     def __str__(self):
         return '{}'.format(self.numero_parcela)

@@ -50,9 +50,9 @@ class Profile(TimeStampedModel):
     def __str__(self):
         return self.user.username
 
-    def save(self):
-        self.slug = slugify(self.user.first_name)
-        super(Profile, self).save()
+    # def save(self):
+    #     self.slug = slugify(self.user.first_name)
+    #     super(Profile, self).save()
 
     def get_absolute_url(self):
         return reverse('subvenciones:subvencion_by_category',

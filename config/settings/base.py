@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'gym',
     'contracts',
     'import_export',
+    'museo',
 ]
 
 REST_FRAMEWORK = {

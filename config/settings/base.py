@@ -102,7 +102,8 @@ TEMPLATES = [
                  os.path.join(BASE_DIR, 'subvenciones/templates'),
                  os.path.join(BASE_DIR, 'profiles/templates'),
                  os.path.join(BASE_DIR, 'parcelas/templates'),
-                 os.path.join(BASE_DIR, 'contracts/templates'),],
+                 os.path.join(BASE_DIR, 'contracts/templates'),
+                 os.path.join(BASE_DIR, 'museo/templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

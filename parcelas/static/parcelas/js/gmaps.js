@@ -338,15 +338,15 @@ function functionAfterParseFindParcela(doc){
     for (var j = 0; j < doc.length ; j++) { // Added by me to parse all kml files to the map
         geoXmlDoc = doc;
 
-        for (var i = 0; i < doc[j].gpolygons.length; i++) {
-            //console.log(doc[j].gpolygons[i]);
-            google.maps.event.addListener(doc[j].gpolygons[i], "mouseover", function() {
-                this.setOptions({fillOpacity: "0"});
-            });
-            google.maps.event.addListener(doc[j].gpolygons[i], "mouseout", function() {
-                this.setOptions({fillOpacity: ".7"});
-            });
-        }
+//        for (var i = 0; i < doc[j].gpolygons.length; i++) {
+//            //console.log(doc[j].gpolygons[i].fillOpacity);
+//            google.maps.event.addListener(doc[j].gpolygons[i], "mouseover", function() {
+//                this.setOptions({fillOpacity: "0"});
+//            });
+//            google.maps.event.addListener(doc[j].gpolygons[i], "mouseout", function() {
+//                this.setOptions({fillOpacity: "0.69"});
+//            });
+//        }
     }
 }
 

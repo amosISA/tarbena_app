@@ -59,4 +59,7 @@ class ParcelaForm(forms.ModelForm):
                     instance.save()
             if commit:
                 instance.save()
+
+        # If we don't save the m2m, the ManyToMany relation will be empty
+        self.save_m2m()
         return instance

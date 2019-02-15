@@ -39,10 +39,10 @@ def upload_location(instance, filename):
 
 class Museo(TimeStampedModel):
     n_inventari = models.CharField(max_length=250, blank=True, null=True)
-    nom = models.CharField(max_length=250, blank=True, null=True)
+    nom = models.CharField(max_length=250, default='')
     imatge = models.ImageField(blank=True, null=True, upload_to=upload_location)
     classe = models.ForeignKey(Classe, blank=True, null=True, related_name='museo_classe')
-    tipus = models.ForeignKey(Classe, blank=True, null=True, related_name='museo_tipus')
+    tipus = models.ForeignKey(Tipus, blank=True, null=True, related_name='museo_tipus')
     n_peces = models.IntegerField(blank=True, null=True)
     utilitat = models.CharField(max_length=250, blank=True, null=True)
     procedencia = models.CharField(max_length=250, blank=True, null=True)

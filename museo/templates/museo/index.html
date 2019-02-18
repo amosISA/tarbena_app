@@ -1,0 +1,58 @@
+{% extends "museo/base.html" %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+    <!-- Datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+{% endblock %}
+
+{% block title %}
+    Museo
+{% endblock %}
+
+{% block content %}
+
+    {% if museos %}
+        <table id="museoTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Nº inventari</th>
+                    <th>Nom</th>
+                    <th>Classe</th>
+                    <th>Tipus</th>
+                    <th>Nº peces</th>
+                    <th>Utilitat</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in museos %}
+                <tr>
+                    <td>{{ m.n_inventari }}</td>
+                    <td>{{ m.nom }}</td>
+                    <td>{% if m.classe.nom %}{{ m.classe.nom }}{% endif %}</td>
+                    <td>{% if m.tipus.nom %}{{ m.tipus.nom }}{% endif %}</td>
+                    <td>{% if m.n_peces %}{{ m.n_peces }}{% endif %}</td>
+                    <td>{% if m.utilitat %}{{ m.utilitat }}{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>No hay objetos registrados.</h2>
+    {% endif %}
+{% endblock %}
+
+{% block addscript %}
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#museoTable').DataTable({
+                "ordering": false,
+                "language": {
+                    url: "/static/home/location/es_ES.json"
+                },
+                "lengthMenu": [[-1], ["Todas"]],
+            });
+        } );
+    </script>
+{% endblock %}

@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'contracts',
     'import_export',
     'museo',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 REST_FRAMEWORK = {

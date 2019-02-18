@@ -35,27 +35,27 @@ def save_created_field(sender, instance, **kwargs):
 
     instance.created = datetime.now()
 
-@receiver(post_init, sender=models.Profile)
-def backup_image_path(sender, instance, **kwargs):
-    """" Delete image after uploading a new one """
-
-    instance._current_imagen_file = instance.avatar
-
-@receiver(post_save, sender=models.Profile)
-def delete_img_post_update(sender, instance, **kwargs):
-    """" Delete image after uploading a new one """
-
-    if hasattr(instance, '_current_imagen_file'):
-        if instance.avatar:
-            if instance._current_imagen_file != instance.avatar.path:
-                instance._current_imagen_file.delete(save=False)
-        else:
-            if instance._current_imagen_file:
-                instance._current_imagen_file.delete()
-
-@receiver(post_delete, sender=models.Profile)
-def delete_img_post_delete(sender, instance, *args, **kwargs):
-    """ Delete image after the profile user is deleted """
-
-    if instance.avatar:
-        delete_file(instance.avatar.path)
+# @receiver(post_init, sender=models.Profile)
+# def backup_image_path(sender, instance, **kwargs):
+#     """" Delete image after uploading a new one """
+#
+#     instance._current_imagen_file = instance.avatar
+#
+# @receiver(post_save, sender=models.Profile)
+# def delete_img_post_update(sender, instance, **kwargs):
+#     """" Delete image after uploading a new one """
+#
+#     if hasattr(instance, '_current_imagen_file'):
+#         if instance.avatar:
+#             if instance._current_imagen_file != instance.avatar.path:
+#                 instance._current_imagen_file.delete(save=False)
+#         else:
+#             if instance._current_imagen_file:
+#                 instance._current_imagen_file.delete()
+#
+# @receiver(post_delete, sender=models.Profile)
+# def delete_img_post_delete(sender, instance, *args, **kwargs):
+#     """ Delete image after the profile user is deleted """
+#
+#     if instance.avatar:
+#         delete_file(instance.avatar.path)

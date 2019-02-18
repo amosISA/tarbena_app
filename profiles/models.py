@@ -9,6 +9,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 
 from .utils import code_generator
+from .validators import file_size
 User = settings.AUTH_USER_MODEL
 
 # Create your models here.
@@ -37,7 +38,8 @@ class Profile(TimeStampedModel):
                                blank=True,
                                height_field="height_field",
                                width_field="width_field",
-                               default="")
+                               default="",
+                               validators=[file_size])
     height_field = models.IntegerField(default=0, blank=True, null=True)
     width_field = models.IntegerField(default=0, blank=True, null=True)
     telefono_fijo = models.CharField(max_length=250, blank=True, null=True)

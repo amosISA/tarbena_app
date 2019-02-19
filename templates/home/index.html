@@ -114,7 +114,7 @@
                         </div>
                         <div class="section-body">
                             <ul class="section-list" style="padding:0;">
-                                {% if request.user.is_suerpuser %}
+                                {% if request.user.is_superuser %}
                                 <!-- Subvenciones -->
                                 <li class="card-outer">
                                     <a href="{% url 'subvenciones:index' %}">

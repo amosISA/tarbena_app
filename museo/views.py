@@ -5,7 +5,6 @@ from .models import Museo
 
 # Create your views here.
 @login_required()
-@permission_required('subvenciones.can_add_subvencion', raise_exception=True)
 def index_museo(request):
     museos = Museo.objects.all().select_related(
         'tipus', 'classe'

@@ -66,6 +66,7 @@ class ContractsAdmin(admin.ModelAdmin):
     list_display_links = ('contractor',)
     show_full_result_count = True
     #raw_id_fields = ("cpv",)
+    date_hierarchy = 'date_contract'
 
     actions = [export_xls]
 

@@ -38,7 +38,7 @@ def upload_location(instance, filename):
     return os.path.join('museo/imatges/', datetime.datetime.now().date().strftime("%Y/%m/%d"), filename)
 
 class Museo(TimeStampedModel):
-    n_inventari = models.CharField(max_length=250, blank=True, null=True)
+    n_inventari = models.CharField(max_length=250, blank=True, null=True,  default=0)
     nom = models.CharField(max_length=250, default='')
     #imatge = models.ImageField(blank=True, null=True, upload_to=upload_location)
     classe = models.ForeignKey(Classe, blank=True, null=True, related_name='museo_classe')

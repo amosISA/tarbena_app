@@ -8,7 +8,7 @@ class ImatgeInline(admin.StackedInline):
     extra = 0
 
 class MuseoAdmin(admin.ModelAdmin):
-    list_display = ('n_inventari', 'nom', 'classe', 'tipus', 'utilitat', 'propietari')
+    list_display = ('nom', 'classe', 'tipus', 'utilitat', 'propietari')
     list_filter = ('classe', 'tipus')
     search_fields = ('classe__nom', 'tipus__nom')
 

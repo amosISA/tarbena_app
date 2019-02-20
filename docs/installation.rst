@@ -13,7 +13,7 @@ About the app
     - Manage subsidies
     - Manage parcels
     - Manage keys that belongs to the Town Hall of Tarbena
-    - Add any other app they think can resolve their daily problems
+    - Add any other apps they think that can resolve their daily problems
 
 Requirements
 ------------
@@ -55,3 +55,22 @@ Get ready (Windows)
     django-admin startproject src
     python manage.py migrate
     python manage.py startapp subvenciones
+
+Other ideas I want to add
+-------------------------
+**1. Django compressor for minifying assets**:
+
+- `django-compressor <https://django-compressor.readthedocs.io/en/stable/quickstart/#installation>`_
+- `django-pipeline <https://django-pipeline.readthedocs.io/en/latest/installation.html>`_
+
+**2. New app 'terceros' with extended user model**:
+
+- `Extend user model <https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html>`_
+
+**3. Pip functionality with** ``pipenv``
+
+- `pipenv github functionality <https://github.com/pypa/pipenv>`_
+
+**4. Key app with QR code made with React**
+
+**5. Library online app**

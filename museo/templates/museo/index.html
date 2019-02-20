@@ -37,7 +37,7 @@
                 {% for m in museos %}
                 <tr>
                     <td>{{ m.n_inventari }}</td>
-                    <td><a href="{% url 'admin:museo_museo_change' m.id %}" target="_blank">{{ m.nom }}</a></td>
+                    <td>{% if request.user.is_superuser %}<a href="{% url 'admin:museo_museo_change' m.id %}" target="_blank">{{ m.nom }}</a>{% else %}{{ m.nom }}{% endif %}</td>
                     <td>{% if m.classe.nom %}{{ m.classe.nom }}{% endif %}</td>
                     <td>{% if m.tipus.nom %}{{ m.tipus.nom }}{% endif %}</td>
                     <td>{% if m.n_peces %}{{ m.n_peces }}{% endif %}</td>
@@ -47,6 +47,8 @@
                     <td>{% if m.n_diposit_material %}{{ m.n_diposit_material }}{% endif %}</td>
                     <td>{% if m.descripcio_us %}{{ m.descripcio_us }}{% endif %}</td>
                     <td>{% if m.any_fabricacio %}{{ m.any_fabricacio }}{% endif %}</td>
+                    <td>{%  %}</td>
+                    <td></td>
                 </tr>
                 {% endfor %}
             </tbody>

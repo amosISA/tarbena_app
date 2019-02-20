@@ -24,6 +24,8 @@ Apps
 - **Contracts**: this app manages contracts, contractors, generate pdfs
 - **Gym**: town gym management
 - **Museo**: town museu management
+- **django-cleanup**: auto delete images when deleting object with realted image from the directories
+- **django-autocomplete-light**: in the app parcelas auto search propietarios in the bbdd
 
 Authentication
 ^^^^^^^^^^^^^^
@@ -161,6 +163,20 @@ Django Admin Interface
 | `https://djangopackages.org/grids/g/admin-styling/ <https://djangopackages.org/grids/g/admin-styling/>`_
 | `https://github.com/fabiocaccamo/django-admin-interface <https://github.com/fabiocaccamo/django-admin-interface>`_
 | You can choose your own theme!
+
+Django Cleanup
+^^^^^^^^^^^^^^
+| `https://github.com/un1t/django-cleanup <https://github.com/un1t/django-cleanup>`_
+| Files or images are auto delted when object related to them is also deleted without any signals
+
+Django Autocomplete Light v3
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+| `https://django-autocomplete-light.readthedocs.io/en/master/install.html <https://django-autocomplete-light.readthedocs.io/en/master/install.html>`_
+| In the app parcelas I use it for ajax search propietarios when the user create new Parcela
+
+Contracts
+^^^^^^^^^
+I use Adobe Acrobat PRO for creating powerfull PDFs with the custom fields (such as I did with parcelas app).
 
 smart-select
 ^^^^^^^^^^^^

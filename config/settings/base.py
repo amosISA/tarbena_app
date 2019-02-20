@@ -72,7 +72,7 @@ INSTALLED_APPS = [
     'import_export',
     'museo',
     'django_cleanup.apps.CleanupConfig',
-    'pipeline',
+    #'pipeline',
 ]
 
 REST_FRAMEWORK = {
@@ -268,21 +268,21 @@ MESSAGE_TAGS = {
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
 # Manage static files/assets with pipeline
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'pipeline.finders.PipelineFinder',
-)
-
-PIPELINE = {
-    'PIPELINE_ENABLED': True,
-    'STYLESHEETS': {
-        'museocss': {
-            'source_filenames': (
-              'museo/css/base.css',
-            ),
-            'output_filename': 'museo/css/nuevo.css',
-        },
-    }
-}
+# STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+# STATICFILES_FINDERS = (
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#     'pipeline.finders.PipelineFinder',
+# )
+#
+# PIPELINE = {
+#     'PIPELINE_ENABLED': True,
+#     'STYLESHEETS': {
+#         'museocss': {
+#             'source_filenames': (
+#               'museo/css/base.css',
+#             ),
+#             'output_filename': 'museo/css/nuevo.css',
+#         },
+#     }
+# }

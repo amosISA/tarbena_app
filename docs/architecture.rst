@@ -20,6 +20,10 @@ Apps
 - **smart-selects**: area-ente selects functionality
 - **django-notify-x**: django notification system activity
 - **django-markdown-editor**
+- **Favourites**: favourites of each user to appear in the index panel
+- **Contracts**: this app manages contracts, contractors, generate pdfs
+- **Gym**: town gym management
+- **Museo**: town museu management
 
 Authentication
 ^^^^^^^^^^^^^^

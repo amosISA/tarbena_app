@@ -26,6 +26,11 @@
                     <th>Tipus</th>
                     <th>Nº peces</th>
                     <th>Utilitat</th>
+                    <th>Procedencia</th>
+                    <th>Propietari</th>
+                    <th>Nº diposit material</th>
+                    <th>Descripció</th>
+                    <th>Any fabricació</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +42,11 @@
                     <td>{% if m.tipus.nom %}{{ m.tipus.nom }}{% endif %}</td>
                     <td>{% if m.n_peces %}{{ m.n_peces }}{% endif %}</td>
                     <td>{% if m.utilitat %}{{ m.utilitat }}{% endif %}</td>
+                    <td>{% if m.procedencia %}{{ m.procedencia }}{% endif %}</td>
+                    <td>{% if m.propietari %}{{ m.propietari }}{% endif %}</td>
+                    <td>{% if m.n_diposit_material %}{{ m.n_diposit_material }}{% endif %}</td>
+                    <td>{% if m.descripcio_us %}{{ m.descripcio_us }}{% endif %}</td>
+                    <td>{% if m.any_fabricacio %}{{ m.any_fabricacio }}{% endif %}</td>
                 </tr>
                 {% endfor %}
             </tbody>

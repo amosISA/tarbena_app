@@ -52,4 +52,4 @@ What is the doc directory about?
         Add my docs to readthedocs.io:
             - Create account there
             - Pin project from github and webhook him
-            - And we ready to go!
+            - And we are ready to go!

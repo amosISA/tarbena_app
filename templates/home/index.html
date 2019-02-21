@@ -114,6 +114,29 @@
                         </div>
                         <div class="section-body">
                             <ul class="section-list" style="padding:0;">
+                                {% if user|check_permission:'acceder_parcelas' or request.user.is_superuser %}
+                                    <!-- Parcelas -->
+                                    <li class="card-outer">
+                                        <a href="{% url 'parcelas:index' %}">
+                                            <div class="card_from">
+                                                <div class="card-preview-image-outer" style="background-image: url('{% static "home/img/apps/app_parcelas.png"%}')"></div>
+                                                <div class="card-details">
+                                                    <div class="card-host-name">Parcelas</div>
+                                                    <div class="card-text">
+                                                        <h4 class="card-title">Comprobación de Parcelas</h4>
+                                                    </div>
+                                                    <div class="card-context">
+                                                        <span class="card-context-icon icon icon-history-item" style="background-image: url('{% static "home/img/icons/history.svg"%}')"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="context-menu-button icon">
+                                            <span class="sr-only">Open context menu for Parcelas</span>
+                                        </button>
+                                    </li>
+                                {% endif %}
+
                                 {% if request.user.is_superuser %}
                                 <!-- Subvenciones -->
                                 <li class="card-outer">
@@ -133,27 +156,6 @@
                                     </a>
                                     <button class="context-menu-button icon">
                                         <span class="sr-only">Open context menu for Subvenciones</span>
-                                    </button>
-                                </li>
-
-                                <!-- Parcelas -->
-                                <li class="card-outer">
-                                    <a href="{% url 'parcelas:index' %}">
-                                        <div class="card_from">
-                                            <div class="card-preview-image-outer" style="background-image: url('{% static "home/img/apps/app_parcelas.png"%}')"></div>
-                                            <div class="card-details">
-                                                <div class="card-host-name">Parcelas</div>
-                                                <div class="card-text">
-                                                    <h4 class="card-title">Comprobación de Parcelas</h4>
-                                                </div>
-                                                <div class="card-context">
-                                                    <span class="card-context-icon icon icon-history-item" style="background-image: url('{% static "home/img/icons/history.svg"%}')"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <button class="context-menu-button icon">
-                                        <span class="sr-only">Open context menu for Parcelas</span>
                                     </button>
                                 </li>
 

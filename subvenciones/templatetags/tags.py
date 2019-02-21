@@ -114,3 +114,13 @@ def truncatesmart(value, limit=80):
 
     # Join the words and return
     return ' '.join(words) + '...'
+
+@register.filter()
+def check_permission(user, permission):
+    """
+    Check permissions in templates
+
+    """
+    if user.user_permissions.filter(codename = permission).exists():
+        return True
+    return False

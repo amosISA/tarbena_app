@@ -77,8 +77,8 @@ urlpatterns = [
     # Contracts
     url(r'^contratos/', include('contracts.urls', namespace='contracts')),
 
-    # Museo
-    url(r'^museo/', include('museo.urls', namespace='museo')),
+    # Museu
+    url(r'^museu/', include('museo.urls', namespace='museo')),
 ]
 
 if settings.DEBUG:

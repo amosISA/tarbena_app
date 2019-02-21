@@ -4,7 +4,7 @@ from django.shortcuts import render
 from .models import Museo
 
 # Create your views here.
-@login_required()
+#@login_required()
 def index_museo(request):
     museos = Museo.objects.all().select_related(
         'tipus', 'classe'

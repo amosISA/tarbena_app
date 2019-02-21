@@ -282,7 +282,11 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 #             'source_filenames': (
 #               'museo/css/base.css',
 #             ),
-#             'output_filename': 'museo/css/nuevo.css',
+#             'output_filename': 'museo/css/base.min.css',
 #         },
 #     }
 # }
+#
+# PIPELINE_COMPILERS = (
+#     'pipeline.compilers.less.LessCompiler',
+# )

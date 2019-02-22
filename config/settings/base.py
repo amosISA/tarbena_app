@@ -268,6 +268,9 @@ MESSAGE_TAGS = {
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
 # Manage static files/assets with pipeline
+#PIPELINE_YUGLIFY_BINARY = 'C:/Users/AMOS/AppData/Roaming/npm/node_modules/yuglify/bin/yuglify'
+# COMPRESS_CSS_FILTERS = ["compressor.filters.yuglify.YUglifyCSSFilter"]
+# COMPRESS_JS_FILTERS = ["compressor.filters.yuglify.YUglifyJSFilter"]
 # STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 # STATICFILES_FINDERS = (
 #     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -288,5 +291,5 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 # }
 #
 # PIPELINE_COMPILERS = (
-#     'pipeline.compilers.less.LessCompiler',
+#     'pipeline.compilers.sass.SASSCompiler',
 # )

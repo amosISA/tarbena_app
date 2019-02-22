@@ -1,0 +1,555 @@
+{% extends "museo/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ m.nom }}
+{% endblock %}
+
+{% block navbar %}
+    {% include 'museo/snippets/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+{% load tags %}
+
+<div style="width:800px; margin:0 auto;">
+   <table style="border-collapse: collapse;width:800px; margin:0 auto;">
+       <tbody>
+           <tr style="height: 59.5pt;">
+               <td style="width: 107.8pt; border-left: 0.75pt solid #000000; border-top: 0.75pt solid #000000;border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top;">
+                   <p class="Standard" style="text-align: center;">
+                       <img src="https://myfiles.space/23568_6a6454cfbb9c23fc/1550822457_fitxa-barrina-de-sembrar-bueno-copy/1550822457_fitxa-barrina-de-sembrar-bueno-copy.001.jpg" alt="" />
+                   </p>
+               </td>
+               <td style="width: 241.7pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #f3f3f3;">
+                   <h1 style="text-align:center;">
+                       <strong>Amics des Museu T&agrave;rbena</strong>
+                   </h1>
+                   <h5 style="text-align:center;">
+                       <strong>Museu Etnol&ograve;gic</strong>
+                   </h5>
+               </td>
+               <td style="width: 128.5pt; border: 0.75pt solid #000000; padding-right: 3.12pt; padding-left: 3.12pt; vertical-align: top;">
+                   <h3 style="margin-bottom: 0pt; text-align: center; line-height: 16pt;">
+                       <img style="float: left;" src="https://myfiles.space/23568_6a6454cfbb9c23fc/1550822457_fitxa-barrina-de-sembrar-bueno-copy/1550822457_fitxa-barrina-de-sembrar-bueno-copy.002.png" alt="" />
+                   </h3>
+               </td>
+           </tr>
+       </tbody>
+   </table>
+   <h3 style="line-height: 16pt;">&nbsp;</h3>
+   <table border="1" width="385" cellspacing="0" cellpadding="5" style="width:800px; margin:0 auto;">
+       <colgroup>
+           <col width="138" />
+           <col width="225" />
+       </colgroup>
+       <tbody>
+           <tr>
+               <td colspan="2" valign="TOP" width="373" height="25">
+                   <p lang="ca-ES" align="CENTER">
+                       <span style="color: #000000;">
+                           <span style="font-family: Verdana, sans-serif;">
+                               <span style="font-size: x-large;">
+                                   <em>
+                                       <strong>CATALOGACI&Oacute; PECES</strong>
+                                   </em>
+                               </span>
+                           </span>
+                       </span>
+                   </p>
+               </td>
+           </tr>
+           <tr valign="TOP">
+               <td bgcolor="#d9d9d9" width="138" height="26">
+                   <p lang="ca-ES" align="CENTER">
+                       <span style="font-family: Verdana, sans-serif;">
+                           <span style="font-size: small;">
+                               <strong>N&ordm;. INVENTARI</strong>
+                           </span>
+                       </span>
+                   </p>
+               </td>
+               <td width="225">
+                   <p lang="ca-ES" align="CENTER">
+                       <span style="color: #000000;">
+                           <span style="font-family: Arial, sans-serif;">
+                               <span style="font-size: medium;">{% if museu.n_inventari %}{{ museu.n_inventari }}{% endif %}</span>
+                           </span>
+                       </span>
+                   </p>
+               </td>
+           </tr>
+           <tr valign="TOP">
+               <td bgcolor="#d9d9d9" width="138" height="24">
+                   <p lang="ca-ES" align="CENTER">
+                       <span style="font-family: Verdana, sans-serif;">
+                           <span style="font-size: small;">
+                               <strong>NOM</strong>
+                           </span>
+                       </span>
+                   </p>
+               </td>
+               <td width="225">
+                   <p lang="ca-ES" align="CENTER">
+                       <span style="color: #000000;">
+                           <span style="font-family: Arial, sans-serif;">
+                               <span style="font-size: medium;">{% if museu.nom %}{{ museu.nom }}{% endif %}</span>
+                           </span>
+                       </span>
+                   </p>
+               </td>
+           </tr>
+           <tr valign="TOP">
+               <td bgcolor="#d9d9d9" width="138" height="29">
+                   <p lang="ca-ES" align="CENTER">
+                       <span style="font-family: Verdana, sans-serif;">
+                           <span style="font-size: small;">
+                               <strong>CLASSE</strong>
+                           </span>
+                       </span>
+                   </p>
+               </td>
+               <td width="225">
+                   <p lang="ca-ES" align="CENTER">
+                       <span style="color: #000000;">
+                           <span style="font-family: Arial, sans-serif;">
+                               <span style="font-size: medium;">{% if museu.classe.nom %}{{ museu.classe.nom }}{% endif %}</span>
+                           </span>
+                       </span>
+                   </p>
+               </td>
+           </tr>
+           <tr valign="TOP">
+               <td bgcolor="#d9d9d9" width="138" height="18">
+                   <p lang="ca-ES" align="CENTER">
+                       <span style="font-family: Verdana, sans-serif;">
+                           <span style="font-size: small;">
+                               <strong>TIPUS</strong>
+                           </span>
+                       </span>
+                   </p>
+               </td>
+               <td width="225">
+                   <p lang="ca-ES" align="CENTER">
+                       <span style="color: #000000;">
+                           <span style="font-family: Arial, sans-serif;">
+                               <span style="font-size: medium;">{% if museu.tipus.nom %}{{ museu.tipus.nom }}{% endif %}</span>
+                           </span>
+                       </span>
+                   </p>
+               </td>
+           </tr>
+           <tr valign="TOP">
+               <td bgcolor="#d9d9d9" width="138" height="25">
+                   <p lang="ca-ES" align="CENTER">
+                       <span style="font-family: Verdana, sans-serif;">
+                           <span style="font-size: small;">
+                               <strong>N&ordm;. PECES</strong>
+                           </span>
+                       </span>
+                   </p>
+               </td>
+               <td bgcolor="#ffffff" width="225">
+                   <p lang="ca-ES" align="CENTER">
+                       <span style="color: #000000;">
+                           <span style="font-family: Arial, sans-serif;">
+                               <span style="font-size: medium;">{% if museu.n_peces %}{{ museu.n_peces }}{% endif %}</span>
+                           </span>
+                       </span>
+                   </p>
+               </td>
+           </tr>
+           <tr valign="TOP">
+               <td bgcolor="#d9d9d9" width="138" height="28">
+                   <p lang="ca-ES" align="CENTER">
+                       <span style="font-family: Verdana, sans-serif;">
+                           <span style="font-size: small;">
+                               <strong>UTILITAT</strong>
+                           </span>
+                       </span>
+                   </p>
+               </td>
+               <td width="225">
+                   <p lang="ca-ES" align="CENTER">
+                       <span style="color: #000000;">
+                           <span style="font-family: Arial, sans-serif;">
+                               <span style="font-size: medium;">{% if museu.utilitat %}{{ museu.utilitat }}{% endif %}</span>
+                           </span>
+                       </span>
+                   </p>
+               </td>
+           </tr>
+       </tbody>
+   </table>
+   <p class="Textbody" style="line-height: 16pt;">
+       <strong>
+           <span style="font-size: 1pt;">&nbsp;</span>
+       </strong>
+   </p>
+   <table style="width:800px; margin:0 auto;border-collapse: collapse;">
+       <tbody>
+           <tr style="height: 26.4pt;">
+               <td style="width: 109.75pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;">
+                   <p class="NormalWeb" style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0pt; text-align: center;">
+                       <strong>NOM</strong>
+                   </p>
+               </td>
+               <td style="width: 158.75pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top;" colspan="6">
+                   <p class="Standard" style="text-align: center; font-size: 13pt;">
+                       <span style="font-family: Arial;">{% if museu.nom %}{{ museu.nom }}{% endif %}</span>
+                   </p>
+               </td>
+               <td style="width: 47pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;" colspan="3">
+                   <p class="NormalWeb" style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0pt; text-align: center;">
+                       <strong>TIPUS</strong>
+                   </p>
+               </td>
+               <td style="width: 154.95pt; border: 0.75pt solid #000000; padding-right: 3.12pt; padding-left: 3.12pt; vertical-align: top;" colspan="11">
+                   <p class="Standard" style="text-align: center; font-size: 13pt;">
+                       <span style="font-family: Arial;">{% if museu.tipus.nom %}{{ museu.tipus.nom }}{% endif %}</span>
+                   </p>
+               </td>
+           </tr>
+           <tr style="height: 26.65pt;">
+               <td style="width: 109.75pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;">
+                   <p class="NormalWeb" style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0pt; text-align: center;">
+                       <strong>PROCED&Egrave;NCIA</strong>
+                   </p>
+               </td>
+               <td style="width: 203.75pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top;" colspan="8">
+                   <p class="NormalWeb" style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0pt; text-align: center;">
+                       <span style="font-family: Arial; font-size: 13pt;">{% if museu.procedencia %}{{ museu.procedencia }}{% endif %}</span>
+                   </p>
+               </td>
+               <td style="width: 83pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;" colspan="7">
+                   <p class="NormalWeb" style="margin-bottom: 0pt; text-indent: 0pt; text-align: center;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman';">EXPOSADA</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 11pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;">
+                   <p class="NormalWeb" style="margin-bottom: 0pt; text-indent: 0pt;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman';">SI</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 11pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top;">
+                   <p class="NormalWeb" style="margin-bottom: 0pt; text-indent: 0pt;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman';">{% if museu.exposada %}X{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 20pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;" colspan="2">
+                   <p class="NormalWeb" style="margin-bottom: 0pt; text-indent: 0pt;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman';">NO</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 10.95pt; border: 0.75pt solid #000000; padding-right: 3.12pt; padding-left: 3.12pt; vertical-align: top;">
+                   <p class="NormalWeb" style="margin-bottom: 0pt; text-align: center;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 12pt;">{% if not museu.exposada %}X{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+           </tr>
+           <tr style="height: 12pt;">
+               <td style="width: 109.75pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;" rowspan="2">
+                   <p class="NormalWeb" style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0pt; text-align: center;">
+                       <strong>PROPIETARI</strong>
+                   </p>
+               </td>
+               <td style="width: 149.75pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top;" colspan="5" rowspan="2">
+                   <p class="NormalWeb" style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0pt; text-align: center;">
+                       <span style="font-family: Arial; font-size: 13pt;">{% if museu.propietari %}{{ museu.propietari }}{% endif %}</span>
+                   </p>
+               </td>
+               <td style="width: 56pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #cccccc;" colspan="4" rowspan="2">
+                   <p class="NormalWeb" style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0pt; text-align: center;">
+                       <strong>DONACIO</strong>
+                   </p>
+               </td>
+               <td style="width: 20pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #f3f3f3;" colspan="2">
+                   <p class="NormalWeb" style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0pt; text-align: center;">
+                       <strong>SI</strong>
+                   </p>
+               </td>
+               <td style="width: 20pt; border-top: 0.75pt solid #000000; border-left: 0.75pt solid #000000; border-bottom: 0.75pt solid #000000; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top;" colspan="3">
+                   <p class="NormalWeb" style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0pt; text-align: center;">
+                       <strong>NO</strong>
+                   </p>
+               </td>
+               <td style="width: 100.95pt; border: 0.75pt solid #000000; padding-right: 3.12pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;" colspan="6">
+                   <p class="NormalWeb" style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0pt;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 8pt;">N&ordm; DIPOSIT MATERIAL</span>
+                       </strong>
+                   </p>
+               </td>
+           </tr>
+           <tr style="height: 14.25pt;">
+               <td style="width: 20pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #f3f3f3;" colspan="2">
+                   <p style="margin-top: 14pt; margin-bottom: 0pt; text-indent: 21.6pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">{% if museu.donacio %}X{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 20pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top;" colspan="3">
+                   <p style="margin-top: 14pt; margin-bottom: 0pt; text-indent: 21.6pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 12pt;">{% if not museu.donacio %}X{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 100.95pt; border-style: solid; border-width: 0.75pt; padding-right: 3.12pt; padding-left: 3.12pt; vertical-align: top;" colspan="6">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; widows: 0; orphans: 0; font-size: 13pt;">
+                       <span style="font-family: Arial;">{% if museu.n_diposit_material %}{{ museu.n_diposit_material }}{% endif %}</span>
+                   </p>
+               </td>
+           </tr>
+           <tr style="height: 64.5pt;">
+               <td style="width: 109.75pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 12pt; color: #666666;">&nbsp;</span>
+                       </strong>
+                   </p>
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">DESCRIPCI&Oacute;</span>
+                       </strong>
+                   </p>
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">&Uacute;S</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 374.7pt; border-style: solid; border-width: 0.75pt; padding-right: 3.12pt; padding-left: 3.12pt; vertical-align: top;" colspan="20">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: justify; line-height: 16pt; widows: 0; orphans: 0;">
+                       <span style="font-family: Arial; font-size: 13pt;">{% if museu.descripcio_us %}{{ museu.descripcio_us }}{% endif %}</span>
+                   </p>
+               </td>
+           </tr>
+           <tr style="height: 22.2pt;">
+               <td style="width: 109.75pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">MESURES (cm.)</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 43.75pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #e6e6e6;">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">LLARG</span>
+                       </strong>
+                   </p>
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">ALT</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 30.8pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top;">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 12pt;">{% if museu.mesura_llarg_alt %}{{ museu.mesura_llarg_alt }}{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 45.35pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #e6e6e6;" colspan="2">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">AMPLE</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 30.8pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top;" colspan="3">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 12pt;">{% if museu.mesura_ample %}{{ museu.mesura_ample }}{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 39.7pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #e6e6e6;" colspan="3">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">GRO&Ccedil;</span>
+                       </strong>
+                   </p>
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">FONS</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 32.8pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top;" colspan="3">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 12pt;">{% if museu.mesura_grueso_fons %}{{ museu.mesura_grueso_fons }}{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 71.2pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #e6e6e6;" colspan="5">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">DI&Agrave;METRE</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 31.3pt; border-style: solid; border-width: 0.75pt; padding-right: 3.12pt; padding-left: 3.12pt; vertical-align: top;" colspan="2">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 12pt;">{% if museu.mesura_diametre %}{{ museu.mesura_diametre }}{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+           </tr>
+           <tr style="height: 30.9pt;">
+               <td style="width: 109.75pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">MATERIAL/S DE FABRICACI&Oacute;</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 374.7pt; border-style: solid; border-width: 0.75pt; padding-right: 3.12pt; padding-left: 3.12pt; vertical-align: top;" colspan="20">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: justify; line-height: 16pt; widows: 0; orphans: 0;">
+                       <span style="font-family: Arial; font-size: 12pt;">{% if museu.material_fabricacio %}{{ museu.material_fabricacio }}{% endif %}</span>
+                   </p>
+               </td>
+           </tr>
+           <tr style="height: 32.95pt;">
+               <td style="width: 109.75pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">T&Egrave;CNICA DE FABRICACI&Oacute;</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 374.7pt; border-style: solid; border-width: 0.75pt; padding-right: 3.12pt; padding-left: 3.12pt; vertical-align: top;" colspan="20">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 12pt;">{% if museu.tecnica_fabricacio %}{{ museu.tecnica_fabricacio }}{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+           </tr>
+           <tr style="height: 30.9pt;">
+               <td style="width: 109.75pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">ANY DE FABRICACI&Oacute;</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 149.75pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top;" colspan="5">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 12pt;">{% if museu.any_fabricacio %}{{ museu.any_fabricacio }}{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 90.35pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;" colspan="7">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">ANY DE US</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 120.6pt; border-style: solid; border-width: 0.75pt; padding-right: 3.12pt; padding-left: 3.12pt; vertical-align: top;" colspan="8">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 12pt;">{% if museu.any_us %}{{ museu.any_us }}{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+           </tr>
+           <tr style="height: 26.7pt;">
+               <td style="width: 109.75pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">RESTAURACI&Oacute;</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 374.7pt; border-style: solid; border-width: 0.75pt; padding-right: 3.12pt; padding-left: 3.12pt; vertical-align: top;" colspan="20">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 12pt;">{% if museu.restauracio %}{{ museu.restauracio }}{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+           </tr>
+           <tr style="height: 36.05pt;">
+               <td style="width: 109.75pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: Verdana; font-size: 10pt;">ESTAT DE CONSERVACI&Oacute;</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 131.75pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top;" colspan="3">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 12pt;">{% if museu.estat_conservacio %}{{ museu.estat_conservacio }}{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 119.45pt; border-top-style: solid; border-top-width: 0.75pt; border-left-style: solid; border-left-width: 0.75pt; border-bottom-style: solid; border-bottom-width: 0.75pt; padding-right: 3.5pt; padding-left: 3.12pt; vertical-align: top; background-color: #d9d9d9;" colspan="10">
+                   <p style="margin-top: 0pt; margin-bottom: 0pt; text-align: center; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 10pt;">DATA CATALOGACI&Oacute;</span>
+                       </strong>
+                   </p>
+               </td>
+               <td style="width: 109.5pt; border-style: solid; border-width: 0.75pt; padding-right: 3.12pt; padding-left: 3.12pt; vertical-align: top;" colspan="7">
+                   <p style="margin-top: 14pt; margin-bottom: 0pt; text-align: justify; line-height: 16pt; widows: 0; orphans: 0;">
+                       <strong>
+                           <span style="font-family: 'Times New Roman'; font-size: 12pt;">{% if museu.data_catalogacio %}{{ museu.data_catalogacio }}{% endif %}</span>
+                       </strong>
+                   </p>
+               </td>
+           </tr>
+           <tr style="height: 0pt;">
+               <td style="width: 116.75pt;">&nbsp;</td>
+               <td style="width: 50.75pt;">&nbsp;</td>
+               <td style="width: 37.8pt;">&nbsp;</td>
+               <td style="width: 50.2pt;">&nbsp;</td>
+               <td style="width: 2.15pt;">&nbsp;</td>
+               <td style="width: 15.85pt;">&nbsp;</td>
+               <td style="width: 9pt;">&nbsp;</td>
+               <td style="width: 12.95pt;">&nbsp;</td>
+               <td style="width: 32.05pt;">&nbsp;</td>
+               <td style="width: 9pt;">&nbsp;</td>
+               <td style="width: 5.65pt;">&nbsp;</td>
+               <td style="width: 21.35pt;">&nbsp;</td>
+               <td style="width: 7.35pt;">&nbsp;</td>
+               <td style="width: 11.1pt;">&nbsp;</td>
+               <td style="width: 8.55pt;">&nbsp;</td>
+               <td style="width: 27pt;">&nbsp;</td>
+               <td style="width: 18pt;">&nbsp;</td>
+               <td style="width: 18pt;">&nbsp;</td>
+               <td style="width: 6.65pt;">&nbsp;</td>
+               <td style="width: 20.35pt;">&nbsp;</td>
+               <td style="width: 17.95pt;">&nbsp;</td>
+           </tr>
+       </tbody>
+   </table>
+   <p style="margin-top: 0pt; margin-bottom: 0pt; widows: 0; orphans: 0; font-size: 12pt;">
+       <span style="font-family: 'Times New Roman';">&nbsp;</span>
+   </p>
+</div>
+
+<div style="width:800px; margin:0 auto;">
+   {% for m in museu.imatges.all %}
+   <img src="{{ m.imatge.url }}" width="150" height="150">
+   {% endfor %}
+</div>
+{% endblock %}

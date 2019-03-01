@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'contracts',
     'import_export',
     'museo',
+    'terceros',
     'django_cleanup.apps.CleanupConfig',
     #'pipeline',
 ]

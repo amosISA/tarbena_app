@@ -33,6 +33,8 @@ class Tipus(TimeStampedModel):
 
     class Meta:
         ordering = ['nom',]
+        verbose_name = 'Tipus'
+        verbose_name_plural = "Tipus"
 
 def upload_location(instance, filename):
     return os.path.join('museo/imatges/', datetime.datetime.now().date().strftime("%Y/%m/%d"), filename)

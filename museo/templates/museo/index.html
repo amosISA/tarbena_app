@@ -37,8 +37,8 @@
                 {% for m in museos %}
                 <tr>
                     <!-- Para el enlace a admin: {% url 'admin:museo_museo_change' m.id %}-->
-                    <td>{% if request.user.is_staff %}<a href="{% url 'museo:museu_detail' id=m.id %}" target="_blank">{{ m.n_inventari }}</a>{% else %}{{ m.n_inventari }}{% endif %}</td>
-                    <td>{% if m.nom %}{{ m.nom }}{% endif %}</td>
+                    <td>{% if m.n_inventari %}{{ m.n_inventari }}{% endif %}</td>
+                    <td>{% if m.nom %}<a href="{% url 'museo:museu_detail' id=m.id %}" target="_blank">{{ m.nom }}</a>{% endif %}</td>
                     <td>{% if m.classe.nom %}{{ m.classe.nom }}{% endif %}</td>
                     <td>{% if m.tipus.nom %}{{ m.tipus.nom }}{% endif %}</td>
                     <td>{% if m.n_peces %}{{ m.n_peces }}{% endif %}</td>

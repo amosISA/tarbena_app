@@ -12,6 +12,9 @@
                         <li class="custom-home-navbar__li menu">
                             <a href="#" class="custom-home-navbar__li__anchor"></a>
                         </li>
+                        <li class="custom-home-navbar__li menu">
+                            <p class="navbar-text" style="margin: 0;color: #fff;">Bienvenido, {{ request.user.username }}</p>
+                        </li>
                     {% endif %}
                 </ul>
             </div>

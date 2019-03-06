@@ -9,12 +9,17 @@
             <div class="custom-home-navbar__menus">
                 <ul class="custom-home-navbar__left__ul">
                     {% if request.user.is_authenticated %}
-                        <li class="custom-home-navbar__li menu">
+                        <!--<li class="custom-home-navbar__li menu">
                             <a href="#" class="custom-home-navbar__li__anchor"></a>
-                        </li>
+                        </li>-->
                         <li class="custom-home-navbar__li menu">
-                            <p class="navbar-text" style="margin: 0;color: #fff;">Bienvenido, {{ request.user.username }}</p>
+                            <p class="navbar-text" style="margin: 0;color: #fff;margin-left:10px;">Bienvenido, {{ request.user.username }}</p>
                         </li>
+                        {% if request.user.is_superuser %}
+                            <li class="custom-home-navbar__li menu">
+                                <a href="{% url 'admin:index' %}" class="navbar-text" style="margin: 0;color: #fff;margin-left:10px;">Panel</a>
+                            </li>
+                        {% endif %}
                     {% endif %}
                 </ul>
             </div>

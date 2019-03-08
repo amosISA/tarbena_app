@@ -2,7 +2,7 @@ $(document).ready(function() {
     // Mobile
     if ($(window).width() < 1180) {
         // Delete all but last and penultimate
-        $('#subvenciones-nav-dropdown-toggle a:not(:last)').prev().prev().prev().remove();
+        $('#subvenciones-nav-dropdown-toggle a:not(:last)').prev().prev().remove();
         $('<a href="/subvenciones/" class="anchor-drop-dwn__subv menu-item"> \
             <div class="subv_inside__anchor--drop">Inicio <span class="span__drop--itm"><i class="fas fa-home"></i></span></div> \
             </a> \
@@ -11,6 +11,9 @@ $(document).ready(function() {
             </a> \
             <a href="/subvenciones/favourites/" class="anchor-drop-dwn__subv menu-item"> \
             <div class="subv_inside__anchor--drop">Favoritos <span class="span__drop--itm"><i class="far fa-bookmark"></i></span></div> \
+            </a> \
+            <a href="#" class="anchor-drop-dwn__subv menu-item" id="button-actual-subsidie-dropdown"> \
+            <div class="subv_inside__anchor--drop">Actual <span class="span__drop--itm"><i class="fas fa-exchange-alt"></i></span></div> \
             </a>').prependTo('#subvenciones-nav-dropdown-toggle');
     }
 

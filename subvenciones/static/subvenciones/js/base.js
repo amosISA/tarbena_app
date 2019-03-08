@@ -111,7 +111,7 @@ $(document).ready(function() {
     }
 
     // Navigation click on button that is left to the search box for scrolling to actual subsidie
-    $('#button-actual-subsidie-navigation').click(function() {
+    $('#button-actual-subsidie-navigation, #button-actual-subsidie-dropdown').click(function() {
         $('.date-end').each(function(i, v) {
             // if date equals to today or if date is greater than today then get that one
             if ($.trim($(this).text()) == dataFormated || process($.trim($(this).text())) > process(dataFormated)) {

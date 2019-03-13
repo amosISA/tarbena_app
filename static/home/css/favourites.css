@@ -200,9 +200,7 @@ body {
 .top-sites-list li {
   margin: 0 0 8px; }
 
-.top-site-outer:first-child {
-  padding-left: 0 !important; }
-
+/*.top-site-outer:first-child { padding-left: 0!important; }*/
 .top-site-outer {
   padding: 0 16px;
   display: inline-block; }

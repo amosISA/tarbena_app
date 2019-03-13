@@ -11,6 +11,10 @@ from .sites import my_admin_site
 import django_filters
 from django_filters.widgets import RangeWidget
 
+import sys
+sys.path.append("..")
+from config.utils import get_users_by_permission_q
+
 class EstadoForm(forms.ModelForm):
     class Meta:
         model = Estado
@@ -52,7 +56,8 @@ class SubvencionForm(forms.ModelForm):
     # In reponsable field get user by first_name
     def __init__(self, *args, **kwargs):
         super(SubvencionForm, self).__init__(*args, **kwargs)
-        users = User.objects.filter(Q(groups__name='staff') | Q(is_staff=True)).distinct()
+        #users = User.objects.filter(Q(groups__name='staff') | Q(is_staff=True)).distinct()
+        users = get_users_by_permission_q("subvenciones.add_subvencion")
         self.fields['responsable'].choices = [(user.pk, user.first_name) for user in users]
         self.fields['porcentaje_subvencionable'].label = "% subv."
 

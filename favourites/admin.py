@@ -14,6 +14,15 @@ class FavouritesAdmin(admin.ModelAdmin):
     list_select_related = (
         'type',
     )
+
+    # Show only user favorites, not all
+    def get_queryset(self, request):
+        if request.user.is_superuser:
+            qs = super(FavouritesAdmin, self).get_queryset(request)
+            return qs
+        else:
+            qs = super(FavouritesAdmin, self).get_queryset(request)
+            return qs.filter(user=request.user)
 admin.site.register(Favourite, FavouritesAdmin)
 
 class FavouritesTypesAdmin(admin.ModelAdmin):

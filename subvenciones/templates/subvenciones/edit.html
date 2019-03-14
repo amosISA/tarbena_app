@@ -296,7 +296,7 @@
                         <!-- Se relacion con -->
                         <div class="form-group title-create_post se_relaciona_con_ajax_div" style="text-align:justify;font-weight:bold;">
                             {{ form.se_relaciona_con.label_tag }}
-                            {{ form.se_relaciona_con|htmlattributes:"placeholder: Expediente, class:form-control" }}
+                            {{ form.se_relaciona_con|htmlattributes:"class:form-control" }}
                         </div>
                     </div>
                 </div>
@@ -472,6 +472,14 @@
                     }
                 });
                 $('#id_se_relaciona_con input:checkbox').prop('checked', true);
+                
+                /* Make related subsidies being clickable */
+                $('ul#id_se_relaciona_con li').each(function() {
+                    var id_link = $(this).find('label > input').attr('value');
+                    if ($(this).children().length > 0) {
+                        $(this).append('<div style="text-align:right;"><a href="/subvenciones/' + id_link + '" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>');
+                    }
+                });
             });
 
             /* Clickable href on procedimiento if so */
@@ -479,6 +487,14 @@
 
             $('textarea#id_procedimiento, textarea#id_bases, textarea#id_solicitud').click(function() {
                 window.open($(this).text(),'_blank');
+            });
+
+            /* Make related subsidies being clickable */
+            $('ul#id_se_relaciona_con li').each(function() {
+                var id_link = $(this).find('label > input').attr('value');
+                if ($(this).children().length > 0) {
+                    $(this).append('<div style="text-align:right;"><a href="/subvenciones/' + id_link + '" target="_blank"><img src="{% static 'subvenciones/img/icons/Icon_External_Link.png' %}" alt="{{ subv.get_absolute_url }}"></a>');
+                }
             });
         });
     </script>

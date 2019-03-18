@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'import_export',
     'museo',
     'terceros',
+    'luz',
     'django_cleanup.apps.CleanupConfig',
     #'pipeline',
 ]

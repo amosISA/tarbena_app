@@ -1,4 +1,5 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 
 from .models import Contador, Factura
 
@@ -12,7 +13,7 @@ class ContadorAdmin(admin.ModelAdmin):
     show_full_result_count = True
 admin.site.register(Contador, ContadorAdmin)
 
-class FacturaAdmin(admin.ModelAdmin):
+class FacturaAdmin(ImportExportModelAdmin):
     list_display = ('desde', 'hasta', 'cantidad', 'lectura_anterior', 'lectura_posterior', 'consumo',)
     list_filter = ['contador__nombre', 'desde', 'hasta', 'cantidad', 'lectura_anterior', 'lectura_posterior', 'consumo']
     search_fields = ('contador__nombre' ,'desde', 'hasta', 'cantidad', 'lectura_anterior', 'lectura_posterior', 'consumo',)

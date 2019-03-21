@@ -100,7 +100,7 @@ def cleanhtml(raw_html):
     return cleantext
 
 class ParcelaAdmin(ImportExportModelAdmin):
-    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'sectores_trabajo',
+    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario',
                     'metros_cuadrados', 'estado_parcela_trabajo', 'estado']
     #list_editable = ('localizacion', 'url',)
     list_filter = ['sector_trabajo', 'estado_parcela_trabajo']
@@ -119,7 +119,7 @@ class ParcelaAdmin(ImportExportModelAdmin):
         'propietario',
         'estado',
         'estado_parcela_trabajo',
-        'poblacion__provincia',
+        'poblacion__provincia'
     )
 
     inlines = [SectorTrabajoInline]

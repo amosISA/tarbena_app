@@ -227,6 +227,7 @@ $(document).ready(function() {
                                             '<tessellate>1</tessellate><outerBoundaryIs><LinearRing>' + kml_coordinates +
                                             '</LinearRing></outerBoundaryIs></Polygon></Placemark></Document></kml>';
                     }
+                    console.log(full_kml);
                     geoXml.parseKmlString(full_kml);
                 });
                 body_widget.append('<table class="table table-sm panel_table_parcelas" style="width:100%;font-size:0.8rem;background-color: #ffff;color:#000;max-height:400px;overflow-y:scroll;display:block;">' +

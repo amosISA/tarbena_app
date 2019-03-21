@@ -100,10 +100,10 @@ def cleanhtml(raw_html):
     return cleantext
 
 class ParcelaAdmin(ImportExportModelAdmin):
-    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'metros_cuadrados', 'estado_parcela_trabajo',
-                    'estado']
+    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario', 'sectores_trabajo',
+                    'metros_cuadrados', 'estado_parcela_trabajo', 'estado']
     #list_editable = ('localizacion', 'url',)
-    list_filter = ['estado_parcela_trabajo']
+    list_filter = ['sector_trabajo', 'estado_parcela_trabajo']
     search_fields = ('propietario__nombre', 'propietario__apellidos', 'propietario__apellidos2', 'propietario__nif',
                      'propietario__email', 'metros_cuadrados', 'poligono', 'numero_parcela', 'poblacion__nombre',
                      'sector_trabajo__sector')
@@ -124,6 +124,9 @@ class ParcelaAdmin(ImportExportModelAdmin):
 
     inlines = [SectorTrabajoInline]
     actions = [export_xls]
+
+    def sectores_trabajo(self, obj):
+        return "\n".join([p.sector for p in obj.sector_trabajo.all()])
 
     # Make kml for each parcela and save their localizacion and url
     def save_model(self, request, obj, form, change):

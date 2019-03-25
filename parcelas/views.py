@@ -39,7 +39,7 @@ def index(request):
     ).values(
         'superfavorita', 'poblacion__pk', 'poblacion__nombre', 'poblacion__codigo'
     ).filter(user=request.user)
-    print(poblaciones_favs)
+    #print(poblaciones_favs)
     return render(request,
                   'parcelas/index.html',
                   {'parcelas': parcelas,

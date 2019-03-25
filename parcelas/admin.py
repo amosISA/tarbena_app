@@ -152,7 +152,7 @@ class ParcelaAdmin(ImportExportModelAdmin):
             page_soup = BeautifulSoup(page_html, "html.parser")
             labels_page = page_soup.find_all("label")
             for index, item in enumerate(labels_page, start=0):
-                if index == 1:
+                if index == 2:
                     remove_br = re.sub('<br/>', ' ', str(item))
                     obj.localizacion = cleanhtml(remove_br)
                     obj.save()

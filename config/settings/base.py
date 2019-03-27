@@ -107,7 +107,8 @@ TEMPLATES = [
                  os.path.join(BASE_DIR, 'profiles/templates'),
                  os.path.join(BASE_DIR, 'parcelas/templates'),
                  os.path.join(BASE_DIR, 'contracts/templates'),
-                 os.path.join(BASE_DIR, 'museo/templates'),],
+                 os.path.join(BASE_DIR, 'museo/templates'),
+                 os.path.join(BASE_DIR, 'luz/templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -178,6 +179,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "profiles/static"),
     os.path.join(BASE_DIR, "contracts/static"),
     os.path.join(BASE_DIR, "museo/static"),
+    os.path.join(BASE_DIR, "luz/static"),
     os.path.join(BASE_DIR, "static"),
 ]
 

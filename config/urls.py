@@ -79,6 +79,9 @@ urlpatterns = [
 
     # Museu
     url(r'^museu/', include('museo.urls', namespace='museo')),
+
+    # Facturas luz ayto
+    url(r'^luz/', include('luz.urls', namespace='luz')),
 ]
 
 if settings.DEBUG:

@@ -36,7 +36,7 @@ class Factura(TimeStampedModel):
     contador = models.ForeignKey(Contador, blank=True, null=True, related_name='contadores')
 
     class Meta:
-        ordering = ["desde"]
+        ordering = ["contador"]
         verbose_name = 'Factura'
         verbose_name_plural = "Facturas"
 

@@ -21,8 +21,8 @@ class ContadorAdmin(admin.ModelAdmin):
 admin.site.register(Contador, ContadorAdmin)
 
 class FacturaAdmin(ImportExportModelAdmin):
-    list_display = ('desde', 'hasta', 'cantidad', 'lectura_anterior', 'lectura_posterior', 'consumo',)
-    list_filter = ['contador__nombre', 'desde', 'hasta', 'cantidad', 'lectura_anterior', 'lectura_posterior', 'consumo']
+    list_display = ('desde', 'hasta', 'cantidad', 'lectura_anterior', 'lectura_posterior', 'consumo', 'contador')
+    list_filter = ['contador__nombre', 'desde', 'hasta']
     search_fields = ('contador__nombre' ,'desde', 'hasta', 'cantidad', 'lectura_anterior', 'lectura_posterior', 'consumo',)
     empty_value_display = '-'
     list_display_links = ('desde',)

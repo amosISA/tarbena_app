@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+    {% load staticfiles %}
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Tarbena web with Django and Python - Facturas Luz App">
+        <meta name="author" content="Isaila Amos Lucian">
+        <meta name="generator" content="Django, PyCharm" />
+        <meta name="keywords" content="html, css, sass, python, jQuery, ajax, javascript" />
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <!-- Favicon -->
+        <link rel="icon" href="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" type="image/x-icon"/>
+        <link rel="stylesheet" href="{% static 'subvenciones/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'luz/css/base.css' %}">
+
+        {% block stylesheets %}
+        {% endblock %}
+
+        <title>
+            {% block title %}Facturas Luz{% endblock %}
+        </title>
+
+        <!-- Cookies alert -->
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+        <script>
+            window.addEventListener("load", function(){
+            window.cookieconsent.initialise({
+              "palette": {
+                "popup": {
+                  "background": "#eaf7f7",
+                  "text": "#5c7291"
+                },
+                "button": {
+                  "background": "#065773"
+                }
+              },
+              "content": {
+                "message": "Utilizamos cookies propias y de terceros para obtener datos estadísticos de la navegación de nuestros usuarios y mejorar nuestros servicios. Si acepta o continúa navegando, consideramos que acepta su uso.",
+                "dismiss": "Aceptar",
+                "link": "Más información.",
+                "href": "/cookies"
+              }
+            })});
+        </script>
+    </head>
+    <body>
+        <!-- Navbar -->
+        {% block navbar %}
+        {% endblock %}
+
+        <div class="starter-template-luz">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script
+          src="https://code.jquery.com/jquery-3.3.1.min.js"
+          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+          crossorigin="anonymous"></script>
+        <script src="http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+
+        <script>
+            /* Add csrftoken in every AJAX request */
+            var csrftoken = $.cookie('csrftoken');
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+        </script>
+
+        {% block addscript %}
+        {% endblock %}
+
+        {% block js %}
+        {% endblock %}
+    </body>
+</html>

@@ -22,9 +22,13 @@
             <div class="col-md-4"><a href="#">Consumo total</a></div>
             <div class="col-md-4"><a href="#">Consumo total</a></div>
         </div>
+
+        <div class="row" style="margin-top:55px;">
+            <canvas id="myChart"></canvas>
+        </div>
     </div>
 
-    <canvas id="myChart"></canvas>
+
 
 {% endblock %}
 
@@ -49,7 +53,7 @@
                             data: {
                                 labels: labels,
                                 datasets: [{
-                                    label: 'Total Contadores',
+                                    label: 'Total Contadores 2013 - ' + new Date().getFullYear() + ' (kW)',
                                     data: defaultData,
                                     borderWidth: 3
                                 }]

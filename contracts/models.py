@@ -1,5 +1,9 @@
 from django.db import models
 
+import sys
+sys.path.append("..")
+from terceros.models import Terceros
+
 # Create your models here.
 class TimeStampedModel(models.Model):
     """
@@ -71,6 +75,7 @@ class Cpv(TimeStampedModel):
 class Contract(TimeStampedModel):
     type = models.ForeignKey(TypeContract, related_name='type_contract', blank=True, null=True)
     contractor = models.ForeignKey(Contractor, related_name='contract_contractor', blank=True, null=True)
+    contratante = models.ForeignKey(Terceros, related_name='contract_tercero', blank=True, null=True)
     base = models.CharField(max_length=250, blank=True, null=True)
     iva = models.CharField(max_length=250, blank=True, null=True)
     total = models.CharField(max_length=250, blank=True, null=True)

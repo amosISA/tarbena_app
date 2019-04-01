@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Factura
+from .models import Factura, Contador
 import rest_framework
 
 # Create your views here.
@@ -17,9 +17,10 @@ import rest_framework
 @login_required()
 @permission_required('subvenciones.can_add_subvencion', raise_exception=True)
 def index_facturas(request):
+    contadores = Contador.objects.all()
     return render(request,
                   'luz/index.html',
-                  {})
+                  {'contadores':contadores})
 
 # --------------- Facturas JSON --------------- #
 @login_required()
@@ -46,7 +47,7 @@ class AdminAuthenticationPermission(rest_framework.permissions.BasePermission):
                 not any(isinstance(request._authenticator, x) for x in self.ADMIN_ONLY_AUTH_CLASSES)
         return False
 
-class ContadorTotalConsumo(APIView):
+class ContadoresTotalConsumo(APIView):
     """
     All Contadores with their FULL Consumo returned from all years
     """
@@ -64,3 +65,14 @@ class ContadorTotalConsumo(APIView):
             'consumo': consumo
         }
         return Response(data)
+
+def totalConsumoByContador(request, contador_id):
+    """
+    Individual Contador Consumo returned from all years
+    """
+    contador_consumo = Factura.objects.all().select_related(
+        'contador',
+    ).filter(contador__id=contador_id).order_by('desde')
+
+    data = serializers.serialize('json', contador_consumo)
+    return HttpResponse(data, content_type="application/json")

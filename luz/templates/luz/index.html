@@ -19,12 +19,22 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4"><a href="#" id="luz__consumo_total">Consumo total</a></div>
-            <div class="col-md-4"><a href="#">Consumo total</a></div>
-            <div class="col-md-4"><a href="#">Consumo total</a></div>
+            {% for contador in contadores %}
+                <div class="col-md-4"><a href="#" class="luz__consumo_total--by_object" data-id="{{ contador.id }}">{{ contador.nombre }}</a></div>
+            {% endfor %}
+
+            <div class="col-md-4"><a href="#">Cuantía total</a></div>
+            <div class="col-md-4"><a href="#">Evolución cuantía por contador</a></div>
+
+            <div class="col-md-4"><a href="#">Lecturas y evolución</a></div>
+        </div>
+
+        <div class="row" style="margin-top:55px;" id="firstCanvasChart">
+            <canvas id="myChart"></canvas>
         </div>
 
         <div class="row" style="margin-top:55px;">
-            <canvas id="myChart"></canvas>
+            <canvas id="myChart2"></canvas>
         </div>
     </div>
 
@@ -37,6 +47,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes@latest/dist/chartjs-plugin-colorschemes.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Reverse url so I can use it in js
+            function generete_some_url(id){
+                return "{% url 'luz:api-consumo-by-contador' contador_id=112233 %}".replace("112233", id);
+            }
+
+            // TOTAL CONSUMO GRAPHICS
             $('#luz__consumo_total').click(function(){
                 var endpoint = '/luz/api/contador/total/consumo/';
                 var defaultData = [];
@@ -48,8 +64,87 @@
                         labels = data.contador
                         defaultData = data.consumo
                         var ctx = document.getElementById('myChart');
+                        var ctx2 = document.getElementById('myChart2');
+
+                        // Bar graphic
                         var myChart = new Chart(ctx, {
                             type: 'bar',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Total Contadores 2013 - ' + new Date().getFullYear() + ' (kW)',
+                                    data: defaultData,
+                                    borderWidth: 3
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                },
+                                plugins: {
+                                    colorschemes: {
+                                        scheme: 'brewer.Paired12'
+                                    }
+                                }
+                            }
+                        });
+
+                        // Pie graphic
+                        var myPieChart = new Chart(ctx2, {
+                            type: 'pie',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Total Contadores 2013 - ' + new Date().getFullYear() + ' (kW)',
+                                    data: defaultData,
+                                    borderWidth: 3
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                },
+                                plugins: {
+                                    colorschemes: {
+                                        scheme: 'brewer.Paired12'
+                                    }
+                                }
+                            }
+                        });
+                    },
+                    error: function(error_data) {
+                        console.log(error_data);
+                    }
+                });
+            });
+
+            // CONSUMO INDIVIDUALIZADO POR CONTADOR
+            $('.luz__consumo_total--by_object').click(function() {
+                var contador_id = $(this).attr('data-id');
+                var defaultData = [];
+                var labels = [];
+                $.ajax({
+                    method: "GET",
+                    url: generete_some_url(contador_id),
+                    success: function(data) {
+                        $('#firstCanvasChart').empty();
+                        $('#firstCanvasChart').html('<canvas id="myChart"></canvas>');
+                        var ctx = document.getElementById('myChart');
+                        $.each(data, function( key, value ) {
+                            labels.push(value.fields['desde'])
+                            defaultData.push(value.fields['consumo']);
+                        });
+
+                        var myLineChart = new Chart(ctx, {
+                            type: 'line',
                             data: {
                                 labels: labels,
                                 datasets: [{

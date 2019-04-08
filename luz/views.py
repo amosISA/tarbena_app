@@ -15,7 +15,7 @@ import rest_framework
 # Create your views here.
 # --------------- Luz Index --------------- #
 @login_required()
-@permission_required('subvenciones.can_add_subvencion', raise_exception=True)
+@permission_required('subvenciones.add_subvencion', raise_exception=True)
 def index_facturas(request):
     contadores = Contador.objects.all()
     return render(request,
@@ -24,7 +24,7 @@ def index_facturas(request):
 
 # --------------- Facturas JSON --------------- #
 @login_required()
-@permission_required('subvenciones.can_add_subvencion', raise_exception=True)
+@permission_required('subvenciones.add_subvencion', raise_exception=True)
 def get_data(request, *args, **kwargs):
     query = Factura.objects.all().select_related(
         'contador',

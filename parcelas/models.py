@@ -4,6 +4,10 @@ from django.db import models
 
 User = settings.AUTH_USER_MODEL
 
+import sys
+sys.path.append("..")
+from terceros.models import Terceros
+
 class TimeStampedModel(models.Model):
     """
     An abstract base class model that provides selfupdating

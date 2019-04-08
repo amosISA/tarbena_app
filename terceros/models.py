@@ -47,4 +47,4 @@ class Terceros(TimeStampedModel):
         verbose_name_plural = "Terceros"
 
     def __str__(self):
-        return '{} {} {}'.format(self.primer_apellido, self.segundo_apellido, self.nombre)
+        return '{}'.format(self.nombre)

@@ -21,6 +21,7 @@ from dal import autocomplete
 from weasyprint import HTML
 
 import datetime
+import urllib
 import urllib.request
 import weasyprint
 

@@ -16,6 +16,7 @@
 </head>
 <body>
   {% load staticfiles %}
+</body>
   <img src="{% static 'home/img/favicon/logo_vector_rojo_trans.png' %}" />
 
   Por medio de la presente, YO, <strong>{{ parcela.propietario.nombre }} {{ parcela.propietario.apellidos }} {{ parcela.propietario.apellidos2 }}</strong>, con documento de identidad nº <strong>{{ parcela.propietario.nif }}</strong>, propietario/a de la parcela <strong>{{ parcela.numero_parcela }}</strong> polígono <strong>{{ parcela.poligono }}</strong> del término municipal de Tárbena, confiero autorización al Ayuntamiento de dicho municipio a ejercer labores selvícolas  en la mencionada parcela. Me han sido explicados la finalidad y el método de ejecución de dichos labores y la presente autorización tiene validez hasta que se finalicen dichas labores.
@@ -32,5 +33,4 @@
     <span>C/ San Miguel nº 1 - 03518 Tàrbena, Alacant</span><br />
     <span>Tlf.: 965 884 234 - Fax: 965 884 105 - ajuntament@tarbena.es</span>
   </div>
-</body>
 </html>

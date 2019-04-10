@@ -135,7 +135,7 @@ class ParcelaAdmin(ImportExportModelAdmin):
 
         if not obj.kml:
             context = ssl._create_unverified_context()
-            kml_url='https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=03' + obj.poblacion.codigo + 'A'+ "{:03n}".format(int(obj.poligono)) + "{:05n}".format(int(obj.numero_parcela)) + '0000BP&del=3&mun=' + obj.poblacion.codigo + '&tipo=3d'
+            kml_url='https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=0' + obj.poblacion.provincia.codigo + obj.poblacion.codigo + 'A'+ "{:03n}".format(int(obj.poligono)) + "{:05n}".format(int(obj.numero_parcela)) + '0000BP&del=3&mun=' + obj.poblacion.codigo + '&tipo=3d'
             fp = urllib.request.urlopen(kml_url,context=context)
             mybytes = fp.read()
             mykml = mybytes.decode('unicode_escape').encode('utf-8')
@@ -143,7 +143,7 @@ class ParcelaAdmin(ImportExportModelAdmin):
             obj.save()
 
         if not obj.localizacion:
-            my_url = "https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCConCiud.aspx?del=3&mun=" + obj.poblacion.codigo + "&UrbRus=&RefC=03" + obj.poblacion.codigo + "A" + "{:03n}".format(int(obj.poligono)) + "{:05n}".format(int(obj.numero_parcela)) + "0000BL&Apenom=&esBice=&RCBice1=&RCBice2=&DenoBice=&latitud=&longitud=&gradoslat=&minlat=&seglat=&gradoslon=&minlon=&seglon=&x=&y=&huso=&tipoCoordenadas="
+            my_url = "https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCConCiud.aspx?del=3&mun=" + obj.poblacion.codigo + "&UrbRus=&RefC=0" + obj.poblacion.provincia.codigo + obj.poblacion.codigo + "A" + "{:03n}".format(int(obj.poligono)) + "{:05n}".format(int(obj.numero_parcela)) + "0000BL&Apenom=&esBice=&RCBice1=&RCBice2=&DenoBice=&latitud=&longitud=&gradoslat=&minlat=&seglat=&gradoslon=&minlon=&seglon=&x=&y=&huso=&tipoCoordenadas="
             uClient = urllib.request.urlopen(my_url)
             page_html = uClient.read()
             uClient.close()
@@ -156,6 +156,21 @@ class ParcelaAdmin(ImportExportModelAdmin):
                     remove_br = re.sub('<br/>', ' ', str(item))
                     obj.localizacion = cleanhtml(remove_br)
                     obj.save()
+
+        if not obj.ref_catastral:
+            my_url = "https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCConCiud.aspx?del=3&mun=" + obj.poblacion.codigo + "&UrbRus=&RefC=0" + obj.poblacion.provincia.codigo + obj.poblacion.codigo + "A" + "{:03n}".format(int(obj.poligono)) + "{:05n}".format(int(obj.numero_parcela)) + "0000BL&Apenom=&esBice=&RCBice1=&RCBice2=&DenoBice=&latitud=&longitud=&gradoslat=&minlat=&seglat=&gradoslon=&minlon=&seglon=&x=&y=&huso=&tipoCoordenadas="
+            uClient = urllib.request.urlopen(my_url)
+            page_html = uClient.read()
+            uClient.close()
+            obj.url = my_url
+
+            page_soup = BeautifulSoup(page_html, "html.parser")
+            labels_page = page_soup.find_all("label")
+            for index, item in enumerate(labels_page, start=0):
+                if index == 1:
+                    obj.ref_catastral = item.get_text()
+                    obj.save()
+
 
     # Massive parcelas upload bbdd to add their kml if not exist
     # This function pops the save button for the editable_list option of admin

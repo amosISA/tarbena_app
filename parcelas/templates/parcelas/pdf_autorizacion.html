@@ -21,7 +21,8 @@
 
   Por medio de la presente, YO, <strong>{{ parcela.propietario.nombre }} {{ parcela.propietario.apellidos }} {{ parcela.propietario.apellidos2 }}</strong>, con documento de identidad nº <strong>{{ parcela.propietario.nif }}</strong>, propietario/a de la parcela <strong>{{ parcela.numero_parcela }}</strong> polígono <strong>{{ parcela.poligono }}</strong> del término municipal de Tárbena, confiero autorización al Ayuntamiento de dicho municipio a ejercer labores selvícolas  en la mencionada parcela. Me han sido explicados la finalidad y el método de ejecución de dichos labores y la presente autorización tiene validez hasta que se finalicen dichas labores.
   <br /><br />
-  Para mayor conformidad sobre la zona de actuación se adjunta a continuación la delimitación de la parcela según los datos obtenidos del SIGPAC:
+  Para mayor conformidad sobre la zona de actuación se adjunta a continuación la delimitación de la parcela según los datos obtenidos del
+  <a target="_blank" href="http://sigpac.mapama.gob.es/fega/serviciosvisorsigpac/PrintDocument.aspx?layer=parcela&id={{ parcela.poblacion.provincia.codigo }},{{ parcela.poblacion.codigo }},0,0,{{ parcela.poligono }},{{ parcela.numero_parcela }}&visibleLayers=parcela;recinto;arboles;e_paisaje;e_paisaje_linea;e_paisaje_punto;&etiquetas=true">SIGPAC:</a>
 
   <div class="signature" style="position: fixed;bottom: 0;width: 100%;text-align:right;margin-bottom:80px;">
     Firmado el {{ now.day }} de {% now "F" %} del {{ now.year }}<br /><br /><br />

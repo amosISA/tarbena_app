@@ -60,6 +60,22 @@ class ParcelaForm(forms.ModelForm):
             if commit:
                 instance.save()
 
+        if not instance.ref_catastral:
+            my_url = "https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCConCiud.aspx?del=3&mun=" + instance.poblacion.codigo + "&UrbRus=&RefC=0" + instance.poblacion.provincia.codigo + instance.poblacion.codigo + "A" + "{:03n}".format(int(instance.poligono)) + "{:05n}".format(int(instance.numero_parcela)) + "0000BL&Apenom=&esBice=&RCBice1=&RCBice2=&DenoBice=&latitud=&longitud=&gradoslat=&minlat=&seglat=&gradoslon=&minlon=&seglon=&x=&y=&huso=&tipoCoordenadas="
+            uClient = urllib.request.urlopen(my_url)
+            page_html = uClient.read()
+            uClient.close()
+            instance.url = my_url
+
+            page_soup = BeautifulSoup(page_html, "html.parser")
+            labels_page = page_soup.find_all("label")
+            for index, item in enumerate(labels_page, start=0):
+                if index == 1:
+                    instance.ref_catastral = item.get_text()
+                    instance.save()
+            if commit:
+                instance.save()
+
         # If we don't save the m2m, the ManyToMany relation will be empty
         self.save_m2m()
         return instance

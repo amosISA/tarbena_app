@@ -142,7 +142,7 @@ class ParcelaAdmin(ImportExportModelAdmin):
             obj.kml = mykml
             obj.save()
 
-        if not obj.localizacion or obj.localizacion:
+        if not obj.localizacion:
             my_url = "https://www1.sedecatastro.gob.es/CYCBienInmueble/OVCConCiud.aspx?del=3&mun=" + obj.poblacion.codigo + "&UrbRus=&RefC=0" + obj.poblacion.provincia.codigo + obj.poblacion.codigo + "A" + "{:03n}".format(int(obj.poligono)) + "{:05n}".format(int(obj.numero_parcela)) + "0000BL&Apenom=&esBice=&RCBice1=&RCBice2=&DenoBice=&latitud=&longitud=&gradoslat=&minlat=&seglat=&gradoslon=&minlon=&seglon=&x=&y=&huso=&tipoCoordenadas="
             uClient = urllib.request.urlopen(my_url)
             page_html = uClient.read()

@@ -135,8 +135,6 @@ $(document).ready(function() {
                     var kml_coordinates = kml_bbdd.substring(coord_start, coord_end) + "</coordinates>";
                     //var ref_cat = '03' + value['poblacion'].codigo + 'A' + pad(value['poligono'], 3) + pad(value['numero_parcela'], 5) + '0000BP';
                     var ref_cat = value['ref_catastral'];
-                    console.log(value);
-                    console.log(ref_cat);
                     // poblacion selected option
                     var e_inp_pobl = document.getElementById("inputPoblacion");
                     var e_inp_pobl_value = e_inp_pobl.options[e_inp_pobl.selectedIndex].value;

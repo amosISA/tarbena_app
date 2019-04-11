@@ -146,6 +146,26 @@ class ParcelaAdmin(ImportExportModelAdmin):
         #             obj.poseedor = t
         #             obj.save()
 
+        # OR THIS BY THE shell of python
+        # >> > from terceros.models import *
+        # >> > from parcelas.models import *
+        # >> > terceros = Terceros.objects.all()
+        # >> > parcelas = Parcela.objects.all().prefetch_related('sector_trabajo'
+        #                                                        ...).select_related(
+        #     ...
+        # 'propietario', 'poblacion', 'estado', 'estado_parcela_trabajo'
+        #     ...             )
+        #
+        # >> for t in terceros:
+        #     ...
+        #     for p in parcelas:
+        #         ...
+        #     if t.identificacion == p.propietario.nif:
+        #         ...
+        #     p.poseedor = t
+        # ...
+        # p.save()
+
         if not obj.kml:
             context = ssl._create_unverified_context()
             kml_url='https://ovc.catastro.meh.es/Cartografia/WMS/BuscarParcelaGoogle3D.aspx?refcat=0' + obj.poblacion.provincia.codigo + obj.poblacion.codigo + 'A'+ "{:03n}".format(int(obj.poligono)) + "{:05n}".format(int(obj.numero_parcela)) + '0000BP&del=3&mun=' + obj.poblacion.codigo + '&tipo=3d'

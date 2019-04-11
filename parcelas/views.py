@@ -13,7 +13,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 
-from .models import Parcela, Proyecto, SectorTrabajo, Poblacion, Propietario, PoblacionesFavoritas
+from .models import Parcela, Proyecto, SectorTrabajo, Poblacion, PoblacionesFavoritas
 from .forms import ParcelaForm
 
 from bs4 import BeautifulSoup

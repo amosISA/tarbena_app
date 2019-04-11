@@ -4,11 +4,15 @@ from dal import autocomplete
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Parcela, Propietario
+from .models import Parcela
 
 import urllib.request
 import re
 import ssl
+
+import sys
+sys.path.append("..")
+from terceros.models import Terceros
 
 def cleanhtml(raw_html):
     """
@@ -21,7 +25,7 @@ def cleanhtml(raw_html):
 
 class ParcelaForm(forms.ModelForm):
     propietario = forms.ModelChoiceField(
-        queryset=Propietario.objects.all(),
+        queryset=Terceros.objects.all(),
         widget=autocomplete.ModelSelect2(url='parcelas:propietario-autocomplete')
     )
 

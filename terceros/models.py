@@ -42,7 +42,7 @@ class Terceros(TimeStampedModel):
     color = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
-        ordering = ["-nombre"]
+        ordering = ["nombre"]
         verbose_name = 'Tercero'
         verbose_name_plural = "Terceros"
 

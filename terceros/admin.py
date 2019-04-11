@@ -12,6 +12,7 @@ class TerceroAdmin(admin.ModelAdmin):
                      'nombre_via', 'numero', 'bloque', 'escalera', 'planta', 'puerta',
                      'pais', 'provincia', 'municipio', 'codigo_postal',)
     empty_value_display = '-'
+    ordering = ('nombre',)
     show_full_result_count = True
 
 admin.site.register(Terceros, TerceroAdmin)

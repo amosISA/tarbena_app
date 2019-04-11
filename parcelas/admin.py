@@ -12,6 +12,10 @@ import re
 import ssl
 import xlwt
 
+import sys
+sys.path.append("..")
+from terceros.models import Terceros
+
 def export_xls(modeladmin, request, queryset):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename=parcelas.xls'
@@ -100,9 +104,9 @@ def cleanhtml(raw_html):
     return cleantext
 
 class ParcelaAdmin(ImportExportModelAdmin):
-    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario',
+    list_display = ['poblacion' ,'poligono', 'numero_parcela', 'poseedor',
                     'metros_cuadrados', 'estado_parcela_trabajo', 'estado']
-    #list_editable = ('ref_catastral', 'localizacion',)
+    #list_editable = ('propietario', 'poseedor',)
     list_filter = ['sector_trabajo', 'estado_parcela_trabajo']
     search_fields = ('propietario__nombre', 'propietario__apellidos', 'propietario__apellidos2', 'propietario__nif',
                      'propietario__email', 'metros_cuadrados', 'poligono', 'numero_parcela', 'poblacion__nombre',
@@ -119,7 +123,8 @@ class ParcelaAdmin(ImportExportModelAdmin):
         'propietario',
         'estado',
         'estado_parcela_trabajo',
-        'poblacion__provincia'
+        'poblacion__provincia',
+        'poseedor'
     )
 
     inlines = [SectorTrabajoInline]
@@ -132,6 +137,14 @@ class ParcelaAdmin(ImportExportModelAdmin):
     def save_model(self, request, obj, form, change):
         super(ParcelaAdmin, self).save_model(request, obj, form, change)
         #https://stackoverflow.com/questions/3813735/in-python-how-to-specify-a-format-when-converting-int-to-string
+
+        # Add same value to field poseedor as field propietario
+        # if not obj.poseedor:
+        #     terceros = Terceros.objects.all()
+        #     for t in terceros:
+        #         if t.identificacion == obj.propietario.nif:
+        #             obj.poseedor = t
+        #             obj.save()
 
         if not obj.kml:
             context = ssl._create_unverified_context()
@@ -170,7 +183,6 @@ class ParcelaAdmin(ImportExportModelAdmin):
                 if index == 1:
                     obj.ref_catastral = item.get_text()
                     obj.save()
-
 
     # Massive parcelas upload bbdd to add their kml if not exist
     # This function pops the save button for the editable_list option of admin

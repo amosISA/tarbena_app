@@ -125,7 +125,7 @@ class Estado_Parcela_Trabajo(TimeStampedModel):
 class Parcela(TimeStampedModel):
     #user = models.ForeignKey(User, blank=True, null=True)
     #propietario = models.ForeignKey(Propietario, related_name='propietario', default='', blank=True, null=True, on_delete=models.SET_NULL)
-    poseedor = models.ForeignKey(Terceros, related_name='poseedor', default='', blank=True, null=True)
+    propietario = models.ForeignKey(Terceros, related_name='propietario', default='', blank=True, null=True)
     poblacion = models.ForeignKey(Poblacion, default='')
     metros_cuadrados = models.CharField(max_length=250, blank=True)
     poligono = models.CharField(max_length=250)
@@ -143,7 +143,7 @@ class Parcela(TimeStampedModel):
     url = models.TextField(blank=True, null=True, help_text="Se autocompleta")
 
     class Meta:
-        ordering = ["poseedor", "poligono"]
+        ordering = ["propietario", "poligono"]
         verbose_name = 'Parcela'
         verbose_name_plural = "Parcelas"
         permissions = (

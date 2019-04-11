@@ -25,6 +25,10 @@ import urllib
 import urllib.request
 import weasyprint
 
+import sys
+sys.path.append("..")
+from terceros.models import Terceros
+
 @permission_required('parcelas.acceder_parcelas', raise_exception=True)
 def index(request):
     parcelas = Parcela.objects.all().prefetch_related('sector_trabajo'
@@ -85,7 +89,7 @@ def ajax_get_projects(request):
 
 # --------------- Create New Parcela --------------- #
 class ParcelaCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
-    permission_required = ('subvenciones.can_add_parcela')
+    permission_required = ('subvenciones.add_parcela')
     raise_exception = True
     form_class = ParcelaForm
     template_name = 'parcelas/parcela_create.html'
@@ -94,7 +98,7 @@ class ParcelaCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
     def form_valid(self, form):
         return super(ParcelaCreateView, self).form_valid(form)
 
-@permission_required('parcelas.can_add_parcela', raise_exception=True)
+@permission_required('parcelas.add_parcela', raise_exception=True)
 def ParcelaCreate(request):
     data = dict()
 
@@ -118,28 +122,32 @@ def ParcelaCreate(request):
 # @permission_required('parcelas.can_add_parcela', raise_exception=True)
 class PropietarioAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Propietario.objects.all()
+        qs = Terceros.objects.all()
 
         if self.q:
             qs = qs.filter(
                 Q(nombre__icontains=self.q) |
                 Q(nombre__iexact=self.q) |
-                Q(apellidos__icontains=self.q) |
-                Q(apellidos__iexact=self.q) |
-                Q(apellidos2__icontains=self.q) |
-                Q(apellidos2__iexact=self.q) |
-                Q(nif__icontains=self.q) |
-                Q(nif__iexact=self.q) |
-                Q(direccion__icontains=self.q) |
-                Q(direccion__iexact=self.q) |
-                Q(telefono_movil__icontains=self.q) |
-                Q(telefono_movil__iexact=self.q) |
-                Q(telefono_fijo__icontains=self.q) |
-                Q(telefono_fijo__iexact=self.q) |
+                Q(primer_apellido__icontains=self.q) |
+                Q(primer_apellido__iexact=self.q) |
+                Q(segundo_apellido__icontains=self.q) |
+                Q(segundo_apellido__iexact=self.q) |
+                Q(identificacion__icontains=self.q) |
+                Q(identificacion__iexact=self.q) |
+                Q(nombre_via__icontains=self.q) |
+                Q(nombre_via__iexact=self.q) |
+                Q(movil__icontains=self.q) |
+                Q(movil__iexact=self.q) |
+                Q(telefono__icontains=self.q) |
+                Q(telefono__iexact=self.q) |
                 Q(email__icontains=self.q) |
                 Q(email__iexact=self.q) |
                 Q(comentarios__icontains=self.q) |
-                Q(comentarios__iexact=self.q)
+                Q(comentarios__iexact=self.q) |
+                Q(observaciones__iexact=self.q) |
+                Q(observaciones__icontains=self.q) |
+                Q(municipio__iexact=self.q) |
+                Q(municipio__icontains=self.q)
             )
 
         return qs

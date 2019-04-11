@@ -60,6 +60,7 @@ class ContractsAdmin(admin.ModelAdmin):
     list_display = ['type', 'contratante', 'base',
                     'iva', 'total', 'date_contract']
     list_filter = ['type__name', 'date_contract', ]
+    raw_id_fields = ('contratante',)
     #list_editable = ('date_contract',)
     search_fields = ('type__name', 'contratante__nombre', 'date_contract',)
     empty_value_display = '-'

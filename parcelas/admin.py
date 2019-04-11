@@ -106,7 +106,8 @@ def cleanhtml(raw_html):
 class ParcelaAdmin(ImportExportModelAdmin):
     list_display = ['poblacion' ,'poligono', 'numero_parcela', 'propietario',
                     'metros_cuadrados', 'estado_parcela_trabajo', 'estado']
-    #list_editable = ('propietario', 'poseedor',)
+    list_editable = ('propietario',)
+    raw_id_fields = ('propietario',)
     list_filter = ['sector_trabajo', 'estado_parcela_trabajo']
     search_fields = ('propietario__nombre', 'propietario__identificacion', 'propietario__primer_apellido', 'propietario__segundo_apellido',
                      'metros_cuadrados', 'poligono', 'numero_parcela', 'poblacion__nombre',

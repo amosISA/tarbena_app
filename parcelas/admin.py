@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.http import HttpResponse
 
 from import_export.admin import ImportExportModelAdmin
-from .models import Parcela, Propietario, SectorTrabajo, Estado, Proyecto, Poblacion, Estado_Parcela_Trabajo, Provincia, PoblacionesFavoritas
+from .models import Parcela, SectorTrabajo, Estado, Proyecto, Poblacion, Estado_Parcela_Trabajo, Provincia, PoblacionesFavoritas
 from .sites import my_admin_site
 
 import urllib.request
@@ -246,22 +246,22 @@ class ParcelaAdmin(ImportExportModelAdmin):
 my_admin_site.register(Parcela, ParcelaAdmin)
 admin.site.register(Parcela, ParcelaAdmin)
 
-class PropietarioAdmin(ImportExportModelAdmin):
-    list_display = ['nombre', 'apellidos', 'apellidos2', 'poblacion', 'direccion', 'nif',
-                    'telefono_fijo', 'telefono_movil', 'comentarios']
-    list_filter = ['nombre']
-    #list_editable = ('poblacion',)
-    search_fields = ('nombre', 'apellidos', 'nif', 'poblacion__nombre',
-                     'telefono_fijo', 'telefono_movil', 'comentarios',)
-    empty_value_display = '-'
-    show_full_result_count = True
-    inlines = [ParcelaInline]
-
-    list_select_related = (
-        'poblacion',
-        'poblacion__provincia',
-    )
-admin.site.register(Propietario, PropietarioAdmin)
+# class PropietarioAdmin(ImportExportModelAdmin):
+#     list_display = ['nombre', 'apellidos', 'apellidos2', 'poblacion', 'direccion', 'nif',
+#                     'telefono_fijo', 'telefono_movil', 'comentarios']
+#     list_filter = ['nombre']
+#     #list_editable = ('poblacion',)
+#     search_fields = ('nombre', 'apellidos', 'nif', 'poblacion__nombre',
+#                      'telefono_fijo', 'telefono_movil', 'comentarios',)
+#     empty_value_display = '-'
+#     show_full_result_count = True
+#     inlines = [ParcelaInline]
+#
+#     list_select_related = (
+#         'poblacion',
+#         'poblacion__provincia',
+#     )
+# admin.site.register(Propietario, PropietarioAdmin)
 
 class SectorTrabajoAdmin(admin.ModelAdmin):
     list_display = ['sector']

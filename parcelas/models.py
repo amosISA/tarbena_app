@@ -46,28 +46,28 @@ class Poblacion(TimeStampedModel):
     def __str__(self):
         return '{}, {}'.format(self.codigo, self.nombre)
 
-class Propietario(TimeStampedModel):
-    nombre = models.CharField(max_length=250, blank=False)
-    apellidos = models.CharField(max_length=250, blank=True)
-    apellidos2 = models.CharField(max_length=250, blank=True)
-    nif = models.CharField(max_length=250, blank=True, unique=True, help_text='Ejemplo: 12345678-T')
-    poblacion = models.ForeignKey(Poblacion, blank=True, null=True, related_name='propietario_poblacion')
-    direccion = models.CharField(max_length=250, blank=True)
-    telefono_fijo = models.CharField(max_length=250, blank=True)
-    telefono_movil = models.CharField(max_length=250, blank=True)
-    email = models.CharField(max_length=250, blank=True)
-    comentarios = models.TextField(blank=True)
-
-    class Meta:
-        ordering = ["-nombre"]
-        verbose_name = 'Propietario'
-        verbose_name_plural = "Propietarios"
-
-    def __str__(self):
-        return '{}, {} {}, {}, ({})'.format(self.nif ,self.apellidos, self.apellidos2, self.nombre, self.direccion)
-
-    def natural_key(self):
-        return '{}, {} {}, {}, ({})'.format(self.nif, self.apellidos, self.apellidos2, self.nombre, self.direccion)
+# class Propietario(TimeStampedModel):
+#     nombre = models.CharField(max_length=250, blank=False)
+#     apellidos = models.CharField(max_length=250, blank=True)
+#     apellidos2 = models.CharField(max_length=250, blank=True)
+#     nif = models.CharField(max_length=250, blank=True, unique=True, help_text='Ejemplo: 12345678-T')
+#     poblacion = models.ForeignKey(Poblacion, blank=True, null=True, related_name='propietario_poblacion')
+#     direccion = models.CharField(max_length=250, blank=True)
+#     telefono_fijo = models.CharField(max_length=250, blank=True)
+#     telefono_movil = models.CharField(max_length=250, blank=True)
+#     email = models.CharField(max_length=250, blank=True)
+#     comentarios = models.TextField(blank=True)
+#
+#     class Meta:
+#         ordering = ["-nombre"]
+#         verbose_name = 'Propietario'
+#         verbose_name_plural = "Propietarios"
+#
+#     def __str__(self):
+#         return '{}, {} {}, {}, ({})'.format(self.nif ,self.apellidos, self.apellidos2, self.nombre, self.direccion)
+#
+#     def natural_key(self):
+#         return '{}, {} {}, {}, ({})'.format(self.nif, self.apellidos, self.apellidos2, self.nombre, self.direccion)
 
 class Estado(models.Model):
     nombre = models.CharField(max_length=250, blank=False)
@@ -124,7 +124,7 @@ class Estado_Parcela_Trabajo(TimeStampedModel):
 
 class Parcela(TimeStampedModel):
     #user = models.ForeignKey(User, blank=True, null=True)
-    propietario = models.ForeignKey(Propietario, related_name='propietario', default='', blank=True, null=True, on_delete=models.SET_NULL)
+    #propietario = models.ForeignKey(Propietario, related_name='propietario', default='', blank=True, null=True, on_delete=models.SET_NULL)
     poseedor = models.ForeignKey(Terceros, related_name='poseedor', default='', blank=True, null=True)
     poblacion = models.ForeignKey(Poblacion, default='')
     metros_cuadrados = models.CharField(max_length=250, blank=True)
@@ -143,7 +143,7 @@ class Parcela(TimeStampedModel):
     url = models.TextField(blank=True, null=True, help_text="Se autocompleta")
 
     class Meta:
-        ordering = ["propietario", "poligono"]
+        ordering = ["poseedor", "poligono"]
         verbose_name = 'Parcela'
         verbose_name_plural = "Parcelas"
         permissions = (

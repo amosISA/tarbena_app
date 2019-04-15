@@ -153,6 +153,22 @@ class Parcela(TimeStampedModel):
     def __str__(self):
         return '{}'.format(self.numero_parcela)
 
+    def get_full_name(self):
+        if self.propietario.primer_apellido and self.propietario.segundo_apellido:
+            return '{} {} {}'.format(self.propietario.primer_apellido, self.propietario.segundo_apellido, self.propietario.nombre)
+        elif not self.propietario.primer_apellido and self.propietario.segundo_apellido:
+            return '{} {}'.format(self.propietario.segundo_apellido, self.propietario.nombre)
+        elif self.propietario.primer_apellido and not self.propietario.segundo_apellido:
+            return '{} {}'.format(self.propietario.primer_apellido, self.propietario.nombre)
+        else:
+            return '{}'.format(self.propietario.nombre)
+
+    def get_identificacion(self):
+        if self.get_identificacion:
+            return '{}'.format(self.propietario.identificacion)
+        else:
+            return '-'
+
 class Proyecto(TimeStampedModel):
     nombre = models.CharField(max_length=250, blank=False)
     sector_trabajo = models.ManyToManyField(SectorTrabajo, blank=True)

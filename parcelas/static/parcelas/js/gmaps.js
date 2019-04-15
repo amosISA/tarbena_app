@@ -175,7 +175,7 @@ $(document).ready(function() {
                         table_rows += ('<td class="p1_poblacion">' + value['poblacion'].codigo + '</td>' +
                                        '<td>' + value['poligono'] + '</td>' +
                                        '<td><a class="modify_parcela_anchor" target="_blank" title="Modificar parcela" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/parcela/' +  value['id'] + '/change">' + value['numero_parcela'] + '</a></td>' +
-                                       '<td><a class="modify_propietario_anchor" target="_blank" title="' + value['propietario'].apellidos + ' ' + value['propietario'].apellidos2 + ', ' + value['propietario'].nombre + ', (' + value['propietario'].direccion + ')" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/propietario/' +  value['propietario'].id + '/change">' + value['propietario'].nif + '</td>' +
+                                       '<td><a class="modify_propietario_anchor" target="_blank" title="' + value['get_full_name'] + '" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/propietario/' +  value['propietario'].id + '/change">' + value['get_identificacion'] + '</td>' +
                                        '<td>' + value['metros_cuadrados'] + '</td>' +
                                        '<td><a class="anchor_autorizacion_parcelas" target="_blank" title="Obtener autorización" href="' + generete_some_url(value['id']) + '"><i class="fas fa-file-alt"></i></a></td>'
                                        //'<td><a href="javascript:kmlHighlightPoly('+j+','+i+','+value['estado'].color+');">highlight</a></td>'

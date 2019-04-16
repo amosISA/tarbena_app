@@ -82,6 +82,9 @@ urlpatterns = [
 
     # Facturas luz ayto
     url(r'^luz/', include('luz.urls', namespace='luz')),
+
+    # FAQ
+    url(r'^faq/', views.faq, name='faq'),
 ]
 
 if settings.DEBUG:

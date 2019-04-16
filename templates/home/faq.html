@@ -1,0 +1,34 @@
+{% extends "home/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Frequent Asked Questions (FAQ)
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+<div>
+    <div>
+
+        {% include 'home/snippets/navbar.html' %}
+
+        <div>
+            <div class="rights-tarbena main">
+                <div class="rights-tarbena content">
+                    <div class="rights-tarbena">
+                        <div class="rights-tarbena md">
+                            <h1>Frequent Asked Questions (FAQ)</h1>
+                            <p>1. ¿Cómo crear un usuario con acceso a subvenciones y permisos solo a las que tenga asignadas?</p>
+                            <p>- Crear el usuario</p>
+                            <p>- Editar el usuario y dar permisos de => subvenciones | Subvencion | Can add Subvencion</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

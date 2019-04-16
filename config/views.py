@@ -50,3 +50,10 @@ def terms_privacy_cookies(request, name):
     return render(request,
                   template_name,
                   {})
+
+# --------------- FAQ --------------- #
+def faq(request):
+    template_name = 'home/faq.html'
+    return render(request,
+                  template_name,
+                  {})

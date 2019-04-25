@@ -2,8 +2,7 @@
 {% load staticfiles %}
 
 {% block stylesheets %}
-    <!-- Datatables -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 {% endblock %}
 
 {% block title %}
@@ -17,25 +16,32 @@
 {% block content %}
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-4"><a href="#" id="luz__consumo_total">Consumo total</a></div>
-            {% for contador in contadores %}
-                <div class="col-md-4"><a href="#" class="luz__consumo_total--by_object" data-id="{{ contador.id }}">{{ contador.nombre }}</a></div>
-            {% endfor %}
 
-            <div class="col-md-4"><a href="#">Cuantía total</a></div>
-            <div class="col-md-4"><a href="#">Evolución cuantía por contador</a></div>
-
-            <div class="col-md-4"><a href="#">Lecturas y evolución</a></div>
-        </div>
+        <ol class="breadcrumb">
+            <li><a href="#" id="luz__consumo_total">Consumo total</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Por contador
+                </a>
+                <ul class="dropdown-menu">
+                    {% for contador in contadores %}
+                        <li><a href="#" class="luz__consumo_total--by_object" data-id="{{ contador.id }}">{{ contador.nombre }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li><a href="#">Cuantía total</a></li>
+            <li><a href="#">Evolución cuantía por contador</a></li>
+            <li><a href="#">Lecturas y evolución</a></li>
+        </ol>
 
         <div class="row" style="margin-top:55px;" id="firstCanvasChart">
             <canvas id="myChart"></canvas>
         </div>
 
-        <div class="row" style="margin-top:55px;">
+        <div class="row" style="margin-top:55px;" id="secondCanvasChart">
             <canvas id="myChart2"></canvas>
         </div>
+
     </div>
 
 
@@ -131,12 +137,14 @@
                 var contador_id = $(this).attr('data-id');
                 var defaultData = [];
                 var labels = [];
+                var contador_nombre = $(this).text();
                 $.ajax({
                     method: "GET",
                     url: generete_some_url(contador_id),
                     success: function(data) {
                         $('#firstCanvasChart').empty();
                         $('#firstCanvasChart').html('<canvas id="myChart"></canvas>');
+                        $('#secondCanvasChart').html() != "" ? $('#secondCanvasChart').html('<canvas id="myChart2"></canvas>') : "";
                         var ctx = document.getElementById('myChart');
                         $.each(data, function( key, value ) {
                             labels.push(value.fields['desde'])
@@ -148,7 +156,7 @@
                             data: {
                                 labels: labels,
                                 datasets: [{
-                                    label: 'Total Contadores 2013 - ' + new Date().getFullYear() + ' (kW)',
+                                    label: contador_nombre + ' (kW)',
                                     data: defaultData,
                                     borderWidth: 3
                                 }]

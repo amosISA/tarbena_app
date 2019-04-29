@@ -20,6 +20,12 @@
                                 <a href="{% url 'admin:index' %}" class="navbar-text" style="margin: 0;color: #fff;margin-left:10px;">Panel</a>
                             </li>
                         {% endif %}
+                        <li class="custom-home-navbar__li menu">
+                            <a href="{% url 'profiles:user_profile' username=user.username %}" class="navbar-text" style="margin: 0;color: #fff;margin-left:10px;display:none;">Mi perfil</a>
+                        </li>
+                        <li class="custom-home-navbar__li menu">
+                            <a href="{% url 'logout' %}" class="navbar-text" style="margin: 0;color: #fff;margin-left:10px;display:none;">Salir</a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>

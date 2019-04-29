@@ -23,83 +23,6 @@
         <div class="main-page-pau">
             <div class="body-wrapper on">
                 <div class="sections-list">
-                    <!-- Fav Sites -->
-                    <section class="collapsible-section top-sites animation-enabled">
-                        <div class="section-top-bar">
-                            <h3 class="section-title">
-                                <span class="click-target">
-                                    <span class="icon icon-small-spacer icon-topsites" style="background-image: url('{% static "home/img/icons/glyph-topsites-16.svg"%}')"></span>
-                                    <span>Sitios favoritos</span>
-                                    <span class="collapsible-arrow icon icon-arrowhead-down-small" style="background-image: url('{% static "home/img/icons/glyph-arrowhead-down-12.svg"%}')"></span>
-                                </span>
-                            </h3>
-                            <div>
-                                <button class="context-menu-button icon" style="background-image: url('{% static "home/img/icons/page-action.svg"%}')">
-                                    <span class="sr-only"><span>Abrir la sección menú contextual</span></span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="section-body">
-                            <ul class="top-sites-list" style="padding:0;">
-                                <!-- If user is staff show the perma favourites for staff members -->
-                                {% for fav in favourites %}
-                                    {% if fav.type.name == 'Permanente staff' %}
-                                        {% if request.user.is_superuser %}
-                                        <li class="top-site-outer">
-                                            <div class="top-site-inner">
-                                                <a href="{{ fav.link }}" tabindex="0">
-                                                    <div class="tile" aria-hidden="true" data-fallback="{{ fav.name|make_list|first }}">
-                                                        <div class="screenshot active" alt="{{ fav.name }}" data-url="{{ fav.link }}"></div>
-                                                        <div class="top-site-icon default-icon"></div>
-                                                    </div>
-                                                    <div class="title" title="{{ fav.name }}">
-                                                        <span dir="auto">{{ fav.name }}</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        {% endif %}
-                                    {% elif fav.type.name == 'Permanente ciudadanos' %}
-                                        <li class="top-site-outer">
-                                            <div class="top-site-inner">
-                                                <a href="{{ fav.link }}" tabindex="0">
-                                                    <div class="tile" aria-hidden="true" data-fallback="{{ fav.name|make_list|first }}">
-                                                        <div class="screenshot active" alt="{{ fav.name }}" data-url="{{ fav.link }}"></div>
-                                                        <div class="top-site-icon default-icon"></div>
-                                                    </div>
-                                                    <div class="title" title="{{ fav.name }}">
-                                                        <span dir="auto">{{ fav.name }}</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </li>
-                                    {% endif %}
-                                {% endfor %}
-
-                                <!-- If not, show his own favourites -->
-                                {% for fav in favourites %}
-                                    {% for u in fav.user.all %}
-                                        {% if u == request.user %}
-                                        <li class="top-site-outer">
-                                            <div class="top-site-inner">
-                                                <a href="{{ fav.link }}" tabindex="0">
-                                                    <div class="tile" aria-hidden="true" data-fallback="{{ fav.name|make_list|first }}">
-                                                        <div class="screenshot active" alt="{{ fav.name }}" data-url="{{ fav.link }}"></div>
-                                                        <div class="top-site-icon default-icon"></div>
-                                                    </div>
-                                                    <div class="title" title="{{ fav.name }}">
-                                                        <span dir="auto">{{ fav.name }}</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endfor %}
-                            </ul>
-                            <div class="edit-topsites-wrapper"><!-- Here it goes modal add new fav site --></div>
-                        </div>
-                    </section>
 
                     <!-- Aplicaciones -->
                     <section class="collapsible-section section compact-cards animation-enabled" data-section-id="highlights">
@@ -285,9 +208,111 @@
                                         <span class="sr-only">Open context menu for Transparencia Subvenciones</span>
                                     </button>
                                 </li>
+
+                                {% if request.user.is_superuser %}
+                                <!-- FAQ -->
+                                <li class="card-outer">
+                                    <a href="{% url 'faq' %}">
+                                        <div class="card_from">
+                                            <div class="card-preview-image-outer" style="background-image: url('{% static "home/img/apps/app_faq.png"%}')"></div>
+                                            <div class="card-details">
+                                                <div class="card-host-name">FAQ</div>
+                                                <div class="card-text">
+                                                    <h4 class="card-title">Frequent Asked Questions</h4>
+                                                </div>
+                                                <div class="card-context">
+                                                    <span class="card-context-icon icon icon-history-item" style="background-image: url('{% static "home/img/icons/history.svg"%}')"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <button class="context-menu-button icon">
+                                        <span class="sr-only">Preguntas más comunes</span>
+                                    </button>
+                                </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </section>
+
+                    <!-- Fav Sites -->
+                    <section class="collapsible-section top-sites animation-enabled">
+                        <div class="section-top-bar">
+                            <h3 class="section-title">
+                                <span class="click-target">
+                                    <span class="icon icon-small-spacer icon-topsites" style="background-image: url('{% static "home/img/icons/glyph-topsites-16.svg"%}')"></span>
+                                    <span>Sitios favoritos</span>
+                                    <span class="collapsible-arrow icon icon-arrowhead-down-small" style="background-image: url('{% static "home/img/icons/glyph-arrowhead-down-12.svg"%}')"></span>
+                                </span>
+                            </h3>
+                            <div>
+                                <button class="context-menu-button icon" style="background-image: url('{% static "home/img/icons/page-action.svg"%}')">
+                                    <span class="sr-only"><span>Abrir la sección menú contextual</span></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="section-body">
+                            <ul class="top-sites-list" style="padding:0;">
+                                <!-- If user is staff show the perma favourites for staff members -->
+                                {% for fav in favourites %}
+                                    {% if fav.type.name == 'Permanente staff' %}
+                                        {% if request.user.is_superuser %}
+                                        <li class="top-site-outer">
+                                            <div class="top-site-inner">
+                                                <a href="{{ fav.link }}" tabindex="0">
+                                                    <div class="tile" aria-hidden="true" data-fallback="{{ fav.name|make_list|first }}">
+                                                        <div class="screenshot active" alt="{{ fav.name }}" data-url="{{ fav.link }}"></div>
+                                                        <div class="top-site-icon default-icon"></div>
+                                                    </div>
+                                                    <div class="title" title="{{ fav.name }}">
+                                                        <span dir="auto">{{ fav.name }}</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        {% endif %}
+                                    {% elif fav.type.name == 'Permanente ciudadanos' %}
+                                        <li class="top-site-outer">
+                                            <div class="top-site-inner">
+                                                <a href="{{ fav.link }}" tabindex="0">
+                                                    <div class="tile" aria-hidden="true" data-fallback="{{ fav.name|make_list|first }}">
+                                                        <div class="screenshot active" alt="{{ fav.name }}" data-url="{{ fav.link }}"></div>
+                                                        <div class="top-site-icon default-icon"></div>
+                                                    </div>
+                                                    <div class="title" title="{{ fav.name }}">
+                                                        <span dir="auto">{{ fav.name }}</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <!-- If not, show his own favourites -->
+                                {% for fav in favourites %}
+                                    {% for u in fav.user.all %}
+                                        {% if u == request.user %}
+                                        <li class="top-site-outer">
+                                            <div class="top-site-inner">
+                                                <a href="{{ fav.link }}" tabindex="0">
+                                                    <div class="tile" aria-hidden="true" data-fallback="{{ fav.name|make_list|first }}">
+                                                        <div class="screenshot active" alt="{{ fav.name }}" data-url="{{ fav.link }}"></div>
+                                                        <div class="top-site-icon default-icon"></div>
+                                                    </div>
+                                                    <div class="title" title="{{ fav.name }}">
+                                                        <span dir="auto">{{ fav.name }}</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                            <div class="edit-topsites-wrapper"><!-- Here it goes modal add new fav site --></div>
+                        </div>
+                    </section>
+
                 </div>
             </div>
         </div>

@@ -35,6 +35,10 @@
         <div>
             <div class="rights-tarbena main">
                 <div class="rights-tarbena content">
+
+                    <!-- Count total cuantia final subvenciones -->
+                    <div class="count_cuantia_final" style="margin-left: 16px;margin-bottom: 20px;font-weight: bold;"></div>
+
                     <div class="rights-tarbena">
                         <div class="rights-tarbena md">
                             <div class="row align-items-center subv-table-row">
@@ -74,7 +78,7 @@
                                                         {% if f.fin %}<div class="fechaInicio date-end">{{ f.fin|date:"d/m/Y" }}</div>{% endif %}
                                                         <div class="estadoBloque estado">{{ f.estado }}</div>
                                                         <div class="cuantia"><i class="fas fa-dollar-sign"></i> {% if f.cuantia_inicial %}{{ f.cuantia_inicial|safe }}{% endif %}</div>
-                                                        <div class="cuantia"><i class="fas fa-euro-sign"></i> {% if f.cuantia_final %}{{ f.cuantia_final|safe }}{% endif %}</div>
+                                                        <div class="cuantia"><i class="fas fa-euro-sign"></i> <span class="cuantia_final">{% if f.cuantia_final %}{{ f.cuantia_final|safe }}{% else %}0{% endif %}</span></div>
                                                     </td>
                                                     <td class="td4">
                                                         <a href="{{ f.procedimiento }}" target="_blank">Procedimiento</a>
@@ -122,4 +126,30 @@
     <script src="{% static 'home/datatables/pdfmake.min.js' %}"></script>
     <script src="{% static 'home/datatables/vfs_fonts.js' %}"></script>
     <script src="{% static 'home/js/transparencia.js' %}"></script>
+
+    <script>
+        /* Script to calculate cuantia final of all subvenciones */
+        var array_sum = [];
+        var new_array_sum = [];
+        $.each($('.cuantia_final'), function() {
+            array_sum.push($(this).html());
+        });
+        $.each(array_sum, function(index, value) {
+            var str = value.replace(/[.,\s]/g, '');
+            var formated_str = Number(str).toLocaleString("es-ES");
+            new_array_sum.push(parseInt(str));
+
+        });
+        function getSum(total, num) {
+            return total + num;
+        }
+
+        var number_formated = new_array_sum.reduce(getSum);
+        var str = number_formated.toString();
+        var str_substring = str.substring(0, str.length-2);
+        console.log(str_substring);
+        var number_formated_locale = Number(parseInt(str_substring)).toLocaleString("es-ES");
+        var total_suma_cuantias_finales = '<p>Total subvenciones: ' + number_formated_locale + ',00 €</p>';
+        $('.count_cuantia_final').html(total_suma_cuantias_finales);
+    </script>
 {% endblock %}

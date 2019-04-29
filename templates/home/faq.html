@@ -5,6 +5,13 @@
     Frequent Asked Questions (FAQ)
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{% endblock %}
+
 {% block navbar %}
 {% endblock %}
 
@@ -18,11 +25,54 @@
             <div class="rights-tarbena main">
                 <div class="rights-tarbena content">
                     <div class="rights-tarbena">
-                        <div class="rights-tarbena md">
+                        <div class="rights-tarbena md" style="margin-bottom:20px;">
                             <h1>Frequent Asked Questions (FAQ)</h1>
-                            <p>1. ¿Cómo crear un usuario con acceso a subvenciones y permisos solo a las que tenga asignadas?</p>
-                            <p>- Crear el usuario</p>
-                            <p>- Editar el usuario y dar permisos de => subvenciones | Subvencion | Can add Subvencion</p>
+                        </div>
+
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                        ¿Cómo crear un usuario con acceso a subvenciones y permisos solo a las que tenga asignadas?
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <p>Crear el usuario en el <a target="_blank" href="{% url 'admin:auth_user_add' %}">panel de administración</a>.</p>
+                                        <p>Editar el usuario y dar permisos de: <b>subvenciones | Subvencion | Can add Subvencion</b></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="card-link" data-toggle="collapse" href="#collapseTwo">
+                                        ¿Cómo permitir a un usuario poder acceder al panel de administración?
+                                    </a>
+                                </div>
+                                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <p>Para que un usuario pueda acceder al panel de administración hay que modificarlo y hacerlo <b>staff.</b></p>
+                                        <p>Hay que tener en cuenta que si lo haces <b>staff</b>, podrá acceder al panel de aministración y ver solo
+                                        los contenidos de las aplicaciones de las que tenga permisos.</p>
+                                        <p>Por lo contrario, si lo haces <b>superusuario</b> podrá acceder a todo tipo de contenido (OJO!).</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="card-link" data-toggle="collapse" href="#collapseThree">
+                                        ¿Cómo permitir a un usuario poder acceder a la aplicación de parcelas?
+                                    </a>
+                                </div>
+                                <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <p>Para que un usuario pueda acceder a la aplicación de parcelas hay que asignarle el sigueinte permiso: <b>parcelas | Poblacion | Puede acceder a la app de parcelas</b></p>
+                                        <p>Cuando entre sólo podrá ver los proyectos disponibles pero no lo que contiene cada uno.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

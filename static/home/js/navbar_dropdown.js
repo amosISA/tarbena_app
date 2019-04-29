@@ -9,6 +9,8 @@ $(document).ready(function() {
 
     // Toggle dropdown right side when user is not logged in
     $('.custom-home-navbar__menus_toogle').click(function () {
+        $('.custom-home-navbar__menus__links').html('');
+        $('.custom-home-navbar__left__ul li > a').css("display","block");
         $('.custom-home-navbar__menus_toogle > a').toggleClass("setting-dropdown-icon--active");
         $('.custom-home-navbar__menus__links').toggleClass('custom-home-navbar__menus__links--active').toggle();
         handle1();

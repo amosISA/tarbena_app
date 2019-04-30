@@ -60,28 +60,30 @@
                                     </li>
                                 {% endif %}
 
-                                {% if request.user.is_superuser %}
-                                <!-- Subvenciones -->
-                                <li class="card-outer">
-                                    <a href="{% url 'subvenciones:index' %}">
-                                        <div class="card_from">
-                                            <div class="card-preview-image-outer" style="background-image: url('{% static "home/img/apps/app_subv.png"%}')"></div>
-                                            <div class="card-details">
-                                                <div class="card-host-name">Subvenciones</div>
-                                                <div class="card-text">
-                                                    <h4 class="card-title">Gestión de Subvenciones</h4>
-                                                </div>
-                                                <div class="card-context">
-                                                    <span class="card-context-icon icon icon-history-item" style="background-image: url('{% static "home/img/icons/history.svg"%}')"></span>
+                                {% if perms.subvenciones.add_subvencion %}
+                                    <!-- Subvenciones -->
+                                    <li class="card-outer">
+                                        <a href="{% url 'subvenciones:index' %}">
+                                            <div class="card_from">
+                                                <div class="card-preview-image-outer" style="background-image: url('{% static "home/img/apps/app_subv.png"%}')"></div>
+                                                <div class="card-details">
+                                                    <div class="card-host-name">Subvenciones</div>
+                                                    <div class="card-text">
+                                                        <h4 class="card-title">Gestión de Subvenciones</h4>
+                                                    </div>
+                                                    <div class="card-context">
+                                                        <span class="card-context-icon icon icon-history-item" style="background-image: url('{% static "home/img/icons/history.svg"%}')"></span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                    <button class="context-menu-button icon">
-                                        <span class="sr-only">Open context menu for Subvenciones</span>
-                                    </button>
-                                </li>
+                                        </a>
+                                        <button class="context-menu-button icon">
+                                            <span class="sr-only">Open context menu for Subvenciones</span>
+                                        </button>
+                                    </li>
+                                {% endif %}
 
+                                {% if request.user.is_superuser %}
                                 <!-- Llaves -->
                                 <li class="card-outer">
                                     <a href="#">

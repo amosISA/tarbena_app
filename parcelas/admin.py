@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
 from django.contrib import admin
+from django.db import models
 from django.http import HttpResponse
+from django.forms import CheckboxSelectMultiple
 
 from import_export.admin import ImportExportModelAdmin
 from .models import Parcela, SectorTrabajo, Estado, Proyecto, Poblacion, Estado_Parcela_Trabajo, Provincia, PoblacionesFavoritas
@@ -278,6 +280,10 @@ class ProyectoAdmin(admin.ModelAdmin):
     search_fields = ('nombre', 'descripcion', 'comentarios',)
     empty_value_display = '-'
     show_full_result_count = True
+
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
 admin.site.register(Proyecto, ProyectoAdmin)
 
 class EstadoAdmin(admin.ModelAdmin):

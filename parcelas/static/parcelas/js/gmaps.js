@@ -17,6 +17,9 @@ $(document).ready(function() {
     // WHEN YOU CLICK ON PROJECTS ON BREADCRUMBS
     var card = $('#widget');
     card.on("click", ".proj-breadcrumb", function() {
+        // Remove download sector as kml button if exists
+        if ($('.button_download_sector_kml')) $('.button_download_sector_kml').remove();
+
         $.ajax({
             method: 'GET',
             url: ajaxproyectos_url,
@@ -39,6 +42,9 @@ $(document).ready(function() {
 
     // WHEN YOU CLICK ON SECTORS ON BREADCRUMBS
     card.on("click", ".sector-breadcrumb", function() {
+        // Remove download sector as kml button if exists
+        if ($('.button_download_sector_kml')) $('.button_download_sector_kml').remove();
+
         $.ajax({
             method: 'GET',
             url: ajaxsectores_url,
@@ -62,6 +68,9 @@ $(document).ready(function() {
 
     // WHEN YOU CLICK ON EACH PROJECT TO SWITCH TO SECTORES
     card.on('click', '.project-name', function() {
+        // Remove download sector as kml button if exists
+        if ($('.button_download_sector_kml')) $('.button_download_sector_kml').remove();
+
         global_project_txt = null;
         global_project_txt = $(this).text();
         global_project_clicked_txt = $(this).text();
@@ -236,6 +245,51 @@ $(document).ready(function() {
                                         '<tbody style="font-size:12px;">' + table_rows + '</tbody>' +
                                    '</table>'
                 );
+
+                // Create download button to download all checked parcels in one KML
+                if ($('.button_download_sector_kml')) $('.button_download_sector_kml').remove();
+                $('.widget-body').before('<button class="button_download_sector_kml" style="font-size: .7rem;margin-bottom: 2px;">Descargar Sector (KML)</button>');
+
+                //$('#widget').on('click', '.button_download_sector_kml', function(){
+                var array_checks_parcelas = [];
+                var file_export_kml = '<?xml version="1.0" encoding="UTF-8"?><kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom"><Folder><name>' + global_sector_txt + '</name><open>1</open><Style><ListStyle><listItemType>check</listItemType><ItemIcon><state>open</state><href>:/mysavedplaces_open.png</href></ItemIcon><ItemIcon><state>closed</state><href>:/mysavedplaces_closed.png</href></ItemIcon><bgColor>00ffffff</bgColor><maxSnippetLines>2</maxSnippetLines></ListStyle></Style>';
+                $('.button_download_sector_kml').click(function() {
+                    array_checks_parcelas = [];
+                    $('input.parcela-google-maps-checkbox:checkbox:checked').each(function () {
+                        array_checks_parcelas.push($(this).attr("data-parcela"));
+                    });
+
+                    $.each(data, function(key, value) {
+                        if($.inArray(value['numero_parcela'], array_checks_parcelas) !== -1) {
+                            var kml_bbdd = value['kml'];
+                            var coord_start = kml_bbdd.indexOf('<coordinates>');
+                            var coord_end = kml_bbdd.indexOf('</coordinates>');
+                            var kml_coordinates = kml_bbdd.substring(coord_start, coord_end) + "</coordinates>";
+
+                            if(value['estado']) {
+                                var color_kml = '';
+                                if (value['estado'].nombre == 'No aceptado') { color_kml = '1400E6'; } else if (value['estado'].nombre == 'Aceptado') { color_kml = '78C878'; } else if (value['estado'].nombre == 'Intermedio') { color_kml = '78E6F0' } else if (value['estado'].nombre == 'Pendiente') { color_kml = 'A0A0A0' }
+                                file_export_kml += '<Document>' +
+                                                   '<Style id="polygon_style"><LineStyle><color>' + color_kml + '</color><width>2</width></LineStyle><PolyStyle><color>B3' + color_kml + '</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
+                                                   '<name>' + value['ref_catastral'] + '</name><Placemark>' + '<name><![CDATA[<font size=+1><a class="modify_parcela_anchor" target="_blank" title="Modificar parcela" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/parcela/' +  value['id'] + '/change">' + value['localizacion'] + '</a></font>]]></name>' +
+                                                   '<description><![CDATA[<font size=+0><A href="' + value['url']  + '" target="_blank">' + value['ref_catastral'] + '</a></font><br><font size=+0><span style="margin-top:10px;"><strong>Propietario</strong>: <a class="modify_propietario_anchor" target="_blank" href="' + document.location.href.replace('parcelas/#', '') + 'panel/terceros/terceros/' +  value['propietario'].id + '/change">' + value['get_identificacion'] + ', ' + value['propietario'].nombre + ',<br> (' + value['propietario'].nombre_via + ')</a><br><strong>Estado: </strong>' + value['estado'].nombre + '<br><strong>m2: </strong>' + value['metros_cuadrados'] + ' m2<br><a class="anchor_autorizacion_parcelas" target="_blank" title="Obtener autorización" href="' + generete_some_url(value['id']) + '"><i class="fas fa-file-alt"></i></a></font>]]></description>' +
+                                                   '<Polygon>' + '<styleUrl>#polygon_style</styleUrl>' +
+                                                   '<tessellate>1</tessellate><outerBoundaryIs><LinearRing>' + kml_coordinates +
+                                                   '</LinearRing></outerBoundaryIs></Polygon></Placemark></Document>';
+                            } else {
+                                file_export_kml += '<Document>' +
+                                                   '<Style id="polygon_style"><LineStyle><color>ffffff</color><width>2</width></LineStyle><PolyStyle><color>66ffffff</color><fill>1</fill><outline>1</outline></PolyStyle></Style>' +
+                                                   '<name>' + value['ref_catastral'] + '</name><Placemark>' + '<name><![CDATA[<font size=+1><a class="modify_parcela_anchor" target="_blank" title="Modificar parcela" href="' + document.location.href.replace('parcelas/#', '') + 'panel/parcelas/parcela/' +  value['id'] + '/change">' + value['localizacion'] + '</a></font>]]></name>' +
+                                                   '<description><![CDATA[<font size=+0><A href="' + value['url']  + '" target="_blank">' + value['ref_catastral'] + '</a></font><br><font size=+0><span style="margin-top:10px;"><strong>Propietario</strong>: <a class="modify_propietario_anchor" target="_blank" href="' + document.location.href.replace('parcelas/#', '') + 'panel/terceros/terceros/' +  value['propietario'].id + '/change">' + value['get_identificacion'] + ', ' + value['propietario'].nombre + ',<br> (' + value['propietario'].nombre_via + ')</a><br><strong>Estado: </strong>' + '<br><strong>m2: </strong>' + value['metros_cuadrados'] + ' m2<br><a class="anchor_autorizacion_parcelas" target="_blank" title="Obtener autorización" href="' + generete_some_url(value['id']) + '"><i class="fas fa-file-alt"></i></a></font>]]></description>' +
+                                                   '<Polygon>' + '<styleUrl>#polygon_style</styleUrl>' +
+                                                   '<tessellate>1</tessellate><outerBoundaryIs><LinearRing>' + kml_coordinates +
+                                                   '</LinearRing></outerBoundaryIs></Polygon></Placemark></Document>';
+                            }
+                        }
+                    });
+                    file_export_kml += '</Folder></kml>';
+                    download(global_sector_txt+'.kml', file_export_kml);
+                });
             }
         });
     });
@@ -460,6 +514,20 @@ function highlightPoly(poly, color) {
   google.maps.event.addListener(poly, "mouseout", function () {
     poly.setOptions({ fillColor: color, strokeColor: color, fillOpacity: 0.5 });
   });
+}
+
+// Click on download sector parcelas as KML
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
 }
 
 ////////////////////////

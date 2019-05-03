@@ -39,7 +39,7 @@ def export_xls(modeladmin, request, queryset):
         row_num += 1
         row = [
             obj.type.name,
-            obj.contractor.name,
+            obj.contratante.nombre,
             obj.base.replace("€","").replace(" ",""),
             obj.iva.replace("€","").replace(" ",""),
             obj.total.replace("€","").replace(" ",""),

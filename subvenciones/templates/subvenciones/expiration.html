@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-</head>
+    {% load staticfiles %}
+    <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+            <meta name="description" content="Owners and Parcels web with Django and Python">
+            <meta name="author" content="Isaila Amos Lucian">
+            <meta name="generator" content="Django, PyCharm" />
+            <meta name="keywords" content="html, css, sass, python, jquery" />
+
+            <!-- Favicon -->
+            {% block favicon %}
+            <link rel="icon" href="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" type="image/x-icon"/>
+            {% endblock %}
+            <title>Expiración</title>
+    </head>
     <body>
         <ul>
             <h3>Listado de subvenciones que van a expirar pronto</h3>
             {% for s in subvenciones %}
-                <li>{{ s.nombre }} <strong>- Expira en: {{ today|timesince:s.fin }}</strong></li>
+            <li><a style="color:#000;" target="_blank" href="{% url 'subvenciones:edit_subvencion' pk=s.pk %}">{{ s.nombre }}</a> <strong>- Expira en: {{ today|timesince:s.fin }}</strong></li>
             {% endfor %}
         </ul>
     </body>

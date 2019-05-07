@@ -596,7 +596,7 @@ def subvenciones_expires_next_five_days(request):
                 else:
                     # all expiration dates - i can show them if i want
                     pass
-                
+
     return render(request,
                   'subvenciones/expiration.html',
                   {'subvenciones': ls,

@@ -11,18 +11,58 @@
             <meta name="generator" content="Django, PyCharm" />
             <meta name="keywords" content="html, css, sass, python, jquery" />
 
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
             <!-- Favicon -->
             {% block favicon %}
             <link rel="icon" href="{% static 'home/img/favicon/logoTarbenaSubvenciones.png' %}" type="image/x-icon"/>
             {% endblock %}
             <title>Expiración</title>
+            <style>
+                .rest_of_subsidies_tr {
+                    display: none;
+                }
+            </style>
     </head>
     <body>
-        <ul>
+        <div class="container" style="margin-top:30px;margin-bottom: 30px;">
             <h3>Listado de subvenciones que van a expirar pronto</h3>
-            {% for s in subvenciones %}
-            <li><a style="color:#000;" target="_blank" href="{% url 'subvenciones:edit_subvencion' pk=s.pk %}">{{ s.nombre }}</a> <strong>- Expira en: {{ today|timesince:s.fin }}</strong></li>
-            {% endfor %}
-        </ul>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Subvención</th>
+                        <th>Expira en</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for s in subvenciones %}
+                <tr>
+                    <td><a style="color:#000;" target="_blank" href="{% url 'subvenciones:edit_subvencion' pk=s.pk %}">{{ s.nombre }}</a></td>
+                    <td><strong>{{ today|timesince:s.fin }}</strong><br>({{s.fin}})</td>
+                </tr>
+                {% endfor %}
+
+                <!-- Load rest of subsidies -->
+                {% for s in rest_subvenciones %}
+                <tr class="rest_of_subsidies_tr">
+                    <td><a style="color:#000;" target="_blank" href="{% url 'subvenciones:edit_subvencion' pk=s.pk %}">{{ s.nombre }}</a></td>
+                    <td><strong>{{ today|timesince:s.fin }}</strong><br>({{s.fin}})</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a id="load_rest_subsidies" href="#">Cargar las demás subvenciones</a>
+        </div>
     </body>
+    <script
+          src="https://code.jquery.com/jquery-3.3.1.min.js"
+          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+          crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('#load_rest_subsidies').click(function() {
+                $(".rest_of_subsidies_tr").toggle();
+            });
+        });
+    </script>
 </html>

@@ -586,11 +586,17 @@ def subvenciones_expires_next_five_days(request):
         )
 
     today = date.today()
+    todayfivedaysmore = today + timedelta(days=5)
     for s in subvenciones:
         if s.fin:
             if s.fin > today:
-                ls.append(s)
-
+                if s.fin < todayfivedaysmore:
+                    # only expiration dates lower than 5 days
+                    ls.append(s)
+                else:
+                    # all expiration dates - i can show them if i want
+                    pass
+                
     return render(request,
                   'subvenciones/expiration.html',
                   {'subvenciones': ls,

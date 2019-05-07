@@ -579,6 +579,7 @@ def reset_filtering_button(request):
 # --------------- Subvenciones that expires in the next 5 days (their fin field) --------------- #
 def subvenciones_expires_next_five_days(request):
     ls = []
+    others = []
     subvenciones = Subvencion.objects.prefetch_related(
             'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion', 'responsable__profile'
         ).select_related(
@@ -595,9 +596,10 @@ def subvenciones_expires_next_five_days(request):
                     ls.append(s)
                 else:
                     # all expiration dates - i can show them if i want
-                    pass
+                    others.append(s)
 
     return render(request,
                   'subvenciones/expiration.html',
                   {'subvenciones': ls,
+                   'rest_subvenciones': others,
                    'today': today})

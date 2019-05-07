@@ -1,7 +1,8 @@
 var $j = jQuery.noConflict();
 $j(document).ready(function(){
     // Modify textareas
-    $j("textarea[name='drive'], textarea[name='procedimiento'], textarea[name='bases'], textarea[name='solicitud'], textarea[name='nombre']").attr({'cols': '20', 'rows': '1'});
+    $('textarea#id_nombre').attr('rows', '');
+    $j("textarea[name='drive'], textarea[name='procedimiento'], textarea[name='bases'], textarea[name='solicitud']").attr({'cols': '20', 'rows': '1'}).css('cursor', 'pointer');
     $j("textarea[name='descripcion']").attr({'cols': '20', 'rows': '12'});
     $j("textarea[name='cuantia_inicial']").attr({'cols': '20', 'rows': '1'});
     $j("textarea[name='cuantia_final']").attr({'cols': '20', 'rows': '1'});

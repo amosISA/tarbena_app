@@ -150,6 +150,8 @@
                                     <div class="cuantia"><div class="cuantia_index__span">I</div><div class="cuantia_index__numbers">{% if f.cuantia_inicial %}{{ f.cuantia_inicial|safe }}{% endif %}</div></div>
                                     <div class="cuantia"><div class="cuantia_index__span">S</div><div class="cuantia_index__numbers">{% if f.cuantia_solicitada %}{{ f.cuantia_solicitada|safe }}{% endif %}</div></div>
                                     <div class="cuantia"><div class="cuantia_index__span">C</div><div class="cuantia_index__numbers">{% if f.cuantia_final %}{{ f.cuantia_final|safe }}{% endif %}</div></div>
+                                    <div class="cuantia"><div class="cuantia_index__span">%</div><div class="cuantia_index__numbers">{% if f.porcentaje_subvencionable %}{{ f.porcentaje_subvencionable|safe }}{% endif %}</div></div>
+                                    <div class="cuantia"><div class="cuantia_index__span"></div><div class="cuantia_index__numbers">{% if f.sin_cuantia %}Sin cuantía{% else %}Con cuantía{% endif %}</div></div>
                                 </td>
                                 <td class="td4">
                                     <!-- Comentarios -->

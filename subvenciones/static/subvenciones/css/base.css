@@ -1016,6 +1016,6 @@ table.mceLayout, textarea.tinyMCE {
 
 /* Comentarios field overflow */
 #id_comentarios {
-  height: 200px;
+  /*height: 200px;*/
   overflow: auto;
 }

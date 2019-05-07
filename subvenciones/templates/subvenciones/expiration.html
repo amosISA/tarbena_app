@@ -1,0 +1,6 @@
+<ul>
+    <h3>Listado de subvenciones que van a expirar pronto</h3>
+{% for s in subvenciones %}
+    <li>{{ s.nombre }} <strong>- Expira en: {{ today|timesince:s.fin }}</strong></li>
+{% endfor %}
+</ul>

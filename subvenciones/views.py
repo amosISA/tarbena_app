@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from bs4 import BeautifulSoup
+from datetime import *
 from django.conf import settings
 from django.core import serializers
 from django.contrib import messages
@@ -574,3 +575,23 @@ def reset_filtering_button(request):
         'filter': filter
     }
     return JsonResponse(data)
+
+# --------------- Subvenciones that expires in the next 5 days (their fin field) --------------- #
+def subvenciones_expires_next_five_days(request):
+    ls = []
+    subvenciones = Subvencion.objects.prefetch_related(
+            'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion', 'responsable__profile'
+        ).select_related(
+            'user', 'estado', 'ente', 'area', 'user__profile'
+        )
+
+    today = date.today()
+    for s in subvenciones:
+        if s.fin:
+            if s.fin > today:
+                ls.append(s)
+
+    return render(request,
+                  'subvenciones/expiration.html',
+                  {'subvenciones': ls,
+                   'today': today})

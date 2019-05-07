@@ -40,6 +40,8 @@
                 <li title="{{ subvencion.nombre }}"><a href="{{ subvencion.get_absolute_url }}">{{ subvencion.nombre|truncatechars:15 }}</a></li>
                 <li title="Creado por"><a href="#"><span class="icon icon-user"> </span> {{ subvencion.user|title }}, {{ subvencion.created }}</a></li>
                 <li title="Última modificación"><a href="#"><span class="icon icon-pencil"> </span> {{ subvencion.updated }}</a></li>
+                <li class="breadcrumb_detail__anchor--delete"><a href="{% url 'subvenciones:delete_subvencion' pk=subvencion.pk %}"><span class="icon icon-trash"> </span> Eliminar</a></li>
+                <li class="breadcrumb_detail__anchor--pdf"><a href="{% url 'subvenciones:admin_subvencion_pdf' subvencion_id=subvencion.id %}" target="_blank"><span class="far fa-file-pdf"> </span> PDF</a></li>
             </ul>
 
             {{ comments_formset.management_form }}

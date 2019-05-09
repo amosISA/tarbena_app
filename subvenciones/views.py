@@ -271,8 +271,9 @@ class SubvencionCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateVi
 
 # --------------- Edit Subsidie --------------- #
 class SubvencionUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    login_url = '/accounts/login/'
     permission_required = ('subvenciones.add_subvencion')
-    raise_exception = True
+    #raise_exception = True
     model = Subvencion
     form_class = SubvencionForm
     template_name = 'subvenciones/edit.html'

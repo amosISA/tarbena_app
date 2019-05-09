@@ -585,7 +585,7 @@ def subvenciones_expires_next_five_days(request):
             'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion', 'responsable__profile'
         ).select_related(
             'user', 'estado', 'ente', 'area', 'user__profile'
-        )
+        ).filter(estado__nombre='Definiéndose')
 
     today = date.today()
     todayfivedaysmore = today + timedelta(days=5)

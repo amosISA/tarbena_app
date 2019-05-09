@@ -6,6 +6,9 @@ urlpatterns = [
     # Expiration subvenciones in the next 5 days
     url(r'^expiration/$', views.subvenciones_expires_next_five_days, name='expiration'),
 
+    # Notifications
+    url(r'^notificaciones/', views.notificaciones, name='notificaciones'),
+
     url(r'^ajaxareas/$', views.subsidies_for_ajax_loop, name='ajax_loop_areas'),
     url(r'^ajaxrelation/$', views.ajax_se_relaciona_con, name='ajax_se_relaciona_con'),
     url(r'^like/$', views.likes, name='like'),

@@ -604,3 +604,10 @@ def subvenciones_expires_next_five_days(request):
                   {'subvenciones': ls,
                    'rest_subvenciones': others,
                    'today': today})
+
+# --------------- Notificaciones --------------- #
+def notificaciones(request):
+    template_name = 'subvenciones/notificaciones.html'
+    return render(request,
+                  template_name,
+                  {})

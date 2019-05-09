@@ -1,3 +1,5 @@
+{% load notification_tags %}
+{% include_notify_js_variables %}
 {% url 'subvenciones:subvencion_by_category' estado.slug as estado %}
 {% url 'subvenciones:subvencion_by_category' area.slug as area %}
 {% url 'subvenciones:subvencion_by_category' responsable__username.username as responsable %}
@@ -61,7 +63,24 @@
                 <!-- Notification system -->
                 <div class="subv-header-notification">
                     <div class="subvenciones-header-menu__right-item__icon">
-                        <a target="_blank" href="{% url 'subvenciones:notificaciones' %}"><span class="subvenciones-header-menu__right-item__span"><i class="fa fa-bell"></i></span></a>
+                        <span id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="subvenciones-header-menu__right-item__span"><i class="fa fa-bell"></i></span>
+                        <ul class="dropdown-menu row-user-notifications">
+                            <li class="head text-light bg-dark">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12 col-12">
+                                        <span>Notificaciones</span>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <div class="notification-box-list">
+                                {% render_notifications using user.notifications.active.prefetch for box %}
+                            </div>
+
+                            <li class="footer bg-dark text-center">
+                                <!--<a href="" class="text-light">Ver Todo</a>-->
+                            </li>
+                        </ul>
                     </div>
                 </div>
             {% endif %}

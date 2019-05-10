@@ -589,7 +589,7 @@ def subvenciones_expires_next_five_days(request):
         ).filter(estado__nombre='Definiéndose')
 
     today = date.today()
-    todayfivedaysmore = today + timedelta(days=5)
+    todayfivedaysmore = today + timedelta(days=6)
     for s in subvenciones:
         if s.fin:
             if s.fin > today:

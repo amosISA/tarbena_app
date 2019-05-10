@@ -85,6 +85,7 @@ urlpatterns = [
 
     # FAQ
     url(r'^faq/', views.faq, name='faq'),
+    url(r'^upr/', include('UPR.urls', namespace='upr'))
 ]
 
 if settings.DEBUG:

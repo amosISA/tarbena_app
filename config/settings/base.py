@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'terceros',
     'luz',
     'django_cleanup.apps.CleanupConfig',
+    'UPR',
     #'pipeline',
 ]
 
@@ -112,7 +113,8 @@ TEMPLATES = [
                  os.path.join(BASE_DIR, 'parcelas/templates'),
                  os.path.join(BASE_DIR, 'contracts/templates'),
                  os.path.join(BASE_DIR, 'museo/templates'),
-                 os.path.join(BASE_DIR, 'luz/templates'),],
+                 os.path.join(BASE_DIR, 'luz/templates'),
+                 os.path.join(BASE_DIR, 'UPR/templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -184,6 +186,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "contracts/static"),
     os.path.join(BASE_DIR, "museo/static"),
     os.path.join(BASE_DIR, "luz/static"),
+    os.path.join(BASE_DIR, "UPR/static"),
     os.path.join(BASE_DIR, "static"),
 ]
 

@@ -592,7 +592,7 @@ def subvenciones_expires_next_five_days(request):
     todayfivedaysmore = today + timedelta(days=6)
     for s in subvenciones:
         if s.fin:
-            if s.fin > today:
+            if s.fin > today or s.fin == today:
                 if s.fin < todayfivedaysmore:
                     # only expiration dates lower than 5 days
                     ls.append(s)

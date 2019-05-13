@@ -233,6 +233,52 @@
                                     </button>
                                 </li>
                                 {% endif %}
+
+                                {% if perms.UPR.add_componente %}
+                                    <!-- UPR -->
+                                    <li class="card-outer">
+                                        <a href="{% url 'upr:index' %}">
+                                            <div class="card_from">
+                                                <div class="card-preview-image-outer" style="background-image: url('{% static "home/img/apps/app_upr.png"%}')"></div>
+                                                <div class="card-details">
+                                                    <div class="card-host-name">UPR</div>
+                                                    <div class="card-text">
+                                                        <h4 class="card-title">Grupo Tragsa</h4>
+                                                    </div>
+                                                    <div class="card-context">
+                                                        <span class="card-context-icon icon icon-history-item" style="background-image: url('{% static "home/img/icons/history.svg"%}')"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="context-menu-button icon">
+                                            <span class="sr-only">Open context menu for UPR</span>
+                                        </button>
+                                    </li>
+                                {% endif %}
+
+                                {% if request.user.is_superuser %}
+                                <!-- Últimas Subvenciones -->
+                                <li class="card-outer">
+                                    <a href="{% url 'subvenciones:expiration' %}">
+                                        <div class="card_from">
+                                            <div class="card-preview-image-outer" style="background-image: url('{% static "home/img/apps/app_expiration.png"%}')"></div>
+                                            <div class="card-details">
+                                                <div class="card-host-name">Últimas Subvenciones</div>
+                                                <div class="card-text">
+                                                    <h4 class="card-title">Últimas Subvenciones</h4>
+                                                </div>
+                                                <div class="card-context">
+                                                    <span class="card-context-icon icon icon-history-item" style="background-image: url('{% static "home/img/icons/history.svg"%}')"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <button class="context-menu-button icon">
+                                        <span class="sr-only">Últimas Subvenciones</span>
+                                    </button>
+                                </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </section>

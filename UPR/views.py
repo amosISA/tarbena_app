@@ -4,7 +4,6 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import Maquina, TipoMaquina, Componentes, Incidencias
 
-
 # Create your views here.
 # --------------- Maquina Index --------------- #
 @login_required()
@@ -15,12 +14,13 @@ def index_maquinas(request):
                   {'maquinas':maquinas})
 
 # --------------- Maquina Details --------------- #
-def maquina_detail(request, id):
-    maquinas = get_object_or_404(Maquina.objects.select_related(
+def maquina_detail(request, ninventario):
+    maquina = get_object_or_404(Maquina.objects.select_related(
                                             'tipo_maquina','capataz_responsable'
-                                        ),
-                                   id=id)
+                                        ).prefetch_related('incidencias'),
+                                numero_inventario=ninventario)
 
     return render(request,
                   'UPR/detail.html',
-                  {'maquinas': maquinas})
+                  {'maquina': maquina,
+                   'ninventario': ninventario})

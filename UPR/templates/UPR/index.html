@@ -28,14 +28,14 @@
             </thead>
             {% for o in maquinas %}
             <tr>
-                <td><a href="{% url 'upr:maquina_detail' id=o.id %}" target="_blank">{{ o.numero_inventario }}</a></td>
+                <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
                 <td>{{ o.numero_serie }}</td>
                 <td>{{ o.fecha_compra}}</td>
                 <td>{{ o.tipo_maquina}}</td>
                 <td>{{ o.capataz_responsable}}</td>
             </tr>
             {% endfor %}
-        </ul>
+        </table>
     </div>
 
 

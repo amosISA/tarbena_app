@@ -14,6 +14,18 @@
         <div class="row justify-content-md-center">
             {{ maquina.numero_inventario }}
             {{ maquina.numero_serie }}
+
+            <div>
+                <h1>INCIDENCIAS</h1>
+                {% for a in maquina.incidencias.all %}
+                    {{ a.tipo_incidencias.tipo_componentes }}
+                    {{ a.tipo_incidencias.tipo_componentes }}
+
+                    {% for e in a.tipo_incidencias.tipo_maquina.all %}
+                        {{ e.tipo }}
+                    {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

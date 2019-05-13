@@ -11,7 +11,6 @@ class MaquinaAdmin(admin.ModelAdmin):
     empty_value_display = '-'
     list_display_links = ('numero_inventario',)
     show_full_result_count = True
-
 admin.site.register(Maquina, MaquinaAdmin)
 
 class TipoMaquinaAdmin(admin.ModelAdmin):
@@ -21,7 +20,6 @@ class TipoMaquinaAdmin(admin.ModelAdmin):
     empty_value_display = '-'
     list_display_links = ('tipo',)
     show_full_result_count = True
-
 admin.site.register(TipoMaquina, TipoMaquinaAdmin)
 
 class ComponentesAdmin(admin.ModelAdmin):
@@ -31,7 +29,6 @@ class ComponentesAdmin(admin.ModelAdmin):
     empty_value_display = '-'
     list_display_links = ('tipo_componentes',)
     show_full_result_count = True
-
 admin.site.register(Componentes, ComponentesAdmin)
 
 class IncidenciasAdmin(admin.ModelAdmin):
@@ -41,5 +38,4 @@ class IncidenciasAdmin(admin.ModelAdmin):
     empty_value_display = '-'
     list_display_links = ('tipo_incidencias',)
     show_full_result_count = True
-
 admin.site.register(Incidencias, IncidenciasAdmin)

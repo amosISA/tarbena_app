@@ -21,7 +21,6 @@ class TimeStampedModel(models.Model):
 def upload_location(instance, filename):
     return os.path.join('UPR/img/', datetime.datetime.now().date().strftime("%Y/%m/%d"), filename)
 
-
 class TipoMaquina(TimeStampedModel):
     tipo = models.CharField(max_length=250, blank=True, null=True)
 
@@ -40,7 +39,6 @@ class Componentes(TimeStampedModel):
     class Meta:
         verbose_name = 'Componente'
         verbose_name_plural = 'Componentes'
-
 
 class Incidencias(TimeStampedModel):
     tipo_incidencias = models.ForeignKey(Componentes, blank=True, null=True, related_name='tipo_componente')

@@ -12,20 +12,76 @@
 {% block content %}
     <div class="container" style="margin-top:100px;">
         <div class="row justify-content-md-center">
-            {{ maquina.numero_inventario }}
-            {{ maquina.numero_serie }}
+            <div class="col">
+                <h3>{{ maquina.tipo_maquina}}</h3>
+                <div></div>
+                <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
+                <table width="100%" class="text-right">
+                    <tr>
+                        <td>número serie:</td>
+                        <td>{{ maquina.numero_serie }}</td>
+                    </tr>
+                    <tr>
+                        <td>fecha compra:</td>
+                        <td>{{ maquina.fecha_compra}}</td>
+                    </tr>
+                    <tr>
+                        <td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td>capataz responsable:</td>
+                        <td>{{ maquina.capataz_responsable}}</td>
+                    </tr>
+                    <tr>
+                        <td>ubicación:</td>
+                        <td>Almacén Alicante</td>
+                    </tr>
+                </table>
+                 </br>
 
-            <div>
-                <h1>INCIDENCIAS</h1>
-                {% for a in maquina.incidencias.all %}
-                    {{ a.tipo_incidencias.tipo_componentes }}
-                    {{ a.tipo_incidencias.tipo_componentes }}
+            </div>
+            <div class="col-8">
+                <h2>INCIDENCIAS</h2>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Componente</th>
+                      <th scope="col">Incidencias</th>
+                    </tr>
+                  </thead>
+                  <tbody>
 
-                    {% for e in a.tipo_incidencias.tipo_maquina.all %}
-                        {{ e.tipo }}
+                     {% for c in componentes %}
+                    <tr>
+                        <td style="width: 30%">{{ c.tipo_componentes }}</td>
+
+                        <td>
+                            {% for a in maquina.incidencias.all %}
+                            {% if c.tipo_componentes == a.tipo_incidencias.tipo_componentes %}
+                            <span class="fecha">{{ a.fecha }}</span> {{ a.comentario }}<br>
+                            {% endif %}
+                            {% endfor %}
+                        </td>
+
+                    </tr>
                     {% endfor %}
-                {% endfor %}
+
+
+
+                    <tr>
+                        <td>Componentes</td>
+                        <td>--</td>
+                    </tr>
+
+                  </tbody>
+                </table>
             </div>
         </div>
     </div>
 {% endblock %}
+
+<!--
+                fecha: {{ a.fecha }} <br>
+                    comentario: {{ a.comentario }}
+
+                    -->

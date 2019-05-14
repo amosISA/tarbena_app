@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Maquina, TipoMaquina, Componentes, Incidencias
+from .models import Maquina, TipoMaquina, Componentes, Incidencias, GrupoComponentes
 
 class MaquinaAdmin(admin.ModelAdmin):
     list_display = ('numero_inventario', 'numero_serie', 'fecha_compra','tipo_maquina','capataz_responsable',)
@@ -22,8 +22,17 @@ class TipoMaquinaAdmin(admin.ModelAdmin):
     show_full_result_count = True
 admin.site.register(TipoMaquina, TipoMaquinaAdmin)
 
+class GrupoComponentesAdmin(admin.ModelAdmin):
+    list_display = ('tipo_grupo_componentes',)
+    list_filter = ['tipo_grupo_componentes']
+    search_fields = ('tipo_grupo_componentes',)
+    empty_value_display = '-'
+    list_display_links = ('tipo_grupo_componentes',)
+    show_full_result_count = True
+admin.site.register(GrupoComponentes, GrupoComponentesAdmin)
+
 class ComponentesAdmin(admin.ModelAdmin):
-    list_display = ('tipo_componentes',)
+    list_display = ('tipo_componentes','tipo_comentario','imatge_componente',)
     list_filter = ['tipo_componentes']
     search_fields = ('tipo_componentes',)
     empty_value_display = '-'

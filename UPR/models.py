@@ -23,15 +23,24 @@ def upload_location(instance, filename):
 
 class TipoMaquina(TimeStampedModel):
     tipo = models.CharField(max_length=250, blank=True, null=True)
+    img_maquina = models.ImageField(upload_to=upload_location, null=True, blank=True)
+    url_tienda_maquina = models.CharField(max_length=250, blank=True, null=True)
 
     def __str__(self):
         return '{}'.format(self.tipo)
+
+class GrupoComponentes(TimeStampedModel):
+    tipo_grupo_componentes = models.CharField(max_length=250, blank=True, null=True)
+
+    def __str__(self):
+        return '{}'.format(self.tipo_grupo_componentes)
 
 class Componentes(TimeStampedModel):
     tipo_componentes = models.CharField(max_length=250, blank=True, null=True)
     tipo_comentario = models.TextField(blank=True, null=True)
     imatge_componente = models.ImageField(upload_to=upload_location, null=True, blank=True)
     tipo_maquina = models.ManyToManyField(TipoMaquina, blank=True, related_name='tipo_maquina_componente')
+    grupo_componentes = models.ForeignKey(GrupoComponentes, blank=True, null=True, related_name='grupo_componentes')
 
     def __str__(self):
         return '{}'.format(self.tipo_componentes)
@@ -39,6 +48,7 @@ class Componentes(TimeStampedModel):
     class Meta:
         verbose_name = 'Componente'
         verbose_name_plural = 'Componentes'
+
 
 class Incidencias(TimeStampedModel):
     tipo_incidencias = models.ForeignKey(Componentes, blank=True, null=True, related_name='tipo_componente')

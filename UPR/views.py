@@ -20,7 +20,10 @@ def maquina_detail(request, ninventario):
                                         ).prefetch_related('incidencias'),
                                 numero_inventario=ninventario)
 
+    componentes = Componentes.objects.all().filter(tipo_maquina=maquina.tipo_maquina)
+
     return render(request,
                   'UPR/detail.html',
                   {'maquina': maquina,
-                   'ninventario': ninventario})
+                   'ninventario': ninventario,
+                   'componentes': componentes})

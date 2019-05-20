@@ -16,6 +16,7 @@
                 <h3>{{ maquina.tipo_maquina}} <a href="/panel/UPR/maquina/{{ maquina.id }}/change/" target="_blank"><i class="far fa-edit"></i></a></h3>
                 <div></div>
                 <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
+
                 <table width="100%" class="text-right">
                     <tr>
                         <td>número serie:</td>
@@ -37,58 +38,65 @@
                         <td>{{ maquina.maquina_población}}</td>
                     </tr>
                 </table>
-                 </br>
+                </br>
 
             </div>
+
             <div class="col-8">
                 <h2>INCIDENCIAS</h2>
+
                 <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">Componente</th>
-                      <th scope="col">Incidencias</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                    <thead>
+                        <tr>
+                            <th scope="col">Componente</th>
+                            <th scope="col">Incidencias</th>
+                        </tr>
+                    </thead>
 
-                     {% for c in componentes %}
-                    <tr>
-                        <td style="width: 30%">{{ c.tipo_componentes }}</td>
+                    <tbody>
 
-                        <td>
-                            {% for a in maquina.incidencias.all %}
-                            {% if c.tipo_componentes == a.tipo_incidencias.tipo_componentes %}
-                                {% if a.cerrado == False %}
-                                    <i class="fas fa-exclamation-triangle" style="color: red"></i>
-                                {% endif %}
-                                <a href="/panel/UPR/incidencias/{{ a.id }}/change/" class="fecha">{{ a.fecha }}</a> {{ a.comentario }}<br>
-                                 {{ a.tipo_incidencias.grupo_componentes }}
+                    {% for c in componentes %}
+                        <tr id="container">
 
+                            <td style="width: 30%">{{ c.tipo_componentes }}</td>
 
+                            <td class="group_component">
+                                {% for a in maquina.incidencias.all %}
+                                    {% if c.tipo_componentes == a.tipo_incidencias.tipo_componentes %}
+                                        {% if a.cerrado == False %}
+                                            <i class="fas fa-exclamation-triangle" style="color: red"></i>
+                                        {% endif %}
+                                        <a href="/panel/UPR/incidencias/{{ a.id }}/change/" class="fecha">{{ a.fecha }}</a> {{ a.comentario }}<br>
+                                        {{ a.tipo_incidencias.grupo_componentes }}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
 
-                            {% endif %}
-                            {% endfor %}
-                        </td>
-
-                    </tr>
+                        </tr>
                     {% endfor %}
 
-
-
-                    <tr>
-                        <td>Componentes</td>
-                        <td>--</td>
-                    </tr>
-
-                  </tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 {% endblock %}
 
-<!--
-                fecha: {{ a.fecha }} <br>
-                    comentario: {{ a.comentario }}
+{% block js %}
+    <script>
+        $(document).ready(function() {
+            $('.group_component').each(function() {
+                // Si el componente no pertenece a ningun grupo de componentes, se elimina
+                if ($(this).children().length == 0) {
+                    $(this).parent().remove();
+                }
+            });
 
-                    -->
+            
+    </script>
+{% endblock %}
+
+<!--
+    fecha: {{ a.fecha }} <br>
+    comentario: {{ a.comentario }}
+-->

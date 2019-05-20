@@ -79,6 +79,7 @@ class Poblacion(TimeStampedModel):
 class Componentes(TimeStampedModel):
     tipo_componentes = models.CharField(max_length=250, blank=True, null=True)
     tipo_comentario = models.TextField(blank=True, null=True)
+    tipo_opciones = models.TextField(blank=True, null=True)
     imatge_componente = models.ImageField(upload_to=upload_location, null=True, blank=True)
     tipo_maquina = models.ManyToManyField(TipoMaquina, blank=True, related_name='tipo_maquina_componente')
     grupo_componentes = models.ForeignKey(GrupoComponentes, blank=True, null=True, related_name='grupo_componentes')

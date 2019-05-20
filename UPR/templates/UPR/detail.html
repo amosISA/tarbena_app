@@ -13,7 +13,7 @@
     <div class="container" style="margin-top:100px;">
         <div class="row justify-content-md-center">
             <div class="col">
-                <h3>{{ maquina.tipo_maquina}}</h3>
+                <h3>{{ maquina.tipo_maquina}} <a href="/panel/UPR/maquina/{{ maquina.id }}/change/" target="_blank"><i class="far fa-edit"></i></a></h3>
                 <div></div>
                 <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
                 <table width="100%" class="text-right">
@@ -34,7 +34,7 @@
                     </tr>
                     <tr>
                         <td>ubicación:</td>
-                        <td>Almacén Alicante</td>
+                        <td>{{ maquina.maquina_población}}</td>
                     </tr>
                 </table>
                  </br>
@@ -58,7 +58,14 @@
                         <td>
                             {% for a in maquina.incidencias.all %}
                             {% if c.tipo_componentes == a.tipo_incidencias.tipo_componentes %}
-                            <span class="fecha">{{ a.fecha }}</span> {{ a.comentario }}<br>
+                                {% if a.cerrado == False %}
+                                    <i class="fas fa-exclamation-triangle" style="color: red"></i>
+                                {% endif %}
+                                <a href="/panel/UPR/incidencias/{{ a.id }}/change/" class="fecha">{{ a.fecha }}</a> {{ a.comentario }}<br>
+                                 {{ a.tipo_incidencias.grupo_componentes }}
+
+
+
                             {% endif %}
                             {% endfor %}
                         </td>

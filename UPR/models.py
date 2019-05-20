@@ -15,6 +15,7 @@ class TimeStampedModel(models.Model):
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
+
     class Meta:
         abstract = True
 
@@ -31,9 +32,49 @@ class TipoMaquina(TimeStampedModel):
 
 class GrupoComponentes(TimeStampedModel):
     tipo_grupo_componentes = models.CharField(max_length=250, blank=True, null=True)
+    position_grupo_componentes = models.PositiveSmallIntegerField(default=0)
 
     def __str__(self):
         return '{}'.format(self.tipo_grupo_componentes)
+
+class Provincia(TimeStampedModel):
+    nombre = models.CharField(max_length=250, blank=True, null=True)
+    codigo = models.CharField(max_length=250, blank=True, null=True)
+
+    class Meta:
+        ordering = ["nombre"]
+        verbose_name = 'Provincia'
+        verbose_name_plural = "Provincias"
+
+    def __str__(self):
+        return '{}, {}'.format(self.nombre, self.nombre)
+
+class Comarca(TimeStampedModel):
+    nombre = models.CharField(max_length=250, blank=True, null=True)
+    capital = models.CharField(max_length=250, blank=True, null=True)
+    habitantes = models.DecimalField(max_digits=6, decimal_places=0, blank=True, null=True)
+    provincia = models.ForeignKey(Provincia, blank=True, null=True)
+    km_cuadrados = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
+
+    class Meta:
+        ordering = ["nombre"]
+
+    def __str__(self):
+        return '{}, {}'.format(self.nombre, self.nombre)
+
+class Poblacion(TimeStampedModel):
+    nombre = models.CharField(max_length=250, blank=True, null=True)
+    codigo_INE = models.CharField(max_length=250, blank=True, null=True)
+    comarca = models.ForeignKey(Comarca, blank=True, null=True)
+    orden_noel = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        ordering = ["codigo_INE"]
+        verbose_name = 'Poblacion'
+        verbose_name_plural = "Poblaciones"
+
+    def __str__(self):
+        return '{}, {}'.format(self.codigo_INE, self.nombre)
 
 class Componentes(TimeStampedModel):
     tipo_componentes = models.CharField(max_length=250, blank=True, null=True)
@@ -53,6 +94,7 @@ class Componentes(TimeStampedModel):
 class Incidencias(TimeStampedModel):
     tipo_incidencias = models.ForeignKey(Componentes, blank=True, null=True, related_name='tipo_componente')
     fecha = models.DateField(blank=True, null=True)
+    cerrado = models.BooleanField(default=True)
     comentario = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -68,7 +110,9 @@ class Maquina(TimeStampedModel):
     fecha_compra = models.DateField(blank=True, null=True)
     tipo_maquina = models.ForeignKey(TipoMaquina, blank=True, null=True, related_name='tipo_maquinas')
     incidencias = models.ManyToManyField(Incidencias, blank=True, related_name='tipo_incidencia')
-    capataz_responsable = models.ForeignKey(User, blank=True, null=True,)
-
+    #incidencias = models.ManyToManyField(Incidencias, blank=True, null=True, limit_choices_to={'fechas' != ''})
+    capataz_responsable = models.ForeignKey(User, blank=True, null=True, limit_choices_to={'groups__name': "UPR"})
+    #maquina_poblacion = models.ForeignKey(Poblacion, blank=True, null=True, related_name='nombre_poblacion')
     def __str__(self):
         return '{}'.format(self.numero_inventario)
+

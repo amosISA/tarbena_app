@@ -2,7 +2,38 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Maquina, TipoMaquina, Componentes, Incidencias, GrupoComponentes
+from .models import Maquina, TipoMaquina, Componentes, Incidencias, GrupoComponentes, Poblacion, Comarca, Provincia
+
+
+## POBLACIONES, COMARCAS Y PROVINCIAS
+##
+class PoblacionAdmin(admin.ModelAdmin):
+    list_display = ('nombre','codigo_INE',)
+    list_filter = ('nombre','codigo_INE',)
+    search_fields = ('nombre','codigo_INE')
+    empty_value_display = '-'
+    list_display_links = ('nombre',)
+    show_full_result_count = True
+admin.site.register(Poblacion, PoblacionAdmin)
+
+class ComarcaAdmin(admin.ModelAdmin):
+    list_display = ('nombre','capital','habitantes','km_cuadrados',)
+    list_filter = ('nombre',)
+    search_fields = ('nombre',)
+    empty_value_display = '-'
+    list_display_links = ('nombre',)
+    show_full_result_count = True
+admin.site.register(Comarca, ComarcaAdmin)
+
+class ProvinciaAdmin(admin.ModelAdmin):
+    list_display = ('nombre',)
+    list_filter = ('nombre',)
+    search_fields = ('nombre',)
+    empty_value_display = '-'
+    list_display_links = ('nombre',)
+    show_full_result_count = True
+admin.site.register(Provincia, ProvinciaAdmin)
+
 
 class MaquinaAdmin(admin.ModelAdmin):
     list_display = ('numero_inventario', 'numero_serie', 'fecha_compra','tipo_maquina','capataz_responsable',)
@@ -11,6 +42,12 @@ class MaquinaAdmin(admin.ModelAdmin):
     empty_value_display = '-'
     list_display_links = ('numero_inventario',)
     show_full_result_count = True
+
+#    def nombre_poblacion_display(self, obj):
+#        return ", ".join([
+#            poblacion.nombre for poblacion in obj.nombre.all()
+#        ])
+#    nombre_poblacion_display.short_description = "nombre poblacion"
 admin.site.register(Maquina, MaquinaAdmin)
 
 class TipoMaquinaAdmin(admin.ModelAdmin):
@@ -23,7 +60,7 @@ class TipoMaquinaAdmin(admin.ModelAdmin):
 admin.site.register(TipoMaquina, TipoMaquinaAdmin)
 
 class GrupoComponentesAdmin(admin.ModelAdmin):
-    list_display = ('tipo_grupo_componentes',)
+    list_display = ('tipo_grupo_componentes','position_grupo_componentes',)
     list_filter = ['tipo_grupo_componentes']
     search_fields = ('tipo_grupo_componentes',)
     empty_value_display = '-'
@@ -32,12 +69,23 @@ class GrupoComponentesAdmin(admin.ModelAdmin):
 admin.site.register(GrupoComponentes, GrupoComponentesAdmin)
 
 class ComponentesAdmin(admin.ModelAdmin):
-    list_display = ('tipo_componentes','tipo_comentario','imatge_componente',)
+    list_display = ('tipo_componentes','tipo_comentario','imatge_componente','tipo_maquina_display','grupo_componentes',)
     list_filter = ['tipo_componentes']
     search_fields = ('tipo_componentes',)
     empty_value_display = '-'
     list_display_links = ('tipo_componentes',)
     show_full_result_count = True
+
+    def tipo_maquina_display(self, obj):
+        return ", ".join([
+            maquina.tipo for maquina in obj.tipo_maquina.all()
+        ])
+    tipo_maquina_display.short_description = "Tipo maquina"
+
+#    def position_grupo_componentes_display(self, obj):
+#        return ", ".join([
+#            grupoComponentes.
+#        ])
 admin.site.register(Componentes, ComponentesAdmin)
 
 class IncidenciasAdmin(admin.ModelAdmin):

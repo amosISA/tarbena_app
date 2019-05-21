@@ -67,7 +67,8 @@ def index_subvenciones(request, estado_slug=None):
                 'likes', 'colectivo', 'responsable', 'se_relaciona_con', 'comments__user', 'comments__subvencion', 'responsable__profile'
             ).select_related(
                 'user', 'estado', 'ente', 'area', 'user__profile'
-            ).filter(fin__gte=last_six_months).extra(select={"day_mod": "date(fin)"}).order_by('day_mod'))
+            #).filter(fin__gte=last_six_months).extra(select={"day_mod": "date(fin)"}).order_by('day_mod'))
+            ).extra(select={"day_mod": "date(fin)"}).order_by('day_mod'))
         else:
             request.session['urltoremember'] = request.get_full_path()
             request.session.set_expiry(604800)

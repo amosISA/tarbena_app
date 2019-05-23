@@ -113,7 +113,16 @@ class Maquina(TimeStampedModel):
     incidencias = models.ManyToManyField(Incidencias, blank=True, related_name='tipo_incidencia')
     #incidencias = models.ManyToManyField(Incidencias, blank=True, null=True, limit_choices_to={'fechas' != ''})
     capataz_responsable = models.ForeignKey(User, blank=True, null=True, limit_choices_to={'groups__name': "UPR"})
+    poblacion = models.ForeignKey(Poblacion, blank=True, null=True, related_name='nombrePoblacionMaquina')
     #maquina_poblacion = models.ForeignKey(Poblacion, blank=True, null=True, related_name='nombre_poblacion')
     def __str__(self):
         return '{}'.format(self.numero_inventario)
 
+class MovimientoMaquinaria(TimeStampedModel):
+    fecha_movimiento = models.DateField(blank=True, null=True)
+    numero_inventario_mm = models.ForeignKey(Maquina, blank=True, null=True, related_name='numeroInventario')
+    poblacion_mm = models.ForeignKey(Poblacion, blank=True, null=True, related_name='nombrePoblacion')
+
+
+    def __str__(self):
+        return '{}'.format(self.numero_inventario_mm)

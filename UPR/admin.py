@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Maquina, TipoMaquina, Componentes, Incidencias, GrupoComponentes, Poblacion, Comarca, Provincia
+from .models import Maquina, TipoMaquina, Componentes, Incidencias, GrupoComponentes, Poblacion, Comarca, Provincia, MovimientoMaquinaria
 
 
 ## POBLACIONES, COMARCAS Y PROVINCIAS
@@ -96,3 +96,13 @@ class IncidenciasAdmin(admin.ModelAdmin):
     list_display_links = ('tipo_incidencias',)
     show_full_result_count = True
 admin.site.register(Incidencias, IncidenciasAdmin)
+
+
+class MovimientoMaquinariaAdmin(admin.ModelAdmin):
+    list_display = ('numero_inventario_mm','poblacion_mm',)
+    list_filter = ('numero_inventario_mm', 'poblacion_mm',)
+    search_fields = ('numero_inventario_mm',)
+    empty_value_display = '-'
+    list_display_links = ('numero_inventario_mm',)
+    show_full_result_count = True
+admin.site.register(MovimientoMaquinaria, MovimientoMaquinariaAdmin)

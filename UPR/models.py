@@ -96,6 +96,7 @@ class Incidencias(TimeStampedModel):
     fecha = models.DateField(blank=True, null=True)
     cerrado = models.BooleanField(default=True)
     comentario = models.TextField(blank=True, null=True)
+    revision_fin_temporada_2019 = models.BooleanField(default=False)
 
     def __str__(self):
         return '{}'.format(self.tipo_incidencias)

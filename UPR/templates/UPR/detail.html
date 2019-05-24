@@ -58,32 +58,31 @@
                     </thead>
                     <tbody>
 
-                    {% for c in componentes %}
-                        <tr id="container">
-                            <td style="width: 30%">{{ c.tipo_componentes }}</td>
+                    {% for i in incidencias %}
+                        <tr></tr>
+                        <tr>
+                            <td style="width: 30%">{{ i.tipo_incidencias }}</td>
                             <td class="group_component">
-                                {% for a in maquina.incidencias.all %}
-                                    {% if c.tipo_componentes == a.tipo_incidencias.tipo_componentes %}
-                                        <div>
-                                            {% if a.cerrado == False %}
-                                                <i class="fas fa-exclamation-triangle" style="color: red"></i>
-                                            {% endif %}
-                                                <a href="/panel/UPR/incidencias/{{ a.id }}/change/" >{{ a.fecha }}</a> | {{ a.comentario }}
-                                                {% if a.revision_fin_temporada_2019 == True %}
-                                            <span class="capsula"><i class="fas fa-calendar-check" style="color: black"> M-19</i></span>
-                                        {{ a.tipo_incidencias.grupo_componentes }}
-                                        </div>
+                                <div>
+                                    {% if i.cerrado == False %}
+                                        <i class="fas fa-exclamation-triangle" style="color: red"></i>
                                     {% endif %}
+                                    <a href="/panel/UPR/incidencias/{{ a.id }}/change/" >{{ i.fecha }}</a> | {{ i.comentario }}
+
+                                    {% if i.revision_fin_temporada_2019 == True %}
+                                        <span class="capsula"><i class="fas fa-calendar-check" style="color: black"> M-19</i></span>
                                     {% endif %}
-                                {% endfor %}
+                                    {{ i.tipo_incidencias.grupo_componentes }}
+                                </div>
                             </td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
+
                 <h4>Revisión en campo - Mayo 2019</h4>
                 <table class="table table-striped">
-                        <thead>
+                    <thead>
                         <tr>
                             <th scope="col">Componente</th>
                             <th scope="col">Incidencias</th>
@@ -95,16 +94,16 @@
                         <tr id="container">
 
                             <td style="width: 30%">{{ c.tipo_componentes }}</td>
-
                             <td class="group_component">
                                 {% for a in maquina.incidencias.all %}
                                     {% if c.tipo_componentes == a.tipo_incidencias.tipo_componentes %}
-                                    {% if a.revision_fin_temporada_2019 == True %}
-                                <a href="/panel/UPR/incidencias/{{ a.id }}/change/" >{{ a.fecha }}</a> | {{ a.comentario }}
-                                        <div>
-                                        {% if a.cerrado == False %}
-                                            <i class="fas fa-exclamation-triangle" style="color: red"></i>
-                                        {% endif %}
+                                        {% if a.revision_fin_temporada_2019 == True %}
+                                            <a href="/panel/UPR/incidencias/{{ a.id }}/change/" >{{ a.fecha }}</a> | {{ a.comentario }}
+                                            <div>
+                                                {% if a.cerrado == False %}
+                                                    <i class="fas fa-exclamation-triangle" style="color: red"></i>
+                                                {% endif %}
+                                            </div>
                                             {% endif %}
                                     {% endif %}
                                 {% endfor %}
@@ -127,14 +126,14 @@
 
 {% block js %}
     <script>
-        $(document).ready(function() {
+        /*$(document).ready(function() {
             $('.group_component').each(function() {
                 // Si el componente no pertenece a ningun grupo de componentes, se elimina
                 if ($(this).children().length == 0) {
                     $(this).parent().remove();
                 }
             });
-        });
+        });*/
     </script>
 {% endblock %}
 

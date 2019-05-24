@@ -123,6 +123,15 @@ class MovimientoMaquinaria(TimeStampedModel):
     numero_inventario_mm = models.ForeignKey(Maquina, blank=True, null=True, related_name='numeroInventario')
     poblacion_mm = models.ForeignKey(Poblacion, blank=True, null=True, related_name='nombrePoblacion')
 
-
     def __str__(self):
         return '{}'.format(self.numero_inventario_mm)
+
+    class Meta:
+        ordering = ['-fecha_movimiento',]
+
+class RevisionesTemporada(TimeStampedModel):
+    nombre_revision = models.CharField(max_length=250, blank=True, null=True)
+    fecha_revisión = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return '{}'.format(self.nombre_revision)

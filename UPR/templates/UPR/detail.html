@@ -35,16 +35,20 @@
                     </tr>
                     <tr>
                         <td>ubicación:</td>
-                        <td>{{ maquina.maquina_población}}</td>
+                        <td>{{ maquina.poblacion_mm}}</td>
                     </tr>
                 </table>
                 </br>
-
+                <table>
+                    {% for m in maquina.numeroInventario.all %}
+                    <tr>
+                        <td>{{ m.fecha_movimiento }}</td><td>{{ m.poblacion_mm.nombre }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
             </div>
-
             <div class="col-8">
                 <h2>INCIDENCIAS</h2>
-
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -52,34 +56,27 @@
                             <th scope="col">Incidencias</th>
                         </tr>
                     </thead>
-
                     <tbody>
 
                     {% for c in componentes %}
                         <tr id="container">
-
                             <td style="width: 30%">{{ c.tipo_componentes }}</td>
-
                             <td class="group_component">
                                 {% for a in maquina.incidencias.all %}
                                     {% if c.tipo_componentes == a.tipo_incidencias.tipo_componentes %}
-                                    {% if a.revision_fin_temporada_2019 != True %}
                                         <div>
-                                        {% if a.cerrado == False %}
-                                            <i class="fas fa-exclamation-triangle" style="color: red"></i>
-                                        {% endif %}
-
-                                        <a href="/panel/UPR/incidencias/{{ a.id }}/change/" >{{ a.fecha }}</a> | {{ a.comentario }}
-                                            {% if a.revision_fin_temporada_2019 == True %}
+                                            {% if a.cerrado == False %}
+                                                <i class="fas fa-exclamation-triangle" style="color: red"></i>
+                                            {% endif %}
+                                                <a href="/panel/UPR/incidencias/{{ a.id }}/change/" >{{ a.fecha }}</a> | {{ a.comentario }}
+                                                {% if a.revision_fin_temporada_2019 == True %}
                                             <span class="capsula"><i class="fas fa-calendar-check" style="color: black"> M-19</i></span>
-                                        {% endif %}
                                         {{ a.tipo_incidencias.grupo_componentes }}
                                         </div>
                                     {% endif %}
                                     {% endif %}
                                 {% endfor %}
                             </td>
-
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -108,16 +105,7 @@
                                         {% if a.cerrado == False %}
                                             <i class="fas fa-exclamation-triangle" style="color: red"></i>
                                         {% endif %}
-
-
-
-
-
-
-
-
-
-                                        {% endif %}
+                                            {% endif %}
                                     {% endif %}
                                 {% endfor %}
                             </td>
@@ -130,6 +118,11 @@
             </div>
         </div>
     </div>
+<div>
+
+
+
+</div>
 {% endblock %}
 
 {% block js %}

@@ -99,7 +99,7 @@ admin.site.register(Incidencias, IncidenciasAdmin)
 
 
 class MovimientoMaquinariaAdmin(admin.ModelAdmin):
-    list_display = ('numero_inventario_mm','poblacion_mm',)
+    list_display = ('numero_inventario_mm','poblacion_mm','fecha_movimiento',)
     list_filter = ('numero_inventario_mm', 'poblacion_mm',)
     search_fields = ('numero_inventario_mm',)
     empty_value_display = '-'

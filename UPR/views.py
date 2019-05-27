@@ -48,8 +48,12 @@ def add_incidencia(request, ninventario):
                                         ).prefetch_related('incidencias').order_by('indicencias__fecha'),
                                 numero_inventario=ninventario)
 
-    grupos_componentes = GrupoComponentes.objects.all()
+    componentes = Componentes.objects.all().filter(tipo_maquina=maquina.tipo_maquina)
+    movimientos = MovimientoMaquinaria.objects.all().filter(numero_inventario_mm=maquina.numero_inventario)
+    poblacion = Poblacion.objects.all().filter(nombre=maquina.poblacion)
     incidencias = maquina.incidencias.all()
+    grupos_componentes = GrupoComponentes.objects.all()
+    mantenimiento_maquinaria = MantenimientoMaquinaria.objects.all()
 
     return render(request,
               'UPR/incidencias.html',

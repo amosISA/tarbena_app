@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, get_object_or_404
 
-from .models import Maquina, TipoMaquina, Componentes, Incidencias, MovimientoMaquinaria, Poblacion, GrupoComponentes
+from .models import Maquina, TipoMaquina, Componentes, Incidencias, MovimientoMaquinaria, Poblacion, GrupoComponentes, RevisionesTemporada, Obra, MantenimientoMaquinaria
 
 # Create your views here.
 # --------------- Maquina Index --------------- #
@@ -25,6 +25,8 @@ def maquina_detail(request, ninventario):
     poblacion = Poblacion.objects.all().filter(nombre=maquina.poblacion)
     incidencias = maquina.incidencias.all()
     grupos_componentes = GrupoComponentes.objects.all()
+    mantenimiento_maquinaria = MantenimientoMaquinaria.objects.all()
+
 
     return render(request,
                   'UPR/detail.html',
@@ -34,4 +36,6 @@ def maquina_detail(request, ninventario):
                    'movimientos': movimientos,
                    'poblacion': poblacion,
                    'incidencias': incidencias,
-                   'grupos_componentes': grupos_componentes})
+                   'grupos_componentes': grupos_componentes,
+                   'mantenimiento_maquinaria': mantenimiento_maquinaria,
+                   })

@@ -61,19 +61,24 @@
                     {% for i in incidencias %}
                         <tr></tr>
                         <tr>
-                            <td style="width: 30%">{{ i.tipo_incidencias }}</td>
+                            <td style="width: 30%">
+                                {{ i.tipo_incidencias }}
+                                <small class="componente">{{ i.tipo_incidencias.grupo_componentes }}</small>
+                            </td>
                             <td class="group_component">
-                                <div>
-                                    {% if i.cerrado == False %}
-                                        <i class="fas fa-exclamation-triangle" style="color: red"></i>
-                                    {% endif %}
-                                    <a href="/panel/UPR/incidencias/{{ a.id }}/change/" >{{ i.fecha }}</a> | {{ i.comentario }}
+
+                                    <div class="fecha">
+                                        <a href="/panel/UPR/incidencias/{{ i.id }}/change/" >{{ i.fecha }}</a>
+                                        {% if i.cerrado == False %}
+                                            <i class="fas fa-exclamation-triangle" style="color: red"></i>
+                                        {% endif %}
+                                    </div>
+                                    {{ i.comentario }}
 
                                     {% if i.revision_fin_temporada_2019 == True %}
                                         <span class="capsula"><i class="fas fa-calendar-check" style="color: black"> M-19</i></span>
                                     {% endif %}
-                                    {{ i.tipo_incidencias.grupo_componentes }}
-                                </div>
+
                             </td>
                         </tr>
                     {% endfor %}

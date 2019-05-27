@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Maquina, TipoMaquina, Componentes, Incidencias, GrupoComponentes, Poblacion, Comarca, Provincia, MovimientoMaquinaria
+from .models import Maquina, TipoMaquina, Componentes, Incidencias, GrupoComponentes, Poblacion, Comarca, Provincia, MovimientoMaquinaria, RevisionesTemporada
 
 
 ## POBLACIONES, COMARCAS Y PROVINCIAS
@@ -106,3 +106,12 @@ class MovimientoMaquinariaAdmin(admin.ModelAdmin):
     list_display_links = ('numero_inventario_mm',)
     show_full_result_count = True
 admin.site.register(MovimientoMaquinaria, MovimientoMaquinariaAdmin)
+
+class RevisionesTemporadaAdmin(admin.ModelAdmin):
+    list_display = ('nombre_revision','fecha_revision',)
+    list_filter = ('nombre_revision', 'fecha_revision',)
+    search_fields = ('nombre_revision',)
+    empty_value_display = '-'
+    list_display_links = ('nombre_revision',)
+    show_full_result_count = True
+admin.site.register(RevisionesTemporada, RevisionesTemporadaAdmin)

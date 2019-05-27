@@ -61,6 +61,13 @@ class Comarca(TimeStampedModel):
 
     def __str__(self):
         return '{}, {}'.format(self.nombre, self.nombre)
+class RevisionesTemporada(TimeStampedModel):
+    nombre_revision = models.CharField(max_length=250, blank=True, null=True)
+    fecha_revision = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return '{}'.format(self.nombre_revision)
+
 
 class Poblacion(TimeStampedModel):
     nombre = models.CharField(max_length=250, blank=True, null=True)
@@ -96,7 +103,7 @@ class Incidencias(TimeStampedModel):
     fecha = models.DateField(blank=True, null=True)
     cerrado = models.BooleanField(default=True)
     comentario = models.TextField(blank=True, null=True)
-    revision_fin_temporada_2019 = models.BooleanField(default=False)
+    mantenimientos = models.ForeignKey(RevisionesTemporada, blank=True, null=True, related_name='tipo_mantenimiento')
 
     def __str__(self):
         return '{}'.format(self.tipo_incidencias)
@@ -130,9 +137,3 @@ class MovimientoMaquinaria(TimeStampedModel):
     class Meta:
         ordering = ['-fecha_movimiento',]
 
-class RevisionesTemporada(TimeStampedModel):
-    nombre_revision = models.CharField(max_length=250, blank=True, null=True)
-    fecha_revisión = models.DateField(blank=True, null=True)
-
-    def __str__(self):
-        return '{}'.format(self.nombre_revision)

@@ -115,7 +115,7 @@ class Incidencias(TimeStampedModel):
     class Meta:
         verbose_name = 'Incidencia'
         verbose_name_plural = 'Incidencias'
-        ordering = ['fecha']
+        ordering = ['-fecha']
 
 class Maquina(TimeStampedModel):
     numero_inventario = models.CharField(max_length=250, blank=True, null=True)

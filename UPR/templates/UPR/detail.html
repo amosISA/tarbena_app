@@ -17,34 +17,48 @@
                 <div></div>
                 <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
 
-                <table width="100%" class="text-right">
-                    <tr>
+                <table width="100%" class="text-right menuDetalles">
+                    <tr class="lineaTR">
                         <td>número serie:</td>
                         <td>{{ maquina.numero_serie }}</td>
                     </tr>
-                    <tr>
+                    <tr class="lineaTR">
                         <td>fecha compra:</td>
                         <td>{{ maquina.fecha_compra}}</td>
                     </tr>
-                    <tr>
-                        <td></td><td></td>
-                    </tr>
-                    <tr>
+                    <tr class="lineaTR">
                         <td>capataz responsable:</td>
                         <td>{{ maquina.capataz_responsable}}</td>
                     </tr>
-                    <tr>
-                        <td>ubicación:</td>
-                        <td>{{ maquina.poblacion_mm}}</td>
+                    <tr class="lineaTR">
+                        <td valign="top">ubicación:</td>
+                        <td align="right">
+                            <table>
+                                {% for m in maquina.numeroInventario.all %}
+                                <tr><td><small>{{ m.fecha_movimiento }}</small></td>
+                                    <td align="left">{{ m.poblacion_mm.nombre }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+
+                        </td>
+                    </tr>
+                     <tr class="lineaTR">
+                        <td valign="top">obra:</td>
+                        <td align="right">
+                            <table>
+                                {% for m in maquina.numeroInventarioObra.all %}
+                                <tr><td><small>{{ m.fecha_movimiento }}</small></td>
+                                    <td align="left">{{ m.nombre_obra }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
                     </tr>
                 </table>
                 </br>
                 <table>
-                    {% for m in maquina.numeroInventario.all %}
-                    <tr>
-                        <td>{{ m.fecha_movimiento }}</td><td>{{ m.poblacion_mm.nombre }}</td>
-                    </tr>
-                    {% endfor %}
+
                 </table>
             </div>
             <div class="col-8">

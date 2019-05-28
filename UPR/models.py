@@ -25,6 +25,9 @@ def upload_location(instance, filename):
 class Obra(TimeStampedModel):
     nombre_obra  = models.CharField(max_length=250, blank=True, null=True)
 
+    def __str__(self):
+        return '{}'.format(self.nombre_obra)
+
 
 class TipoMaquina(TimeStampedModel):
     tipo = models.CharField(max_length=250, blank=True, null=True)
@@ -142,7 +145,21 @@ class MovimientoMaquinaria(TimeStampedModel):
     class Meta:
         ordering = ['-fecha_movimiento',]
 
+class MovimientoObra(TimeStampedModel):
+    fecha_movimiento = models.DateField(blank=True, null=True)
+    numero_inventario_obra = models.ForeignKey(Maquina, blank=True, null=True, related_name='numeroInventarioObra')
+    nombre_obra  = models.ForeignKey(Obra, blank=True, null=True, related_name='nombreObra')
+
+    def __str__(self):
+        return '{}'.format(self.nombre_obra)
+
+    class Meta:
+        ordering = ['-fecha_movimiento',]
+
 class MantenimientoMaquinaria(TimeStampedModel):
     nombre_revision = models.ForeignKey(RevisionesTemporada, blank=True, null=True, related_name='nombreRevision')
     numero_maquina = models.ForeignKey(Maquina, blank=True, null=True, related_name='numeroMaquina')
     numero_incidencia = models.ForeignKey(Incidencias, blank=True, null=True, related_name='numeroIncidencia')
+
+    def __str__(self):
+        return '{}'.format(self.nombre_revision)

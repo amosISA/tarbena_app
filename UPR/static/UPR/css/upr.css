@@ -24,6 +24,7 @@ display: block;
 small.componente {display: block;
     font-size: 65%;
     color: forestgreen;}
+.menuDetalles small {font-size: 65%;
+    color: forestgreen;}
 
-
-
+.lineaTR {border-bottom: 1px solid #ccc;}

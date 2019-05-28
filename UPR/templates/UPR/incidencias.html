@@ -35,14 +35,14 @@
                     </tr>
                     <tr>
                         <td>ubicación:</td>
-                        <td>{{ maquina.poblacion_mm}}</td>
+                        <td>{{ maquina.nombrePoblacionMaquina}}</td>
                     </tr>
                 </table>
                 </br>
                 <table>
-                    {% for m in maquina.numeroInventario.all %}
+                    {% for m in maquina.numeroInventario.latest() %}
                     <tr>
-                        <td>{{ m.fecha_movimiento }}</td><td>{{ m.poblacion_mm.nombre }}</td>
+                        <td>:{{ m.fecha_movimiento }}</td><td>{{ m.poblacion_mm.nombre }}</td>
                     </tr>
                     {% endfor %}
                 </table>

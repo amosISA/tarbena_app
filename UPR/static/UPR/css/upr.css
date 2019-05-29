@@ -28,3 +28,11 @@ small.componente {display: block;
     color: forestgreen;}
 
 .lineaTR {border-bottom: 1px solid #ccc;}
+
+.table td, .table th {
+    padding: .35rem;
+    }
+
+.puestoDestacado tr:first-child {
+  background-color: #ddd;
+}

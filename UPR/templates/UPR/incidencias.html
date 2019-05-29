@@ -12,135 +12,94 @@
 {% block content %}
     <div class="container" style="margin-top:100px;">
         <div class="row justify-content-md-center">
-            <div class="col">
-                <h3>{{ maquina.tipo_maquina}} <a href="/panel/UPR/maquina/{{ maquina.id }}/change/" target="_blank"><i class="far fa-edit"></i></a></h3>
+            <div class="col-lg-4 col-xs-12">
+                <h3>{{ maquina.tipo_maquina}}</h3>
                 <div></div>
                 <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
-
-                <table width="100%" class="text-right">
-                    <tr>
-                        <td>número serie:</td>
-                        <td>{{ maquina.numero_serie }}</td>
-                    </tr>
-                    <tr>
-                        <td>fecha compra:</td>
-                        <td>{{ maquina.fecha_compra}}</td>
-                    </tr>
-                    <tr>
-                        <td></td><td></td>
-                    </tr>
-                    <tr>
-                        <td>capataz responsable:</td>
-                        <td>{{ maquina.capataz_responsable}}</td>
-                    </tr>
-                    <tr>
-                        <td>ubicación:</td>
-                        <td>{{ maquina.nombrePoblacionMaquina}}</td>
-                    </tr>
-                </table>
-                </br>
-                <table>
-                    {% for m in maquina.numeroInventario.latest() %}
-                    <tr>
-                        <td>:{{ m.fecha_movimiento }}</td><td>{{ m.poblacion_mm.nombre }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
             </div>
-            <div class="col-8">
-                <h2>INCIDENCIAS</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Componente</th>
-                            <th scope="col">Incidencias</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div class="col-lg-8 col-xs-12">
+                <h2>AÑADIR INCIDENCIA</h2>
 
-                    {% for i in incidencias %}
-                        <tr></tr>
-                        <tr>
-                            <td style="width: 30%">
-                                {{ i.tipo_incidencias }}
-                                <small class="componente">{{ i.tipo_incidencias.grupo_componentes }}</small>
-                            </td>
-                            <td class="group_component">
+       <!--         {%
+class MyForm(forms.Form):
+    CHOICES = (('Option 1', 'Option 1'),('Option 2', 'Option 2'),)
+    field = forms.ChoiceField(choices=CHOICES)
 
-                                    <div class="fecha">
-                                        <a href="/panel/UPR/incidencias/{{ i.id }}/change/" >{{ i.fecha }}</a>
-                                        {% if i.cerrado == False %}
-                                            <i class="fas fa-exclamation-triangle" style="color: red"></i>
-                                        {% endif %}
-                                    </div>
-                                    {{ i.comentario }}
+print MyForm().as_p()
 
-                                    {% if i.revision_fin_temporada_2019 == True %}
-                                        <span class="capsula"><i class="fas fa-calendar-check" style="color: black"> M-19</i></span>
-                                    {% endif %}
+                %}
+                -->
+                <select id="selectGrupoComponentes">
+                <option value="0"> </option>
+                {% for i in grupos_componentes %}
+                    <option value="{{ i.tipo_grupo_componentes.id }}">{{ i.tipo_grupo_componentes }}</option>
+                {% endfor %}
+                </select>
 
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+<hr>
+                <!--
+                {% for i in grupos_componentes %}
+                    {{ i.tipo_grupo_componentes }} <br>
 
-                <h4>Revisión en campo - Mayo 2019</h4>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Componente</th>
-                            <th scope="col">Incidencias</th>
-                        </tr>
-                    </thead>
+                {% endfor %}
+                -->
+                <hr>
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                <script>
+                $(document).ready(function() {
+                    $('#selectGrupoComponentes').change(function() {
+    mensaje = $(this).val()
 
-                    <tbody>
-                    {% for c in componentes %}
-                        <tr id="container">
+console.log(mensaje);
+if mensaje == 1 {
 
-                            <td style="width: 30%">{{ c.tipo_componentes }}</td>
-                            <td class="group_component">
-                                {% for a in maquina.incidencias.all %}
-                                    {% if c.tipo_componentes == a.tipo_incidencias.tipo_componentes %}
-                                        {% if a.revision_fin_temporada_2019 == True %}
-                                            <a href="/panel/UPR/incidencias/{{ a.id }}/change/" >{{ a.fecha }}</a> | {{ a.comentario }}
-                                            <div>
-                                                {% if a.cerrado == False %}
-                                                    <i class="fas fa-exclamation-triangle" style="color: red"></i>
-                                                {% endif %}
-                                            </div>
-                                            {% endif %}
-                                    {% endif %}
-                                {% endfor %}
-                            </td>
+}
 
-                        </tr>
-                    {% endfor %}
+});
+})
 
-                    </tbody>
-                </table>
+                </script>
+                {% for c in componentes %}
+                    {% if c.grupo_componentes.position_grupo_componentes == 1 %}
+                    <div id="componentes_1">
+                        soy componente1<br>
+                        {{ c.id }} . {{ c.tipo_componentes }} <br>
+                    </div>
+                    {% endif %}
+                {% if c.grupo_componentes.position_grupo_componentes == 2 %}
+                    <div id="componentes_2">
+                        soy componente2<br>
+                        {{ c.id }} . {{ c.tipo_componentes }} <br>
+                    </div>
+                    {% endif %}
+                {% if c.grupo_componentes.position_grupo_componentes == 3 %}
+                    <div id="componentes_3">
+                        soy componente3<br>
+                        {{ c.id }} . {{ c.tipo_componentes }} <br>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+
+                <hr>
+hola
+                <!-- Ente -->
+                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                            {{ form.grupocomponentes.label_tag }}
+                            {{ form.grupocomponentes }}
+                        </div>
+hoal 2
+                        <!-- Area -->
+                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
+                            {{ form.componentes.label_tag }}
+                            {{ form.componentes }}
+                        </div>
             </div>
         </div>
     </div>
-<div>
 
-
-
-</div>
 {% endblock %}
 
-{% block js %}
-    <script>
-        /*$(document).ready(function() {
-            $('.group_component').each(function() {
-                // Si el componente no pertenece a ningun grupo de componentes, se elimina
-                if ($(this).children().length == 0) {
-                    $(this).parent().remove();
-                }
-            });
-        });*/
-    </script>
-{% endblock %}
+
 
 <!--
     fecha: {{ a.fecha }} <br>

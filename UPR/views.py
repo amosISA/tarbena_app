@@ -52,7 +52,7 @@ def add_incidencia(request, ninventario):
     movimientos = MovimientoMaquinaria.objects.all().filter(numero_inventario_mm=maquina.numero_inventario)
     poblacion = Poblacion.objects.all().filter(nombre=maquina.poblacion)
     incidencias = maquina.incidencias.all()
-    grupos_componentes = GrupoComponentes.objects.all()
+    grupos_componentes = GrupoComponentes.objects.all().order_by('position_grupo_componentes')
     mantenimiento_maquinaria = MantenimientoMaquinaria.objects.all()
 
     return render(request,
@@ -66,3 +66,29 @@ def add_incidencia(request, ninventario):
                'grupos_componentes': grupos_componentes,
                'mantenimiento_maquinaria': mantenimiento_maquinaria,
                })
+
+
+# --------------- Get Areas related to each ente with AJAX --------------- #
+def ajax_se_relaciona_con(request):
+    diputacion = request.GET.getlist('diputacion_ajax[]', '0')
+    generalitat = request.GET.getlist('generalitat_ajax[]', '0')
+    gobierno = request.GET.getlist('gobierno_ajax[]', '0')
+
+    query = Subvencion.objects.all().filter(Q(area__id__in=diputacion) |
+                                      Q(area__id__in=generalitat) |
+                                      Q(area__id__in=gobierno))
+    data = serializers.serialize('json', query)
+    return HttpResponse(data, content_type="application/json")
+
+def subsidies_for_ajax_loop(request):
+    subvenciones = Subvencion.objects.all()
+    diputacion = Area.objects.filter(ente_id=1)
+    generalitat = Area.objects.filter(ente_id=2)
+    gobierno = Area.objects.filter(ente_id=3)
+
+    return render(request,
+                  'subvenciones/ajax_se_relaciona_con_modal.html',
+                  {'subvenciones':subvenciones,
+                   'diputacion':diputacion,
+                   'generalitat':generalitat,
+                   'gobierno':gobierno})

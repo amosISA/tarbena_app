@@ -36,3 +36,5 @@ small.componente {display: block;
 .puestoDestacado tr:first-child {
   background-color: #ddd;
 }
+
+.with-margin {margin-bottom: 1rem;}

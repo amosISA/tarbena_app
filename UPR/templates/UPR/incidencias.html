@@ -13,13 +13,13 @@
     <div class="container" style="margin-top:100px;">
         <div class="row justify-content-md-center">
             <div class="col-lg-4 col-xs-12">
-                <h3>{{ maquina.tipo_maquina}}</h3>
+                <h3>{{ maquina.tipo_maquina}} <a href="/upr/maquina/{{ maquina.numero_inventario }}/"><i class="fas fa-arrow-circle-left"></i></a></h3>
                 <div></div>
                 <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
             </div>
-            <div class="col-lg-8 col-xs-12">
+            <div class="col-lg-4 col-xs-12">
                 <h2>AÑADIR INCIDENCIA</h2>
-
+                <div class="form-group">
                 {% if messages %}
                     {% for message in messages %}
                         <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -30,15 +30,16 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-
-                <select id="selectGrupoComponentes">
-                    <option value="0">-----</option>
-                    {% for i in grupos_componentes %}
-                        <option value="{{ i.pk }}">{{ i.tipo_grupo_componentes }}</option>
-                    {% endfor %}
-                </select><br>
-
+                <div class="row with-margin">
+                    <select id="selectGrupoComponentes" class="form-control">
+                        <option value="0">-----</option>
+                        {% for i in grupos_componentes %}
+                            <option value="{{ i.pk }}">{{ i.tipo_grupo_componentes }}</option>
+                        {% endfor %}
+                    </select><br>
+                </div>
                 <!-- INCIDENCIAS FORM -->
+
                 <form class="form-horizontal" method="post" enctype="multipart/form-data" action="">{% csrf_token %}
                     {% if form.errors %}
                         <div class="ag_form_login_message_error">
@@ -48,15 +49,29 @@
                         </div>
                     {% endif %}
 
-                    {{ form.tipo_incidencias }}
-                    {{ form.fecha }}
-                    {{ form.cerrado }}
-                    {{ form.comentario }}
-                    {{ form.mantenimientos }}
+                    <div class="row with-margin">{{ form.tipo_incidencias }}</div>
 
-                    <input type="submit" value="Crear incidencia" />
+
+
+                    <div class="row with-margin">{{ form.fecha }}</div>
+                    <div class="row with-margin">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    {{ form.cerrado }}
+                                    <label for="id_cerrado">cerrado</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row with-margin">{{ form.comentario }}</div>
+                    <div class="row with-margin">{{ form.mantenimientos }}</div>
+                    <div class="row with-margin">
+                        <input type="submit" value="Crear incidencia" />
+                    </div>
                 </form>
-
+                </div>
             </div>
         </div>
     </div>
@@ -87,6 +102,7 @@
                     }
                 });
             });
+            $('#id_fecha').datepicker({});
         });
     </script>
 {% endblock %}

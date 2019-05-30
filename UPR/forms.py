@@ -10,6 +10,12 @@ class MaquinaIncidenciasForm(forms.ModelForm):
     class Meta:
         model = Incidencias
         fields = ["tipo_incidencias", "fecha", "cerrado", "comentario", "mantenimientos",]
+        widgets = {
+            'tipo_incidencias': forms.Select(attrs={'class': 'form-control'}),
+            'fecha': forms.TextInput(attrs={'class': 'form-control .fecha'}),
+            'comentario': forms.Textarea(attrs={'class': 'form-control .comentario'}),
+            'mantenimientos': forms.Select(attrs={'class': 'form-control'}),
+        }
 
 class GrupoComponentesForm(forms.ModelForm):
     class Meta:

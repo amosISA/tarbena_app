@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    {{ ninventario }}
+    Crear incidencia
 {% endblock %}
 
 {% block navbar %}
@@ -20,88 +20,73 @@
             <div class="col-lg-8 col-xs-12">
                 <h2>AÑADIR INCIDENCIA</h2>
 
-       <!--         {%
-class MyForm(forms.Form):
-    CHOICES = (('Option 1', 'Option 1'),('Option 2', 'Option 2'),)
-    field = forms.ChoiceField(choices=CHOICES)
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <strong>{{ message }}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
 
-print MyForm().as_p()
-
-                %}
-                -->
                 <select id="selectGrupoComponentes">
-                <option value="0"> </option>
-                {% for i in grupos_componentes %}
-                    <option value="{{ i.tipo_grupo_componentes.id }}">{{ i.tipo_grupo_componentes }}</option>
-                {% endfor %}
-                </select>
+                    <option value="0">-----</option>
+                    {% for i in grupos_componentes %}
+                        <option value="{{ i.pk }}">{{ i.tipo_grupo_componentes }}</option>
+                    {% endfor %}
+                </select><br>
 
-<hr>
-                <!--
-                {% for i in grupos_componentes %}
-                    {{ i.tipo_grupo_componentes }} <br>
-
-                {% endfor %}
-                -->
-                <hr>
-                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-                <script>
-                $(document).ready(function() {
-                    $('#selectGrupoComponentes').change(function() {
-    mensaje = $(this).val()
-
-console.log(mensaje);
-if mensaje == 1 {
-
-}
-
-});
-})
-
-                </script>
-                {% for c in componentes %}
-                    {% if c.grupo_componentes.position_grupo_componentes == 1 %}
-                    <div id="componentes_1">
-                        soy componente1<br>
-                        {{ c.id }} . {{ c.tipo_componentes }} <br>
-                    </div>
-                    {% endif %}
-                {% if c.grupo_componentes.position_grupo_componentes == 2 %}
-                    <div id="componentes_2">
-                        soy componente2<br>
-                        {{ c.id }} . {{ c.tipo_componentes }} <br>
-                    </div>
-                    {% endif %}
-                {% if c.grupo_componentes.position_grupo_componentes == 3 %}
-                    <div id="componentes_3">
-                        soy componente3<br>
-                        {{ c.id }} . {{ c.tipo_componentes }} <br>
-                    </div>
-                    {% endif %}
-                {% endfor %}
-
-                <hr>
-hola
-                <!-- Ente -->
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            {{ form.grupocomponentes.label_tag }}
-                            {{ form.grupocomponentes }}
+                <!-- INCIDENCIAS FORM -->
+                <form class="form-horizontal" method="post" enctype="multipart/form-data" action="">{% csrf_token %}
+                    {% if form.errors %}
+                        <div class="ag_form_login_message_error">
+                            {% for field,error in form.errors.items %}
+                                {{ field|capfirst }} - {{ error|striptags }}
+                            {% endfor %}
                         </div>
-hoal 2
-                        <!-- Area -->
-                        <div class="form-group title-create_post" style="text-align:justify;font-weight:bold;">
-                            {{ form.componentes.label_tag }}
-                            {{ form.componentes }}
-                        </div>
+                    {% endif %}
+
+                    {{ form.tipo_incidencias }}
+                    {{ form.fecha }}
+                    {{ form.cerrado }}
+                    {{ form.comentario }}
+                    {{ form.mantenimientos }}
+
+                    <input type="submit" value="Crear incidencia" />
+                </form>
+
             </div>
         </div>
     </div>
-
 {% endblock %}
 
+{% block js %}
+    <script>
+        $(document).ready(function() {
+            $('#selectGrupoComponentes').change(function() {
+                var group_comp_id = $(this).val();
+                var componentes_url = '{% url "upr:get_components_by_group" %}';
 
+                $.ajax({
+                    type: "GET",
+                    url: componentes_url,
+                    data: {
+                        'grupo_comp_id': group_comp_id,
+                    },
+                    success: function (data) {
+                        $('#id_tipo_incidencias').html('');
 
-<!--
-    fecha: {{ a.fecha }} <br>
-    comentario: {{ a.comentario }}
--->
+                        $.each(data, function(key, value){
+                            var componente = value.fields['tipo_componentes'];
+                            var componente_id = value.pk;
+                            $('#id_tipo_incidencias').append('<option value="' + componente_id + '">' + componente + '</option>');
+                            //console.log(componente + "  // ID: " + componente_id);
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

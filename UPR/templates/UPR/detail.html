@@ -12,43 +12,69 @@
 {% block content %}
     <div class="container" style="margin-top:100px;">
         <div class="row justify-content-md-center">
-            <div class="col">
-                <h3>{{ maquina.tipo_maquina}} <a href="/panel/UPR/maquina/{{ maquina.id }}/change/" target="_blank"><i class="far fa-edit"></i></a></h3>
+            <div class="col-lg-4 col-xs-12">
+                <h3>{{ maquina.tipo_maquina}} <a href="/panel/UPR/maquina/{{ maquina.id }}/change/"><i class="far fa-edit"></i></a> | <a href="{% url 'upr:add_incidencia' ninventario=maquina.numero_inventario %}"><i class="fas fa-tools"></i></a></h3>
                 <div></div>
                 <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
 
-                <table width="100%" class="text-right">
-                    <tr>
-                        <td>número serie:</td>
+                <table width="100%" class="text-right menuDetalles">
+                    <tr class="lineaTR">
+                        <td width="50%">NÚMERO SERIE:</td>
                         <td>{{ maquina.numero_serie }}</td>
                     </tr>
-                    <tr>
-                        <td>fecha compra:</td>
+                    <tr class="lineaTR">
+                        <td>FECHA COMPRA:</td>
                         <td>{{ maquina.fecha_compra}}</td>
                     </tr>
-                    <tr>
-                        <td></td><td></td>
-                    </tr>
-                    <tr>
-                        <td>capataz responsable:</td>
+                    <tr class="lineaTR">
+                        <td>CAPATAZ RESPONSABLE:</td>
                         <td>{{ maquina.capataz_responsable}}</td>
                     </tr>
-                    <tr>
-                        <td>ubicación:</td>
-                        <td>{{ maquina.poblacion_mm}}</td>
+                    <tr class="lineaTR">
+                        <td valign="top">UBICACIÓN:</td>
+                        <td align="right">
+                            <table class="puestoDestacado">
+                                {% for m in maquina.numeroInventario.all %}
+                                <tr><td><small>{{ m.fecha_movimiento }}</small></td>
+                                    <td align="left">{{ m.poblacion_mm.nombre }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+
+                        </td>
+                    </tr>
+                     <tr class="lineaTR">
+                        <td valign="top">OBRA:</td>
+                        <td align="right">
+                            <table class="puestoDestacado">
+                                {% for m in maquina.numeroInventarioObra.all %}
+                                <tr><td><small>{{ m.fecha_movimiento }}</small></td>
+                                    <td align="left">{{ m.nombre_obra }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
                     </tr>
                 </table>
                 </br>
                 <table>
-                    {% for m in maquina.numeroInventario.all %}
-                    <tr>
-                        <td>{{ m.fecha_movimiento }}</td><td>{{ m.poblacion_mm.nombre }}</td>
-                    </tr>
-                    {% endfor %}
+
                 </table>
             </div>
-            <div class="col-8">
+            <div  class="col-lg-8 col-xs-12">
                 <h2>INCIDENCIAS</h2>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <strong>{{ message }}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -59,27 +85,32 @@
                     <tbody>
 
                     {% for i in incidencias %}
-                        <tr></tr>
+
                         <tr>
-                            <td style="width: 30%">{{ i.tipo_incidencias }}</td>
+                            <td style="width: 30%">
+                                {{ i.tipo_incidencias }}
+                                <small class="componente">{{ i.tipo_incidencias.grupo_componentes }}</small>
+                            </td>
                             <td class="group_component">
-                                <div>
-                                    {% if i.cerrado == False %}
-                                        <i class="fas fa-exclamation-triangle" style="color: red"></i>
-                                    {% endif %}
-                                    <a href="/panel/UPR/incidencias/{{ a.id }}/change/" >{{ i.fecha }}</a> | {{ i.comentario }}
+
+                                    <div class="fecha">
+                                        <a href="/panel/UPR/incidencias/{{ i.id }}/change/" >{{ i.fecha }}</a>
+                                        {% if i.cerrado == False %}
+                                            <i class="fas fa-exclamation-triangle" style="color: red"></i>
+                                        {% endif %}
+                                    </div>
+                                    {{ i.comentario }}
 
                                     {% if i.revision_fin_temporada_2019 == True %}
                                         <span class="capsula"><i class="fas fa-calendar-check" style="color: black"> M-19</i></span>
                                     {% endif %}
-                                    {{ i.tipo_incidencias.grupo_componentes }}
-                                </div>
+
                             </td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-
+<!--
                 <h4>Revisión en campo - Mayo 2019</h4>
                 <table class="table table-striped">
                     <thead>
@@ -114,6 +145,7 @@
 
                     </tbody>
                 </table>
+                -->
             </div>
         </div>
     </div>

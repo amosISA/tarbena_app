@@ -59,7 +59,7 @@ class Provincia(TimeStampedModel):
         verbose_name_plural = "Provincias"
 
     def __str__(self):
-        return '{}, {}'.format(self.nombre, self.nombre)
+        return '{}'.format(self.nombre)
 
 class Comarca(TimeStampedModel):
     nombre = models.CharField(max_length=250, blank=True, null=True)
@@ -72,7 +72,8 @@ class Comarca(TimeStampedModel):
         ordering = ["nombre"]
 
     def __str__(self):
-        return '{}, {}'.format(self.nombre, self.nombre)
+        return '{}'.format(self.nombre)
+
 class RevisionesTemporada(TimeStampedModel):
     nombre_revision = models.CharField(max_length=250, blank=True, null=True)
     fecha_revision = models.DateField(blank=True, null=True)
@@ -93,7 +94,7 @@ class Poblacion(TimeStampedModel):
         verbose_name_plural = "Poblaciones"
 
     def __str__(self):
-        return '{}, {}'.format(self.codigo_INE, self.nombre)
+        return '{}'.format(self.nombre)
 
 class Componentes(TimeStampedModel):
     tipo_componentes = models.CharField(max_length=250, blank=True, null=True)

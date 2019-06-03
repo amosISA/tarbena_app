@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView
 
-from .models import Maquina, TipoMaquina, Componentes, Incidencias, MovimientoMaquinaria, Poblacion, GrupoComponentes, RevisionesTemporada, Obra, MantenimientoMaquinaria
+from .models import Maquina, TipoMaquina, Componentes, Incidencias, MovimientoMaquinaria, Poblacion, GrupoComponentes, RevisionesTemporada, Obra, MantenimientoMaquinaria, MovimientoObra
 from .forms import MaquinaIncidenciasForm
 
 # Create your views here.
@@ -22,16 +22,17 @@ def index_maquinas(request):
 # --------------- Maquina Details --------------- #
 def maquina_detail(request, ninventario):
     maquina = get_object_or_404(Maquina.objects.select_related(
-                                            'tipo_maquina','capataz_responsable','poblacion'
-                                        ).prefetch_related('incidencias').order_by('indicencias__fecha'),
+                                            'tipo_maquina','capataz_responsable',
+    ).prefetch_related('incidencias').order_by('indicencias__fecha'),
                                 numero_inventario=ninventario)
 
     componentes = Componentes.objects.all().filter(tipo_maquina=maquina.tipo_maquina)
-    movimientos = MovimientoMaquinaria.objects.all().filter(numero_inventario_mm=maquina.numero_inventario)
-    poblacion = Poblacion.objects.all().filter(nombre=maquina.poblacion)
+    movimientos = MovimientoMaquinaria.objects.all().filter(numero_inventario_mm=maquina.id)
+    #poblacion = Poblacion.objects.all().filter(nombre=maquina.poblacion)
     incidencias = maquina.incidencias.all()
     grupos_componentes = GrupoComponentes.objects.all()
-    mantenimiento_maquinaria = MantenimientoMaquinaria.objects.all()
+    mantenimiento_maquinaria = MantenimientoMaquinaria.objects.all().filter(numero_maquina=maquina.id)
+    movimientosObra = MovimientoObra.objects.all().filter(numero_inventario_obra=maquina.id)
 
     return render(request,
                   'UPR/detail.html',
@@ -39,17 +40,18 @@ def maquina_detail(request, ninventario):
                    'ninventario': ninventario,
                    'componentes': componentes,
                    'movimientos': movimientos,
-                   'poblacion': poblacion,
+                  # 'poblacion': poblacion,
                    'incidencias': incidencias,
                    'grupos_componentes': grupos_componentes,
                    'mantenimiento_maquinaria': mantenimiento_maquinaria,
+                   'movimientosObra' : movimientosObra
                    })
 
 # --------------- Add_Incidencia --------------- #
 def add_incidencia(request, ninventario):
     form = MaquinaIncidenciasForm(request.POST or None, request.FILES or None)
     maquina = get_object_or_404(Maquina.objects.select_related(
-                                            'tipo_maquina','capataz_responsable','poblacion'
+                                            'tipo_maquina','capataz_responsable',
                                         ).prefetch_related('incidencias').order_by('indicencias__fecha'),
                                 numero_inventario=ninventario)
 

@@ -70,6 +70,13 @@
                     <div class="row with-margin">
                         <input type="submit" value="Crear incidencia" class="btn btn-primary"/>
                     </div>
+                    <div>
+                        {% for m in mantenimiento_maquinaria %}
+                        {{ m.fecha_movimiento }<br>
+
+                        {% endfor %}
+
+                    </div>
                 </form>
                 </div>
             </div>
@@ -107,7 +114,7 @@
     </script>
     <script>
     $( function() {
-        $( "#id_fecha" ).datepicker({ dateFormat: 'dd-mm-yy', firstDay: 1 });
+        $( "#id_fecha" ).datepicker({ dateFormat: 'dd/mm/yy', firstDay: 1 });
         $('#id_fecha').blur();
     } );
     </script>

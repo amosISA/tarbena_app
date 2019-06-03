@@ -15,7 +15,6 @@ class TimeStampedModel(models.Model):
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
-
     class Meta:
         abstract = True
 
@@ -59,7 +58,7 @@ class Provincia(TimeStampedModel):
         verbose_name_plural = "Provincias"
 
     def __str__(self):
-        return '{}'.format(self.nombre)
+        return '{}, {}'.format(self.nombre, self.nombre)
 
 class Comarca(TimeStampedModel):
     nombre = models.CharField(max_length=250, blank=True, null=True)
@@ -77,10 +76,8 @@ class Comarca(TimeStampedModel):
 class RevisionesTemporada(TimeStampedModel):
     nombre_revision = models.CharField(max_length=250, blank=True, null=True)
     fecha_revision = models.DateField(blank=True, null=True)
-
     def __str__(self):
         return '{}'.format(self.nombre_revision)
-
 
 class Poblacion(TimeStampedModel):
     nombre = models.CharField(max_length=250, blank=True, null=True)
@@ -110,7 +107,6 @@ class Componentes(TimeStampedModel):
         verbose_name = 'Componente'
         verbose_name_plural = 'Componentes'
 
-
 class Incidencias(TimeStampedModel):
     tipo_incidencias = models.ForeignKey(Componentes, blank=True, null=True, related_name='tipo_componente')
     fecha = models.DateField(blank=True, null=True)
@@ -134,7 +130,7 @@ class Maquina(TimeStampedModel):
     incidencias = models.ManyToManyField(Incidencias, blank=True, related_name='tipo_incidencia')
     #incidencias = models.ManyToManyField(Incidencias, blank=True, null=True, limit_choices_to={'fechas' != ''})
     capataz_responsable = models.ForeignKey(User, blank=True, null=True, limit_choices_to={'groups__name': "UPR"})
-    poblacion = models.ForeignKey(Poblacion, blank=True, null=True, related_name='nombrePoblacionMaquina')
+    #poblacion = models.ForeignKey(Poblacion, blank=True, null=True, related_name='nombrePoblacionMaquina')
     #maquina_poblacion = models.ForeignKey(Poblacion, blank=True, null=True, related_name='nombre_poblacion')
     obra = models.ForeignKey(Obra, blank=True, null=True, related_name='obra')
     def __str__(self):

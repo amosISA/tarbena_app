@@ -34,9 +34,9 @@
                         <td valign="top">UBICACIÓN:</td>
                         <td align="right">
                             <table class="puestoDestacado">
-                                {% for m in maquina.numeroInventario.all %}
-                                <tr><td><small>{{ m.fecha_movimiento }}</small></td>
-                                    <td align="left">{{ m.poblacion_mm.nombre }}</td>
+                                {% for n in movimientos %}
+                                <tr><td><small>{{ n.fecha_movimiento }}</small></td>
+                                    <td align="left">{{ n.poblacion_mm }}</td>
                                 </tr>
                                 {% endfor %}
                             </table>
@@ -47,9 +47,9 @@
                         <td valign="top">OBRA:</td>
                         <td align="right">
                             <table class="puestoDestacado">
-                                {% for m in maquina.numeroInventarioObra.all %}
-                                <tr><td><small>{{ m.fecha_movimiento }}</small></td>
-                                    <td align="left">{{ m.nombre_obra }}</td>
+                                {% for o in movimientosObra %}
+                                <tr><td><small>{{ o.fecha_movimiento }}</small></td>
+                                    <td align="left">{{ o.nombre_obra }}</td>
                                 </tr>
                                 {% endfor %}
                             </table>
@@ -57,6 +57,7 @@
                     </tr>
                 </table>
                 </br>
+
                 <table>
 
                 </table>
@@ -90,6 +91,11 @@
                             <td style="width: 30%">
                                 {{ i.tipo_incidencias }}
                                 <small class="componente">{{ i.tipo_incidencias.grupo_componentes }}</small>
+                                <small class="componente" style="background: #ccc;">
+                                    {% if i.mantenimientos != None %}
+                                        {{ i.mantenimientos }}
+                                    {% endif %}
+                                </small>
                             </td>
                             <td class="group_component">
 

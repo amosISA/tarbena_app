@@ -132,7 +132,7 @@ class Maquina(TimeStampedModel):
     capataz_responsable = models.ForeignKey(User, blank=True, null=True, limit_choices_to={'groups__name': "UPR"})
     #poblacion = models.ForeignKey(Poblacion, blank=True, null=True, related_name='nombrePoblacionMaquina')
     #maquina_poblacion = models.ForeignKey(Poblacion, blank=True, null=True, related_name='nombre_poblacion')
-    obra = models.ForeignKey(Obra, blank=True, null=True, related_name='obra')
+    #obra = models.ForeignKey(Obra, blank=True, null=True, related_name='obra')
     def __str__(self):
         return '{}'.format(self.numero_inventario)
 

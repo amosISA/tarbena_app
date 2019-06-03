@@ -12,7 +12,7 @@ class MaquinaIncidenciasForm(forms.ModelForm):
         fields = ["tipo_incidencias", "fecha", "cerrado", "comentario", "mantenimientos",]
         widgets = {
             'tipo_incidencias': forms.Select(attrs={'class': 'form-control'}),
-            'fecha': forms.TextInput(attrs={'class': 'form-control .fecha'}),
+            'fecha': forms.TextInput(attrs={'class': 'form-control .fecha', 'autocomplete': 'off'}),
             'comentario': forms.Textarea(attrs={'class': 'form-control .comentario'}),
             'mantenimientos': forms.Select(attrs={'class': 'form-control'}),
         }

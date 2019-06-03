@@ -57,7 +57,7 @@
                     <div class="row with-margin">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <div class="input-group-text">
+                                <div class="input-group-text custom-control custom-switch">
                                     {{ form.cerrado }}
                                     <label for="id_cerrado">cerrado</label>
                                 </div>
@@ -68,12 +68,13 @@
                     <div class="row with-margin">{{ form.comentario }}</div>
                     <div class="row with-margin">{{ form.mantenimientos }}</div>
                     <div class="row with-margin">
-                        <input type="submit" value="Crear incidencia" />
+                        <input type="submit" value="Crear incidencia" class="btn btn-primary"/>
                     </div>
                 </form>
                 </div>
             </div>
         </div>
+
     </div>
 {% endblock %}
 
@@ -102,7 +103,11 @@
                     }
                 });
             });
-            $('#id_fecha').datepicker({});
         });
+    </script>
+    <script>
+    $( function() {
+        $( "#id_fecha" ).datepicker({ dateFormat: 'dd-mm-yy', firstDay: 1 });
+    } );
     </script>
 {% endblock %}

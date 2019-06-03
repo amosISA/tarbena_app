@@ -17,7 +17,7 @@ class PoblacionAdmin(admin.ModelAdmin):
 admin.site.register(Poblacion, PoblacionAdmin)
 
 class ComarcaAdmin(admin.ModelAdmin):
-    list_display = ('nombre','capital','habitantes','km_cuadrados',)
+    list_display = ('nombre','capital','habitantes','km_cuadrados','provincia',)
     list_filter = ('nombre',)
     search_fields = ('nombre',)
     empty_value_display = '-'

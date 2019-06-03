@@ -21,6 +21,7 @@
             menús
         </div>
         <div class="col-8">
+            <input id="myInput" type="text" placeholder="Search..">
             <table class="table table-striped" cellspacing="0" width="100%">
                 <thead>
                     <tr>
@@ -30,20 +31,34 @@
                         <th>Capataz responsable</th>
                     </tr>
                 </thead>
+                <tbody id="tablaHome">
                 {% for o in maquinas %}
+
                 <tr>
                     <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}">{{ o.numero_inventario }}</a></td>
                     <td>{{ o.tipo_maquina}}</td>
-                    <td>Almacén Alicante</td>
+                    <td>{{ o.poblacion}}</td>
                     <td>{{ o.capataz_responsable}}</td>
                 </tr>
                 {% endfor %}
+                </tbody>
             </table>
         </div>
 
         </div>
     </div>
+{% endblock %}
+{% block js %}
+<script>
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#tablaHome tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
 
-
+</script>
 
 {% endblock %}

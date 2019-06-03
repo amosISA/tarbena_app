@@ -28,6 +28,11 @@ class Obra(TimeStampedModel):
     def __str__(self):
         return '{}'.format(self.nombre_obra)
 
+class Temporada(TimeStampedModel):
+    nombre_temporada  = models.CharField(max_length=250, blank=True, null=True)
+
+    def __str__(self):
+        return '{}'.format(self.nombre_temporada)
 
 class TipoMaquina(TimeStampedModel):
     tipo = models.CharField(max_length=250, blank=True, null=True)
@@ -163,3 +168,11 @@ class MantenimientoMaquinaria(TimeStampedModel):
 
     def __str__(self):
         return '{}'.format(self.nombre_revision)
+
+
+class PuebloTermporada(TimeStampedModel):
+    nombre_temporada  = models.CharField(max_length=250, blank=True, null=True)
+    poblacion = models.ForeignKey(Temporada, blank=True, null=True, related_name='poblacionTemporada')
+
+    def __str__(self):
+        return '{}'.format(self.puebloTemporada)

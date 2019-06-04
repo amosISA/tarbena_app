@@ -8,7 +8,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView
 
 from .models import Maquina, TipoMaquina, Componentes, Incidencias, MovimientoMaquinaria, Poblacion, GrupoComponentes, RevisionesTemporada, Obra, MantenimientoMaquinaria, MovimientoObra
-from .forms import MaquinaIncidenciasForm
+from .forms import MaquinaIncidenciasForm, MovimientoMaquinariaForm
 
 # Create your views here.
 # --------------- Maquina Index --------------- #
@@ -27,12 +27,12 @@ def maquina_detail(request, ninventario):
                                 numero_inventario=ninventario)
 
     componentes = Componentes.objects.all().filter(tipo_maquina=maquina.tipo_maquina)
-    movimientos = MovimientoMaquinaria.objects.all().filter(numero_inventario_mm=maquina.id)
+    movimientos = MovimientoMaquinaria.objects.all().filter(numero_inventario_mm=maquina.id).order_by('-fecha_movimiento')[:1]
     #poblacion = Poblacion.objects.all().filter(nombre=maquina.poblacion)
     incidencias = maquina.incidencias.all()
     grupos_componentes = GrupoComponentes.objects.all()
     mantenimiento_maquinaria = MantenimientoMaquinaria.objects.all().filter(numero_maquina=maquina.id)
-    movimientosObra = MovimientoObra.objects.all().filter(numero_inventario_obra=maquina.id)
+    movimientosObra = MovimientoObra.objects.filter(numero_inventario_obra=maquina.id).order_by('-fecha_movimiento')[:1]
 
     return render(request,
                   'UPR/detail.html',
@@ -88,3 +88,39 @@ def get_components_by_group(request):
     componentes = Componentes.objects.all().filter(grupo_componentes__id=grupo_comp_id)
     data = serializers.serialize('json', componentes)
     return HttpResponse(data, content_type="application/json")
+
+
+# --------------- Add_Ubicacion --------------- #
+def add_ubicacion(request, ninventario):
+    form = MaquinaIncidenciasForm(request.POST or None, request.FILES or None)
+    maquina = get_object_or_404(Maquina.objects.select_related(
+                                            'tipo_maquina','capataz_responsable',
+                                        ).prefetch_related('incidencias').order_by('indicencias__fecha'),
+                                numero_inventario=ninventario)
+
+    movimientos = MovimientoMaquinaria.objects.filter(numero_inventario_mm=maquina.id).order_by('-fecha_movimiento')
+    poblacion = Poblacion.objects.all()
+    print(movimientos)
+
+    if request.method == "POST":
+        if form.is_valid():
+            # Create, but don't save the new ubicacion instance.
+            instance = form.save(commit=False)
+            # Save the new instance.
+            instance.save()
+            maquina.incidencias.add(instance)
+            maquina.save()
+            # Flash message
+            messages.success(request, "Ubicación añadida.")
+            # Redirect
+            return HttpResponseRedirect(reverse('upr:maquina_detail', kwargs={'ninventario':ninventario}))
+        else:
+            messages.error(request, "Error añadiendo la ubicación.")
+
+    return render(request,
+              'UPR/ubicacion.html',
+              {'maquina': maquina,
+               'ninventario': ninventario,
+               'movimientos': movimientos,
+               'form': form
+               })

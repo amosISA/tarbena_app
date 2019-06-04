@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^incidencia/(?P<ninventario>[-\w\d]+)/$', views.add_incidencia, name='add_incidencia'),
     url(r'^ajaxgetcomponentsbygroup/$', views.get_components_by_group, name='get_components_by_group'),
     #url(r'^incidencia/new/$', views.NewMaquinaIncidencia.as_view(), name='create_maquina_incidencia'),
+    url(r'^ubicacion/(?P<ninventario>[-\w\d]+)/$', views.add_ubicacion, name='add_ubicacion'),
 ]

@@ -24,6 +24,16 @@ display: block;
 small.componente {display: block;
     font-size: 65%;
     color: forestgreen;}
+
+small.componente2 {
+    font-size: 65%;
+    color: white;
+    background: #ccc;
+    padding: 3px;
+    border-radius: 2px;
+    }
+
+
 .menuDetalles small {font-size: 65%;
     color: forestgreen;}
 

@@ -4,8 +4,10 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from .models import GrupoComponentes, Componentes, Incidencias
+from .models import GrupoComponentes, Componentes, Incidencias, MovimientoMaquinaria
 
+
+# formularios para incidencias.html | MaquinaIncidenciasForm, GrupoComponentesForm, ComponentesForm
 class MaquinaIncidenciasForm(forms.ModelForm):
     class Meta:
         model = Incidencias
@@ -27,3 +29,12 @@ class ComponentesForm(forms.ModelForm):
         model = Componentes
         fields = ["tipo_componentes"]
 
+# formluarios para Ubicacion | MovimientoMaquinaria
+
+class MovimientoMaquinariaForm(forms.ModelForm):
+    class Meta:
+        model = MovimientoMaquinaria
+        fields = ["fecha_movimiento", "numero_inventario_mm","poblacion_mm"]
+        widgets = {
+            'poblacion': forms.Select(attrs={'class': 'form-control'}),
+        }

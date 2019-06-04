@@ -24,6 +24,16 @@ display: block;
 small.componente {display: block;
     font-size: 65%;
     color: forestgreen;}
+
+small.componente2 {
+    font-size: 65%;
+    color: white;
+    background: #ccc;
+    padding: 3px;
+    border-radius: 2px;
+    }
+
+
 .menuDetalles small {font-size: 65%;
     color: forestgreen;}
 
@@ -39,3 +49,10 @@ small.componente {display: block;
 }
 */
 .with-margin {margin-bottom: 1rem;}
+
+h2 > #myInput {
+    border: 0;
+    background: #ccc;
+    padding: 0.4rem;
+    font-size: 1rem;
+}

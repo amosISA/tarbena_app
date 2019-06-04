@@ -1,0 +1,86 @@
+{% extends "UPR/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Añadir ubicación
+{% endblock %}
+
+{% block navbar %}
+    {% include 'UPR/snippets/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="margin-top:100px;">
+        <div class="row justify-content-md-center">
+            <div class="col-lg-4 col-xs-12">
+                <h3>{{ maquina.tipo_maquina}} <a href="/upr/maquina/{{ maquina.numero_inventario }}/"><i class="fas fa-arrow-circle-left"></i></a></h3>
+                <div></div>
+                <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
+                <table class="text-right menuDetalles" style="margin-top: 50px; width: 100%;">
+                    <tr class="lineaTR" style="boder-top: 5px solid">
+                        <td valign="top"><a href="{% url 'upr:add_ubicacion' ninventario=maquina.numero_inventario %}" target="_blank"><i class="fas fa-map-marker-alt"></i></a> UBICACIÓN:</td>
+                        <td align="right">
+                            {% for n in movimientos %}
+                                {{ n.poblacion_mm }} <small>{{ n.fecha_movimiento }}</small>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-4 col-xs-12">
+                <h2>AÑADIR UBICACIÓN</h2>
+                <div class="form-group">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <strong>{{ message }}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <!-- INCIDENCIAS FORM -->
+
+                <form class="form-horizontal" method="post" enctype="multipart/form-data" action="">{% csrf_token %}
+                    {% if form.errors %}
+                        <div class="ag_form_login_message_error">
+                            {% for field,error in form.errors.items %}
+                                {{ field|capfirst }} - {{ error|striptags }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="row with-margin">fecha: {{ form.fecha_movimiento }}</div>
+
+
+
+                    <div class="row with-margin">número: {{ form.numero_inventario_mm }}</div>
+
+                    <div class="row with-margin">población: {{ form.poblacion_mm }}</div>
+                    <div class="row with-margin">
+                        <input type="submit" value="Crear incidencia" class="btn btn-primary"/>
+                    </div>
+
+                </form>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function() {
+
+        });
+    </script>
+    <script>
+    $( function() {
+        $( "#id_fecha" ).datepicker({ dateFormat: 'dd/mm/yy', firstDay: 1 });
+        $('#id_fecha').blur();
+    } );
+    </script>
+{% endblock %}

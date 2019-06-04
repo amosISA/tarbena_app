@@ -56,7 +56,7 @@
                 </table>
             </div>
             <div  class="col-lg-8 col-xs-12">
-                <h2>INCIDENCIAS</h2>
+                <h2>INCIDENCIAS | <input id="myInput" type="text" placeholder=""></h2>
 <!-- mensaje de confirmación / error cuando se envia la incidencia -->
                 {% if messages %}
                     {% for message in messages %}
@@ -69,7 +69,7 @@
                     {% endfor %}
                 {% endif %}
 
-                <table class="table table-striped">
+                <table class="table table-striped" id="tablaHome">
                     <thead>
                         <tr>
                             <th scope="col">Componente</th>
@@ -114,10 +114,16 @@
 {% endblock %}
 
 {% block js %}
-    <script>
-        /*$(document).ready(function() {
-        });*/
-    </script>
+<script>
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#tablaHome tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 {% endblock %}
 
 <!--

@@ -20,6 +20,8 @@ def index_maquinas(request):
                   {'maquinas':maquinas})
 
 # --------------- Maquina Details --------------- #
+# /upr/maquina/721721/
+
 def maquina_detail(request, ninventario):
     maquina = get_object_or_404(Maquina.objects.select_related(
                                             'tipo_maquina','capataz_responsable',
@@ -27,8 +29,7 @@ def maquina_detail(request, ninventario):
                                 numero_inventario=ninventario)
 
     componentes = Componentes.objects.all().filter(tipo_maquina=maquina.tipo_maquina)
-    movimientos = MovimientoMaquinaria.objects.all().filter(numero_inventario_mm=maquina.id).order_by('-fecha_movimiento')[:1]
-    #poblacion = Poblacion.objects.all().filter(nombre=maquina.poblacion)
+    movimientos = maquina.maquina_poblacion.all().order_by('-fecha_movimiento')[:1]
     incidencias = maquina.incidencias.all()
     grupos_componentes = GrupoComponentes.objects.all()
     mantenimiento_maquinaria = MantenimientoMaquinaria.objects.all().filter(numero_maquina=maquina.id)
@@ -40,7 +41,6 @@ def maquina_detail(request, ninventario):
                    'ninventario': ninventario,
                    'componentes': componentes,
                    'movimientos': movimientos,
-                  # 'poblacion': poblacion,
                    'incidencias': incidencias,
                    'grupos_componentes': grupos_componentes,
                    'mantenimiento_maquinaria': mantenimiento_maquinaria,
@@ -92,15 +92,15 @@ def get_components_by_group(request):
 
 # --------------- Add_Ubicacion --------------- #
 def add_ubicacion(request, ninventario):
-    form = MaquinaIncidenciasForm(request.POST or None, request.FILES or None)
+    form = MovimientoMaquinariaForm(request.POST or None, request.FILES or None)
     maquina = get_object_or_404(Maquina.objects.select_related(
                                             'tipo_maquina','capataz_responsable',
-                                        ).prefetch_related('incidencias').order_by('indicencias__fecha'),
+                                        ).prefetch_related('maquina_poblacion').order_by('maquina_poblacion__fecha_movimiento'),
                                 numero_inventario=ninventario)
 
-    movimientos = MovimientoMaquinaria.objects.filter(numero_inventario_mm=maquina.id).order_by('-fecha_movimiento')
+    movimientos = maquina.maquina_poblacion.all().order_by('-fecha_movimiento')
     poblacion = Poblacion.objects.all()
-    print(movimientos)
+    print(poblacion)
 
     if request.method == "POST":
         if form.is_valid():
@@ -108,7 +108,7 @@ def add_ubicacion(request, ninventario):
             instance = form.save(commit=False)
             # Save the new instance.
             instance.save()
-            maquina.incidencias.add(instance)
+            maquina.maquina_poblacion.add(instance)
             maquina.save()
             # Flash message
             messages.success(request, "Ubicación añadida.")
@@ -121,6 +121,7 @@ def add_ubicacion(request, ninventario):
               'UPR/ubicacion.html',
               {'maquina': maquina,
                'ninventario': ninventario,
+               'poblacion': poblacion,
                'movimientos': movimientos,
                'form': form
                })

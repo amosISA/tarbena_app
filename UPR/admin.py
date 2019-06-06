@@ -97,13 +97,12 @@ class IncidenciasAdmin(admin.ModelAdmin):
     show_full_result_count = True
 admin.site.register(Incidencias, IncidenciasAdmin)
 
-
 class MovimientoMaquinariaAdmin(admin.ModelAdmin):
-    list_display = ('numero_inventario_mm','poblacion_mm','fecha_movimiento',)
-    list_filter = ('numero_inventario_mm', 'poblacion_mm',)
-    search_fields = ('numero_inventario_mm',)
+    list_display = ('poblacion_mm','fecha_movimiento','comentario',)
+    list_filter = ('poblacion_mm','fecha_movimiento',)
+    search_fields = ('poblacion_mm',)
     empty_value_display = '-'
-    list_display_links = ('numero_inventario_mm',)
+    list_display_links = ('poblacion_mm',)
     show_full_result_count = True
 admin.site.register(MovimientoMaquinaria, MovimientoMaquinariaAdmin)
 

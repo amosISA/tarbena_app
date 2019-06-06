@@ -34,7 +34,7 @@
 <!-- Ubicación y Obra -->
                 <table class="text-right menuDetalles" style="margin-top: 50px; width: 100%;">
                     <tr class="lineaTR" style="boder-top: 5px solid">
-                        <td valign="top"><a href="{% url 'upr:add_ubicacion' ninventario=maquina.numero_inventario %}" target="_blank"><i class="fas fa-map-marker-alt"></i></a> UBICACIÓN:</td>
+                        <td valign="top"><a href="{% url 'upr:add_ubicacion' ninventario=maquina.numero_inventario %}"><i class="fas fa-map-marker-alt"></i></a> UBICACIÓN:</td>
                         <td align="right">
                             {% for n in movimientos %}
                                 {{ n.poblacion_mm }} <small>{{ n.fecha_movimiento }}</small>

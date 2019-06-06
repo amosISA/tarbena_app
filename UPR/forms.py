@@ -34,7 +34,5 @@ class ComponentesForm(forms.ModelForm):
 class MovimientoMaquinariaForm(forms.ModelForm):
     class Meta:
         model = MovimientoMaquinaria
-        fields = ["fecha_movimiento", "numero_inventario_mm","poblacion_mm"]
-        widgets = {
-            'poblacion': forms.Select(attrs={'class': 'form-control'}),
-        }
+        fields = ["fecha_movimiento", "comentario", "poblacion_mm"]
+

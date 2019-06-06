@@ -288,4 +288,18 @@ class Migration(migrations.Migration):
             name='provincia',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='UPR.Provincia'),
         ),
+        migrations.RemoveField(
+            model_name='movimientomaquinaria',
+            name='numero_inventario_mm',
+        ),
+        migrations.AddField(
+            model_name='maquina',
+            name='maquina_poblacion',
+            field=models.ManyToManyField(blank=True, related_name='nombre_poblacion', to='UPR.MovimientoMaquinaria'),
+        ),
+        migrations.AddField(
+            model_name='movimientomaquinaria',
+            name='comentario',
+            field=models.TextField(blank=True, null=True),
+        ),
     ]

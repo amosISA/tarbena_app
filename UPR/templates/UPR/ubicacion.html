@@ -20,7 +20,7 @@
                     <tr class="lineaTR" style="boder-top: 5px solid">
                         <td valign="top"><a href="{% url 'upr:add_ubicacion' ninventario=maquina.numero_inventario %}" target="_blank"><i class="fas fa-map-marker-alt"></i></a> UBICACIÓN:</td>
                         <td align="right">
-                            {% for n in movimientos %}
+                            {% for n in poblacion %}
                                 {{ n.poblacion_mm }} <small>{{ n.fecha_movimiento }}</small>
                             {% endfor %}
                         </td>
@@ -53,12 +53,11 @@
 
                     <div class="row with-margin">fecha: {{ form.fecha_movimiento }}</div>
 
-
-
-                    <div class="row with-margin">número: {{ form.numero_inventario_mm }}</div>
+                    <div class="row with-margin">número: {{ form.comentario }}</div>
 
                     <div class="row with-margin">población: {{ form.poblacion_mm }}</div>
                     <div class="row with-margin">
+
                         <input type="submit" value="Crear incidencia" class="btn btn-primary"/>
                     </div>
 

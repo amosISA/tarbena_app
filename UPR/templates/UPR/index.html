@@ -29,6 +29,7 @@
                         <th>Tipo Máquina</th>
                         <th>Ubicación</th>
                         <th>Capataz responsable</th>
+                        <th>avería</th>
                     </tr>
                 </thead>
                 <tbody id="tablaHome">
@@ -39,10 +40,12 @@
                     <td>{{ o.tipo_maquina}}</td>
                     <td>{{ o.poblacion}}</td>
                     <td>{{ o.capataz_responsable}}</td>
-                    <td><{{ o.poblacion}}/td>
-                    <td>{{ o.obra}}</td>
+                    <td>{{ o.poblacion}}</td>
+                    <td></td>
                 </tr>
                 {% endfor %}
+
+
                 </tbody>
             </table>
         </div>

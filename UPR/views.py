@@ -8,16 +8,21 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView
 
 from .models import Maquina, TipoMaquina, Componentes, Incidencias, MovimientoMaquinaria, Poblacion, GrupoComponentes, RevisionesTemporada, Obra, MantenimientoMaquinaria, MovimientoObra
-from .forms import MaquinaIncidenciasForm, MovimientoMaquinariaForm
+from .forms import MaquinaIncidenciasForm, MovimientoMaquinariaForm, MovimientoObraForm
 
 # Create your views here.
 # --------------- Maquina Index --------------- #
 @login_required()
 def index_maquinas(request):
     maquinas = Maquina.objects.all()
+    # movimientos = Maquina.maquina_poblacion.poblacion_mm.order_by('-fecha_movimiento')[0]
+    llegandoCerrado = Maquina.objects.select_related(
+        'tipo_maquina', 'capataz_responsable',
+    ).prefetch_related('incidencias')
     return render(request,
                   'UPR/index.html',
-                  {'maquinas':maquinas})
+                  {'maquinas':maquinas,
+                   'llegandoCerrado':llegandoCerrado})
 
 # --------------- Maquina Details --------------- #
 # /upr/maquina/721721/
@@ -33,7 +38,7 @@ def maquina_detail(request, ninventario):
     incidencias = maquina.incidencias.all()
     grupos_componentes = GrupoComponentes.objects.all()
     mantenimiento_maquinaria = MantenimientoMaquinaria.objects.all().filter(numero_maquina=maquina.id)
-    movimientosObra = MovimientoObra.objects.filter(numero_inventario_obra=maquina.id).order_by('-fecha_movimiento')[:1]
+    movimientosObra = maquina.obra.all().order_by('-fecha_movimiento')[:1]
 
     return render(request,
                   'UPR/detail.html',
@@ -122,6 +127,43 @@ def add_ubicacion(request, ninventario):
               {'maquina': maquina,
                'ninventario': ninventario,
                'poblacion': poblacion,
+               'movimientos': movimientos,
+               'form': form
+               })
+
+
+# --------------- Add_Obra --------------- #
+def add_obra(request, ninventario):
+    form = MovimientoObraForm(request.POST or None, request.FILES or None)
+    maquina = get_object_or_404(Maquina.objects.select_related(
+                                            'tipo_maquina','capataz_responsable',
+                                        ).prefetch_related('obra').order_by('obra__fecha_movimiento'),
+                                numero_inventario=ninventario)
+
+    movimientos = maquina.obra.all().order_by('-fecha_movimiento')
+    obra = Obra.objects.all()
+    print(obra)
+
+    if request.method == "POST":
+        if form.is_valid():
+            # Create, but don't save the new ubicacion instance.
+            instance = form.save(commit=False)
+            # Save the new instance.
+            instance.save()
+            maquina.obra.add(instance)
+            maquina.save()
+            # Flash message
+            messages.success(request, "Obra cambiada.")
+            # Redirect
+            return HttpResponseRedirect(reverse('upr:maquina_detail', kwargs={'ninventario':ninventario}))
+        else:
+            messages.error(request, "Error cambiando la obra.")
+
+    return render(request,
+              'UPR/obra.html',
+              {'maquina': maquina,
+               'ninventario': ninventario,
+               'obra': obra,
                'movimientos': movimientos,
                'form': form
                })

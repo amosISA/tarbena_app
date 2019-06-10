@@ -98,7 +98,7 @@ class IncidenciasAdmin(admin.ModelAdmin):
 admin.site.register(Incidencias, IncidenciasAdmin)
 
 class MovimientoMaquinariaAdmin(admin.ModelAdmin):
-    list_display = ('poblacion_mm','fecha_movimiento','comentario',)
+    list_display = ('poblacion_mm','fecha_movimiento',)
     list_filter = ('poblacion_mm','fecha_movimiento',)
     search_fields = ('poblacion_mm',)
     empty_value_display = '-'
@@ -134,7 +134,7 @@ class ObraAdmin(admin.ModelAdmin):
 admin.site.register(Obra, ObraAdmin)
 
 class MovimientoObraAdmin(admin.ModelAdmin):
-    list_display = ('fecha_movimiento','numero_inventario_obra','nombre_obra',)
+    list_display = ('fecha_movimiento','nombre_obra','comentario')
     list_filter = ('nombre_obra',)
     search_fields = ('nombre_obra',)
     empty_value_display = '-'

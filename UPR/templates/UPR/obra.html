@@ -18,13 +18,13 @@
                 <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
                 <table class="text-right menuDetalles" style="margin-top: 50px; width: 100%;">
 
-<!-- listado poblaciones -->
+<!-- listado obras -->
                     <tr class="lineaTR" style="boder-top: 5px solid">
-                        <td valign="top">UBICACIÓN:</td>
+                        <td valign="top">OBRA:</td>
                         <td align="right">
 
                             {% for n in movimientos %}
-                            <div class="bloquePoblacion">{{ n.poblacion_mm }} <small>{{ n.fecha_movimiento }}</small><br>
+                            <div class="bloquePoblacion">{{ n.nombre_obra }} <small>{{ n.fecha_movimiento }}</small><br>
                                 <div class="comentario">{{ n.comentario }}</div>
                             </div>
                             {% endfor %}
@@ -33,7 +33,7 @@
                 </table>
             </div>
             <div class="col-lg-4 col-xs-12">
-                <h2>AÑADIR UBICACIÓN</h2>
+                <h2>AÑADIR OBRA</h2>
                 <div class="form-group">
                 {% if messages %}
                     {% for message in messages %}
@@ -60,10 +60,10 @@
 
                     <div class="row with-margin">comentario: {{ form.comentario }}</div>
 
-                    <div class="row with-margin">población: {{ form.poblacion_mm }}</div>
+                    <div class="row with-margin">obra: {{ form.nombre_obra }}</div>
                     <div class="row with-margin">
 
-                        <input type="submit" value="Crear incidencia" class="btn btn-primary"/>
+                        <input type="submit" value="Crear obra" class="btn btn-primary"/>
                     </div>
 
                 </form>

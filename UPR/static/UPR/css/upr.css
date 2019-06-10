@@ -56,3 +56,8 @@ h2 > #myInput {
     padding: 0.4rem;
     font-size: 1rem;
 }
+div.comentario {    font-size: 70%;
+    background: #ddd;
+    border-bottom: 1px solid #000;}
+
+   .bloquePoblacion {border-top: 1px solid #ccc; padding-top: 10px;}

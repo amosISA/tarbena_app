@@ -117,6 +117,7 @@ class Incidencias(TimeStampedModel):
     tipo_incidencias = models.ForeignKey(Componentes, blank=True, null=True, related_name='tipo_componente')
     fecha = models.DateField(blank=True, null=True)
     cerrado = models.BooleanField(default=True)
+    taller = models.BooleanField(default=False)
     comentario = models.TextField(blank=True, null=True)
     mantenimientos = models.ForeignKey(RevisionesTemporada, blank=True, null=True, related_name='tipo_mantenimiento')
 
@@ -135,6 +136,19 @@ class Temporada(TimeStampedModel):
         return '{}'.format(self.nombre_temporada)
 
 
+# qué sucede con las máquinas: movimientoObra, movimientoMaquinaria
+# --------------------------------------------------------------------------------------------------------------------------------------
+
+class MovimientoObra(TimeStampedModel):
+    fecha_movimiento = models.DateField(blank=True, null=True)
+    nombre_obra  = models.ForeignKey(Obra, blank=True, null=True, related_name='nombreObra')
+    comentario = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return '{}'.format(self.nombre_obra)
+
+    class Meta:
+        ordering = ['-fecha_movimiento',]
 
 class MovimientoMaquinaria(TimeStampedModel):
     poblacion_mm = models.ForeignKey(Poblacion, blank=True, null=True, related_name='nombrePoblacion')
@@ -157,22 +171,11 @@ class Maquina(TimeStampedModel):
     incidencias = models.ManyToManyField(Incidencias, blank=True, related_name='tipo_incidencia')
     capataz_responsable = models.ForeignKey(User, blank=True, null=True, limit_choices_to={'groups__name': "UPR"})
     maquina_poblacion = models.ManyToManyField(MovimientoMaquinaria, blank=True, related_name='nombre_poblacion')
+    obra = models.ManyToManyField(MovimientoObra, blank=True, related_name='rel_nombre_obra')
     def __str__(self):
         return '{}'.format(self.numero_inventario)
 
-# qué sucede con las máquinas
-# --------------------------------------------------------------------------------------------------------------------------------------
 
-class MovimientoObra(TimeStampedModel):
-    fecha_movimiento = models.DateField(blank=True, null=True)
-    numero_inventario_obra = models.ForeignKey(Maquina, blank=True, null=True, related_name='numeroInventarioObra')
-    nombre_obra  = models.ForeignKey(Obra, blank=True, null=True, related_name='nombreObra')
-
-    def __str__(self):
-        return '{}'.format(self.nombre_obra)
-
-    class Meta:
-        ordering = ['-fecha_movimiento',]
 
 # este modelo crea la tabla donde añadimos las incidencias que han sido realizadas bajo una bateria de pruebas de un mantenimiento programado
 class MantenimientoMaquinaria(TimeStampedModel):

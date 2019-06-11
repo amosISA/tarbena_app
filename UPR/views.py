@@ -36,6 +36,10 @@ def index_maquinas(request):
     numMoto101_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="1").count()
     numMoto103_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="2").count()
 
+    ubicacion = Maquina.objects.all()
+    cerrado = Maquina.objects.filter(incidencias__cerrado=False)
+
+
 
     # movimientos = Maquina.maquina_poblacion.poblacion_mm.order_by('-fecha_movimiento')[0]
     llegandoCerrado = Maquina.objects.select_related(
@@ -61,7 +65,8 @@ def index_maquinas(request):
                    'numMoto241_0748241': numMoto241_0748241,
                    'numMoto261_0748241': numMoto261_0748241,
                    'numMoto101_0748241': numMoto101_0748241,
-                   'numMoto103_0748241': numMoto103_0748241})
+                   'numMoto103_0748241': numMoto103_0748241,
+                   'cerrado' : cerrado})
 
 # --------------- Maquina Details --------------- #
 # /upr/maquina/721721/
@@ -90,6 +95,21 @@ def maquina_detail(request, ninventario):
                    'mantenimiento_maquinaria': mantenimiento_maquinaria,
                    'movimientosObra' : movimientosObra
                    })
+
+
+# --------------- ultimas incidencias --------------- #
+# /upr/ultimasincidencias/
+def ultimas_incidencias(request):
+    maquina = Maquina.objects.all()
+    incidencias = Maquina.incidencias.all()
+
+    return render(request,
+                  'UPR/ultimasincicendias.html',
+                  {'maquina': maquina,
+                   'incidencias': incidencias
+                   })
+
+
 
 # --------------- Add_Incidencia --------------- #
 def add_incidencia(request, ninventario):

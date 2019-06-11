@@ -10,4 +10,5 @@ urlpatterns = [
     #url(r'^incidencia/new/$', views.NewMaquinaIncidencia.as_view(), name='create_maquina_incidencia'),
     url(r'^ubicacion/(?P<ninventario>[-\w\d]+)/$', views.add_ubicacion, name='add_ubicacion'),
     url(r'^obra/(?P<ninventario>[-\w\d]+)/$', views.add_obra, name='add_obra'),
+    url(r'^ultimasincidencias/$', views.ultimas_incidencias, name='ultimas_incidencias'),
 ]

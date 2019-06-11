@@ -14,7 +14,29 @@ from .forms import MaquinaIncidenciasForm, MovimientoMaquinariaForm, MovimientoO
 # --------------- Maquina Index --------------- #
 @login_required()
 def index_maquinas(request):
-    maquinas = Maquina.objects.all()
+    maquinas = Maquina.objects.filter(capataz_responsable=request.user.id)
+    desbro = Maquina.objects.filter(tipo_maquina='3')
+    moto261 = Maquina.objects.filter(tipo_maquina='5')
+    moto241 = Maquina.objects.filter(tipo_maquina='4')
+    moto101 = Maquina.objects.filter(tipo_maquina='1')
+    moto103 = Maquina.objects.filter(tipo_maquina='2')
+    #número de máquinas según su tipo
+    numMaquina = Maquina.objects.count()
+    numDesbro = Maquina.objects.filter(tipo_maquina='3').count()
+    numMoto261 = Maquina.objects.filter(tipo_maquina='5').count()
+    numMoto241 = Maquina.objects.filter(tipo_maquina='4').count()
+    numMoto101 = Maquina.objects.filter(tipo_maquina='1').count()
+    numMoto103 = Maquina.objects.filter(tipo_maquina='2').count()
+    #mostramos las máquinas pertenecientes a la obra 0748241
+    #también mostramos cada tipo de máquina de esta obra
+    numMaquinaObra0748241 = Maquina.objects.filter(obra='1').count()
+    numDesbro_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="3").count()
+    numMoto241_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="4").count()
+    numMoto261_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="5").count()
+    numMoto101_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="1").count()
+    numMoto103_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="2").count()
+
+
     # movimientos = Maquina.maquina_poblacion.poblacion_mm.order_by('-fecha_movimiento')[0]
     llegandoCerrado = Maquina.objects.select_related(
         'tipo_maquina', 'capataz_responsable',
@@ -22,7 +44,24 @@ def index_maquinas(request):
     return render(request,
                   'UPR/index.html',
                   {'maquinas':maquinas,
-                   'llegandoCerrado':llegandoCerrado})
+                   'desbro':desbro,
+                   'moto261':moto261,
+                   'moto241': moto241,
+                   'moto101': moto101,
+                   'moto103': moto103,
+                   'llegandoCerrado':llegandoCerrado,
+                   'numMaquina':numMaquina,
+                   'numMaquinaObra0748241':numMaquinaObra0748241,
+                   'numDesbro': numDesbro,
+                   'numMoto261':numMoto261,
+                   'numMoto241':numMoto241,
+                   'numMoto101':numMoto101,
+                   'numMoto103':numMoto103,
+                   'numDesbro_0748241': numDesbro_0748241,
+                   'numMoto241_0748241': numMoto241_0748241,
+                   'numMoto261_0748241': numMoto261_0748241,
+                   'numMoto101_0748241': numMoto101_0748241,
+                   'numMoto103_0748241': numMoto103_0748241})
 
 # --------------- Maquina Details --------------- #
 # /upr/maquina/721721/

@@ -18,13 +18,85 @@
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-4">
-            menús
-        </div>
+                <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">capataz: </small><br>{{request.user.username}}</h3>
+
+                <table width="100%" class="text-right menuDetalles">
+                    <tr class="lineaTR">
+                        <td width="70%"><b>Total máquinas</b>:</td>
+                        <td>{{ numMaquina }}</td>
+                    </tr>
+                    <tr class="lineaTR">
+                        <td colspan="2">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width:70%"><a href="#Husqvarna555">desbrozadora 555FRM</a>:</td>
+                                    <td>{{ numDesbro }}</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#Stihl241">moto 241</a>:</td>
+                                    <td>{{ numMoto241 }}</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#Stihl261">moto 261</a>:</td>
+                                    <td>{{ numMoto261 }}</td>
+                                </tr>
+                                <tr>
+                                     <td><a href="#Stihl101">Total moto 101</a>:</td>
+                                    <td>{{ numMoto101 }}</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#Stihl103">total moto 103</a>:</td>
+                                    <td>{{ numMoto103 }}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+
+                    <tr class="lineaTR">
+                        <td><b>Total máquinas obra 0748241</b>:</td>
+                        <td>{{ numMaquinaObra0748241 }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width:70%">desbrozadora 555FRM:</td>
+                                    <td>{{ numDesbro_0748241 }}</td>
+                                </tr>
+                                <tr>
+                                    <td>moto 241:</td>
+                                    <td>{{ numMoto241_0748241 }}</td>
+                                </tr>
+                                <tr>
+                                    <td>moto 261:</td>
+                                    <td>{{ numMoto261_0748241 }}</td>
+                                </tr>
+                                <tr>
+                                     <td>Total moto 101:</td>
+                                    <td>{{ numMoto101_0748241 }}</td>
+                                </tr>
+                                <tr>
+                                    <td>total moto 103:</td>
+                                    <td>{{ numMoto103_0748241 }}</td>
+                                </tr>
+                            </table>
+                        </td>
+
+                    </tr>
+                </table>
+
+
+
+
+
+            </div>
         <div class="col-8">
             <h2>MAQUINARIA | <input id="myInput" type="text" placeholder=""></h2>
             <table class="table table-striped" cellspacing="0" width="100%">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Nº inventario</th>
                         <th>Tipo Máquina</th>
                         <th>Ubicación</th>
@@ -33,19 +105,84 @@
                     </tr>
                 </thead>
                 <tbody id="tablaHome">
+<!-- Mis Maquinas -->
+                <tr><td colspan="7"><h3>Mis Máquinas</h3></td></tr>
                 {% for o in maquinas %}
-
                 <tr>
-                    <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}">{{ o.numero_inventario }}</a></td>
+                    <td></td>
+                    <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
                     <td>{{ o.tipo_maquina}}</td>
-                    <td>{{ o.poblacion}}</td>
+                    <td>{{ o.poblacion_mm}}</td>
+                    <td>{{ o.capataz_responsable}}</td>
+                    <td>{{ o.maquina_poblacion.poblacion_mm.id}}, {{ o.incidencias.cerrado}}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+<!-- Husqvarna 555FRM -->
+                <tr><td colspan="7"><h3><a name="Husqvarna555">Husqvarna 555FRM</a></h3></td></tr>
+                {% for o in desbro %}
+                <tr>
+                    <td></td>
+                    <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
+                    <td>{{ o.tipo_maquina}}</td>
+                    <td>{{ o.poblacion_mm}}</td>
                     <td>{{ o.capataz_responsable}}</td>
                     <td>{{ o.poblacion}}</td>
                     <td></td>
                 </tr>
                 {% endfor %}
-
-
+<!-- stihl 241 -->
+                <tr><td colspan="7"><h3><a name="Stihl241">Stihl 241</a></h3></td></tr>
+                {% for o in moto241 %}
+                <tr>
+                    <td></td>
+                    <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
+                    <td>{{ o.tipo_maquina}}</td>
+                    <td>{{ o.poblacion_mm}}</td>
+                    <td>{{ o.capataz_responsable}}</td>
+                    <td>{{ o.poblacion}}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+<!-- stihl 261 -->
+                <tr><td colspan="7"><h3><a name="Stihl261">Stihl 261</a></h3></td></tr>
+                {% for o in moto261 %}
+                <tr>
+                    <td></td>
+                    <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
+                    <td>{{ o.tipo_maquina}}</td>
+                    <td>{{ o.poblacion_mm}}</td>
+                    <td>{{ o.capataz_responsable}}</td>
+                    <td>{{ o.poblacion}}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+<!-- stihl 101 -->
+                <tr><td colspan="7"><h3><a name="Stihl101">Stihl 101</a></h3></td></tr>
+                {% for o in moto101 %}
+                <tr>
+                    <td></td>
+                    <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
+                    <td>{{ o.tipo_maquina}}</td>
+                    <td>{{ o.poblacion_mm}}</td>
+                    <td>{{ o.capataz_responsable}}</td>
+                    <td>{{ o.poblacion}}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+<!-- stihl 103 -->
+                <tr><td colspan="7"><h3><a name="Stihl103">Stihl 103</a></h3></td></tr>
+                {% for o in moto103 %}
+                <tr>
+                    <td></td>
+                    <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
+                    <td>{{ o.tipo_maquina}}</td>
+                    <td>{{ o.poblacion_mm}}</td>
+                    <td>{{ o.capataz_responsable}}</td>
+                    <td>{{ o.poblacion}}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>

@@ -100,16 +100,10 @@ def maquina_detail(request, ninventario):
 # --------------- ultimas incidencias --------------- #
 # /upr/ultimasincidencias/
 def ultimas_incidencias(request):
-    maquina = Maquina.objects.all()
-    objetos = maquina.filter(incidencias='')
-
-    #ultimas_incidencias = Incidencias.objects.order_by('fecha')
-    #incidencias = Incidencias.all()
-
-    return render(
+    incidencias = Incidencias.objects.all().order_by('-created')[:100]
+    return render(request,
                   'UPR/ultimasincidencias.html',
-                  {'objetos': objetos
-                   })
+                  {'incidencias': incidencias})
 
 
 

@@ -101,12 +101,14 @@ def maquina_detail(request, ninventario):
 # /upr/ultimasincidencias/
 def ultimas_incidencias(request):
     maquina = Maquina.objects.all()
-    incidencias = Maquina.incidencias.all()
+    objetos = maquina.filter(incidencias='')
 
-    return render(request,
-                  'UPR/ultimasincicendias.html',
-                  {'maquina': maquina,
-                   'incidencias': incidencias
+    #ultimas_incidencias = Incidencias.objects.order_by('fecha')
+    #incidencias = Incidencias.all()
+
+    return render(
+                  'UPR/ultimasincidencias.html',
+                  {'objetos': objetos
                    })
 
 

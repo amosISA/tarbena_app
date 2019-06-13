@@ -30,11 +30,11 @@ def index_maquinas(request):
     #mostramos las máquinas pertenecientes a la obra 0748241
     #también mostramos cada tipo de máquina de esta obra
     numMaquinaObra0748241 = Maquina.objects.filter(obra='1').count()
-    numDesbro_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="3").count()
-    numMoto241_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="4").count()
-    numMoto261_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="5").count()
-    numMoto101_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="1").count()
-    numMoto103_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="2").count()
+    numDesbro_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='3').count()
+    numMoto241_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='4').count()
+    numMoto261_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='5').count()
+    numMoto101_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='1').count()
+    numMoto103_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='2').count()
 
     ubicacion = Maquina.objects.all()
     cerrado = Maquina.objects.filter(incidencias__cerrado=False)
@@ -96,6 +96,17 @@ def maquina_detail(request, ninventario):
                    'movimientosObra' : movimientosObra
                    })
 
+# --------------- Componente Details --------------- #
+# /upr/componente/23/
+
+def componente_detail(request, ncomponente):
+
+    incidencias = Incidencias.objects.all().filter(cerrado=False).filter(tipo_incidencias=ncomponente).order_by('-created')[:100]
+
+    return render(request,
+                  'UPR/componente.html',
+                  {'incidencias': incidencias,
+                   })
 
 # --------------- ultimas incidencias --------------- #
 # /upr/ultimasincidencias/
@@ -106,6 +117,15 @@ def ultimas_incidencias(request):
                   'UPR/ultimasincidencias.html',
                   {'incidencias': incidencias,
                    'maquina': maquina})
+
+# --------------- protector_cuchilla --------------- #
+# /upr/protectorcuchilla/
+def protector_cuchilla(request):
+    incidencias = Incidencias.objects.all().filter(cerrado=False).filter(tipo_incidencias=6).order_by('-created')[:100]
+
+    return render(request,
+                  'UPR/protectorcuchilla.html',
+                  {'incidencias': incidencias,})
 
 
 

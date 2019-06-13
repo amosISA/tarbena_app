@@ -1,0 +1,82 @@
+{% extends "UPR/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ ninventario }}
+{% endblock %}
+
+{% block navbar %}
+    {% include 'UPR/snippets/navbar.html' %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="container" style="margin-top:100px;">
+        <div class="col-12">
+            <h2>COMPONENTES | <input id="myInput" type="text" placeholder=""></h2>
+            <table class="table table-striped" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>C</th>
+                        <th>T</th>
+                        <th>#</th>
+                        <th>Tipo Incidencia</th>
+                        <th># inventario</th>
+                        <th>Fecha</th>
+                        <th>Comentario</th>
+                        <th>Mantenimientos</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaHome">
+<!-- Mis Maquinas -->
+                <tr><td colspan="8"><h3>Últimas incidencias</h3></td></tr>
+
+
+
+                    {% for i in incidencias %}
+                <tr>
+                        <td>
+                            {% if i.cerrado == False %}
+                                <i class="fas fa-exclamation-triangle" style="color: red"></i>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if i.taller == True %}
+                                <i class="fas fa-tools" style="color: red"></i>
+                            {% endif %}
+                        </td>
+                        <td><a href="/panel/UPR/incidencias/{{ i.id }}/change/" target="_blank">{{ i.pk }}</a></td>
+                        <td>{{ i.tipo_incidencias }}</td>
+                        <td>{{ i.maquina.numero_inventario }}</td>
+                        <td>
+                            <small>{{ i.fecha }} {% if i.fechaCerrado != None %}<br> <span style="color: lime">{{ i.fechaCerrado }}</span>{% endif %}</small></td>
+                        <td>{{ i.comentario }}</td>
+                        <td style="width: 10%">
+                            {% if i.mantenimientos != None %}
+                            <small>{{ i.mantenimientos }}</small>
+                            {% endif %}
+                        </td>
+</tr>
+            {% endfor %}
+
+        </div>
+    </div>
+<div>
+
+
+
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#tablaHome tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+{% endblock %}

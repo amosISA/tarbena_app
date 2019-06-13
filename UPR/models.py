@@ -77,7 +77,7 @@ class Poblacion(TimeStampedModel):
 
 class RevisionesTemporada(TimeStampedModel):
     nombre_revision = models.CharField(max_length=250, blank=True, null=True)
-    fecha_revision = models.DateField(blank=True, null=True)
+    fecha_revision = models.DateField(blank=False, null=True)
 
     def __str__(self):
         return '{}'.format(self.nombre_revision)
@@ -141,7 +141,7 @@ class Temporada(TimeStampedModel):
 # --------------------------------------------------------------------------------------------------------------------------------------
 
 class MovimientoObra(TimeStampedModel):
-    fecha_movimiento = models.DateField(blank=True, null=True)
+    fecha_movimiento = models.DateField(blank=False, null=True)
     nombre_obra  = models.ForeignKey(Obra, blank=True, null=True, related_name='nombreObra')
     comentario = models.TextField(blank=True, null=True)
 
@@ -153,7 +153,7 @@ class MovimientoObra(TimeStampedModel):
 
 class MovimientoMaquinaria(TimeStampedModel):
     poblacion_mm = models.ForeignKey(Poblacion, blank=True, null=True, related_name='nombrePoblacion')
-    fecha_movimiento = models.DateField(blank=True, null=True)
+    fecha_movimiento = models.DateField(blank=False, null=True)
     comentario = models.TextField(blank=True, null=True)
 
     def __str__(self):

@@ -46,9 +46,9 @@
                         </td>
                         <td><a href="/panel/UPR/incidencias/{{ i.id }}/change/" target="_blank">{{ i.pk }}</a></td>
                         <td>{{ i.tipo_incidencias }}</td>
-                        <td>{{ i.numero_inventario }}</td>
+                        <td>{{ i.maquina.numero_inventario }}</td>
                         <td>
-                            <small>{{ i.fecha }} {% if i.fechaCerrado != None %}| <b style="color: lime">{{ i.fechaCerrado }}</b>{% endif %}</small></td>
+                            <small>{{ i.fecha }} {% if i.fechaCerrado != None %}<br> <span style="color: lime">{{ i.fechaCerrado }}</span>{% endif %}</small></td>
                         <td>{{ i.comentario }}</td>
                         <td style="width: 10%">
                             {% if i.mantenimientos != None %}

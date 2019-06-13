@@ -115,8 +115,8 @@ class Componentes(TimeStampedModel):
 
 class Incidencias(TimeStampedModel):
     tipo_incidencias = models.ForeignKey(Componentes, blank=True, null=True, related_name='tipo_componente')
-    fecha = models.DateField(blank=True, null=True)
-    fechaCerrado = models.DateField(blank=True, null=True)
+    fecha = models.DateField(blank=False, null=True)
+    fechaCerrado = models.DateField(blank=False, null=True)
     cerrado = models.BooleanField(default=True)
     taller = models.BooleanField(default=False)
     comentario = models.TextField(blank=True, null=True)

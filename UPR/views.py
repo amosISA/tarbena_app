@@ -15,6 +15,7 @@ from .forms import MaquinaIncidenciasForm, MovimientoMaquinariaForm, MovimientoO
 @login_required()
 def index_maquinas(request):
     maquinas = Maquina.objects.filter(capataz_responsable=request.user.id)
+
     desbro = Maquina.objects.filter(tipo_maquina='3')
     moto261 = Maquina.objects.filter(tipo_maquina='5')
     moto241 = Maquina.objects.filter(tipo_maquina='4')
@@ -30,11 +31,11 @@ def index_maquinas(request):
     #mostramos las máquinas pertenecientes a la obra 0748241
     #también mostramos cada tipo de máquina de esta obra
     numMaquinaObra0748241 = Maquina.objects.filter(obra='1').count()
-    numDesbro_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="3").count()
-    numMoto241_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="4").count()
-    numMoto261_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="5").count()
-    numMoto101_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="1").count()
-    numMoto103_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina="2").count()
+    numDesbro_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='3').count()
+    numMoto241_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='4').count()
+    numMoto261_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='5').count()
+    numMoto101_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='1').count()
+    numMoto103_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='2').count()
 
     ubicacion = Maquina.objects.all()
     cerrado = Maquina.objects.filter(incidencias__cerrado=False)
@@ -96,20 +97,36 @@ def maquina_detail(request, ninventario):
                    'movimientosObra' : movimientosObra
                    })
 
+# --------------- Componente Details --------------- #
+# /upr/componente/23/
+
+def componente_detail(request, ncomponente):
+
+    incidencias = Incidencias.objects.all().filter(cerrado=False).filter(tipo_incidencias=ncomponente).order_by('-created')[:100]
+
+    return render(request,
+                  'UPR/componente.html',
+                  {'incidencias': incidencias,
+                   })
 
 # --------------- ultimas incidencias --------------- #
 # /upr/ultimasincidencias/
 def ultimas_incidencias(request):
+    incidencias = Incidencias.objects.all().order_by('-created')[:100]
     maquina = Maquina.objects.all()
-    objetos = maquina.filter(incidencias='')
-
-    #ultimas_incidencias = Incidencias.objects.order_by('fecha')
-    #incidencias = Incidencias.all()
-
-    return render(
+    return render(request,
                   'UPR/ultimasincidencias.html',
-                  {'objetos': objetos
-                   })
+                  {'incidencias': incidencias,
+                   'maquina': maquina})
+
+# --------------- protector_cuchilla --------------- #
+# /upr/protectorcuchilla/
+def protector_cuchilla(request):
+    incidencias = Incidencias.objects.all().filter(cerrado=False).filter(tipo_incidencias=6).order_by('-created')[:100]
+
+    return render(request,
+                  'UPR/protectorcuchilla.html',
+                  {'incidencias': incidencias,})
 
 
 

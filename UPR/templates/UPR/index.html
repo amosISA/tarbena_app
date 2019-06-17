@@ -114,7 +114,7 @@
                     <td></td>
                     <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
                     <td>{{ o.tipo_maquina}}</td>
-                    <td>{{ o.poblacion_mm}}</td>
+                    <td>{{ o.maquina_poblacion.pk }} ..</td>
                     <td>{{ o.capataz_responsable}}</td>
                     <td>{{ o.maquina_poblacion.poblacion_mm.id}}, {{ o.incidencias.cerrado}}</td>
                     <td></td>

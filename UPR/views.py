@@ -15,6 +15,7 @@ from .forms import MaquinaIncidenciasForm, MovimientoMaquinariaForm, MovimientoO
 @login_required()
 def index_maquinas(request):
     maquinas = Maquina.objects.filter(capataz_responsable=request.user.id)
+
     desbro = Maquina.objects.filter(tipo_maquina='3')
     moto261 = Maquina.objects.filter(tipo_maquina='5')
     moto241 = Maquina.objects.filter(tipo_maquina='4')

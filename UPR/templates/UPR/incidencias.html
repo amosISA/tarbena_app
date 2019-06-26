@@ -51,6 +51,7 @@
 
                     <div class="row with-margin">{{ form.tipo_incidencias }}</div>
                     <div class="row with-margin">
+                        {{ form.tipo_comentario }}
 
 
                     </div>
@@ -72,7 +73,9 @@
                         </div>
                     </div>
 
-                    <div class="row with-margin">{{ form.comentario }}</div>
+                    <div class="row with-margin">
+                        <textarea id="id_tipo_comentario" rows="5" cols="100"></textarea>
+                        {{ form.comentario }}</div>
                     <div class="row with-margin">{{ form.mantenimientos }}</div>
                     <div class="row with-margin">
                         <input type="submit" value="Crear incidencia" class="btn btn-primary"/>
@@ -109,8 +112,37 @@
                         $.each(data, function(key, value){
                             var componente = value.fields['tipo_componentes'];
                             var componente_id = value.pk;
-                            $('#id_tipo_incidencias').append('<option value="' + componente_id + '">' + componente + '</option>');
-                            //console.log(componente + "  // ID: " + componente_id);
+                            var comentario = value.fields['tipo_comentario'];
+                            $('#id_tipo_incidencias').append('<option value="' + componente_id + '">' + componente_id + '-' + componente + '</option>');
+                            $('#id_tipo_comentario').html("del select 1: " + comentario + "id: " + componente_id);
+                            console.log("consulta 1: " + componente + " // ID: " + componente_id + " comentario: " + comentario);
+                        });
+                    }
+                });
+            });
+
+// para que aparezca el tipo_incidencias en el textarea
+
+            $('#id_tipo_incidencias').change(function() {
+                var tipo_comentario_id = $(this).val();
+                console.log("consulta 2: // ID: " + tipo_comentario_id);
+                var tipo_comentario_url = '{% url "upr:get_components_by_tipo_comentario" %}';
+                $.ajax({
+                    type: "GET",
+                    url: tipo_comentario_url,
+                    data: {
+                        'tipo_comentario_id': tipo_comentario_id,
+                    },
+                    success: function (data) {
+                        $('#id_tipo_comentario').html('');
+                        $.each(data, function(key, value){
+                            var comentario = value.fields['tipo_comentario'];
+                            var comentario_id = value.pk;
+                            console.log("data: " + data)
+                            console.log("consulta 3: la variable comentario  id " + tipo_comentario_id + ",valor: " + comentario );
+                            $('#id_tipo_comentario').html("id: " + comentario_id + " y lo que dice el comentario" + comentario);
+                            console.log("estoy en url" + tipo_comentario_url);
+                           // console.log(comentario + "  // ID: " + comentario_id);
                         });
                     }
                 });

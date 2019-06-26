@@ -15,7 +15,7 @@ from .forms import MaquinaIncidenciasForm, MovimientoMaquinariaForm, MovimientoO
 @login_required()
 def index_maquinas(request):
     maquinas = Maquina.objects.filter(capataz_responsable=request.user.id)
-
+    poblacion = MovimientoMaquinaria.objects.all()
     desbro = Maquina.objects.filter(tipo_maquina='3')
     moto261 = Maquina.objects.filter(tipo_maquina='5')
     moto241 = Maquina.objects.filter(tipo_maquina='4')
@@ -31,15 +31,14 @@ def index_maquinas(request):
     #mostramos las máquinas pertenecientes a la obra 0748241
     #también mostramos cada tipo de máquina de esta obra
     numMaquinaObra0748241 = Maquina.objects.filter(obra='1').count()
-    numDesbro_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='3').count()
-    numMoto241_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='4').count()
-    numMoto261_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='5').count()
-    numMoto101_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='1').count()
-    numMoto103_0748241 = Maquina.objects.filter(obra='1').filter(tipo_maquina='2').count()
+    numDesbro_0748241 = Maquina.objects.filter(obra__id=1).filter(tipo_maquina='3').count()
+    numMoto241_0748241 = Maquina.objects.filter(obra__id=2).filter(tipo_maquina='4').count()
+    numMoto261_0748241 = Maquina.objects.filter(obra__id=3).filter(tipo_maquina='5').count()
+    numMoto101_0748241 = Maquina.objects.filter(obra__id=1).filter(tipo_maquina='1').count()
+    numMoto103_0748241 = Maquina.objects.filter(obra__id=1).filter(tipo_maquina='2').count()
 
     ubicacion = Maquina.objects.all()
     cerrado = Maquina.objects.filter(incidencias__cerrado=False)
-
 
 
     # movimientos = Maquina.maquina_poblacion.poblacion_mm.order_by('-fecha_movimiento')[0]
@@ -67,7 +66,9 @@ def index_maquinas(request):
                    'numMoto261_0748241': numMoto261_0748241,
                    'numMoto101_0748241': numMoto101_0748241,
                    'numMoto103_0748241': numMoto103_0748241,
-                   'cerrado' : cerrado})
+                   'cerrado' : cerrado,
+                   'poblacion' : poblacion,
+                   })
 
 # --------------- Maquina Details --------------- #
 # /upr/maquina/721721/
@@ -100,13 +101,26 @@ def maquina_detail(request, ninventario):
 # --------------- Componente Details --------------- #
 # /upr/componente/23/
 
-def componente_detail(request, ncomponente):
+def componente_detail(request, ncomponente, ecerrado, etaller):
 
-    incidencias = Incidencias.objects.all().filter(cerrado=False).filter(tipo_incidencias=ncomponente).order_by('-created')[:100]
+    incidencias = Incidencias.objects.all().filter(cerrado=ecerrado).filter(taller=etaller).filter(tipo_incidencias=ncomponente).order_by('fecha')[:100]
+    nIncidencias = incidencias.count()
+    grupos_componentes = GrupoComponentes.objects.all().order_by('position_grupo_componentes')
+    form = MaquinaIncidenciasForm(request.POST or None, request.FILES or None)
+
+    if request.method == "POST":
+        if form.is_valid():
+            messages.success(request, "Incidencia creada.")
+            return HttpResponseRedirect(reverse('upr:componente_detail', kwargs={'ncomponente': form['tipo_incidencias'].value(), 'ecerrado': form['cerrado'].value(), 'etaller': form['taller'].value()}))
+        else:
+            messages.error(request, "Error creando la incidencia.")
 
     return render(request,
                   'UPR/componente.html',
                   {'incidencias': incidencias,
+                   'grupos_componentes': grupos_componentes,
+                   'form': form,
+                   'nIncidencias': nIncidencias,
                    })
 
 # --------------- ultimas incidencias --------------- #
@@ -172,6 +186,12 @@ def get_components_by_group(request):
     data = serializers.serialize('json', componentes)
     return HttpResponse(data, content_type="application/json")
 
+# --------------- Ajax: Get all componentes from a specific Component --------------- #
+def get_components_by_tipo_comentario(request):
+    tipo_comentario_id = request.GET.get('tipo_comentario_id', '0')
+    comentario = Componentes.objects.all().filter(tipo_componente=tipo_comentario_id)
+    data = serializers.serialize('json', comentario)
+    return HttpResponse(data, content_type="application/json")
 
 # --------------- Add_Ubicacion --------------- #
 def add_ubicacion(request, ninventario):

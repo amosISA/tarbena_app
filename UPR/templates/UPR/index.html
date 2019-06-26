@@ -85,7 +85,13 @@
 
                     </tr>
                     <tr class="lineaTR"><td></td><td></td></tr>
-                    <tr><td colspan="2"><a href="/upr/ultimasincidencias/">Últimas incidencias</a></td> </tr>
+                    <tr><td colspan="2">
+                        <br>
+                        <a href="/upr/ultimasincidencias/"><i class="fas fa-sort-amount-up"></i> Últimas incidencias</a><br>
+                        <a href="/upr/componente/0/False/False/"><i class="fas fa-filter"></i> Filtrado de incidencias</a>
+
+                    </td> </tr>
+
                 </table>
 
 
@@ -114,9 +120,9 @@
                     <td></td>
                     <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
                     <td>{{ o.tipo_maquina}}</td>
-                    <td>{{ o.maquina_poblacion.pk }} ..</td>
+                    <td>{{ o.obra }} .. {{ o.maquina_poblacion }}</td>
                     <td>{{ o.capataz_responsable}}</td>
-                    <td>{{ o.maquina_poblacion.poblacion_mm.id}}, {{ o.incidencias.cerrado}}</td>
+                    <td>{{ o.maquina_poblacion}}, {{ o.incidencias }}</td>
                     <td></td>
                 </tr>
                 {% endfor %}
@@ -127,7 +133,7 @@
                     <td></td>
                     <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
                     <td>{{ o.tipo_maquina}}</td>
-                    <td>{{ o.poblacion_mm}}</td>
+                    <td>{{ o.poblacion.pk }} .ddd </td>
                     <td>{{ o.capataz_responsable}}</td>
                     <td>{{ o.poblacion}}</td>
                     <td></td>

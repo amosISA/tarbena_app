@@ -14,35 +14,65 @@
     <div class="container" style="margin-top:100px;">
         <div class="row justify-content-md-center">
         <div class="col-lg-4 col-xs-12">
-                <h3>{{ maquina.tipo_maquina}} <a href="/panel/UPR/maquina/{{ maquina.id }}/change/" target="_blank"><i class="far fa-edit"></i></a></h3>
 
-                <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
 
-                <table width="100%" class="text-right menuDetalles">
+
+                <table width="80%" class="text-center menuDetalles" style="text-align: center;">
                     <tr class="lineaTR">
-                        <td width="50%">NÚMERO SERIE:</td>
-                        <td>{{ maquina.numero_serie }}</td>
-                    </tr>
-                    <tr class="lineaTR">
-                        <td>FECHA COMPRA:</td>
-                        <td>{{ maquina.fecha_compra}}</td>
-                    </tr>
-                    <tr class="lineaTR">
-                        <td>CAPATAZ RESPONSABLE:</td>
-                        <td>{{ maquina.capataz_responsable}}</td>
+
+                        <td>
+
+                            <form class="form-horizontal" method="post" enctype="multipart/form-data" action="">{% csrf_token %}
+                    {% if form.errors %}
+                        <div class="ag_form_login_message_error">
+                            {% for field,error in form.errors.items %}
+                                {{ field|capfirst }} - {{ error|striptags }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="row with-margin">{{ form.tipo_incidencias }}</div>
+                    <div class="row with-margin">
+
+
+                    </div>
+
+
+
+                    <div class="row with-margin">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text custom-control custom-switch">
+                                    {{ form.cerrado }}
+                                    <label for="id_cerrado">cerrado</label>
+                                </div>
+                                <div class="input-group-text custom-control custom-switch">
+                                    {{ form.taller }}
+                                    <label for="id_taller">taller</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row with-margin">
+                        <input type="hidden" name="fecha" value="10/06/2019">
+                        <input type="submit" value="Consultar componente" class="btn btn-primary"/>
+                    </div>
+                    <div>
+                        {% for m in mantenimiento_maquinaria %}
+                        {{ m.fecha_movimiento }<br>
+
+                        {% endfor %}
+
+                    </div>
+                </form>
+
+                        </td>
                     </tr>
                 </table>
-<!-- Ubicación y Obra -->
-                <table class="text-right menuDetalles" style="margin-top: 50px; width: 100%;">
-                    <tr class="lineaTR" style="boder-top: 5px solid">
-                        <td valign="top"></td>
-                        <td align="right"></td>
-                    </tr>
-                     <tr class="lineaTR">
-                        <td valign="top"></td>
-                        <td align="right"></td>
-                    </tr>
-                </table>
+
             </div>
         <div class="col-lg-8">
             <h2>COMPONENTES | <input id="myInput" type="text" placeholder=""></h2>
@@ -90,6 +120,10 @@
                         </td>
 </tr>
             {% endfor %}
+            <tr>
+                <td colspan="8">total incidencias: <b>{{ nIncidencias }}</b></td>
+            </tr>
+
 
         </div>
     </div>
@@ -109,6 +143,10 @@
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
+
+    $('#id_cerrado').prop('checked', false);
+    $("#id_tipo_incidencias option:first").val('1');
+
     });
 </script>
 {% endblock %}

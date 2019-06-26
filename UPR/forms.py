@@ -28,6 +28,9 @@ class ComponentesForm(forms.ModelForm):
     class Meta:
         model = Componentes
         fields = ["tipo_componentes"]
+     #   widgets = {
+     #       'tipo_comentario': forms.Textarea(attrs={'class': 'form-control', 'disable': 'disabled'}),
+     #   }
 
 # formluarios para Ubicacion | MovimientoMaquinaria
 

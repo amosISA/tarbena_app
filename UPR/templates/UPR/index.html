@@ -115,14 +115,27 @@
                 <tbody id="tablaHome">
 <!-- Mis Maquinas -->
                 <tr><td colspan="7"><h3>Mis Máquinas</h3></td></tr>
+
+
                 {% for o in maquinas %}
                 <tr>
                     <td></td>
                     <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
                     <td>{{ o.tipo_maquina}}</td>
-                    <td>{{ o.obra }} .. {{ o.maquina_poblacion }}</td>
+                    <td>
+                        {% for maquina_poblacion in o.maquina_poblacion.all %}
+                            {{ maquina_poblacion.poblacion_mm }}<br>
+                        {% endfor %}
+                    </td>
+
                     <td>{{ o.capataz_responsable}}</td>
-                    <td>{{ o.maquina_poblacion}}, {{ o.incidencias }}</td>
+                    <td>
+                        {% for incidencias in o.incidencias.all %}
+                            {% if incidencias.cerrado == False %}
+                                <small>{{ incidencias.fecha }}</small> - {{ incidencias.tipo_incidencias }}<br>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
                     <td></td>
                 </tr>
                 {% endfor %}
@@ -135,7 +148,13 @@
                     <td>{{ o.tipo_maquina}}</td>
                     <td>{{ o.poblacion.pk }} .ddd </td>
                     <td>{{ o.capataz_responsable}}</td>
-                    <td>{{ o.poblacion}}</td>
+                    <td>
+                        {% for incidencias in o.incidencias.all %}
+                            {% if incidencias.cerrado == False %}
+                                <small>{{ incidencias.fecha }}</small> - {{ incidencias.tipo_incidencias }}<br>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
                     <td></td>
                 </tr>
                 {% endfor %}
@@ -148,7 +167,13 @@
                     <td>{{ o.tipo_maquina}}</td>
                     <td>{{ o.poblacion_mm}}</td>
                     <td>{{ o.capataz_responsable}}</td>
-                    <td>{{ o.poblacion}}</td>
+                    <td>
+                        {% for incidencias in o.incidencias.all %}
+                            {% if incidencias.cerrado == False %}
+                                <small>{{ incidencias.fecha }}</small> - {{ incidencias.tipo_incidencias }}<br>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
                     <td></td>
                 </tr>
                 {% endfor %}
@@ -161,7 +186,13 @@
                     <td>{{ o.tipo_maquina}}</td>
                     <td>{{ o.poblacion_mm}}</td>
                     <td>{{ o.capataz_responsable}}</td>
-                    <td>{{ o.poblacion}}</td>
+                    <td>
+                        {% for incidencias in o.incidencias.all %}
+                            {% if incidencias.cerrado == False %}
+                                <small>{{ incidencias.fecha }}</small> - {{ incidencias.tipo_incidencias }}<br>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
                     <td></td>
                 </tr>
                 {% endfor %}
@@ -174,7 +205,13 @@
                     <td>{{ o.tipo_maquina}}</td>
                     <td>{{ o.poblacion_mm}}</td>
                     <td>{{ o.capataz_responsable}}</td>
-                    <td>{{ o.poblacion}}</td>
+                    <td>
+                        {% for incidencias in o.incidencias.all %}
+                            {% if incidencias.cerrado == False %}
+                                <small>{{ incidencias.fecha }}</small> - {{ incidencias.tipo_incidencias }}<br>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
                     <td></td>
                 </tr>
                 {% endfor %}
@@ -187,7 +224,13 @@
                     <td>{{ o.tipo_maquina}}</td>
                     <td>{{ o.poblacion_mm}}</td>
                     <td>{{ o.capataz_responsable}}</td>
-                    <td>{{ o.poblacion}}</td>
+                    <td>
+                        {% for incidencias in o.incidencias.all %}
+                            {% if incidencias.cerrado == False %}
+                                <small>{{ incidencias.fecha }}</small> - {{ incidencias.tipo_incidencias }}<br>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
                     <td></td>
                 </tr>
                 {% endfor %}

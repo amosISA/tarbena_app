@@ -15,7 +15,7 @@ from .forms import MaquinaIncidenciasForm, MovimientoMaquinariaForm, MovimientoO
 @login_required()
 def index_maquinas(request):
     maquinas = Maquina.objects.filter(capataz_responsable=request.user.id)
-    poblacion = MovimientoMaquinaria.objects.all()
+    poblacion = MovimientoMaquinaria.objects.all()[:1]
     desbro = Maquina.objects.filter(tipo_maquina='3')
     moto261 = Maquina.objects.filter(tipo_maquina='5')
     moto241 = Maquina.objects.filter(tipo_maquina='4')
@@ -31,11 +31,12 @@ def index_maquinas(request):
     #mostramos las máquinas pertenecientes a la obra 0748241
     #también mostramos cada tipo de máquina de esta obra
     numMaquinaObra0748241 = Maquina.objects.filter(obra='1').count()
-    numDesbro_0748241 = Maquina.objects.filter(obra__id=1).filter(tipo_maquina='3').count()
-    numMoto241_0748241 = Maquina.objects.filter(obra__id=2).filter(tipo_maquina='4').count()
-    numMoto261_0748241 = Maquina.objects.filter(obra__id=3).filter(tipo_maquina='5').count()
-    numMoto101_0748241 = Maquina.objects.filter(obra__id=1).filter(tipo_maquina='1').count()
-    numMoto103_0748241 = Maquina.objects.filter(obra__id=1).filter(tipo_maquina='2').count()
+    numDesbro_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='3').count()
+    numMoto241_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='4').count()
+    numMoto261_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='5').count()
+    numMoto101_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='1').count()
+    numMoto103_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='2').count()
+
 
     ubicacion = Maquina.objects.all()
     cerrado = Maquina.objects.filter(incidencias__cerrado=False)
@@ -126,7 +127,7 @@ def componente_detail(request, ncomponente, ecerrado, etaller):
 # --------------- ultimas incidencias --------------- #
 # /upr/ultimasincidencias/
 def ultimas_incidencias(request):
-    incidencias = Incidencias.objects.all().order_by('-created')[:100]
+    incidencias = Incidencias.objects.all().order_by('-updated')[:100]
     maquina = Maquina.objects.all()
     return render(request,
                   'UPR/ultimasincidencias.html',

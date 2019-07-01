@@ -173,10 +173,13 @@ class Maquina(TimeStampedModel):
     capataz_responsable = models.ForeignKey(User, blank=True, null=True, limit_choices_to={'groups__name': "UPR"})
     maquina_poblacion = models.ManyToManyField(MovimientoMaquinaria, blank=True, related_name='nombre_poblacion')
     obra = models.ManyToManyField(MovimientoObra, blank=True, related_name='rel_nombre_obra')
+
     def __str__(self):
-        return '{}'.format(self.numero_inventario)
+        return '{0}, {1}'.format(self.numero_inventario, self.maquina_poblacion)
 
-
+ #    def display_obra(self):
+  #          return ', '.join([ obra.name for obra in self.obra.all()[:1] ])
+   #     display_genre.short_description = 'MovimientoObra'
 
 # este modelo crea la tabla donde añadimos las incidencias que han sido realizadas bajo una bateria de pruebas de un mantenimiento programado
 class MantenimientoMaquinaria(TimeStampedModel):

@@ -123,9 +123,11 @@
                     <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
                     <td>{{ o.tipo_maquina}}</td>
                     <td>
+                        <ul class="primeraPoblacion">
                         {% for maquina_poblacion in o.maquina_poblacion.all %}
-                            {{ maquina_poblacion.poblacion_mm }}<br>
+                            <li>{{ maquina_poblacion.poblacion_mm.nombre }}</li>
                         {% endfor %}
+                        </ul>
                     </td>
 
                     <td>{{ o.capataz_responsable}}</td>
@@ -146,7 +148,13 @@
                     <td></td>
                     <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
                     <td>{{ o.tipo_maquina}}</td>
-                    <td>{{ o.poblacion.pk }} .ddd </td>
+                    <td>
+                        <ul class="primeraPoblacion">
+                        {% for maquina_poblacion in o.maquina_poblacion.all %}
+                            <li>{{ maquina_poblacion.poblacion_mm.nombre }}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
                     <td>{{ o.capataz_responsable}}</td>
                     <td>
                         {% for incidencias in o.incidencias.all %}
@@ -165,7 +173,13 @@
                     <td></td>
                     <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
                     <td>{{ o.tipo_maquina}}</td>
-                    <td>{{ o.poblacion_mm}}</td>
+                    <td>
+                        <ul class="primeraPoblacion">
+                        {% for maquina_poblacion in o.maquina_poblacion.all %}
+                            <li>{{ maquina_poblacion.poblacion_mm.nombre }}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
                     <td>{{ o.capataz_responsable}}</td>
                     <td>
                         {% for incidencias in o.incidencias.all %}
@@ -184,7 +198,13 @@
                     <td></td>
                     <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
                     <td>{{ o.tipo_maquina}}</td>
-                    <td>{{ o.poblacion_mm}}</td>
+                    <td>
+                        <ul class="primeraPoblacion">
+                        {% for maquina_poblacion in o.maquina_poblacion.all %}
+                            <li>{{ maquina_poblacion.poblacion_mm.nombre }}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
                     <td>{{ o.capataz_responsable}}</td>
                     <td>
                         {% for incidencias in o.incidencias.all %}
@@ -203,7 +223,13 @@
                     <td></td>
                     <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
                     <td>{{ o.tipo_maquina}}</td>
-                    <td>{{ o.poblacion_mm}}</td>
+                    <td>
+                        <ul class="primeraPoblacion">
+                        {% for maquina_poblacion in o.maquina_poblacion.all %}
+                            <li>{{ maquina_poblacion.poblacion_mm.nombre }}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
                     <td>{{ o.capataz_responsable}}</td>
                     <td>
                         {% for incidencias in o.incidencias.all %}
@@ -222,7 +248,13 @@
                     <td></td>
                     <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
                     <td>{{ o.tipo_maquina}}</td>
-                    <td>{{ o.poblacion_mm}}</td>
+                    <td>
+                        <ul class="primeraPoblacion">
+                        {% for maquina_poblacion in o.maquina_poblacion.all %}
+                            <li>{{ maquina_poblacion.poblacion_mm.nombre }}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
                     <td>{{ o.capataz_responsable}}</td>
                     <td>
                         {% for incidencias in o.incidencias.all %}

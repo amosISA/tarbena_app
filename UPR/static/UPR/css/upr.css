@@ -69,3 +69,6 @@ div.comentario {    font-size: 70%;
     border-bottom: 1px solid #000;}
 
    .bloquePoblacion {border-top: 1px solid #ccc; padding-top: 10px;}
+
+.primeraPoblacion li {display: none;}
+.primeraPoblacion li:first-child {display: block;}

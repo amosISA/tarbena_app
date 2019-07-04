@@ -82,7 +82,7 @@ def maquina_detail(request, ninventario):
 
     componentes = Componentes.objects.all().filter(tipo_maquina=maquina.tipo_maquina)
     movimientos = maquina.maquina_poblacion.all().order_by('-fecha_movimiento')[:1]
-    incidencias = maquina.incidencias.all()
+    incidencias = Incidencias.objects.all()
     grupos_componentes = GrupoComponentes.objects.all()
     mantenimiento_maquinaria = MantenimientoMaquinaria.objects.all().filter(numero_maquina=maquina.id)
     movimientosObra = maquina.obra.all().order_by('-fecha_movimiento')[:1]
@@ -127,12 +127,13 @@ def componente_detail(request, ncomponente, ecerrado, etaller):
 # --------------- ultimas incidencias --------------- #
 # /upr/ultimasincidencias/
 def ultimas_incidencias(request):
-    incidencias = Incidencias.objects.all().order_by('-updated')[:100]
-
+    incidencias = Incidencias.maquina_incidencias.objects.all().order_by('-updated')[:100]
+    # relacion =  maquina_incidencias.objects.all()
     maquina = Maquina.objects.all().order_by('updated')[:100]
     return render(request,
                   'UPR/ultimasincidencias.html',
                   {'incidencias': incidencias,
+                   'relacion': relacion,
                    'maquina': maquina})
 
 # --------------- protector_cuchilla --------------- #
@@ -156,7 +157,6 @@ def add_incidencia(request, ninventario):
 
     grupos_componentes = GrupoComponentes.objects.all().order_by('position_grupo_componentes')
     componentes = Componentes.objects.all().filter(grupo_componentes__id=1)
-    todosComponentes = Componentes.objects.select_related('grupo_componentes').prefetch_related('tipo_maquina','opciones_componente')
     print(componentes)
 
     if request.method == "POST":
@@ -179,8 +179,7 @@ def add_incidencia(request, ninventario):
               {'maquina': maquina,
                'ninventario': ninventario,
                'grupos_componentes': grupos_componentes,
-               'form': form,
-               'todosComponentes': todosComponentes
+               'form': form
                })
 
 # --------------- Ajax: Get all componentes from a specific Group --------------- #

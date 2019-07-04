@@ -11,11 +11,7 @@
 
 {% block content %}
     <div class="container" style="margin-top:100px;">
-        <div class="row justify-content-md-center">
-        <div class="col-lg-3 col-xs-12">
-            select de los encargados
-        </div>
-            <div class="col-lg-9 col-xs-12">
+        <div class="col-12">
             <h2>INCIDENCIAS | <input id="myInput" type="text" placeholder=""></h2>
             <table class="table table-striped" cellspacing="0" width="100%">
                 <thead>
@@ -50,13 +46,7 @@
                         </td>
                         <td><a href="/panel/UPR/incidencias/{{ i.id }}/change/" target="_blank">{{ i.pk }}</a></td>
                         <td>{{ i.tipo_incidencias }}</td>
-                        <td>
-                            {{ i.maquina.numero_inventario }}
-                            {% for maquina_id in i.maquina_incidencias.all %}
-
-                                -- {{ maquina.id }} --
-                            {% endfor %}
-                        </td>
+                        <td>{{ i.maquina.numero_inventario }}</td>
                         <td>
                             <small>{{ i.fecha }} {% if i.fechaCerrado != None %}<br> <span style="color: lime">{{ i.fechaCerrado }}</span>{% endif %}</small></td>
                         <td>{{ i.comentario }}</td>
@@ -68,7 +58,6 @@
 </tr>
             {% endfor %}
 
-        </div>
         </div>
     </div>
 <div>

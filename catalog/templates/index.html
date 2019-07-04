@@ -13,6 +13,17 @@
     <li><strong>Copies:</strong> {{ num_instances }}</li>
     <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
     <li><strong>Authors:</strong> {{ num_authors }}</li>
+      <li><strong>Géneros:</strong> {{ num_genre }}.
+      {% for l in list_genre %}
+          {{ l.name }},
+          {% endfor %}
+      </li>
   </ul>
+
+{% for l in libros_castillo %}
+
+    {{ l.title }} - {{ l.author }}
+{% endfor %}
+
 
 {% endblock %}

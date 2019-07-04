@@ -16,24 +16,6 @@
                 <h3>{{ maquina.tipo_maquina}} <a href="/upr/maquina/{{ maquina.numero_inventario }}/"><i class="fas fa-arrow-circle-left"></i></a></h3>
                 <div></div>
                 <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
-                <ul>
-                    {% for t in todosComponentes %}
-                        <li>{{ t.tipo_componentes }}<br>
-                            <b>descripción</b>:<br>{{ t.tipo_comentario }}<br>
-                            <b>maquinas</b>:<br>
-                            {% for tipo_maquina in t.tipo_maquina.all %}
-                                {{ tipo_maquina.tipo }}<br>
-                            {% endfor %}
-                            <b>opciones de estado</b>:<br>
-                            {% for opciones_componente in t.opciones_componente.all %}
-                                {{ opciones_componente.nombre }}<br>
-                            {% endfor %}
-                            <b>grupo componentes:</b><br>
-                            {{ t.grupo_componentes.tipo_grupo_componentes }}</li>
-                    {% endfor %}
-                    <li></li>
-
-                </ul>
             </div>
             <div class="col-lg-4 col-xs-12">
                 <h2>AÑADIR INCIDENCIA</h2>
@@ -70,7 +52,11 @@
                     <div class="row with-margin">{{ form.tipo_incidencias }}</div>
                     <div class="row with-margin">
                         {{ form.tipo_comentario }}
+
+
                     </div>
+
+
                     <div class="row with-margin">{{ form.fecha }}</div>
                     <div class="row with-margin">
                         <div class="input-group mb-3">

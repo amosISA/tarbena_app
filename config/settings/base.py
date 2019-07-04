@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'luz',
     'django_cleanup.apps.CleanupConfig',
     'UPR',
+    'UPR2',
     'catalog',
     #'pipeline',
 ]
@@ -116,6 +117,7 @@ TEMPLATES = [
                  os.path.join(BASE_DIR, 'museo/templates'),
                  os.path.join(BASE_DIR, 'luz/templates'),
                  os.path.join(BASE_DIR, 'UPR/templates'),
+                 os.path.join(BASE_DIR, 'UPR2/templates'),
                  os.path.join(BASE_DIR, 'catalog/templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -189,6 +191,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "museo/static"),
     os.path.join(BASE_DIR, "luz/static"),
     os.path.join(BASE_DIR, "UPR/static"),
+    os.path.join(BASE_DIR, "UPR2/static"),
     os.path.join(BASE_DIR, "catalog/static"),
     os.path.join(BASE_DIR, "static"),
 ]

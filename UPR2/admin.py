@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Maquina, TipoMaquina, Componentes, Incidencias, GrupoComponentes, Poblacion, Comarca, Provincia, MovimientoMaquinaria, RevisionesTemporada, Obra, MantenimientoMaquinaria, MovimientoObra, OpcionesComponente
+from .models import Maquina, TipoMaquina, Componentes, Incidencias, GrupoComponentes, Poblacion, Comarca, Provincia, MovimientoMaquinaria, RevisionesTemporada, Obra, MantenimientoMaquinaria, MovimientoObra
 
 
 ## POBLACIONES, COMARCAS Y PROVINCIAS
@@ -141,8 +141,3 @@ class MovimientoObraAdmin(admin.ModelAdmin):
     list_display_links = ('nombre_obra',)
     show_full_result_count = True
 admin.site.register(MovimientoObra, MovimientoObraAdmin)
-
-class OpcionesComponenteAdmin(admin.ModelAdmin):
-    list_display = ('nombre',)
-    list_display_links = ('nombre',)
-admin.site.register(OpcionesComponente, OpcionesComponenteAdmin)

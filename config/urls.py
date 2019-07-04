@@ -86,7 +86,13 @@ urlpatterns = [
     # FAQ
     url(r'^faq/', views.faq, name='faq'),
     url(r'^upr/', include('UPR.urls', namespace='upr')),
+    url(r'^upr2/', include('UPR2.urls', namespace='upr2')),
     url(r'^catalog/', include('catalog.urls', namespace='catalog'))
+]
+
+from django.views.generic import RedirectView
+urlpatterns += [
+    url('', RedirectView.as_view(url='/catalog/', permanent=True)),
 ]
 
 if settings.DEBUG:

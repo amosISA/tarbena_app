@@ -34,35 +34,32 @@
 <!-- Mis Maquinas -->
                 <tr><td colspan="8"><h3>Últimas incidencias</h3></td></tr>
 
+HOHAOHAHOAHOAHOAHOAHOAOAHAOHAOHAOHAOHAOHAOH
 
-
-                    {% for i in incidencias %}
+                    {% for m in maquina %}
                 <tr>
                         <td>
-                            {% if i.cerrado == False %}
+                            {% if m.incidencias.cerrado == False %}
                                 <i class="fas fa-exclamation-triangle" style="color: red"></i>
                             {% endif %}
                         </td>
                         <td>
-                            {% if i.taller == True %}
+                            {% if m.incidencias.taller == True %}
                                 <i class="fas fa-tools" style="color: red"></i>
                             {% endif %}
                         </td>
-                        <td><a href="/panel/UPR/incidencias/{{ i.id }}/change/" target="_blank">{{ i.pk }}</a></td>
-                        <td>{{ i.tipo_incidencias }}</td>
+                        <td><a href="/panel/UPR/incidencias/{{ m.id }}/change/" target="_blank">{{ m.pk }}</a></td>
+                        <td>{{ m.incidencias.tipo_incidencias }}</td>
                         <td>
-                            {{ i.maquina.numero_inventario }}
-                            {% for maquina_id in i.maquina_incidencias.all %}
+                            {{ m.numero_inventario }}
 
-                                -- {{ maquina.id }} --
-                            {% endfor %}
                         </td>
                         <td>
-                            <small>{{ i.fecha }} {% if i.fechaCerrado != None %}<br> <span style="color: lime">{{ i.fechaCerrado }}</span>{% endif %}</small></td>
-                        <td>{{ i.comentario }}</td>
+                            <small>{{ m.incidencias.fecha }} {% if m.incidencias.fechaCerrado != None %}<br> <span style="color: lime">{{ m.incidencias.fechaCerrado }}</span>{% endif %}</small></td>
+                        <td>{{ m.incidencias.comentario }}</td>
                         <td style="width: 10%">
-                            {% if i.mantenimientos != None %}
-                            <small>{{ i.mantenimientos }}</small>
+                            {% if m.incidencias.mantenimientos != None %}
+                            <small>{{ m.incidencias.mantenimientos }}</small>
                             {% endif %}
                         </td>
 </tr>

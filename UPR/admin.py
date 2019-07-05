@@ -89,8 +89,8 @@ class ComponentesAdmin(admin.ModelAdmin):
 admin.site.register(Componentes, ComponentesAdmin)
 
 class IncidenciasAdmin(admin.ModelAdmin):
-    list_display = ('tipo_incidencias','fecha','comentario',)
-    list_filter = ('tipo_incidencia', 'tipo_incidencia__tipo_maquina',)
+    list_display = ('tipo_incidencias','n_inventario','fecha','fechaCerrado','comentario',)
+    list_filter = ('tipo_incidencias__tipo_componentes',)
     search_fields = ('tipo_incidencias',)
     empty_value_display = '-'
     list_display_links = ('tipo_incidencias',)

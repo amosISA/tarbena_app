@@ -129,6 +129,7 @@ class Incidencias(TimeStampedModel):
     taller = models.BooleanField(default=False)
     comentario = models.TextField(blank=True, null=True)
     mantenimientos = models.ForeignKey(RevisionesTemporada, blank=True, null=True, related_name='tipo_mantenimiento')
+    n_inventario = models.CharField(max_length=6, blank=True, null=True)
 
     def __str__(self):
         return '{}'.format(self.tipo_incidencias)

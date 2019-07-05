@@ -75,7 +75,10 @@
 
                     <div class="row with-margin">
                         <textarea id="id_tipo_comentario" rows="5" cols="100" disabled></textarea>
-                        {{ form.comentario }}</div>
+                        {{ form.comentario }}
+
+                        <input value="{{ maquina.numero_inventario }}" type="hidden" name="n_inventario" autocomplete="off" maxlength="6" id="id_n_inventario" >
+                    </div>
                     <div class="row with-margin">{{ form.mantenimientos }}</div>
                     <div class="row with-margin">
                         <input type="submit" value="Crear incidencia" class="btn btn-primary"/>

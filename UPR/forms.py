@@ -11,7 +11,7 @@ from .models import GrupoComponentes, Componentes, Incidencias, MovimientoMaquin
 class MaquinaIncidenciasForm(forms.ModelForm):
     class Meta:
         model = Incidencias
-        fields = ["tipo_incidencias", "fecha", "cerrado", "taller", "comentario", "mantenimientos",]
+        fields = ["tipo_incidencias", "fecha", "cerrado", "taller", "comentario", "mantenimientos", "n_inventario"]
         widgets = {
             'tipo_incidencias': forms.Select(attrs={'class': 'form-control'}),
             'fecha': forms.TextInput(attrs={'class': 'form-control .fecha', 'autocomplete': 'off'}),

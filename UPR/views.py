@@ -30,7 +30,7 @@ def index_maquinas(request):
     numMoto103 = Maquina.objects.filter(tipo_maquina='2').count()
     #mostramos las máquinas pertenecientes a la obra 0748241
     #también mostramos cada tipo de máquina de esta obra
-    numMaquinaObra0748241 = Maquina.objects.filter(obra='1').count()
+    numMaquinaObra0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').count()
     numDesbro_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='3').count()
     numMoto241_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='4').count()
     numMoto261_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='5').count()

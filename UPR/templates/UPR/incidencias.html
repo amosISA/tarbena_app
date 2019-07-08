@@ -164,10 +164,19 @@
     </script>
     <script>
                 {% for t in todosComponentes %}
-                    var array{{t.pk}} = ['{{t.tipo_componentes}}', '{{t.tipo_comentario}}', [{% for tipo_maquina in t.tipo_maquina.all %}'{{tipo_maquina.tipo}}', {% endfor %}], [{% for opciones_componente in t.opciones_componente.all %} '{{opciones_componente.nombre}}', {% endfor %}], '{{t.grupo_componentes.tipo_grupo_componentes}}']
+                    var array{{t.pk}} = ['{{t.tipo_componentes}}', [{% for tipo_maquina in t.tipo_maquina.all %}'{{tipo_maquina.tipo}}', {% endfor %}], [{% for opciones_componente in t.opciones_componente.all %} '{{opciones_componente.nombre}}', {% endfor %}], '{{t.grupo_componentes.tipo_grupo_componentes}}']
                 {% endfor %}
-    alert(array4[0])
-    alert(array5[2][0])
-    alert(array6[3][2])
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#combo").change(function(){
+                var op = $(this).find("option:selected").val();
+                $('#id_tipo_comentario').html(op);
+            });
+        });
+</script>
+
     </script>
 {% endblock %}

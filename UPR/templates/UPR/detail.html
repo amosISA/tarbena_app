@@ -14,8 +14,12 @@
         <div class="row justify-content-md-center">
             <div class="col-lg-4 col-xs-12">
                 <h3>{{ maquina.tipo_maquina}} <a href="/panel/UPR/maquina/{{ maquina.id }}/change/" target="_blank"><i class="far fa-edit"></i></a></h3>
-
-                <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
+                {% if maquina.capataz_responsable|stringformat:"s" != request.user.username %}
+                    <h3 class="display-4 yellow">
+                {% else %}
+                    <h3 class="display-4 ">
+                {% endif %}
+                <small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
 
                 <table width="100%" class="text-right menuDetalles">
                     <tr class="lineaTR">

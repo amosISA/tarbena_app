@@ -8791,31 +8791,15 @@
   "pk": 402,
   "fields": {
     "created": "2019-05-31T10:56:58.205Z",
-    "updated": "2019-06-05T10:55:16.582Z",
+    "updated": "2019-07-08T10:17:11.544Z",
     "tipo_incidencias": 49,
-    "fecha": null,
-    "fechaCerrado": null,
-    "cerrado": false,
+    "fecha": "2019-05-21",
+    "fechaCerrado": "2019-07-08",
+    "cerrado": true,
     "taller": false,
-    "comentario": "No ok, rota debido a golpe",
+    "comentario": "Cambiado",
     "mantenimientos": 2,
-    "n_inventario": null
-  }
-},
-{
-  "model": "UPR.incidencias",
-  "pk": 403,
-  "fields": {
-    "created": "2019-05-31T10:57:31.340Z",
-    "updated": "2019-06-05T10:55:21.872Z",
-    "tipo_incidencias": 38,
-    "fecha": null,
-    "fechaCerrado": null,
-    "cerrado": false,
-    "taller": false,
-    "comentario": "Falta 1",
-    "mantenimientos": 2,
-    "n_inventario": null
+    "n_inventario": "771333"
   }
 },
 {
@@ -24707,6 +24691,22 @@
   }
 },
 {
+  "model": "UPR.incidencias",
+  "pk": 1437,
+  "fields": {
+    "created": "2019-07-08T10:45:06.327Z",
+    "updated": "2019-07-08T10:45:06.327Z",
+    "tipo_incidencias": 7,
+    "fecha": "2019-07-08",
+    "fechaCerrado": null,
+    "cerrado": true,
+    "taller": false,
+    "comentario": "Cambiado",
+    "mantenimientos": null,
+    "n_inventario": "769522"
+  }
+},
+{
   "model": "UPR.movimientoobra",
   "pk": 1,
   "fields": {
@@ -28293,13 +28293,14 @@
   "pk": 40,
   "fields": {
     "created": "2019-05-31T09:23:01.042Z",
-    "updated": "2019-07-02T06:36:47.380Z",
+    "updated": "2019-07-08T10:45:06.338Z",
     "numero_inventario": "769522",
     "numero_serie": "20170500106",
     "fecha_compra": "2017-12-01",
     "tipo_maquina": 3,
     "capataz_responsable": null,
     "incidencias": [
+      1437,
       1322,
       1329,
       1336,
@@ -28647,8 +28648,7 @@
       1071,
       405,
       404,
-      402,
-      403
+      402
     ],
     "maquina_poblacion": [
       76

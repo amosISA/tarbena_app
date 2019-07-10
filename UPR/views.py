@@ -11,12 +11,13 @@ from .models import Maquina, TipoMaquina, Componentes, Incidencias, MovimientoMa
 from .forms import MaquinaIncidenciasForm, MovimientoMaquinariaForm, MovimientoObraForm
 
 # Create your views here.
+
 # --------------- Maquina Index --------------- #
 @login_required()
 def index_maquinas(request):
-    maquinas = Maquina.objects.filter(capataz_responsable=request.user.id)
+    maquinas = Maquina.objects.filter(capataz_responsable=request.user.id).all()
     poblacion = MovimientoMaquinaria.objects.all()[:1]
-    desbro = Maquina.objects.filter(tipo_maquina='3')
+    desbro = Maquina.objects.filter(tipo_maquina='3').order_by('fecha_compra')
     moto261 = Maquina.objects.filter(tipo_maquina='5')
     moto241 = Maquina.objects.filter(tipo_maquina='4')
     moto101 = Maquina.objects.filter(tipo_maquina='1')
@@ -38,7 +39,6 @@ def index_maquinas(request):
     numMoto103_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='2').count()
 
 
-    ubicacion = Maquina.objects.all()
     cerrado = Maquina.objects.filter(incidencias__cerrado=False)
 
 
@@ -70,6 +70,69 @@ def index_maquinas(request):
                    'cerrado' : cerrado,
                    'poblacion' : poblacion,
                    })
+
+
+
+
+
+
+# --------------- inventario maquinas --------------- #
+@login_required()
+def inventario_maquinas(request):
+    maquinas = Maquina.objects.filter(capataz_responsable=request.user.id).all()
+    poblacion = MovimientoMaquinaria.objects.all()[:1]
+    desbro = Maquina.objects.filter(tipo_maquina='3').order_by('fecha_compra')
+    moto261 = Maquina.objects.filter(tipo_maquina='5')
+    moto241 = Maquina.objects.filter(tipo_maquina='4')
+    moto101 = Maquina.objects.filter(tipo_maquina='1')
+    moto103 = Maquina.objects.filter(tipo_maquina='2')
+    # número de máquinas según su tipo
+    numMaquina = Maquina.objects.count()
+    numDesbro = Maquina.objects.filter(tipo_maquina='3').count()
+    numMoto261 = Maquina.objects.filter(tipo_maquina='5').count()
+    numMoto241 = Maquina.objects.filter(tipo_maquina='4').count()
+    numMoto101 = Maquina.objects.filter(tipo_maquina='1').count()
+    numMoto103 = Maquina.objects.filter(tipo_maquina='2').count()
+    # mostramos las máquinas pertenecientes a la obra 0748241
+    # también mostramos cada tipo de máquina de esta obra
+    numMaquinaObra0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').count()
+    numDesbro_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='3').count()
+    numMoto241_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='4').count()
+    numMoto261_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='5').count()
+    numMoto101_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='1').count()
+    numMoto103_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='2').count()
+
+    cerrado = Maquina.objects.filter(incidencias__cerrado=False)
+
+    # movimientos = Maquina.maquina_poblacion.poblacion_mm.order_by('-fecha_movimiento')[0]
+    llegandoCerrado = Maquina.objects.select_related(
+        'tipo_maquina', 'capataz_responsable',
+    ).prefetch_related('incidencias')
+    return render(request,
+                  'UPR/inventario_maquinas.html',
+                  {'maquinas': maquinas,
+                   'desbro': desbro,
+                   'moto261': moto261,
+                   'moto241': moto241,
+                   'moto101': moto101,
+                   'moto103': moto103,
+                   'llegandoCerrado': llegandoCerrado,
+                   'numMaquina': numMaquina,
+                   'numMaquinaObra0748241': numMaquinaObra0748241,
+                   'numDesbro': numDesbro,
+                   'numMoto261': numMoto261,
+                   'numMoto241': numMoto241,
+                   'numMoto101': numMoto101,
+                   'numMoto103': numMoto103,
+                   'numDesbro_0748241': numDesbro_0748241,
+                   'numMoto241_0748241': numMoto241_0748241,
+                   'numMoto261_0748241': numMoto261_0748241,
+                   'numMoto101_0748241': numMoto101_0748241,
+                   'numMoto103_0748241': numMoto103_0748241,
+                   'cerrado': cerrado,
+                   'poblacion': poblacion,
+                   })
+
 
 # --------------- Maquina Details --------------- #
 # /upr/maquina/721721/

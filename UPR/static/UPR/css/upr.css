@@ -40,6 +40,13 @@ small.componente2 {
     padding: 3px;
     border-radius: 2px;
     }
+small.mono {
+font-family: monospace;
+font-size: 1rem;
+display: block;
+}
+span.fecha {font-family: trebuchet ms;
+    font-weight: 100;}
 
 
 .menuDetalles small {font-size: 65%;
@@ -70,7 +77,24 @@ div.comentario {    font-size: 70%;
 
    .bloquePoblacion {border-top: 1px solid #ccc; padding-top: 10px;}
 
+.primeraPoblacion {padding: 0;}
 .primeraPoblacion li {display: none; list-style-type: none; margin: 0; padding: 0}
 .primeraPoblacion li:first-child {display: block;}
 
+.enlaceMaquina {
+font-size: 1.5rem;
+line-height: 2rem;
+font-weight: 600;
+}
 .yellow {background-color: yellow;}
+
+
+.navlinks {display: inline-block;}
+.navlinks li {    margin: 10px 0px;
+    list-style: none;}
+.navlinks a {    background: beige;
+    padding: 0.3rem;
+    text-align: left;
+    border-radius: 2px;
+    display: block;}
+.navlinks i {margin: 3px 8px 3px 8px;}

@@ -85,19 +85,12 @@
 
                     </tr>
                     <tr class="lineaTR"><td></td><td></td></tr>
-                    <tr><td colspan="2">
-                        <br>
-                        <a href="/upr/ultimasincidencias/"><i class="fas fa-sort-amount-up"></i> Últimas incidencias</a><br>
-                        <a href="/upr/componente/0/False/False/"><i class="fas fa-filter"></i> Filtrado de incidencias</a>
-
-                    </td> </tr>
-
+                    <tr>
+                        <td colspan="2">
+                            {% include 'UPR/snippets/navlinks.html' %}
+                        </td>
+                    </tr>
                 </table>
-
-
-
-
-
             </div>
         <div class="col-8">
             <h2>MAQUINARIA | <input id="myInput" type="text" placeholder=""></h2>
@@ -105,10 +98,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nº inventario</th>
-                        <th>Tipo Máquina</th>
-                        <th>Ubicación</th>
-                        <th>Capataz responsable</th>
+                        <th>Maquina</th>
+                        <th>Ubicación y obra</th>
                         <th>avería</th>
                     </tr>
                 </thead>
@@ -120,150 +111,28 @@
                 {% for o in maquinas %}
                 <tr>
                     <td></td>
-                    <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
-                    <td>{{ o.tipo_maquina}}</td>
                     <td>
-                        <ul class="primeraPoblacion">
-                        {% for maquina_poblacion in o.maquina_poblacion.all %}
-                            <li>{{ maquina_poblacion.poblacion_mm.nombre }}</li>
-                        {% endfor %}
-                        </ul>
+                        <a class="enlaceMaquina" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
+                        <small class="mono">{{ o.tipo_maquina}}</small>
                     </td>
 
-                    <td>{{ o.capataz_responsable}}</td>
-                    <td>
-                        {% for incidencias in o.incidencias.all %}
-                            {% if incidencias.cerrado == False %}
-                                <small>{{ incidencias.fecha }}</small> - {{ incidencias.tipo_incidencias }}<br>
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td></td>
-                </tr>
-                {% endfor %}
-<!-- Husqvarna 555FRM -->
-                <tr><td colspan="7"><h3><a name="Husqvarna555">Husqvarna 555FRM</a></h3></td></tr>
-                {% for o in desbro %}
-                <tr>
-                    <td></td>
-                    <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
-                    <td>{{ o.tipo_maquina}}</td>
                     <td>
                         <ul class="primeraPoblacion">
                         {% for maquina_poblacion in o.maquina_poblacion.all %}
-                            <li>{{ maquina_poblacion.poblacion_mm.nombre }}</li>
+                            <li><i class="fas fa-map-marker-alt"></i> {{ maquina_poblacion.poblacion_mm.nombre }}</li>
+                        {% endfor %}
+                        {% for obra in o.obra.all %}
+                            <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
                         {% endfor %}
                         </ul>
                     </td>
-                    <td>{{ o.capataz_responsable}}</td>
                     <td>
                         {% for incidencias in o.incidencias.all %}
                             {% if incidencias.cerrado == False %}
-                                <small>{{ incidencias.fecha }}</small> - {{ incidencias.tipo_incidencias }}<br>
+                                <small class="componente">{{ incidencias.fecha }}</small>{{ incidencias.tipo_incidencias }}<br>
                             {% endif %}
                         {% endfor %}
                     </td>
-                    <td></td>
-                </tr>
-                {% endfor %}
-<!-- stihl 241 -->
-                <tr><td colspan="7"><h3><a name="Stihl241">Stihl 241</a></h3></td></tr>
-                {% for o in moto241 %}
-                <tr>
-                    <td></td>
-                    <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
-                    <td>{{ o.tipo_maquina}}</td>
-                    <td>
-                        <ul class="primeraPoblacion">
-                        {% for maquina_poblacion in o.maquina_poblacion.all %}
-                            <li>{{ maquina_poblacion.poblacion_mm.nombre }}</li>
-                        {% endfor %}
-                        </ul>
-                    </td>
-                    <td>{{ o.capataz_responsable}}</td>
-                    <td>
-                        {% for incidencias in o.incidencias.all %}
-                            {% if incidencias.cerrado == False %}
-                                <small>{{ incidencias.fecha }}</small> - {{ incidencias.tipo_incidencias }}<br>
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td></td>
-                </tr>
-                {% endfor %}
-<!-- stihl 261 -->
-                <tr><td colspan="7"><h3><a name="Stihl261">Stihl 261</a></h3></td></tr>
-                {% for o in moto261 %}
-                <tr>
-                    <td></td>
-                    <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
-                    <td>{{ o.tipo_maquina}}</td>
-                    <td>
-                        <ul class="primeraPoblacion">
-                        {% for maquina_poblacion in o.maquina_poblacion.all %}
-                            <li>{{ maquina_poblacion.poblacion_mm.nombre }}</li>
-                        {% endfor %}
-                        </ul>
-                    </td>
-                    <td>{{ o.capataz_responsable}}</td>
-                    <td>
-                        {% for incidencias in o.incidencias.all %}
-                            {% if incidencias.cerrado == False %}
-                                <small>{{ incidencias.fecha }}</small> - {{ incidencias.tipo_incidencias }}<br>
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td></td>
-                </tr>
-                {% endfor %}
-<!-- stihl 101 -->
-                <tr><td colspan="7"><h3><a name="Stihl101">Stihl 101</a></h3></td></tr>
-                {% for o in moto101 %}
-                <tr>
-                    <td></td>
-                    <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
-                    <td>{{ o.tipo_maquina}}</td>
-                    <td>
-                        <ul class="primeraPoblacion">
-                        {% for maquina_poblacion in o.maquina_poblacion.all %}
-                            <li>{{ maquina_poblacion.poblacion_mm.nombre }}</li>
-                        {% endfor %}
-                        </ul>
-                    </td>
-                    <td>{{ o.capataz_responsable}}</td>
-                    <td>
-                        {% for incidencias in o.incidencias.all %}
-                            {% if incidencias.cerrado == False %}
-                                <small>{{ incidencias.fecha }}</small> - {{ incidencias.tipo_incidencias }}<br>
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td></td>
-                </tr>
-                {% endfor %}
-<!-- stihl 103 -->
-                <tr><td colspan="7"><h3><a name="Stihl103">Stihl 103</a></h3></td></tr>
-                {% for o in moto103 %}
-                <tr>
-                    <td></td>
-                    <td><a href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a></td>
-                    <td>{{ o.tipo_maquina}}</td>
-                    <td>
-                        <ul class="primeraPoblacion">
-                        {% for maquina_poblacion in o.maquina_poblacion.all %}
-                            <li>{{ maquina_poblacion.poblacion_mm.nombre }}</li>
-                        {% endfor %}
-                        </ul>
-                    </td>
-                    <td>{{ o.capataz_responsable}}</td>
-                    <td>
-                        {% for incidencias in o.incidencias.all %}
-                            {% if incidencias.cerrado == False %}
-                                <small>{{ incidencias.fecha }}</small> - {{ incidencias.tipo_incidencias }}<br>
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td></td>
                 </tr>
                 {% endfor %}
                 </tbody>

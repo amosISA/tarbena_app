@@ -203,7 +203,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'agoraweb700@gmail.com'
+EMAIL_HOST_USER = 'jctarbena@gmail.com'
 
 if HOSTNAME == 'servidor':
     with open('/home/admin/files/django_secret_email.txt') as f:
@@ -213,12 +213,12 @@ else:
     EMAIL_HOST_PASSWORD = SECRET_EMAIL_PASSWORD
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'agoraweb700@gmail.com'
+DEFAULT_FROM_EMAIL = 'jctarbena@gmail.com'
 
 # To receive server errors to my inbox
 ADMINS = (
-    ('Amos', 'agoraweb700@gmail.com'),
-    ('Developer', 'amosisa700@gmail.com'),
+    ('JC', 'jctarbena@gmail.com'),
+    ('Developer', 'jctarbena@gmail.com'),
 )
 MANAGERS = ADMINS
 

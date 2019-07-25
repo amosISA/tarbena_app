@@ -118,11 +118,12 @@
                     </td>
                     <td>
                         <ul class="primeraPoblacion">
-                            {% for maquina_poblacion in o.maquina_poblacion.all %}
-                                <li><i class="fas fa-map-marker-alt"></i> {{ maquina_poblacion.poblacion_mm.nombre }}</li>
+                            {% for p in o.maquina_poblacion.all %}
+                                <li><i class="fas fa-map-marker-alt"></i> {{ p.poblacion_mm.nombre }}</li>
                             {% endfor %}
-                            {% for obra in o.obra.all %}
-                                <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
+                            {% for b in o.obra.all %}
+                                <li><i class="far fa-clipboard"></i> {{ b.nombre_obra.nombre_obra }}</li>
+                                <li><i class="far fa-clipboard"></i> {{ b.fecha_movimiento }}</li>
                             {% endfor %}
                         </ul>
                     </td>
@@ -242,6 +243,7 @@
                                 <li><i class="fas fa-map-marker-alt"></i> {{ maquina_poblacion.poblacion_mm.nombre }}</li>
                             {% endfor %}
                             {% for obra in o.obra.all %}
+                                <li><i class="far fa-clipboard"></i> {{ obra.fecha_movimiento}}</li>
                                 <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
                             {% endfor %}
                         </ul>

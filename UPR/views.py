@@ -82,6 +82,8 @@ def inventario_maquinas(request):
     maquinas = Maquina.objects.filter(capataz_responsable=request.user.id).all()
     poblacion = MovimientoMaquinaria.objects.all()[:1]
     desbro = Maquina.objects.filter(tipo_maquina='3').order_by('fecha_compra')
+    #desbro = Maquina.objects.prefetch_related('obra').order_by('-fecha_compra')
+
     moto261 = Maquina.objects.filter(tipo_maquina='5')
     moto241 = Maquina.objects.filter(tipo_maquina='4')
     moto101 = Maquina.objects.filter(tipo_maquina='1')

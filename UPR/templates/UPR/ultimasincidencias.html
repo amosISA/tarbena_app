@@ -69,8 +69,48 @@
 </tr>
             {% endfor %}
 
+
+
+</tbody>
+            </table>
+
+        </div>
+             <div class="pagination">
+
+          {% if incidencias.has_previous %}
+            <a class="pagination-action" href="?page=1">
+             <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+            </a>
+            <a class="pagination-action" href="?page={{ incidencias.previous_page_number }}">
+              <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </a>
+          {% endif %}
+
+          {% for num in incidencias.paginator.page_range %}
+
+            {% if incidencias.number == num %}
+            <span class="pagination-number pagination-current">{{ num }}</span>
+            {% elif num > incidencias.number|add:'-3' and num < incidencias.number|add:'3' %}
+            <a class="pagination-number" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+
+          {% endfor %}
+
+          {% if incidencias.has_next %}
+            <a class="pagination-action" href="?page={{ incidencias.next_page_number }}">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+            <a class="pagination-action" href="?page={{ incidencias.paginator.num_pages }}">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </a>
+          {% endif %}
+
         </div>
         </div>
+
+<!-- pagination //-->
+
+
     </div>
 <div>
 

@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse_lazy
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView
 
@@ -192,13 +193,20 @@ def componente_detail(request, ncomponente, ecerrado, etaller):
 # --------------- ultimas incidencias --------------- #
 # /upr/ultimasincidencias/
 def ultimas_incidencias(request):
-    incidencias = Incidencias.objects.all().order_by('-updated')[:100]
+    incidencias = Incidencias.objects.all().order_by('-updated')
+    paginator = Paginator(incidencias, 25)
 
-    maquina = Maquina.objects.all().order_by('updated')[:100]
+    page = request.GET.get('page')
+    try:
+        incidencias = paginator.page(page)
+    except PageNotAnInteger:
+        incidencias = paginator.page(1)
+    except EmptyPage:
+        indicencias = paginator.page(paginator.num_pages)
     return render(request,
                   'UPR/ultimasincidencias.html',
-                  {'incidencias': incidencias,
-                   'maquina': maquina})
+                  {'incidencias': incidencias
+                   })
 
 # --------------- protector_cuchilla --------------- #
 # /upr/protectorcuchilla/

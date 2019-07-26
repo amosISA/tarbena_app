@@ -102,3 +102,33 @@ font-weight: 600;
     border-radius: 2px;
     display: block;}
 .navlinks i {margin: 3px 8px 3px 8px;}
+
+
+.pagination {
+    text-align: center;
+    margin-top: 1em;
+}
+
+.pagination-number {
+    padding: .8em 1.5em 0 1.5em;
+    border-radius: 2px;
+    color: #fff;
+    background-color: #6D85C7;
+    margin: 0 0.5em 0;
+}
+
+.pagination-number:hover, .pagination-current {
+    background-color: #3354AA;
+}
+
+.pagination-action {
+    margin: 0 0.1em;
+    display: inline-block;
+    padding: 0.5em 0.5em;
+    color: #B9B9B9;
+    font-size: 1.3em;
+}
+
+.pagination-action:hover, .pagination-previous, .pagination-next {
+    color: #3354AA;
+}

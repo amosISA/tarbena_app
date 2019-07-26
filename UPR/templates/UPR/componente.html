@@ -109,7 +109,7 @@
                         </td>
                         <td><a href="/panel/UPR/incidencias/{{ i.id }}/change/" target="_blank">{{ i.pk }}</a></td>
                         <td>{{ i.tipo_incidencias }}</td>
-                        <td>{{ i.n_inventario }}</td>
+                    <td><a class="enlaceMaquina" href="{% url 'upr:maquina_detail' ninventario=i.n_inventario %}" target="_blank">{{ i.n_inventario }}</a></td>
                         <td>
                             <small>{{ i.fecha }} {% if i.fechaCerrado != None %}<br> <span style="color: lime">{{ i.fechaCerrado }}</span>{% endif %}</small></td>
                         <td>{{ i.comentario }}</td>

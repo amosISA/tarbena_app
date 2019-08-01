@@ -85,6 +85,11 @@ div.comentario {    font-size: 70%;
 .primeraPoblacion li {display: none; list-style-type: none; margin: 0; padding: 0}
 .primeraPoblacion li:first-child {display: block;}
 
+.primeraObra {padding: 0;}
+.primeraObra li {display: none; list-style-type: none; margin: 0; padding: 0}
+.primeraObra li:first-child {display: block;}
+
+
 .enlaceMaquina {
 font-size: 1.5rem;
 line-height: 2rem;

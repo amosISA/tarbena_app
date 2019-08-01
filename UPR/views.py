@@ -194,7 +194,7 @@ def componente_detail(request, ncomponente, ecerrado, etaller):
 # /upr/ultimasincidencias/
 def ultimas_incidencias(request):
     incidencias = Incidencias.objects.all().order_by('-updated')
-    paginator = Paginator(incidencias, 25)
+    paginator = Paginator(incidencias, 100)
 
     page = request.GET.get('page')
     try:
@@ -280,8 +280,7 @@ def add_ubicacion(request, ninventario):
 
     movimientos = maquina.maquina_poblacion.all().order_by('-fecha_movimiento')
     poblacion = Poblacion.objects.all()
-    print(poblacion)
-
+    
     if request.method == "POST":
         if form.is_valid():
             # Create, but don't save the new ubicacion instance.

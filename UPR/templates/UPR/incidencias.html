@@ -75,6 +75,12 @@
 
                     <div class="row with-margin">
                         <textarea id="id_tipo_comentario" rows="5" cols="100" disabled></textarea>
+
+                        <div>
+                            <!-- aqui listo las opciones de los componentes -->
+
+
+                        </div>
                         {{ form.comentario }}
 
                         <input value="{{ maquina.numero_inventario }}" type="hidden" name="n_inventario" autocomplete="off" maxlength="6" id="id_n_inventario" >
@@ -112,23 +118,27 @@
                     },
                     success: function (data) {
                         $('#id_tipo_incidencias').html('');
+                        $('#id_tipo_incidencias').append('<option value="0">---</option>');
                         $.each(data, function(key, value){
                             var componente = value.fields['tipo_componentes'];
                             var componente_id = value.pk;
-                            var comentario = value.fields['tipo_comentario'];
+                            var comentario = value.fields['opciones_componente'][0];
+
                             $('#id_tipo_incidencias').append('<option value="' + componente_id + '">' + componente_id + '-' + componente + '</option>');
-                            $('#id_tipo_comentario').html("del select 1: " + comentario + "id: " + componente_id);
-                            console.log("consulta 1: " + componente + " // ID: " + componente_id + " comentario: " + comentario);
+
+
+                            $('#id_tipo_comentario').html("del select 1, opciones_componente: " + comentario + " // id: " + componente_id);
+                            console.log("consulta 1: " + componente + " // ID: " + componente_id + " // comentario: " + comentario);
                         });
                     }
                 });
             });
 
-// para que aparezca el tipo_incidencias en el textarea
+// para que aparezca el tipo_comentario en el textarea
 
+            // cuando cambia el segundo select. el que lista los tipo componentes
             $('#id_tipo_incidencias').change(function() {
                 var tipo_comentario_id = $(this).val();
-                console.log("consulta 2: // ID: " + tipo_comentario_id);
                 var tipo_comentario_url = '{% url "upr:get_components_by_tipo_comentario" %}';
                 $.ajax({
                     type: "GET",
@@ -137,15 +147,15 @@
                         'tipo_comentario_id': tipo_comentario_id,
                     },
                     success: function (data) {
-                        $('#id_tipo_comentario').html('');
-                        $.each(data, function(key, value){
+                          console.log('estoy dentro de success')
+                          $('#id_tipo_comentario').html('hola'+ tipo_comentario_id +";");
+                          $.each(data, function(key, value){
+                            console.log('estoy  dentro de each')
                             var comentario = value.fields['tipo_comentario'];
                             var comentario_id = value.pk;
                             console.log("data: " + data)
                             console.log("consulta 3: la variable comentario  id " + tipo_comentario_id + ",valor: " + comentario );
-                            $('#id_tipo_comentario').html("id: " + comentario_id + " y lo que dice el comentario" + comentario);
-                            console.log("estoy en url" + tipo_comentario_url);
-                           // console.log(comentario + "  // ID: " + comentario_id);
+                            $('#id_tipo_comentario').html("id_componente:"+ tipo_comentario_id +" // id_comentario: " + comentario_id + " y lo que dice el comentario" + comentario);
                         });
                     }
                 });

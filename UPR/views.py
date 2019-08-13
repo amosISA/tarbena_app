@@ -266,7 +266,7 @@ def get_components_by_group(request):
 # --------------- Ajax: Get all componentes from a specific Component --------------- #
 def get_components_by_tipo_comentario(request):
     tipo_comentario_id = request.GET.get('tipo_comentario_id', '0')
-    comentario = Componentes.objects.all().filter(tipo_componente=tipo_comentario_id)
+    comentario = Componentes.objects.all().filter(id=tipo_comentario_id)
     data = serializers.serialize('json', comentario)
     return HttpResponse(data, content_type="application/json")
 

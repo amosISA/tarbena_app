@@ -142,7 +142,6 @@ class Incidencias(TimeStampedModel):
         verbose_name_plural = 'Incidencias'
         ordering = ['-fecha']
 
-
 class Temporada(TimeStampedModel):
     nombre_temporada  = models.CharField(max_length=250, blank=True, null=True)
     def __str__(self):

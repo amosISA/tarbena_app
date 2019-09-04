@@ -6,7 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from .models import GrupoComponentes, Componentes, Incidencias, MovimientoMaquinaria, MovimientoObra
 
-
 # formularios para incidencias.html | MaquinaIncidenciasForm, GrupoComponentesForm, ComponentesForm
 class MaquinaIncidenciasForm(forms.ModelForm):
     class Meta:

@@ -226,6 +226,8 @@ def listado_componentes(request):
                   {'componentes': componentes,})
 
 
+
+
 # --------------- Add_Incidencia --------------- #
 def add_incidencia(request, ninventario):
     form = MaquinaIncidenciasForm(request.POST or None, request.FILES or None)

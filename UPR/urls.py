@@ -15,4 +15,5 @@ urlpatterns = [
     url('protectorcuchilla/', views.protector_cuchilla, name='protector_cuchilla'),
     url('listadoComponentes/', views.listado_componentes, name='listado_componentes'),
     url(r'^componente/(?P<ncomponente>[-\w\d]+)/(?P<ecerrado>[-\w\d]+)/(?P<etaller>[-\w\d]+)/$', views.componente_detail, name='componente_detail'),
+
 ]

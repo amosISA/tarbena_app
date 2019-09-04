@@ -211,12 +211,19 @@ def ultimas_incidencias(request):
 # --------------- protector_cuchilla --------------- #
 # /upr/protectorcuchilla/
 def protector_cuchilla(request):
-    incidencias = Incidencias.objects.all().filter(cerrado=False).filter(tipo_incidencias=6).order_by('-created')[:100]
+    incidencias = Incidencias.objects.all().order_by('-created')[:100]
 
     return render(request,
                   'UPR/protectorcuchilla.html',
                   {'incidencias': incidencias,})
 
+# --------------- listado componentes --------------- #
+# /upr/protectorcuchilla/
+def listado_componentes(request):
+    componentes = Componentes.objects.all().order_by('-created')[:100]
+    return render(request,
+                  'UPR/listadoComponentes.html',
+                  {'componentes': componentes,})
 
 
 # --------------- Add_Incidencia --------------- #

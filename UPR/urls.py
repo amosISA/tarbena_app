@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^obra/(?P<ninventario>[-\w\d]+)/$', views.add_obra, name='add_obra'),
     url('ultimasincidencias/', views.ultimas_incidencias, name='ultimas_incidencias'),
     url('protectorcuchilla/', views.protector_cuchilla, name='protector_cuchilla'),
+    url('listadoComponentes/', views.listado_componentes, name='listado_componentes'),
     url(r'^componente/(?P<ncomponente>[-\w\d]+)/(?P<ecerrado>[-\w\d]+)/(?P<etaller>[-\w\d]+)/$', views.componente_detail, name='componente_detail'),
 ]

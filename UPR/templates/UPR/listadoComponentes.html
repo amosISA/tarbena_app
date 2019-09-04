@@ -1,0 +1,53 @@
+{% extends "UPR/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ ninventario }}
+{% endblock %}
+
+{% block navbar %}
+    {% include 'UPR/snippets/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="margin-top:100px;">
+        <div class="col-12">
+            <h2>INCIDENCIAS | <input id="myInput" type="text" placeholder=""></h2>
+            <table class="table table-striped" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>tipo componentes</th>
+                        <th style="width: 165px;">tipo comentario</th>
+                        <th>imatge</th>
+                        <th style="width: 165px;">Tipo maquina</th>
+                        <th>grupo componentes</th>
+                        <th>opciones_componente</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaHome">
+                    <tr><td colspan="6"><h3>Componentes</h3></td></tr>
+                    {% for c in componentes %}
+                    <tr>
+                        <td>{{ c.tipo_componentes }}</td>
+                        <td>{{ c.tipo_comentario }}</td>
+                        <td><a href="/panel/UPR/incidencias/{{ c.id }}/change/" target="_blank">{{ c.pk }}</a></td>
+                        <td>
+                            {% for tipo_maquina in c.tipo_maquina.all %}
+                                {{ tipo_maquina.tipo }}<br>
+                            {% endfor %}
+                        </td>
+                        <td>{{ c.grupo_componentes }}</td>
+                        <td>
+                            {% for opciones_componente in c.opciones_componente.all %}
+                                {{ opciones_componente.nombre }}<br>
+                            {% endfor %}
+
+
+                            </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

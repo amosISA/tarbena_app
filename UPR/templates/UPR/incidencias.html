@@ -57,6 +57,10 @@
                     <div class="row with-margin">
                         {{ form.tipo_comentario }}
                     </div>
+                    <div class="row with-margin" id="radioBotones">
+
+
+                    </div>
                     <div class="row with-margin">{{ form.fecha }}</div>
                     <div class="row with-margin">
                         <div class="input-group mb-3">
@@ -74,13 +78,7 @@
                     </div>
 
                     <div class="row with-margin">
-                        <textarea id="id_tipo_comentario" rows="5" cols="100" disabled></textarea>
 
-                        <div>
-                            <!-- aqui listo las opciones de los componentes -->
-
-
-                        </div>
                         {{ form.comentario }}
 
                         <input value="{{ maquina.numero_inventario }}" type="hidden" name="n_inventario" autocomplete="off" maxlength="6" id="id_n_inventario" >
@@ -91,8 +89,7 @@
                     </div>
                     <div>
                         {% for m in mantenimiento_maquinaria %}
-                        {{ m.fecha_movimiento }<br>
-
+                            {{ m.fecha_movimiento }<br>
                         {% endfor %}
 
                     </div>
@@ -106,6 +103,8 @@
 
 {% block js %}
     <script>
+
+    // hacemos la función Change para que nos liste los distintos elementos de cada grupo de elementos.
         $(document).ready(function() {
             $('#selectGrupoComponentes').change(function() {
                 var group_comp_id = $(this).val();
@@ -123,12 +122,7 @@
                             var componente = value.fields['tipo_componentes'];
                             var componente_id = value.pk;
                             var comentario = value.fields['opciones_componente'][0];
-
                             $('#id_tipo_incidencias').append('<option value="' + componente_id + '">' + componente_id + '-' + componente + '</option>');
-
-
-                            $('#id_tipo_comentario').html("del select 1, opciones_componente: " + comentario + " // id: " + componente_id);
-                            console.log("consulta 1: " + componente + " // ID: " + componente_id + " // comentario: " + comentario);
                         });
                     }
                 });
@@ -147,15 +141,16 @@
                         'tipo_comentario_id': tipo_comentario_id,
                     },
                     success: function (data) {
-                          console.log('estoy dentro de success')
-                          $('#id_tipo_comentario').html('hola'+ tipo_comentario_id +";");
                           $.each(data, function(key, value){
-                            console.log('estoy  dentro de each')
-                            var comentario = value.fields['tipo_comentario'];
+                            var comentario = value.fields['tipo_comentario'];                   // es la definición del componente, puede traer también una primera versión de los estados
                             var comentario_id = value.pk;
-                            console.log("data: " + data)
-                            console.log("consulta 3: la variable comentario  id " + tipo_comentario_id + ",valor: " + comentario );
-                            $('#id_tipo_comentario').html("id_componente:"+ tipo_comentario_id +" // id_comentario: " + comentario_id + " y lo que dice el comentario" + comentario);
+                            var opciones_componente = value.fields['opciones_componente'];      // estos son los estados que puede tener ese componente
+                            // una vez hemos seleccionado el componente se listan los radio botones que son los estados en los que puede estar el componente
+                            $('#radioBotones').html('elige opción: ');
+                            var i;
+                                for (i = 0; i < opciones_componente.length; i++) {
+                                   $('#radioBotones').append('<div style="display: block; width: 100%"><input type="radio" id="estado_'+opciones_componente[i]+'" name="campo_componente" value="'+opciones_componente[i]+'"><label for="opciones_componente">'+opciones_componente[i]+'</label></div>');
+                                }
                         });
                     }
                 });
@@ -167,26 +162,5 @@
         $( "#id_fecha" ).datepicker({ dateFormat: 'dd/mm/yy', firstDay: 1 });
         $('#id_fecha').blur();
     } );
-
-
-    var arrayMuchasDimensiones = [1, ["hola", "que", "tal", ["estas", "estamos", "estoy"], ["bien", "mal"], "acabo"], 2, 5];
-
-    </script>
-    <script>
-                {% for t in todosComponentes %}
-                    var array{{t.pk}} = ['{{t.tipo_componentes}}', [{% for tipo_maquina in t.tipo_maquina.all %}'{{tipo_maquina.tipo}}', {% endfor %}], [{% for opciones_componente in t.opciones_componente.all %} '{{opciones_componente.nombre}}', {% endfor %}], '{{t.grupo_componentes.tipo_grupo_componentes}}']
-                {% endfor %}
-
-
-
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $("#combo").change(function(){
-                var op = $(this).find("option:selected").val();
-                $('#id_tipo_comentario').html(op);
-            });
-        });
-</script>
-
     </script>
 {% endblock %}

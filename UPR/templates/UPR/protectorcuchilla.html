@@ -22,13 +22,15 @@
                         <th>Tipo Incidencia</th>
                         <th># inventario</th>
                         <th>Fecha</th>
+                        <th>opciones componente</th>
+                        <th>opcion seleccionada</th>
                         <th>Comentario</th>
                         <th>Mantenimientos</th>
                     </tr>
                 </thead>
                 <tbody id="tablaHome">
 <!-- Mis Maquinas -->
-                <tr><td colspan="8"><h3>Últimas incidencias</h3></td></tr>
+                <tr><td colspan="10"><h3>Últimas incidencias</h3></td></tr>
 
 
 
@@ -48,7 +50,9 @@
                         <td>{{ i.tipo_incidencias }}</td>
                         <td>{{ i.maquina.numero_inventario }}</td>
                         <td>
-                            <small>{{ i.fecha }} {% if i.fechaCerrado != None %}<br> <span style="color: lime">{{ i.fechaCerrado }}</span>{% endif %}</small></td>
+                            <small>{{ i.fecha|date:"l, d M Y" }} {% if i.fechaCerrado != None %}<br> <span style="color: lime">{{ i.fechaCerrado }}</span>{% endif %}</small></td>
+                        <td>{{ i.campo_componente }}</td>
+                        <td>{{ i.opcion_select_componente }}</td>
                         <td>{{ i.comentario }}</td>
                         <td style="width: 10%">
                             {% if i.mantenimientos != None %}

@@ -5,6 +5,7 @@ User = settings.AUTH_USER_MODEL
 import os
 import datetime
 
+
 # Create your models here.
 class TimeStampedModel(models.Model):
     """
@@ -124,12 +125,14 @@ class Componentes(TimeStampedModel):
 class Incidencias(TimeStampedModel):
     tipo_incidencias = models.ForeignKey(Componentes, blank=True, null=True, related_name='tipo_componente')
     fecha = models.DateField(blank=False, null=True)
-    fechaCerrado = models.DateField(default=False, blank=True, null=True)
+    fechaCerrado = models.DateField(blank=True, null=True)
     cerrado = models.BooleanField(default=True)
     taller = models.BooleanField(default=False)
     comentario = models.TextField(blank=True, null=True)
     mantenimientos = models.ForeignKey(RevisionesTemporada, blank=True, null=True, related_name='tipo_mantenimiento')
     n_inventario = models.CharField(max_length=6, blank=True, null=True)
+    campo_componente = models.CharField(max_length=250, blank=False, null=True)
+    opcion_select_componente = models.ForeignKey(OpcionesComponente, blank=True, null=True, related_name='opcion_select_componente')
 
     def __str__(self):
         return '{}'.format(self.tipo_incidencias)

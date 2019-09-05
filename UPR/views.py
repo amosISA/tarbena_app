@@ -220,7 +220,7 @@ def protector_cuchilla(request):
 # --------------- listado componentes --------------- #
 # /upr/protectorcuchilla/
 def listado_componentes(request):
-    componentes = Componentes.objects.all().order_by('-created')[:100]
+    componentes = Componentes.objects.all().order_by('-created')
     return render(request,
                   'UPR/listadoComponentes.html',
                   {'componentes': componentes,})

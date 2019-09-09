@@ -117,14 +117,22 @@
                     </td>
 
                     <td>
-                        <ul class="primeraPoblacion">
-                        {% for maquina_poblacion in o.maquina_poblacion.all %}
-                            <li><i class="fas fa-map-marker-alt"></i> {{ maquina_poblacion.poblacion_mm.nombre }}</li>
-                        {% endfor %}
-                        {% for obra in o.obra.all %}
-                            <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
-                        {% endfor %}
-                        </ul>
+                       <ul class="primeraPoblacion">
+                          {% for maquina_poblacion in o.maquina_poblacion.all %}
+                            {% if forloop.first %}
+                              <li><i class="fas fa-map-marker-alt"></i>
+                                {{ maquina_poblacion.poblacion_mm.nombre }}
+                              </li>
+                            {% endif %}
+                          {% endfor %}
+                      </ul>
+                      <ul class="primeraPoblacion">
+                          {% for obra in o.obra.all %}
+                            {% if forloop.first %}
+                              <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
+                            {% endif %}
+                          {% endfor %}
+                      </ul>
                     </td>
                     <td>
                         {% for incidencias in o.incidencias.all %}

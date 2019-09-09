@@ -82,7 +82,7 @@ div.comentario {    font-size: 70%;
    .bloquePoblacion {border-top: 1px solid #ccc; padding-top: 10px;}
 
 .primeraPoblacion {padding: 0;}
-.primeraPoblacion li {display: none; list-style-type: none; margin: 0; padding: 0}
+.primeraPoblacion li {display: block; list-style-type: none; margin: 0; padding: 0}
 .primeraPoblacion li:first-child {display: block;}
 
 .enlaceMaquina {

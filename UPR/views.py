@@ -81,7 +81,12 @@ def index_maquinas(request):
 @login_required()
 def inventario_maquinas(request):
     maquinas = Maquina.objects.filter(capataz_responsable=request.user.id).all()
-    poblacion = MovimientoMaquinaria.objects.all()[:1]
+
+
+    poblacion2= Maquina.objects.select_related(
+        'tipo_maquina', 'capataz_responsable',
+    ).prefetch_related('incidencias')
+
     desbro = Maquina.objects.filter(tipo_maquina='3').order_by('fecha_compra')
     #desbro = Maquina.objects.prefetch_related('obra').order_by('-fecha_compra')
 
@@ -98,10 +103,11 @@ def inventario_maquinas(request):
     numMoto103 = Maquina.objects.filter(tipo_maquina='2').count()
     # mostramos las máquinas pertenecientes a la obra 0748241
     # también mostramos cada tipo de máquina de esta obra
-    numMaquinaObra0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').count()
-    numDesbro_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='3').count()
-    numMoto241_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='4').count()
-    numMoto261_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='5').count()
+    #numMaquinaObra0748241 = Maquina.objects.filter(obra__nombre_obra__nombre_obra__exact='0748241').count()
+    numMaquinaObra0748241 = Maquina.objects.select_related('obra').filter(obra__nombre_obra__nombre_obra='0748241').count()
+    numDesbro_0748241 = Maquina.objects.filter(obra__nombre_obra__nombre_obra__exact='0748241').filter(tipo_maquina='3').count()
+    numMoto241_0748241 = Maquina.objects.filter(obra__nombre_obra__nombre_obra__exact='0748241').filter(tipo_maquina='4').count()
+    numMoto261_0748241 = Maquina.objects.filter(obra__nombre_obra__nombre_obra__exact='0748241').filter(tipo_maquina='5').count()
     numMoto101_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='1').count()
     numMoto103_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='2').count()
 
@@ -133,7 +139,6 @@ def inventario_maquinas(request):
                    'numMoto101_0748241': numMoto101_0748241,
                    'numMoto103_0748241': numMoto103_0748241,
                    'cerrado': cerrado,
-                   'poblacion': poblacion,
                    })
 
 

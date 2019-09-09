@@ -110,7 +110,7 @@
                 <tr><td colspan="7"><h3><a name="Husqvarna555">Husqvarna 555FRM</a></h3></td></tr>
                 {% for o in desbro %}
                 <tr>
-                    <td></td>
+                    <td>{{ forloop.counter }}</td>
                     <td>
                         <a class="enlaceMaquina" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
                         <small class="mono">{{ o.tipo_maquina}}</small>
@@ -119,13 +119,18 @@
                     <td>
                       <ul class="primeraPoblacion">
                           {% for maquina_poblacion in o.maquina_poblacion.all %}
-                              <li><i class="fas fa-map-marker-alt"></i> {{ maquina_poblacion.poblacion_mm.nombre }}</li>
+                            {% if forloop.first %}
+                              <li><i class="fas fa-map-marker-alt"></i>
+                                {{ maquina_poblacion.poblacion_mm.nombre }}
+                              </li>
+                            {% endif %}
                           {% endfor %}
                       </ul>
-
                       <ul class="primeraPoblacion">
                           {% for obra in o.obra.all %}
+                            {% if forloop.first %}
                               <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
+                            {% endif %}
                           {% endfor %}
                       </ul>
                     </td>
@@ -143,7 +148,7 @@
                 <tr><td colspan="7"><h3><a name="Stihl241">Stihl 241</a></h3></td></tr>
                 {% for o in moto241 %}
                 <tr>
-                    <td></td>
+                    <td>{{ forloop.counter }}</td>
                     <td>
                         <a class="enlaceMaquina" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
                         <small class="mono">{{ o.tipo_maquina}}</small>
@@ -176,7 +181,7 @@
                 <tr><td colspan="7"><h3><a name="Stihl261">Stihl 261</a></h3></td></tr>
                 {% for o in moto261 %}
                 <tr>
-                    <td></td>
+                    <td>{{ forloop.counter }}</td>
                     <td>
                         <a class="enlaceMaquina" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
                         <small class="mono">{{ o.tipo_maquina}}</small>
@@ -209,7 +214,7 @@
                 <tr><td colspan="7"><h3><a name="Stihl101">Stihl 101</a></h3></td></tr>
                 {% for o in moto101 %}
                 <tr>
-                    <td></td>
+                    <td>{{ forloop.counter }}</td>
                     <td>
                         <a class="enlaceMaquina" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
                         <small class="mono">{{ o.tipo_maquina}}</small>
@@ -242,7 +247,7 @@
                 <tr><td colspan="7"><h3><a name="Stihl103">Stihl 103</a></h3></td></tr>
                 {% for o in moto103 %}
                 <tr>
-                    <td></td>
+                    <td>{{ forloop.counter }}</td>
                     <td>
                         <a class="enlaceMaquina" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
                         <small class="mono">{{ o.tipo_maquina}}</small>

@@ -12,5 +12,5 @@ To dive into the details.. `Read the docs <https://tarbena-app.readthedocs.io/en
 .. raw:: html
    
    <p align="center">
-      <img src="readme_img.png" />
+      <img src="http://www.poposique.net/logoGit.png" />
    </p>

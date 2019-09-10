@@ -8,7 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView
 
-from .models import Maquina, TipoMaquina, Componentes, Incidencias, MovimientoMaquinaria, Poblacion, GrupoComponentes, RevisionesTemporada, Obra, MantenimientoMaquinaria, MovimientoObra
+from .models import Maquina, TipoMaquina, Componentes, Incidencias, MovimientoMaquinaria, Poblacion, GrupoComponentes, RevisionesTemporada, Obra, MantenimientoMaquinaria, MovimientoObra, OpcionesComponente
 from .forms import MaquinaIncidenciasForm, MovimientoMaquinariaForm, MovimientoObraForm
 
 # Create your views here.
@@ -244,6 +244,7 @@ def add_incidencia(request, ninventario):
     grupos_componentes = GrupoComponentes.objects.all().order_by('position_grupo_componentes')
     componentes = Componentes.objects.all().filter(grupo_componentes__id=1)
     todosComponentes = Componentes.objects.select_related('grupo_componentes').prefetch_related('tipo_maquina','opciones_componente')
+    opciones = OpcionesComponente.objects.all()
     print(componentes)
 
     if request.method == "POST":
@@ -267,7 +268,8 @@ def add_incidencia(request, ninventario):
                'ninventario': ninventario,
                'grupos_componentes': grupos_componentes,
                'form': form,
-               'todosComponentes': todosComponentes
+               'todosComponentes': todosComponentes,
+               'opciones': opciones,
                })
 
 # --------------- Ajax: Get all componentes from a specific Group --------------- #

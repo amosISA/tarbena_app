@@ -69,7 +69,7 @@ class GrupoComponentesAdmin(admin.ModelAdmin):
 admin.site.register(GrupoComponentes, GrupoComponentesAdmin)
 
 class ComponentesAdmin(admin.ModelAdmin):
-    list_display = ('tipo_componentes','tipo_comentario','imatge_componente','tipo_maquina_display','grupo_componentes',)
+    list_display = ('tipo_componentes','tipo_comentario','imatge_componente','tipo_maquina_display','grupo_componentes','opciones_componente_display',)
     list_filter = ['tipo_componentes']
     search_fields = ('tipo_componentes',)
     empty_value_display = '-'
@@ -81,6 +81,12 @@ class ComponentesAdmin(admin.ModelAdmin):
             maquina.tipo for maquina in obj.tipo_maquina.all()
         ])
     tipo_maquina_display.short_description = "Tipo maquina"
+
+    def opciones_componente_display(self, obj):
+        return ", ".join([
+            incidencias.nombre for incidencias in obj.opciones_componente.all()
+        ])
+    opciones_componente_display.short_description = "Opciones componente"
 
 #    def position_grupo_componentes_display(self, obj):
 #        return ", ".join([

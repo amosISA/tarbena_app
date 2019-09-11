@@ -174,12 +174,12 @@ class MovimientoMaquinaria(TimeStampedModel):
         ordering = ['-fecha_movimiento',]
 
 class PuebloAsignado(TimeStampedModel):
-    poblacion_asignada = models.ForeignKey(Poblacion, blank=True, null=True, related_name='nombrePoblacionAsignado')
+    nombre = models.ForeignKey(Poblacion, blank=True, null=True, related_name='pueblo_asignado')
     fecha_movimiento = models.DateField(blank=False, null=True)
     comentario = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return '{}'.format(self.poblacion_asignada)
+        return '{}'.format(self.nombre)
 
     class Meta:
         ordering = ['-fecha_movimiento',]
@@ -195,7 +195,7 @@ class Maquina(TimeStampedModel):
     capataz_responsable = models.ForeignKey(User, blank=True, null=True, limit_choices_to={'groups__name': "UPR"})
     maquina_poblacion = models.ManyToManyField(MovimientoMaquinaria, blank=True, related_name='nombre_poblacion')
     obra = models.ManyToManyField(MovimientoObra, blank=True, related_name='rel_nombre_obra')
-    pueblo_asignado = models.ManyToManyField(PuebloAsignado, blank=True, related_name='rel_pueblo_asignado')
+    pueblo_asignado = models.ManyToManyField(PuebloAsignado, blank=True, related_name='pueblo_asignado')
 
     def __str__(self):
         return '{0}, {1}'.format(self.numero_inventario, self.maquina_poblacion)

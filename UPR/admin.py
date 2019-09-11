@@ -42,20 +42,8 @@ class MaquinaAdmin(admin.ModelAdmin):
     empty_value_display = '-'
     list_display_links = ('numero_inventario',)
     show_full_result_count = True
-
-    def tipo_maquina_display(self, obj):
-        return ", ".join([
-            maquina.tipo for maquina in obj.tipo_maquina.all()
-        ])
-    tipo_maquina_display.short_description = "Tipo maquina"
-
-
-#    def nombre_poblacion_display(self, obj):
-#        return ", ".join([
-#            poblacion.nombre for poblacion in obj.nombre.all()
-#        ])
-#    nombre_poblacion_display.short_description = "nombre poblacion"
 admin.site.register(Maquina, MaquinaAdmin)
+
 
 class TipoMaquinaAdmin(admin.ModelAdmin):
     list_display = ('tipo',)
@@ -120,11 +108,11 @@ class MovimientoMaquinariaAdmin(admin.ModelAdmin):
 admin.site.register(MovimientoMaquinaria, MovimientoMaquinariaAdmin)
 
 class PuebloAsignadoAdmin(admin.ModelAdmin):
-    list_display = ('poblacion_asignada','fecha_movimiento',)
-    list_filter = ('poblacion_asignada','fecha_movimiento',)
-    search_fields = ('poblacion_asignada',)
+    list_display = ('nombre','fecha_movimiento',)
+    list_filter = ('nombre','fecha_movimiento',)
+    search_fields = ('nombre',)
     empty_value_display = '-'
-    list_display_links = ('poblacion_asignada',)
+    list_display_links = ('nombre',)
     show_full_result_count = True
 admin.site.register(PuebloAsignado, PuebloAsignadoAdmin)
 

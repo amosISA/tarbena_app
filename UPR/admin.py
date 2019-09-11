@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Maquina, TipoMaquina, Componentes, Incidencias, GrupoComponentes, Poblacion, Comarca, Provincia, MovimientoMaquinaria, RevisionesTemporada, Obra, MantenimientoMaquinaria, MovimientoObra, OpcionesComponente
+from .models import Maquina, TipoMaquina, Componentes, Incidencias, GrupoComponentes, Poblacion, Comarca, Provincia, MovimientoMaquinaria, RevisionesTemporada, Obra, MantenimientoMaquinaria, MovimientoObra, OpcionesComponente, PuebloAsignado
 
 
 ## POBLACIONES, COMARCAS Y PROVINCIAS
@@ -42,6 +42,13 @@ class MaquinaAdmin(admin.ModelAdmin):
     empty_value_display = '-'
     list_display_links = ('numero_inventario',)
     show_full_result_count = True
+
+    def tipo_maquina_display(self, obj):
+        return ", ".join([
+            maquina.tipo for maquina in obj.tipo_maquina.all()
+        ])
+    tipo_maquina_display.short_description = "Tipo maquina"
+
 
 #    def nombre_poblacion_display(self, obj):
 #        return ", ".join([
@@ -111,6 +118,15 @@ class MovimientoMaquinariaAdmin(admin.ModelAdmin):
     list_display_links = ('poblacion_mm',)
     show_full_result_count = True
 admin.site.register(MovimientoMaquinaria, MovimientoMaquinariaAdmin)
+
+class PuebloAsignadoAdmin(admin.ModelAdmin):
+    list_display = ('poblacion_asignada','fecha_movimiento',)
+    list_filter = ('poblacion_asignada','fecha_movimiento',)
+    search_fields = ('poblacion_asignada',)
+    empty_value_display = '-'
+    list_display_links = ('poblacion_asignada',)
+    show_full_result_count = True
+admin.site.register(PuebloAsignado, PuebloAsignadoAdmin)
 
 class RevisionesTemporadaAdmin(admin.ModelAdmin):
     list_display = ('nombre_revision','fecha_revision',)

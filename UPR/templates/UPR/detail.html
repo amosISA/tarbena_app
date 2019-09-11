@@ -21,43 +21,48 @@
                 {% endif %}
                 <small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
 
-                <table width="100%" class="text-right menuDetalles">
+                <table width="100%" class="text-left menuDetalles">
                     <tr class="lineaTR">
-                        <td width="50%">NÚMERO SERIE:</td>
+                        <td width="60%"><i class="fas fa-barcode"></i> NÚMERO SERIE:</td>
                         <td>{{ maquina.numero_serie }}</td>
                     </tr>
                     <tr class="lineaTR">
-                        <td>FECHA COMPRA:</td>
+                        <td><i class="far fa-calendar-alt"></i> FECHA COMPRA:</td>
                         <td>{{ maquina.fecha_compra}}</td>
                     </tr>
                     <tr class="lineaTR">
-                        <td>CAPATAZ RESPONSABLE:</td>
-                        <td>{{ maquina.capataz_responsable}}</td>
+                        <td><i class="far fa-address-card"></i> CAPATAZ RESPONSABLE:</td>
+                        <td><strong>{{ maquina.capataz_responsable}}</strong></td>
+                    </tr>
+                     <tr class="lineaTR">
+                        <td><i class="far fa-building"></i> MUNICIPIO ASIGNADO:</td>
+                        <td>
+                            {% for p in puebloAsignado %}
+                            <strong>{{ p.poblacion_asignada}}</strong> <small>{{ p.fecha_movimiento }}</small>
+                            {% endfor %}
+                        </td>
                     </tr>
                 </table>
 <!-- Ubicación y Obra -->
-                <table class="text-right menuDetalles" style="margin-top: 50px; width: 100%;">
+                <table class="text-left menuDetalles" style="margin-top: 50px; width: 100%;">
                     <tr class="lineaTR" style="boder-top: 5px solid">
-                        <td valign="top"><a href="{% url 'upr:add_ubicacion' ninventario=maquina.numero_inventario %}"><i class="fas fa-map-marker-alt"></i></a> UBICACIÓN:</td>
-                        <td align="right">
+                        <td valign="top"><a href="{% url 'upr:add_ubicacion' ninventario=maquina.numero_inventario %}"><i class="fas fa-map-marker-alt"></i> UBICACIÓN:</a></td>
+                        <td align="left">
                             {% for n in movimientos %}
-                                {{ n.poblacion_mm }} <small>{{ n.fecha_movimiento }}</small>
+                            <strong>{{ n.poblacion_mm }}</strong><br> <small>{{ n.fecha_movimiento }}</small>
                             {% endfor %}
                         </td>
                     </tr>
                      <tr class="lineaTR">
-                        <td valign="top"><a href="{% url 'upr:add_obra' ninventario=maquina.numero_inventario %}"><i class="far fa-clipboard"></i></a> OBRA:</td>
-                        <td align="right">
+                        <td valign="top"><a href="{% url 'upr:add_obra' ninventario=maquina.numero_inventario %}"><i class="far fa-clipboard"></i> OBRA:</a></td>
+                        <td align="left">
                             {% for o in movimientosObra %}
-                                {{ o.nombre_obra }}<small> {{ o.fecha_movimiento }}</small>
+                            <strong>{{ o.nombre_obra }}</strong><br><small> {{ o.fecha_movimiento }}</small>
                             {% endfor %}
-                        </td>
-
-
-                            </table>
                         </td>
                     </tr>
                 </table>
+
             </div>
             <div  class="col-lg-8 col-xs-12">
                 <h2>INCIDENCIAS | <input id="myInput" type="text" placeholder=""> <a href="{% url 'upr:add_incidencia' ninventario=maquina.numero_inventario %}"><i class="fas fa-plus-circle"></i></a></h2>
@@ -113,12 +118,6 @@
                 </table>
             </div>
         </div>
-    </div>
-<div>
-
-
-
-</div>
 {% endblock %}
 
 {% block js %}

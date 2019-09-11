@@ -52,6 +52,17 @@ display: block;
 span.fecha {font-family: trebuchet ms;
     font-weight: 100;}
 
+table.text-left.menuDetalles {
+    font-size: 0.8rem;
+}
+.menuDetalles a {
+padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    margin: 0.2rem 0.2rem 0.2rem 0.2rem;
+    display: block;
+    background-color: blanchedalmond;
+    border-radius: 0.25rem;
+}
+}
 
 .menuDetalles small {font-size: 65%;
     color: forestgreen;}

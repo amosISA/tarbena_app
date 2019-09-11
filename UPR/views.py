@@ -153,6 +153,7 @@ def maquina_detail(request, ninventario):
 
     componentes = Componentes.objects.all().filter(tipo_maquina=maquina.tipo_maquina)
     movimientos = maquina.maquina_poblacion.all().order_by('-fecha_movimiento')[:1]
+    puebloAsignado = maquina.pueblo_asignado.all().order_by('-fecha_movimiento')[:1]
     incidencias = maquina.incidencias.all()
     grupos_componentes = GrupoComponentes.objects.all()
     mantenimiento_maquinaria = MantenimientoMaquinaria.objects.all().filter(numero_maquina=maquina.id)
@@ -167,7 +168,8 @@ def maquina_detail(request, ninventario):
                    'incidencias': incidencias,
                    'grupos_componentes': grupos_componentes,
                    'mantenimiento_maquinaria': mantenimiento_maquinaria,
-                   'movimientosObra' : movimientosObra
+                   'movimientosObra': movimientosObra,
+                   'puebloAsignado': puebloAsignado,
                    })
 
 # --------------- Componente Details --------------- #

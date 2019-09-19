@@ -19,7 +19,7 @@
                     <h4>HISTÓRICO OBRAS</h4>
                     {% for n in movimientos %}
                     <div class="bloquePoblacion">
-                        <small class="idSmall">id: {{ n.pk }}</small><small>{{ n.fecha_movimiento }}</small><br>
+                        <small class="idSmall"><a href="/panel/UPR/movimientoobra/{{ n.pk }}/change/">id: {{ n.pk }}</a></small><small>{{ n.fecha_movimiento }}</small><br>
                         <strong>{{ n.nombre_obra }}</strong> <br>
                         <div class="comentario">{{ n.comentario }}</div>
                     </div>

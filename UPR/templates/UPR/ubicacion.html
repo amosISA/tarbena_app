@@ -19,7 +19,7 @@
                     <h4>UBICACIÓN</h4>
                     {% for n in movimientos %}
                     <div class="bloquePoblacion">
-                        <small class="idSmall">id: {{ n.pk }}</small><small>{{ n.fecha_movimiento }}</small><br>
+                        <small class="idSmall"><a href="/panel/UPR/movimientomaquinaria/{{ n.pk }}/change/">id: {{ n.pk }}</a></small><small>{{ n.fecha_movimiento }}</small><br>
                         <strong>{{ n.poblacion_mm }}</strong><br>
                         <div class="comentario">{{ n.comentario }}</div>
                     </div>

@@ -45,7 +45,7 @@ h4 {margin-top: 0.9rem;
     border-radius: 2px;
     text-decoration: none;
     font-size: 1.5rem;
-    /* color: #005792; */
+    color: darkcyan !important
     font-weight: 600;
     width: 100%;
     display: block;}
@@ -241,7 +241,15 @@ font-weight: 600;
 .navlinks a:hover {background-color: #005792; color: yellow; text-decoration: none;}
 .navlinks i {margin: 3px 8px 3px 8px;}
 
-.idSmall {color: #999; font-size: 0.65rem;}
+.idSmall {color: #999;
+    font-size: 0.65rem;
+    float: left;
+    background: cornsilk;
+    padding: 0.5rem;
+    border-radius: 2px;
+    -webkit-box-shadow: 1px 1px 2px -1px rgba(0,0,0,0.3);
+-moz-box-shadow: 1px 1px 2px -1px rgba(0,0,0,0.3);
+box-shadow: 1px 1px 2px -1px rgba(0,0,0,0.3);}
 
 th {
     color: #000;

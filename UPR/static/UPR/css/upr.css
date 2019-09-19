@@ -216,7 +216,7 @@ font-weight: 600;
     color: #3354AA;
 }
 
-.byanddate {font-size: 0.6rem; float: right;}
+.byanddate {font-size: 0.6rem; float: right; width: 100%;}
 
 .celdaTipoIncidencia {border-left: 1px dashed #ddd;}
 
@@ -255,3 +255,7 @@ th {
     color: #000;
     font-weight: 600;
 }
+
+.Obra_0748241 {color: darkorange;}
+.Obra_0749136 {color: darkorchid;}
+.Obra_0749221 {color: darkseagreen;}

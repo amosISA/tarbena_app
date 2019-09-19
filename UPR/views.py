@@ -109,9 +109,11 @@ def inventario_maquinas(request):
     # también mostramos cada tipo de máquina de esta obra
     #numMaquinaObra0748241 = Maquina.objects.filter(obra__nombre_obra__nombre_obra__exact='0748241').count()
     numMaquinaObra0748241 = Maquina.objects.select_related('obra').filter(obra__nombre_obra__nombre_obra='0748241').count()
-    numDesbro_0748241 = Maquina.objects.filter(obra__nombre_obra__nombre_obra__exact='0748241').filter(tipo_maquina='3').count()
-    numMoto241_0748241 = Maquina.objects.filter(obra__nombre_obra__nombre_obra__exact='0748241').filter(tipo_maquina='4').count()
-    numMoto261_0748241 = Maquina.objects.filter(obra__nombre_obra__nombre_obra__exact='0748241').filter(tipo_maquina='5').count()
+    numDesbro_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='11').filter(tipo_maquina='3').count()
+    numMoto241_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='11').filter(tipo_maquina='4').count()
+    numMoto261_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='11').filter(tipo_maquina='5').count()
+    numMotoH555_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='11').filter(tipo_maquina='8').count()
+    numMotoH543_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='11').filter(tipo_maquina='7').count()
     numMoto101_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='1').count()
     numMoto103_0748241 = Maquina.objects.filter(obra__nombre_obra__exact='1').filter(tipo_maquina='2').count()
 
@@ -146,6 +148,8 @@ def inventario_maquinas(request):
                    'numMoto261_0748241': numMoto261_0748241,
                    'numMoto101_0748241': numMoto101_0748241,
                    'numMoto103_0748241': numMoto103_0748241,
+                   'numMotoH555_0748241': numMotoH555_0748241,
+                   'numMotoH543_0748241': numMotoH543_0748241,
                    'cerrado': cerrado,
                    })
 

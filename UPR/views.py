@@ -16,7 +16,7 @@ from .forms import MaquinaIncidenciasForm, MovimientoMaquinariaForm, MovimientoO
 # --------------- Maquina Index --------------- #
 @login_required()
 def index_maquinas(request):
-    maquinas = Maquina.objects.filter(capataz_responsable=request.user.id).all()
+    maquinas = Maquina.objects.filter(capataz_responsable=request.user.id).all().order_by('numero_inventario')
     poblacion = MovimientoMaquinaria.objects.all()[:1]
     desbro = Maquina.objects.filter(tipo_maquina='3').order_by('fecha_compra')
     moto261 = Maquina.objects.filter(tipo_maquina='5')
@@ -87,18 +87,22 @@ def inventario_maquinas(request):
         'tipo_maquina', 'capataz_responsable',
     ).prefetch_related('incidencias')
 
-    desbro = Maquina.objects.filter(tipo_maquina='3').order_by('fecha_compra')
+    desbro = Maquina.objects.filter(tipo_maquina='3').order_by('numero_inventario')
     #desbro = Maquina.objects.prefetch_related('obra').order_by('-fecha_compra')
 
-    moto261 = Maquina.objects.filter(tipo_maquina='5')
-    moto241 = Maquina.objects.filter(tipo_maquina='4')
-    moto101 = Maquina.objects.filter(tipo_maquina='1')
-    moto103 = Maquina.objects.filter(tipo_maquina='2')
+    moto261 = Maquina.objects.filter(tipo_maquina='5').order_by('numero_inventario')
+    moto241 = Maquina.objects.filter(tipo_maquina='4').order_by('numero_inventario')
+    motoH555 = Maquina.objects.filter(tipo_maquina='8').order_by('numero_inventario')
+    motoH543 = Maquina.objects.filter(tipo_maquina='7').order_by('numero_inventario')
+    moto101 = Maquina.objects.filter(tipo_maquina='1').order_by('numero_inventario')
+    moto103 = Maquina.objects.filter(tipo_maquina='2').order_by('numero_inventario')
     # número de máquinas según su tipo
     numMaquina = Maquina.objects.count()
     numDesbro = Maquina.objects.filter(tipo_maquina='3').count()
     numMoto261 = Maquina.objects.filter(tipo_maquina='5').count()
     numMoto241 = Maquina.objects.filter(tipo_maquina='4').count()
+    numMotoH555 = Maquina.objects.filter(tipo_maquina='8').count()
+    numMotoH543 = Maquina.objects.filter(tipo_maquina='7').count()
     numMoto101 = Maquina.objects.filter(tipo_maquina='1').count()
     numMoto103 = Maquina.objects.filter(tipo_maquina='2').count()
     # mostramos las máquinas pertenecientes a la obra 0748241
@@ -123,6 +127,8 @@ def inventario_maquinas(request):
                    'desbro': desbro,
                    'moto261': moto261,
                    'moto241': moto241,
+                   'motoH555': motoH555,
+                   'motoH543': motoH543,
                    'moto101': moto101,
                    'moto103': moto103,
                    'llegandoCerrado': llegandoCerrado,
@@ -131,6 +137,8 @@ def inventario_maquinas(request):
                    'numDesbro': numDesbro,
                    'numMoto261': numMoto261,
                    'numMoto241': numMoto241,
+                   'numMotoH555': numMotoH555,
+                   'numMotoH543': numMotoH543,
                    'numMoto101': numMoto101,
                    'numMoto103': numMoto103,
                    'numDesbro_0748241': numDesbro_0748241,

@@ -1,12 +1,8 @@
 {% extends "UPR/base.html" %}
 {% load staticfiles %}
 
-{% block stylesheets %}
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-{% endblock %}
-
 {% block title %}
-    GEPEMA - Inventario máquinas
+    Inventario máquinas - GEPEMA
 {% endblock %}
 
 {% block navbar %}
@@ -17,90 +13,21 @@
 
     <div class="container">
         <div class="row justify-content-md-center">
-            <div class="col-4">
-                <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">capataz: </small><br>{{request.user.last_name}}</h3>
-
-                <table width="100%" class="text-right menuDetalles">
-                    <tr class="lineaTR">
-                        <td width="70%"><b>Total máquinas</b>:</td>
-                        <td>{{ numMaquina }}</td>
-                    </tr>
-                    <tr class="lineaTR">
-                        <td colspan="2">
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td style="width:70%"><a href="#Husqvarna555">desbrozadora 555FRM</a>:</td>
-                                    <td>{{ numDesbro }}</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#Stihl241">moto 241</a>:</td>
-                                    <td>{{ numMoto241 }}</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#Stihl261">moto 261</a>:</td>
-                                    <td>{{ numMoto261 }}</td>
-                                </tr>
-                                <tr>
-                                     <td><a href="#Stihl101">Total moto 101</a>:</td>
-                                    <td>{{ numMoto101 }}</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#Stihl103">total moto 103</a>:</td>
-                                    <td>{{ numMoto103 }}</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-
-                    <tr class="lineaTR">
-                        <td><b>Total máquinas obra 0748241</b>:</td>
-                        <td>{{ numMaquinaObra0748241 }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td style="width:70%">desbrozadora 555FRM:</td>
-                                    <td>{{ numDesbro_0748241 }}</td>
-                                </tr>
-                                <tr>
-                                    <td>moto 241:</td>
-                                    <td>{{ numMoto241_0748241 }}</td>
-                                </tr>
-                                <tr>
-                                    <td>moto 261:</td>
-                                    <td>{{ numMoto261_0748241 }}</td>
-                                </tr>
-                                <tr>
-                                     <td>Total moto 101:</td>
-                                    <td>{{ numMoto101_0748241 }}</td>
-                                </tr>
-                                <tr>
-                                    <td>total moto 103:</td>
-                                    <td>{{ numMoto103_0748241 }}</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr class="lineaTR"><td></td><td></td></tr>
-                    <tr>
-                        <td colspan="2">
-                            {% include 'UPR/snippets/navlinks.html' %}
-                        </td>
-                    </tr>
-                </table>
+            <div class="col-lg-3 col-xs-12">
+                <h2 class="display-4"><small class="text-muted" style="font-size: 25%;">capataz: </small><br>{{request.user.last_name}}</h2>
+                {% include 'UPR/snippets/resumenTotalMaquinas.html' %}
+                {% include 'UPR/snippets/navlinks.html' %}
             </div>
-        <div class="col-8">
-            <h2>MAQUINARIA | <input id="myInput" type="text" placeholder=""></h2>
-            <table class="table table-striped" cellspacing="0" width="100%">
+            <div class="col-lg-9 col-xs-12">
+            <h2>INVENTARIO MAQUINARIA | <input id="myInput" type="text" placeholder="buscar..."></h2>
+            <table class="table table-striped" cellspacing="0" border="1">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th width="15%">Maquina</th>
                         <th width="25%">Ubicación y obra</th>
-                        <th width="15%">Capataz responsable</th>
-                        <th width="45%">avería</th>
+                        <th width="10%">Capataz</th>
+                        <th width="50%">Avería</th>
                     </tr>
                 </thead>
                 <tbody id="tablaHome">
@@ -110,13 +37,13 @@
                 <tr><td colspan="7"><h3><a name="Husqvarna555">Husqvarna 555FRM</a></h3></td></tr>
                 {% for o in desbro %}
                 <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>
-                        <a class="enlaceMaquina" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
-                        <small class="mono">{{ o.tipo_maquina}}</small>
-                        <span class="fecha">{{ o.fecha_compra }}</span>
+                    <td class="counter"> {{ forloop.counter }}</td>
+                    <td class="text-right">
+                        <a class="n_inventario" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
+                        <small class="byanddate">{{ o.tipo_maquina}}</small>
+                        <small class="byanddate">{{ o.fecha_compra }}</small>
                     </td>
-                    <td>
+                    <td class="celdaTipoIncidencia">
                       <ul class="primeraPoblacion">
                           {% for maquina_poblacion in o.maquina_poblacion.all %}
                             {% if forloop.first %}
@@ -134,11 +61,12 @@
                           {% endfor %}
                       </ul>
                     </td>
-                    <td>{{ o.capataz_responsable}}</td>
+                    <td align="center">{{ o.capataz_responsable.last_name}}</td>
                     <td>
                         {% for incidencias in o.incidencias.all %}
                             {% if incidencias.cerrado == False %}
-                                <small class="componente">{{ incidencias.fecha }}</small>{{ incidencias.tipo_incidencias }}<br>
+                                <small class="componente">{{ incidencias.fecha }}</small>
+                                <i class="fas fa-tools" style="color: {% if incidencias.taller == True %}red{% else %}#ddd{% endif %}"></i> {{ incidencias.tipo_incidencias }}<br>
                             {% endif %}
                         {% endfor %}
                     </td>
@@ -148,30 +76,36 @@
                 <tr><td colspan="7"><h3><a name="Stihl241">Stihl 241</a></h3></td></tr>
                 {% for o in moto241 %}
                 <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>
-                        <a class="enlaceMaquina" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
-                        <small class="mono">{{ o.tipo_maquina}}</small>
-                        <span class="fecha">{{ o.fecha_compra }}</span>
+                    <td class="counter"> {{ forloop.counter }}</td>
+                    <td class="text-right">
+                        <a class="n_inventario" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
+                        <small class="byanddate">{{ o.tipo_maquina}}</small>
+                        <small class="byanddate">{{ o.fecha_compra }}</small>
                     </td>
-                    <td>
-                        <ul class="primeraPoblacion">
-                            {% for maquina_poblacion in o.maquina_poblacion.all %}
-                                <li><i class="fas fa-map-marker-alt"></i> {{ maquina_poblacion.poblacion_mm.nombre }}</li>
-                            {% endfor %}
-                        </ul>
-
-                        <ul class="primeraPoblacion">
-                            {% for obra in o.obra.all %}
-                                <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
-                            {% endfor %}
-                        </ul>
+                    <td class="celdaTipoIncidencia">
+                      <ul class="primeraPoblacion">
+                          {% for maquina_poblacion in o.maquina_poblacion.all %}
+                            {% if forloop.first %}
+                              <li><i class="fas fa-map-marker-alt"></i>
+                                {{ maquina_poblacion.poblacion_mm.nombre }}
+                              </li>
+                            {% endif %}
+                          {% endfor %}
+                      </ul>
+                      <ul class="primeraPoblacion">
+                          {% for obra in o.obra.all %}
+                            {% if forloop.first %}
+                              <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
+                            {% endif %}
+                          {% endfor %}
+                      </ul>
                     </td>
-                    <td>{{ o.capataz_responsable }}</td>
+                    <td align="center">{{ o.capataz_responsable.last_name}}</td>
                     <td>
                         {% for incidencias in o.incidencias.all %}
                             {% if incidencias.cerrado == False %}
-                                <small class="componente">{{ incidencias.fecha }}</small>{{ incidencias.tipo_incidencias }}<br>
+                                <small class="componente">{{ incidencias.fecha }}</small>
+                                <i class="fas fa-tools" style="color: {% if incidencias.taller == True %}red{% else %}#ddd{% endif %}"></i> {{ incidencias.tipo_incidencias }}<br>
                             {% endif %}
                         {% endfor %}
                     </td>
@@ -181,63 +115,154 @@
                 <tr><td colspan="7"><h3><a name="Stihl261">Stihl 261</a></h3></td></tr>
                 {% for o in moto261 %}
                 <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>
-                        <a class="enlaceMaquina" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
-                        <small class="mono">{{ o.tipo_maquina}}</small>
-                        <span class="fecha">{{ o.fecha_compra }}</span>
+                    <td class="counter"> {{ forloop.counter }}</td>
+                    <td class="text-right">
+                        <a class="n_inventario" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
+                        <small class="byanddate">{{ o.tipo_maquina}}</small>
+                        <small class="byanddate">{{ o.fecha_compra }}</small>
                     </td>
-                    <td>
+                    <td class="celdaTipoIncidencia">
                       <ul class="primeraPoblacion">
                           {% for maquina_poblacion in o.maquina_poblacion.all %}
-                              <li><i class="fas fa-map-marker-alt"></i> {{ maquina_poblacion.poblacion_mm.nombre }}</li>
+                            {% if forloop.first %}
+                              <li><i class="fas fa-map-marker-alt"></i>
+                                {{ maquina_poblacion.poblacion_mm.nombre }}
+                              </li>
+                            {% endif %}
                           {% endfor %}
                       </ul>
-
                       <ul class="primeraPoblacion">
                           {% for obra in o.obra.all %}
+                            {% if forloop.first %}
                               <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
+                            {% endif %}
                           {% endfor %}
                       </ul>
                     </td>
-                    <td>{{ o.capataz_responsable}}</td>
+                    <td align="center">{{ o.capataz_responsable.last_name}}</td>
                     <td>
                         {% for incidencias in o.incidencias.all %}
                             {% if incidencias.cerrado == False %}
-                                <small class="componente">{{ incidencias.fecha }}</small>{{ incidencias.tipo_incidencias }}<br>
+                                <small class="componente">{{ incidencias.fecha }}</small>
+                                <i class="fas fa-tools" style="color: {% if incidencias.taller == True %}red{% else %}#ddd{% endif %}"></i> {{ incidencias.tipo_incidencias }}<br>
                             {% endif %}
                         {% endfor %}
                     </td>
                 </tr>
                 {% endfor %}
+<!-- husqvarna 555 -->
+                <tr><td colspan="7"><h3><a name="husq555">Husqvarna 555xp</a></h3></td></tr>
+                {% for o in motoH555 %}
+                <tr>
+                    <td class="counter"> {{ forloop.counter }}</td>
+                    <td class="text-right">
+                        <a class="n_inventario" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
+                        <small class="byanddate">{{ o.tipo_maquina}}</small>
+                        <small class="byanddate">{{ o.fecha_compra }}</small>
+                    </td>
+                    <td class="celdaTipoIncidencia">
+                      <ul class="primeraPoblacion">
+                          {% for maquina_poblacion in o.maquina_poblacion.all %}
+                            {% if forloop.first %}
+                              <li><i class="fas fa-map-marker-alt"></i>
+                                {{ maquina_poblacion.poblacion_mm.nombre }}
+                              </li>
+                            {% endif %}
+                          {% endfor %}
+                      </ul>
+                      <ul class="primeraPoblacion">
+                          {% for obra in o.obra.all %}
+                            {% if forloop.first %}
+                              <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
+                            {% endif %}
+                          {% endfor %}
+                      </ul>
+                    </td>
+                    <td align="center">{{ o.capataz_responsable.last_name}}</td>
+                    <td>
+                        {% for incidencias in o.incidencias.all %}
+                            {% if incidencias.cerrado == False %}
+                                <small class="componente">{{ incidencias.fecha }}</small>
+                                <i class="fas fa-tools" style="color: {% if incidencias.taller == True %}red{% else %}#ddd{% endif %}"></i> {{ incidencias.tipo_incidencias }}<br>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+<!-- husqvarna 543 -->
+                <tr><td colspan="7"><h3><a name="husq543">Husqvarna 543xp</a></h3></td></tr>
+                {% for o in motoH543 %}
+                <tr>
+                    <td class="counter"> {{ forloop.counter }}</td>
+                    <td class="text-right">
+                        <a class="n_inventario" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
+                        <small class="byanddate">{{ o.tipo_maquina}}</small>
+                        <small class="byanddate">{{ o.fecha_compra }}</small>
+                    </td>
+                    <td class="celdaTipoIncidencia">
+                      <ul class="primeraPoblacion">
+                          {% for maquina_poblacion in o.maquina_poblacion.all %}
+                            {% if forloop.first %}
+                              <li><i class="fas fa-map-marker-alt"></i>
+                                {{ maquina_poblacion.poblacion_mm.nombre }}
+                              </li>
+                            {% endif %}
+                          {% endfor %}
+                      </ul>
+                      <ul class="primeraPoblacion">
+                          {% for obra in o.obra.all %}
+                            {% if forloop.first %}
+                              <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
+                            {% endif %}
+                          {% endfor %}
+                      </ul>
+                    </td>
+                    <td align="center">{{ o.capataz_responsable.last_name}}</td>
+                    <td>
+                        {% for incidencias in o.incidencias.all %}
+                            {% if incidencias.cerrado == False %}
+                                <small class="componente">{{ incidencias.fecha }}</small>
+                                <i class="fas fa-tools" style="color: {% if incidencias.taller == True %}red{% else %}#ddd{% endif %}"></i> {{ incidencias.tipo_incidencias }}<br>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+
 <!-- stihl 101 -->
                 <tr><td colspan="7"><h3><a name="Stihl101">Stihl 101</a></h3></td></tr>
                 {% for o in moto101 %}
                 <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>
-                        <a class="enlaceMaquina" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
-                        <small class="mono">{{ o.tipo_maquina}}</small>
-                        <span class="fecha">{{ o.fecha_compra }}</span>
+                    <td class="counter"> {{ forloop.counter }}</td>
+                    <td class="text-right">
+                        <a class="n_inventario" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
+                        <small class="byanddate">{{ o.tipo_maquina}}</small>
+                        <small class="byanddate">{{ o.fecha_compra }}</small>
                     </td>
-                   <td>
-                     <ul class="primeraPoblacion">
-                         {% for maquina_poblacion in o.maquina_poblacion.all %}
-                             <li><i class="fas fa-map-marker-alt"></i> {{ maquina_poblacion.poblacion_mm.nombre }}</li>
-                         {% endfor %}
-                     </ul>
-
-                     <ul class="primeraPoblacion">
-                         {% for obra in o.obra.all %}
-                             <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
-                         {% endfor %}
-                     </ul>
+                    <td class="celdaTipoIncidencia">
+                      <ul class="primeraPoblacion">
+                          {% for maquina_poblacion in o.maquina_poblacion.all %}
+                            {% if forloop.first %}
+                              <li><i class="fas fa-map-marker-alt"></i>
+                                {{ maquina_poblacion.poblacion_mm.nombre }}
+                              </li>
+                            {% endif %}
+                          {% endfor %}
+                      </ul>
+                      <ul class="primeraPoblacion">
+                          {% for obra in o.obra.all %}
+                            {% if forloop.first %}
+                              <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
+                            {% endif %}
+                          {% endfor %}
+                      </ul>
                     </td>
-                    <td>{{ o.capataz_responsable}}</td>
+                    <td align="center">{{ o.capataz_responsable.last_name}}</td>
                     <td>
                         {% for incidencias in o.incidencias.all %}
                             {% if incidencias.cerrado == False %}
-                                <small class="componente">{{ incidencias.fecha }}</small>{{ incidencias.tipo_incidencias }}<br>
+                                <small class="componente">{{ incidencias.fecha }}</small>
+                                <i class="fas fa-tools" style="color: {% if incidencias.taller == True %}red{% else %}#ddd{% endif %}"></i> {{ incidencias.tipo_incidencias }}<br>
                             {% endif %}
                         {% endfor %}
                     </td>
@@ -247,30 +272,36 @@
                 <tr><td colspan="7"><h3><a name="Stihl103">Stihl 103</a></h3></td></tr>
                 {% for o in moto103 %}
                 <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>
-                        <a class="enlaceMaquina" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
-                        <small class="mono">{{ o.tipo_maquina}}</small>
-                        <span class="fecha">{{ o.fecha_compra }}</span>
+                    <td class="counter"> {{ forloop.counter }}</td>
+                    <td class="text-right">
+                        <a class="n_inventario" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
+                        <small class="byanddate">{{ o.tipo_maquina}}</small>
+                        <small class="byanddate">{{ o.fecha_compra }}</small>
                     </td>
-                    <td>
+                    <td class="celdaTipoIncidencia">
                       <ul class="primeraPoblacion">
                           {% for maquina_poblacion in o.maquina_poblacion.all %}
-                              <li><i class="fas fa-map-marker-alt"></i> {{ maquina_poblacion.poblacion_mm.nombre }}</li>
+                            {% if forloop.first %}
+                              <li><i class="fas fa-map-marker-alt"></i>
+                                {{ maquina_poblacion.poblacion_mm.nombre }}
+                              </li>
+                            {% endif %}
                           {% endfor %}
                       </ul>
-
                       <ul class="primeraPoblacion">
                           {% for obra in o.obra.all %}
+                            {% if forloop.first %}
                               <li><i class="far fa-clipboard"></i> {{ obra.nombre_obra }}</li>
+                            {% endif %}
                           {% endfor %}
                       </ul>
                     </td>
-                    <td>{{ o.capataz_responsable}}</td>
+                    <td align="center">{{ o.capataz_responsable.last_name}}</td>
                     <td>
                         {% for incidencias in o.incidencias.all %}
                             {% if incidencias.cerrado == False %}
-                                <small class="componente">{{ incidencias.fecha }}</small>{{ incidencias.tipo_incidencias }}<br>
+                                <small class="componente">{{ incidencias.fecha }}</small>
+                                <i class="fas fa-tools" style="color: {% if incidencias.taller == True %}red{% else %}#ddd{% endif %}"></i> {{ incidencias.tipo_incidencias }}<br>
                             {% endif %}
                         {% endfor %}
                     </td>
@@ -279,9 +310,8 @@
                 </tbody>
             </table>
         </div>
-
-        </div>
     </div>
+</div>
 {% endblock %}
 {% block js %}
 <script>

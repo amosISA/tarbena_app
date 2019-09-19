@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    GEPEMA - {{ ninventario }}
+    {{ ninventario }} - GEPEMA
 {% endblock %}
 
 {% block navbar %}
@@ -10,62 +10,23 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container" style="margin-top:100px;">
+
+    <div class="container">
         <div class="row justify-content-md-center">
-            <div class="col-lg-4 col-xs-12">
-                <h3>{{ maquina.tipo_maquina}} <a href="/panel/UPR/maquina/{{ maquina.id }}/change/" target="_blank"><i class="far fa-edit"></i></a></h3>
+            <div class="col-lg-3 col-xs-12">
+                <h5>{{ maquina.tipo_maquina}} <a href="/panel/UPR/maquina/{{ maquina.id }}/change/" target="_blank"><i class="far fa-edit"></i></a></h5>
                 {% if maquina.capataz_responsable|stringformat:"s" != request.user.username %}
-                    <h3 class="display-4 yellow">
+                    <h3 class="display-4 yellow display-numero">
                 {% else %}
-                    <h3 class="display-4 ">
+                    <h3 class="display-4 display-numero">
                 {% endif %}
                 <small class="text-muted" style="font-size: 25%;">número inventario: </small><br>{{ maquina.numero_inventario }}</h3>
 
-                <table width="100%" class="text-left menuDetalles">
-                    <tr class="lineaTR">
-                        <td width="60%"><i class="fas fa-barcode"></i> NÚMERO SERIE:</td>
-                        <td>{{ maquina.numero_serie }}</td>
-                    </tr>
-                    <tr class="lineaTR">
-                        <td><i class="far fa-calendar-alt"></i> FECHA COMPRA:</td>
-                        <td>{{ maquina.fecha_compra}}</td>
-                    </tr>
-                    <tr class="lineaTR">
-                        <td><i class="far fa-address-card"></i> CAPATAZ RESPONSABLE:</td>
-                        <td><strong>{{ maquina.capataz_responsable}}</strong></td>
-                    </tr>
-                     <tr class="lineaTR">
-                        <td><i class="far fa-building"></i> MUNICIPIO ASIGNADO:</td>
-                        <td>
-                            {% for p in puebloAsignado %}
-                            <strong>{{ p.nombre}}</strong> <small>{{ p.fecha_movimiento }}</small>
-                            {% endfor %}
-                        </td>
-                    </tr>
-                </table>
-<!-- Ubicación y Obra -->
-                <table class="text-left menuDetalles" style="margin-top: 50px; width: 100%;">
-                    <tr class="lineaTR" style="boder-top: 5px solid">
-                        <td valign="top"><a href="{% url 'upr:add_ubicacion' ninventario=maquina.numero_inventario %}"><i class="fas fa-map-marker-alt"></i> UBICACIÓN:</a></td>
-                        <td align="left">
-                            {% for n in movimientos %}
-                            <strong>{{ n.poblacion_mm }}</strong><br> <small>{{ n.fecha_movimiento }}</small>
-                            {% endfor %}
-                        </td>
-                    </tr>
-                     <tr class="lineaTR">
-                        <td valign="top"><a href="{% url 'upr:add_obra' ninventario=maquina.numero_inventario %}"><i class="far fa-clipboard"></i> OBRA:</a></td>
-                        <td align="left">
-                            {% for o in movimientosObra %}
-                            <strong>{{ o.nombre_obra }}</strong><br><small> {{ o.fecha_movimiento }}</small>
-                            {% endfor %}
-                        </td>
-                    </tr>
-                </table>
-
+                {% include 'UPR/snippets/detallesMaquina.html' %}
+                {% include 'UPR/snippets/navlinks.html' %}
             </div>
-            <div  class="col-lg-8 col-xs-12">
-                <h2>INCIDENCIAS | <input id="myInput" type="text" placeholder=""> <a href="{% url 'upr:add_incidencia' ninventario=maquina.numero_inventario %}"><i class="fas fa-plus-circle"></i></a></h2>
+            <div  class="col-lg-9 col-xs-12">
+                <h2>INCIDENCIAS MÁQUINA {{ maquina.numero_inventario }} | <input id="myInput" type="text" placeholder="buscar..."> <a href="{% url 'upr:add_incidencia' ninventario=maquina.numero_inventario %}"><i class="fas fa-plus-circle"></i></a></h2>
 <!-- mensaje de confirmación / error cuando se envia la incidencia -->
                 {% if messages %}
                     {% for message in messages %}
@@ -78,39 +39,40 @@
                     {% endfor %}
                 {% endif %}
 
-                <table class="table table-striped" id="tablaHome">
+                <table class="table table-striped" id="tablaHome" border="1">
                     <thead>
                         <tr>
-                            <th scope="col">Componente</th>
-                            <th scope="col">Incidencias</th>
+                            <th class="text-center">#</th>
+                            <th class="text-center">C</th>
+                            <th class="text-center">T</th>
+                            <th class="text-center">Id</th>
+                            <th scope="col">Tipo Incidencia</th>
+                            <th>Fecha</th>
+                            <th scope="col">Comentario</th>
                         </tr>
                     </thead>
                     <tbody>
 <!-- aqui empezamos a listar las incidencias -->
                     {% for i in incidencias %}
                         <tr>
-                            <td style="width: 40%">
-                                {{ i.tipo_incidencias }}
-                                {{ i.campo_componente }}
-                                <small class="componente">{{ i.tipo_incidencias.grupo_componentes }}</small>
+                            <td class="counter"> {{ forloop.counter }}</td>
+                            <td colspan="3" width="15%" class="text-right">
+                                <i class="fas fa-exclamation-triangle" style="color: {% if i.cerrado == False %}red{% else %}#ddd{% endif %}"></i>
+                                <i class="fas fa-tools" style="color: {% if i.taller == True %}red{% else %}#ddd{% endif %}"></i>
+                                <div class="n_incidencia"><a href="/panel/UPR/incidencias/{{ i.id }}/change/" target="_blank" class="n_inventario">{{ i.pk }}</a></div><br>
+                                <div class="byanddate"><strong>{{ i.capataz_responsable.last_name }}</strong> {{i.updated|date:"d-m-y H:i"}}</div>
                             </td>
-                            <td class="group_component">
-
-                                    <div class="fecha">
-                                        <a href="/panel/UPR/incidencias/{{ i.id }}/change/" target="_blank">{{ i.fecha }}</a>  - <small>{{ i.id}}</small>
-                                        {% if i.mantenimientos != None %}
-                                            <small class="componente2">
-                                                {{ i.mantenimientos }}
-                                            </small>
-                                        {% endif %}
-                                        {% if i.cerrado == False %}
-                                            <i class="fas fa-exclamation-triangle" style="color: red"></i>
-                                        {% endif %}
-                                        {% if i.taller == True %}
-                                            <i class="fas fa-tools" style="color: red"></i>
-                                        {% endif %}
-                                    </div>
-                                    {{ i.comentario }}
+                            <td style="width: 30%" class="celdaTipoIncidencia">
+                                <small class="componente">{{ i.tipo_incidencias.grupo_componentes }}</small>
+                                {{ i.tipo_incidencias }}
+                                <div class="campo_componente">{{ i.campo_componente }}</div>
+                            </td>
+                            <td width="10%" class="text-center">
+                                <small>A: {{ i.fecha|date:"d-m-y" }} {% if i.fechaCerrado != None %}<br> <span style="color: lime">C: {{ i.fechaCerrado|date:"d-m-y" }}</span>{% endif %}</small>
+                            </td>
+                            <td class="group_component" width="45%">
+                                {% if i.mantenimientos != None %}<small class="mantenimientos">{{ i.mantenimientos }}</small>{% endif %}
+                                {{ i.comentario|linebreaks }}
                             </td>
                         </tr>
                     {% endfor %}

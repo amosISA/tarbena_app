@@ -1,12 +1,8 @@
 {% extends "UPR/base.html" %}
 {% load staticfiles %}
 
-{% block stylesheets %}
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-{% endblock %}
-
 {% block title %}
-    GEPEMA - Gestión Pequeña Maquinaria
+    Inicio - GEPEMA
 {% endblock %}
 
 {% block navbar %}
@@ -17,90 +13,19 @@
 
     <div class="container">
         <div class="row justify-content-md-center">
-            <div class="col-4">
-                <h3 class="display-4"><small class="text-muted" style="font-size: 25%;">capataz: </small><br>{{request.user.last_name}}</h3>
-
-                <table width="100%" class="text-right menuDetalles">
-                    <tr class="lineaTR">
-                        <td width="70%"><b>Total máquinas</b>:</td>
-                        <td>{{ numMaquina }}</td>
-                    </tr>
-                    <tr class="lineaTR">
-                        <td colspan="2">
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td style="width:70%"><a href="#Husqvarna555">desbrozadora 555FRM</a>:</td>
-                                    <td>{{ numDesbro }}</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#Stihl241">moto 241</a>:</td>
-                                    <td>{{ numMoto241 }}</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#Stihl261">moto 261</a>:</td>
-                                    <td>{{ numMoto261 }}</td>
-                                </tr>
-                                <tr>
-                                     <td><a href="#Stihl101">Total moto 101</a>:</td>
-                                    <td>{{ numMoto101 }}</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#Stihl103">total moto 103</a>:</td>
-                                    <td>{{ numMoto103 }}</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-
-                    <tr class="lineaTR">
-                        <td><b>Total máquinas obra 0748241</b>:</td>
-                        <td>{{ numMaquinaObra0748241 }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td style="width:70%">desbrozadora 555FRM:</td>
-                                    <td>{{ numDesbro_0748241 }}</td>
-                                </tr>
-                                <tr>
-                                    <td>moto 241:</td>
-                                    <td>{{ numMoto241_0748241 }}</td>
-                                </tr>
-                                <tr>
-                                    <td>moto 261:</td>
-                                    <td>{{ numMoto261_0748241 }}</td>
-                                </tr>
-                                <tr>
-                                     <td>Total moto 101:</td>
-                                    <td>{{ numMoto101_0748241 }}</td>
-                                </tr>
-                                <tr>
-                                    <td>total moto 103:</td>
-                                    <td>{{ numMoto103_0748241 }}</td>
-                                </tr>
-                            </table>
-                        </td>
-
-                    </tr>
-                    <tr class="lineaTR"><td></td><td></td></tr>
-                    <tr>
-                        <td colspan="2">
-                            {% include 'UPR/snippets/navlinks.html' %}
-                        </td>
-                    </tr>
-                </table>
+            <div class="col-lg-3 col-xs-12">
+                <h1 class="display-4"><small class="text-muted" style="font-size: 25%;">capataz: </small><br>{{request.user.last_name}}</h1>
+                {% include 'UPR/snippets/navlinks.html' %}
             </div>
-        <div class="col-8">
-            <h2>MAQUINARIA | <input id="myInput" type="text" placeholder=""></h2>
-            <table class="table table-striped" cellspacing="0" width="100%">
+            <div class="col-lg-9 col-xs-12">
+            <h2>INICIO | <input id="myInput" type="text" placeholder="buscar..."></h2>
+            <table class="table table-striped" cellspacing="0" border="1">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th align="center">#</th>
                         <th>Maquina</th>
-                        <th>Ubicación y obra</th>
-                        <th>avería</th>
+                        <th class="celdaTipoIncidencia">Ubicación y obra</th>
+                        <th style="width: 50%">Incidencias abiertas</th>
                     </tr>
                 </thead>
                 <tbody id="tablaHome">
@@ -110,13 +35,13 @@
 
                 {% for o in maquinas %}
                 <tr>
-                    <td></td>
-                    <td>
-                        <a class="enlaceMaquina" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}" target="_blank">{{ o.numero_inventario }}</a>
-                        <small class="mono">{{ o.tipo_maquina}}</small>
+                    <td class="counter"> {{ forloop.counter }}</td>
+                    <td class="text-right">
+                        <a class="n_inventario" href="{% url 'upr:maquina_detail' ninventario=o.numero_inventario %}">{{ o.numero_inventario }}</a><br>
+                        <small class="byanddate">{{ o.tipo_maquina}}</small>
                     </td>
 
-                    <td>
+                    <td class="celdaTipoIncidencia">
                        <ul class="primeraPoblacion">
                           {% for maquina_poblacion in o.maquina_poblacion.all %}
                             {% if forloop.first %}
@@ -137,7 +62,8 @@
                     <td>
                         {% for incidencias in o.incidencias.all %}
                             {% if incidencias.cerrado == False %}
-                                <small class="componente">{{ incidencias.fecha }}</small>{{ incidencias.tipo_incidencias }}<br>
+                                <small class="componente">{{ incidencias.fecha }}</small>
+                                <i class="fas fa-tools" style="color: {% if incidencias.taller == True %}red{% else %}#ddd{% endif %}"></i> {{ incidencias.tipo_incidencias }}<br>
                             {% endif %}
                         {% endfor %}
                     </td>

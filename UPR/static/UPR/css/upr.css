@@ -1,7 +1,65 @@
-.container {
-    padding-bottom: 100px;
+body {
+ font-family: calibri, serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol" ;
+ text-transform: uppercase;
+}
+h1 {}
+h2 {
+/* border-bottom: 10px solid #005792 ;*/
+margin-bottom: 25px;}
+.navbar {background-color: #005792 !important;}
+.navbar-brand {
+    font-size: 1rem;
+}
+.logoTragsa {width: 8rem;
+    border-radius: 2px; }
+.logoGepema {width: 14rem;
+    border-radius: 2px;}
+.logoUPR {width: 4rem;
+    margin-left: 1rem;
+    border-radius: 2px; display: none;}
+.navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.container {
+    padding-bottom: 100px;
+    margin-top:100px;
+}
+h3 {
+    margin-top: 0.9rem;
+    color: #333;}
+h4 {margin-top: 0.9rem;
+    color: #666;
+    margin: 0.6rem;
+    font-weight: 400;}
+
+
+#tablaHome {}
+.n_inventario {font-family: inherit;
+    padding: 0 0.3rem;
+    background: seashell;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    /* color: #005792; */
+    font-weight: 600;
+    width: 100%;
+    display: block;}
+.n_inventario:hover {background-color: #dee2e6; color: blue; text-decoration: none;}
+.n_incidencia {min-width: 3.35rem;
+    display: inline-block;
+    background: antiquewhite;}
+.counter {    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-align: center;
+    line-height: 1.8rem;
+    color: #888;}
 .fecha {
 display: block;
 }
@@ -17,7 +75,10 @@ display: block;
     background: #eee;
     padding: 3%;
     border-radius: 3px;
+    MARGIN-BOTTOM: 3REM;
+    border-bottom: 10px solid #ddd;
 }
+.display-numero {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol" }
 .display-5 {
     font-size: 1.5rem;
     font-weight: 300;
@@ -34,41 +95,55 @@ display: block;
     box-shadow: 1px 1px 2px -1px #000;
     }
 small.componente {display: block;
-    font-size: 65%;
+    font-size: 62%;
     color: forestgreen;}
 
 small.componente2 {
-    font-size: 65%;
+    font-size: 62%;
     color: white;
     background: #ccc;
     padding: 3px;
     border-radius: 2px;
     }
+small.mantenimientos {    display: block;
+    font-size: 62%;
+    color: #777;
+    padding: 0 0.2rem;
+    border-radius: 2px;
+    background: cornsilk;}
 small.mono {
 font-family: monospace;
 font-size: 1rem;
 display: block;
 }
+.campo_componente {display: block; color: #000; font-weight: 600;}
 span.fecha {font-family: trebuchet ms;
     font-weight: 100;}
 
 table.text-left.menuDetalles {
     font-size: 0.8rem;
 }
-.menuDetalles a {
-padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    margin: 0.2rem 0.2rem 0.2rem 0.2rem;
-    display: block;
-    background-color: blanchedalmond;
-    border-radius: 0.25rem;
-}
-}
+.menuDetalles a {    background: seashell;
+    padding: 0.3rem;
+    text-align: left;
+    border-radius: 2px;
+    display: block;}
+.menuDetalles a:hover {background-color: #005792; color: yellow; text-decoration: none;}
 
 .menuDetalles small {font-size: 65%;
     color: forestgreen;}
 
 .lineaTR {border-bottom: 1px solid #ccc;}
 .lineaTR td {width: 50%;}
+.table {
+    border-collapse: collapse;
+    border: 1px dashed seashell;
+    width: 100%;
+}
+.table tr:hover {background-color: seashell;}
+.table-striped tbody tr:nth-of-type(odd):hover {
+    background-color: seashell;
+}
 
 .table td, .table th {
     padding: .35rem;
@@ -81,10 +156,15 @@ padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 .with-margin {margin-bottom: 1rem;}
 
 h2 > #myInput {
-    border: 0;
-    background: #ccc;
+        border: 1px solid #005792;
+    background: #e1e7f3;
+    display: inline;
     padding: 0.4rem;
     font-size: 1rem;
+    top: -4px;
+    position: relative;
+    border-radius: 2px;
+}
 }
 div.comentario {    font-size: 70%;
     background: #ddd;
@@ -92,7 +172,7 @@ div.comentario {    font-size: 70%;
 
    .bloquePoblacion {border-top: 1px solid #ccc; padding-top: 10px;}
 
-.primeraPoblacion {padding: 0;}
+.primeraPoblacion {padding: 0; margin: 0;}
 .primeraPoblacion li {display: block; list-style-type: none; margin: 0; padding: 0}
 .primeraPoblacion li:first-child {display: block;}
 
@@ -104,15 +184,7 @@ font-weight: 600;
 .yellow {background-color: yellow;}
 
 
-.navlinks {display: inline-block;}
-.navlinks li {    margin: 10px 0px;
-    list-style: none;}
-.navlinks a {    background: beige;
-    padding: 0.3rem;
-    text-align: left;
-    border-radius: 2px;
-    display: block;}
-.navlinks i {margin: 3px 8px 3px 8px;}
+
 
 
 .pagination {
@@ -142,4 +214,36 @@ font-weight: 600;
 
 .pagination-action:hover, .pagination-previous, .pagination-next {
     color: #3354AA;
+}
+
+.byanddate {font-size: 0.6rem; float: right;}
+
+.celdaTipoIncidencia {border-left: 1px dashed #ddd;}
+
+
+
+
+.navlinks {
+    width: 100%;
+    background: #eee;
+    border-radius: 3px;
+    border-top: 10px solid #ddd;
+    margin-top: 1rem;}
+
+.navlinks ul {display: inline-block;}
+.navlinks li {    margin: 10px 0px;
+    list-style: none;}
+.navlinks a {    background: seashell;
+    padding: 0.3rem;
+    text-align: left;
+    border-radius: 2px;
+    display: block;}
+.navlinks a:hover {background-color: #005792; color: yellow; text-decoration: none;}
+.navlinks i {margin: 3px 8px 3px 8px;}
+
+.idSmall {color: #999; font-size: 0.65rem;}
+
+th {
+    color: #000;
+    font-weight: 600;
 }

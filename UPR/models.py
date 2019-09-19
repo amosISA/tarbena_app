@@ -131,6 +131,7 @@ class Incidencias(TimeStampedModel):
     comentario = models.TextField(blank=True, null=True)
     mantenimientos = models.ForeignKey(RevisionesTemporada, blank=True, null=True, related_name='tipo_mantenimiento')
     n_inventario = models.CharField(max_length=6, blank=True, null=True)
+    capataz_responsable = models.ForeignKey(User, blank=True, null=True, limit_choices_to={'groups__name': "UPR"})
     campo_componente = models.CharField(max_length=250, blank=False, null=True)
     opcion_select_componente = models.ForeignKey(OpcionesComponente, blank=True, null=True, related_name='opcion_select_componente')
 
